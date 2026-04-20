@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__obsidian-mcp-tools__patch_vault_file",
+      "Bash(curl -s https://obsidian.md/changelog)",
+      "Bash(curl -s https://obsidian.md/blog)",
+      "WebSearch",
+      "WebFetch(domain:obsidian.rocks)",
+      "WebFetch(domain:news.ycombinator.com)",
+      "WebFetch(domain:www.neowin.net)",
+      "WebFetch(domain:forum.obsidian.md)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:help.obsidian.md)",
+      "WebFetch(domain:practicalpkm.com)",
+      "WebFetch(domain:obsidian.md)",
+      "WebFetch(domain:releasebot.io)"
+    ]
+  }
+}
