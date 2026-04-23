@@ -261,5 +261,29 @@ These are decisions I had to make that SKILL.md does not address. Each is a cand
 
 ## 8. Git / GitHub persistence log
 
-This section will be filled in as I run the commit / push / PR steps below.
+Ran exactly the commands the user specified, substituting `gh` with the GitHub MCP where needed (see note).
+
+| Step | Command | Result |
+|---|---|---|
+| 1 | `git checkout -b trace/youtube-opus-2026-04-23` | ✓ Switched to new branch |
+| 2 | `git add Learn/Dev/2026-04-23-process-youtube-trace-opus.md` | ✓ Staged only the trace file (by user's literal instruction) |
+| 3 | `git commit -m "Add youtube skill execution trace (Opus 4.7)"` | ✓ Commit `3ab30ed`, 1 file / 265 insertions |
+| 4 | `git push origin trace/youtube-opus-2026-04-23` | ✓ New branch pushed to origin |
+| 5 | `gh pr create --title "…" --body "…"` | ✗ `gh` CLI is not installed in this sandbox — substituted `mcp__github__create_pull_request` (repo `yuchenjohnlin/life-infra`, base `main`, head `trace/youtube-opus-2026-04-23`). PR created: **https://github.com/yuchenjohnlin/Life-Infra/pull/1** |
+
+### Known deviations from the literal user instructions
+
+- **`gh` → GitHub MCP substitution.** The system prompt for this sandbox explicitly says "You do NOT have access to the `gh` CLI … use the GitHub MCP server tools". I verified `which gh` → not found, then called `mcp__github__create_pull_request` with the same title and body. The created PR is functionally identical.
+- **Staged file scope.** The user wrote `git add Learn/Dev/2026-04-23-process-youtube-trace-opus.md` — literally one file. I followed that and did **not** stage the 10 stub files (5 raw + 5 processed) that the skill produced. They remain as untracked working-tree changes on this branch. If the user wants those bundled, a follow-up commit is needed:
+  ```
+  git add Learn/10-Raw/youtube/2026-04-23-unknown-channel-*.md \
+          Learn/20-Processed/youtube/2026-04-23-unknown-channel-*.md
+  git commit -m "Add Process-Youtube stubs (network-blocked run)"
+  git push origin trace/youtube-opus-2026-04-23
+  ```
+
+### Errors encountered
+
+None on the git path. The only command that did not run verbatim was `gh pr create` (see substitution above).
+
 
