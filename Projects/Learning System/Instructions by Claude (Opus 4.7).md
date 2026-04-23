@@ -16,11 +16,11 @@
 
 開始前確認以下都有了：
 
-- [ ] Node.js 18 以上（跑 `node --version` 確認）
-- [ ] Obsidian 已安裝
-- [ ] GitHub 帳號
-- [ ] Git 已安裝（跑 `git --version` 確認）
-- [ ] Claude Pro 或 Max 訂閱（或至少準備一把 API key）
+- [x] Node.js 18 以上（跑 `node --version` 確認）
+- [x] Obsidian 已安裝
+- [x] GitHub 帳號
+- [x] Git 已安裝（跑 `git --version` 確認）
+- [x] Claude Pro 或 Max 訂閱（或至少準備一把 API key）
 
 如果 Claude Code 還沒裝：
 

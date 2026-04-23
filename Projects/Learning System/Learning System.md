@@ -22,7 +22,7 @@ tags:
 ## Navigation
 
 - 💭 [[Scratchpad]] — quick capture
-- 🎯 [[Goal]] — what we're solving
+- 🎯 [[Projects/Learning System/archive/Obsidian Learning System - Yu-Chen Lin/Goal]] — what we're solving
 
 ## Current Focus
 
