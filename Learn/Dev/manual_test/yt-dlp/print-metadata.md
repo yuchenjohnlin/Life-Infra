@@ -1,0 +1,1 @@
+ID: zjkBMFhNj_gNACHANNEL: Andrej KarpathyNATITLE: [1hr Talk] Intro to Large Language ModelsNADURATION_SEC: 3588NADURATION_MIN: 59NADESCRIPTION_PREVIEW: This is a 1 hour general-audience introduction to Large Language Models: the core technical component behind systems like ChatGPT, Claude, and Bard. What they are, where they are headed, comparisons a

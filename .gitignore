@@ -1,2 +1,19 @@
 .obsidian
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+.python-version
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+
+# Local-only scratch
+/tmp_local/

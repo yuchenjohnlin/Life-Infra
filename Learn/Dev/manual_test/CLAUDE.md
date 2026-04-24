@@ -1,0 +1,1 @@
+Files in this folder will have weird file extensions, because I add ".md" to human-readable files like ".vtt" so that I can open and look at it in Obsidian. 

@@ -44,6 +44,29 @@
 **教學重點：** 這是一個 **skill 執行者（我）基於 context 做的優化**，不是 skill 規則的違反。如果是完全 cold start（新 session / 新用戶），我會先跑 `which yt-dlp && yt-dlp --version`。
 
 **SKILL.md 對應段落：** `# Prerequisites`。
+%% Do I have to give AI instructions to guide him how he should check first and if not installed run the command to install ? Will AI know that prerequisite means that he has to make sure that the package is installed ? Previously, a lot of the models are instruction finetuned so I thought giving straightforward instructions would be better %%
+
+**Claude 回覆：**
+
+你的直覺對。明確指示比依賴「AI 會猜」可靠很多。
+
+現在 SKILL.md 的寫法是隱含的 — 只列出 yt-dlp 是必要的。大多數 instruction-tuned 模型會把 Prerequisites 理解成「執行前要確認這些存在」，但不保證每次都會主動 check。模型可能直接假設有裝，跑下去失敗了才發現。
+
+更明確的寫法會長這樣：
+
+    # Prerequisites (verify before any other step)
+    - Run `which yt-dlp` first. If it returns nothing:
+      - Ask the user: "yt-dlp is not installed. Run `brew install yt-dlp`?"
+      - Do NOT attempt workarounds (curl YouTube directly, etc.)
+    - Same pattern for `ffmpeg` if Phase 2 is invoked.
+
+這樣 (a) 有明確 check 指令、(b) 明確說失敗了該做什麼、(c) 明確禁止 workaround。
+
+什麼時候可以偷懶？如果這個 skill 只會由已經驗證過環境的 agent 執行 — 例如同一個 session 裡第 10 次跑 — 每次都 check 就是浪費。那種情況可以寫 `# Prerequisites (assumed, check on first run or cold start)`。
+
+我的建議是安全第一，寫明確。Token 成本很小，但避免 silent failure。你觀察到 instruction-finetuned 模型對 straightforward 指示反應最好完全正確 — 這是 skill 設計的第一性原理，不要依賴推理，依賴指令。
+
+這次跑 Karpathy 我為什麼跳過：因為同一個 session 前面已經跑過 yt-dlp，我已知工具存在。這是 session-level context 的優化。Cold start 我會老實 check。
 
 ---
 
@@ -64,11 +87,131 @@ yt-dlp --skip-download --no-warnings --print "ID: %(id)s%(\n)sCHANNEL: %(uploade
 yt-dlp --skip-download --no-warnings --print "%(chapters)j" "..."
 yt-dlp --list-subs --skip-download --no-warnings "..."
 ```
+%% I ran the above commands myself and kind of had my understanding, the --print is a flag that tells yt-dlp how the output format should look like, but I don't understand why using print-json would give so much output, and where are these metadata stored ? if we skip download how do we get the metadata ? Another question is "%(chapters)j" returns a json format right ? what is its difference between print-json ? Finally I have the output of --list-subs in [[list-sub]]. Can you tell me what it is doing (append the explanation in the file)? %%
+
+**Claude 回覆：**
+
+### Q1: `--print` vs `--print-json` 的差別？為什麼 `--print-json` 這麼大？
+
+- **`--print "TEMPLATE"`** — 你給一個**模板字串**，yt-dlp 用 `%(field)s` 取代實際值，**只印你要的**。例如：
+  ```
+  --print "TITLE: %(title)s\nDURATION: %(duration)s"
+  →
+  TITLE: [1hr Talk] Intro to Large Language Models
+  DURATION: 3588
+  ```
+  輸出約 2-10 行。
+
+- **`--print-json`** — 把**完整的 info_dict 物件**整包 dump 成 JSON。info_dict 是 yt-dlp 內部從 YouTube 抓回來的所有 metadata 結構，包含**幾百個欄位**：所有 formats (每種解析度+codec 組合通常 30-50 個)、thumbnails (10-20 個不同尺寸)、heatmap、chapter list、subtitles manifest、automatic_captions (每種語言一個 entry)、age_limit、availability、uploader_id、channel_id、channel_url、channel_follower_count、like_count、view_count、upload_date、playable_in_embed、live_status、release_timestamp、comment_count…等等。
+
+  **為什麼那麼大：** 單一影片的 info_dict 正常 50-200 KB JSON。這是**全部**可能的 metadata，不是你要的那幾個。
+
+### Q2: Skip download 怎麼拿到 metadata？
+
+YouTube 把影片分成兩層資料：
+1. **影片檔本身** (video stream) — 幾百 MB 到數 GB。`yt-dlp` 預設會下載。
+2. **Metadata** — 從 YouTube 的 **InnerTube API** (內部 player API, 前端 YouTube.com 也是用這個) 抓的 JSON 回應。永遠是先抓這個，**才能知道有哪些 stream 可下載**。
+
+`--skip-download` 做的事：**跑正常 metadata fetch 階段，跳過 stream 下載**。所以 metadata 一定會有，影片檔不會進硬碟。這也是為什麼 `--skip-download` + `--print` 很快（<1 秒）—— 只打一個 API 請求。
+
+**存在哪裡？** 在 yt-dlp 的記憶體裡，短暫存在，處理完印到 stdout 就釋放。沒有自動寫磁碟（除非你用 `-J` 或 `--write-info-json`）。
+
+### Q3: `"%(chapters)j"` 返回 JSON，和 `--print-json` 差在哪？
+
+- **`%(chapters)j`** — 只取**一個欄位** (`chapters`) 並以 JSON 格式化輸出。適合當你只要 chapters 但想保留結構。輸出只有 chapter 陣列，例如：
+  ```json
+  [{"start_time": 0, "end_time": 70, "title": "Intro"}, ...]
+  ```
+  通常幾百 bytes 到幾 KB。
+
+- **`--print-json`** — 整個 info_dict（所有欄位）。
+- **`-J` 或 `--dump-json`** — 也是整個 info_dict，但多一個 playlist 層包裝。
+- **`--write-info-json`** — 把 info_dict **寫到檔案** (`<filename>.info.json`)，適合永久保存。
+
+**關鍵差別：** `%(field)j` 是「一個欄位，JSON 格式」；`--print-json` 是「全部欄位，JSON 格式」。格式化語法一樣（都是 JSON），範圍不同。
+%% 我小問一下，這樣我做上面三種作法在call api的時候有差別嗎？意思是說，yt-dlp送的request回來的payload在用這三種方式所得到的是依樣的嗎？哈哈這可能就要看code裡面了啦，只是因為我沒有弄過product不知道一會怎麼設計，想知道一班的這種請求request會怎麼做%%
+
+**Claude 回覆（新問題）：**
+
+**完全沒差。** 三種方式（`--print "%(chapters)j"`、`--print-json`、`--write-info-json`）背後打出去的 HTTP request 一模一樣，YouTube 回來的 payload 也一模一樣。差別只在 yt-dlp 拿到 payload 之後，本地端怎麼呈現：
+
+- 同一次 API 呼叫 → 同一包 `info_dict` 存在記憶體
+- `--print "%(chapters)j"` 挑一個欄位印到 stdout
+- `--print-json` 把整個 dict `json.dumps` 印到 stdout
+- `--write-info-json` 把整個 dict `json.dumps` 寫到檔案
+
+所以三者的網路流量、時間、YouTube 端 rate limit 的消耗都一樣。
+
+**這是常見的 CLI/API 設計 pattern — fetch once, render many ways。** 背後邏輯：
+
+1. **Fetch**：打 API → 拿到完整 payload → deserialize 成 internal object（對 yt-dlp 是 `info_dict`）
+2. **Render**：根據 user flag 決定輸出什麼、輸出到哪
+3. **可選**：把 internal object 緩存或寫檔
+
+**為什麼這樣設計？**
+- API 呼叫貴（網路延遲、rate limit），一次把能抓的都抓最划算
+- 不同 user 要看不同東西，沒必要每個需求都寫新的 API call
+- 日後加新功能（例如 `--print "%(view_count)s"`）不用動 fetch 層
+
+**反向模式是「按需 fetch」** — 每個 flag 打不同 endpoint。這種只有在 API 原生就有分 endpoint、或 payload 太大才值得。大多數 wrapper-style CLI（yt-dlp、gh、kubectl）都走 fetch-once。
+
+**想自己驗證可以跑：**
+```bash
+yt-dlp --skip-download --print-json "$URL" 2>&1 | grep Downloading
+yt-dlp --skip-download --print "%(chapters)j" "$URL" 2>&1 | grep Downloading
+```
+
+兩邊會印一模一樣的 log 行（`Downloading webpage`、`Downloading player API JSON` 等）。那就是同一套 fetch 流程的證據。
+
+**所以你以後自己設計 product** 的 CLI 或 SDK，可以記住這個 pattern：**內部統一一個豐富的 data model，外部提供多種投影方式**。這讓 caching、testing、debug 都容易很多。
+
+### Q4: `--list-subs` 在做什麼？
+
+它**不下載**任何字幕，只**列出有哪些字幕可下載**。輸出大致是：
+
+```
+[info] zjkBMFhNj_g: Downloading webpage
+[info] zjkBMFhNj_g: Downloading player ...
+
+[info] Available subtitles for zjkBMFhNj_g:
+Language  Name                   Formats
+en        English                vtt, ttml, srv3, srv2, srv1, json3
+
+[info] Available automatic captions for zjkBMFhNj_g:
+Language  Name                   Formats
+ab        Abkhazian              vtt, ttml, srv3, srv2, srv1, json3
+af        Afrikaans              vtt, ...
+...
+en        English                vtt, ...
+en-US     English (United States) vtt, ...
+...
+zh-TW     Chinese (Traditional)  vtt, ...
+```
+
+**讀法：**
+
+1. **兩個 section：**
+   - `Available subtitles` = **uploader 自己上傳**的字幕（人工或人校對過，品質高）
+   - `Available automatic captions` = **YouTube 自動生成**的字幕（ASR, 沒標點、rolling-caption 格式 — 第 4 步講的那個陷阱）
+
+2. **每一行三欄：**
+   - `Language` — 語言代碼 (ISO 639-1, 或 `zh-TW` 這種 BCP 47)
+   - `Name` — 人類可讀名稱
+   - `Formats` — 可下載的格式清單
+
+3. **Auto-caption 那一長串 (ab, af, am, ...) 都是什麼？** YouTube 會**自動翻譯** auto-caption 到幾百種語言。`ab` (Abkhazian) 不代表 Karpathy 真的講了 Abkhaz — 只是 YouTube 可以把 native EN auto-caption 翻譯成 Abkhaz 給你。**真正有用的只有原始語言** (這邊是 `en`)；其他都是機器再翻譯，品質更差。
+
+4. **為什麼要先跑 `--list-subs`？** 避免「盲下載」。如果影片**沒有任何字幕**（短片、音樂影片、或 uploader 關閉字幕），你直接 `--write-auto-sub --sub-lang en` 會下載成功**但檔案是空的** —— 你會在 parse 階段才發現。先 `--list-subs` 一次幾百 ms，看到空 = 直接 bail，不浪費後續步驟。
+
+5. **為什麼前面 batch 我跳過 list-subs？** 因為我用 `--write-subs --write-auto-subs` 雙保險；萬一沒 uploader 字幕 auto-caption 也能補。如果你想對字幕完全沒有的影片 fail-fast，`--list-subs` + `grep -E "^en"` 是最乾淨的 pre-check。
 
 **為什麼偏離 SKILL.md：**
 1. **`--print` 格式化 vs `--print-json`：** SKILL 寫 `--print-json` 丟整份 JSON 到檔案；我改用 `--print` 只取我要的欄位，**主 thread 直接看到**，不用再開一個 Read tool call 去讀 JSON。少一步。
 2. **一次抓三種資訊：** metadata、chapters、subtitle availability。SKILL.md 把字幕下載放在 step 2，但**先確認有沒有字幕**比直接下載安全 —— 避免浪費一次下載嘗試。這是我從之前處理 2 支無字幕影片的教訓裡得到的。
 3. **`--no-warnings`：** 雜訊少一點。
+
+---
+## 
 
 **實際輸出（節錄）：**
 ```
@@ -90,7 +233,37 @@ ab       Abkhazian             vtt, ...
 - **21 個 chapters：** 不算少。SKILL.md 說「用官方 chapters 分段」。但 21 個會讓 processed 檔變成一堆零碎條目，**可讀性差**。我當下就決定：**group 成 6 個 logical sections**（詳見第 7 步）。
 - **`ab` (Abkhazian) 在清單第一：** YouTube 的 auto-caption list 包含所有翻譯語言，不只有 native。我要找的是 **native English auto-caption**（因為 Karpathy 用英文講）。怎麼確認？直接嘗試下載 `en`，如果不存在 `yt-dlp` 會報錯。
 
+%% 所以有辦法先知道影片是什麼語言然後只下載對應語言(en)的subtitlea嗎？還是你是用他的output parse 的？感覺就是加一個parameter的感覺%%
+
+> **Claude 回覆：**
+>
+> 有，兩種 parameter 做法都行：
+>
+> **方法 1 — metadata 預查 + 動態 `--sub-lang`**（你直覺的那個）：
+>
+> ```bash
+> LANG=$(yt-dlp --skip-download --no-warnings --print "%(language)s" "$URL")
+> LANG=${LANG:-en}   # 抓不到就 fallback 到 en
+> yt-dlp --write-subs --write-auto-subs --sub-format vtt --sub-lang "$LANG" ...
+> ```
+>
+> 先用 `%(language)s` 抓影片語言代碼（Karpathy 這支會回 `en`），再把它塞進 `--sub-lang`。**缺點：** 有些影片 `language` 欄位是 null（uploader 根本沒設），那時 `$LANG` 會空，需要 fallback。
+>
+> **方法 2 — 直接在 `--sub-lang` 塞 fallback chain**：
+>
+> ```bash
+> yt-dlp --write-subs --write-auto-subs --sub-format vtt \
+>   --sub-lang "en,en-US,en-GB,en-orig" ...
+> ```
+>
+> 逗號分隔，yt-dlp 依序試到有為止。**實務上通常夠用**，因為你只在意「有沒有英文」，不在意是 `en` 還是 `en-US`。
+>
+> **我的建議：** 第一次為保險用方法 1；batch 跑已知都是英文內容（例如 Stanford 課程、英文 podcast）就直接方法 2，省一次 API call。
+>
+> 還有個進階參數 `--sub-langs all`（注意 `s`）可以下載全部語言，但第 2 步看到的 ab/af/am ... 那一長串幾乎都是機器再翻譯，**通常是浪費**。真正想看非原文的情況極少。
+
 **SKILL.md 可以補強的：** 在 Step 1 註明「如果 chapters > 15 考慮 grouping；如果 duration > 60 min 先確認 subtitle 存在再下載」。
+
 
 ---
 
@@ -118,6 +291,141 @@ cd /tmp && yt-dlp --write-auto-sub --skip-download --sub-format vtt --sub-lang e
 - 下載本身非常快（毫秒級），頻寬不是問題；慢的是解析。
 
 **SKILL.md 對應 step 很簡短**（只講了指令），**完全沒提 rolling-caption 陷阱** —— 這是下一步的重頭戲。
+
+%%subtitles也算是一種metadata嗎？可以用-skip-download ? 我可能還是不是很理解InnerTube API 到底是什麼，他是google弄的嗎？這根system design 有關嗎？所以如果我跑--print-json，不加--write-auto-sub會有字幕跑出來嗎？然後上一部有先知道說有automatic captions, 也就是google自己偵測的caption對吧，所以才用--write-auto-sub ? 那如果是另外一種有available subtitles的話呢？%%
+
+> **Claude 回覆：**
+>
+> 拆成四個子問題一個一個回。
+>
+> **(a) Subtitles 也算 metadata 嗎？`--skip-download` 的範圍是什麼？**
+>
+> 要分清楚兩件事：
+>
+> - **Subtitle 的「清單」**（有哪些語言、哪些格式、URL 在哪裡）：這是 metadata，放在 `info_dict.subtitles` 和 `info_dict.automatic_captions` 裡。
+> - **Subtitle 的「實際內容」**（VTT 文字檔本身）：這**不是** metadata，是另一次 HTTP 下載。
+>
+> `--skip-download` 跳過的是**影片串流**（video/audio stream）。字幕則屬於「要另外明確 opt-in 才會下載的東西」。四種組合：
+>
+> ```bash
+> yt-dlp --print-json URL                      # 只抓 metadata（含字幕 URL 清單，但 VTT 不下）
+> yt-dlp --skip-download URL                    # 不下影片、不下字幕
+> yt-dlp --skip-download --write-auto-sub URL   # 不下影片、下 auto 字幕
+> yt-dlp --write-auto-sub URL                   # 影片 + auto 字幕 都下
+> ```
+>
+> **(b) InnerTube API 到底是什麼？是 Google 的嗎？跟 system design 有關嗎？**
+>
+> 是 Google 的。它是 YouTube 內部用的 RPC 介面。**所有** YouTube client — youtube.com 網頁、Android app、iOS app、AppleTV / Roku / Xbox / 智慧電視 app — 背後打的都是這套 API。Endpoint 大概是 `https://www.youtube.com/youtubei/v1/player`，POST JSON（底層 protobuf）。
+>
+> **Google 不官方開放這個 API。** yt-dlp 是逆向工程出來的（抓 Android app 的 request 格式照抄），所以偶爾 Google 改 schema 就會壞掉，需要更新。
+>
+> **跟 system design 非常有關。這是教科書級的 "one backend, many clients" pattern：**
+>
+> - 單一後端 service 同時 serve 異質 client
+> - 每種 client type 有專屬的 optimization（Android 拿得到某些 stream format；web 拿不到；TV client 拿高解析度；mobile 拿壓縮版）
+> - yt-dlp 會**模擬不同 client type**（`--extractor-args "youtube:player_client=android,web"`）來繞過某些限制
+>
+> 你以後自己設計 product 要讓 web / mobile / TV 共用後端，InnerTube 就是參考範例：**API 統一，client-specific 的差異由 "client type" header 控制**，不要每個平台一套 endpoint。
+>
+> **(c) 跑 `--print-json`，不加 `--write-auto-sub`，字幕會跑出來嗎？**
+>
+> 字幕**內容**不會。但 `info_dict` 裡會有字幕的 URL 清單，像這樣：
+>
+> ```json
+> {
+>   "automatic_captions": {
+>     "en": [{"ext": "vtt", "url": "https://www.youtube.com/api/timedtext?..."}, ...],
+>     "zh-TW": [...]
+>   },
+>   "subtitles": {}
+> }
+> ```
+>
+> 這個 URL 是真的、直接 `curl` 就能抓到 VTT。`--write-auto-sub` 做的事其實就是「從清單找到 URL → fetch VTT → 存檔」，你想的話自己寫 script 也能做一樣的事。
+>
+> **(d) `automatic_captions` 和 `subtitles` 的差別？Karpathy 這支是哪一種？**
+>
+> - **`subtitles`**：**uploader（頻道主）自己上傳**的字幕。可能人工打、可能人校對過、可能是專業 CC 團隊做的 — 品質高、有標點、有 speaker 標記。
+> - **`automatic_captions`**：**Google 用 ASR（語音辨識）自動生成**的字幕。沒標點、rolling-caption 格式、罕見詞容易 ASR 錯。
+>
+> Karpathy 這支的狀況：他沒上傳自己的字幕 → `subtitles: {}`（空）→ 只有 `automatic_captions.en` → **所以必須用 `--write-auto-sub`**。
+>
+> 上一批的 Stanford / LangChain / Lex 等**有 uploader 字幕** → `subtitles.en` 非空 → `--write-subs` 會拿到乾淨版本。這就是為什麼現在 SKILL.md 寫 `--write-subs --write-auto-subs`：**先試 uploader 的，沒有再 fallback 到 auto**。
+
+%%
+我也有實際下載vtt檔，你可以在檔案裡面加一個解釋說什麼事rolling caption嗎？請回覆在[[yt-zjkBMFhNj_g.en.vtt]]
+%%
+
+> **Claude 回覆：**
+>
+> 好，我到 [[yt-zjkBMFhNj_g.en.vtt]] 檔案的**最頂端**加了一段 markdown 說明區塊，包含：
+>
+> 1. 什麼是 rolling caption（為什麼 YouTube 這樣設計）
+> 2. 對照這個檔案前 40 行的實例 — 同一句話如何出現 3 次
+> 3. Parser 核心邏輯（只保留含 `<` 的 cue）
+> 4. 指回這份 deep-dive 的第 4 步作為完整參考
+>
+> 原始 VTT 內容完全保留在說明區塊下方，沒有動一個字。因為檔名是 `.vtt.md`，在 Obsidian 裡看起來是 markdown（可 render 說明），但如果要給 VTT parser 吃，請用 `/tmp/yt-zjkBMFhNj_g.en.vtt`（純 VTT 版本）。
+
+%%剛剛有一個小問題我忘記問了，就是進到/tmp去下載東西這件事情是很多software 常做的嗎？有沒有什麼例子，然後/tmp有什麼比較特別的地方嗎？所以我如果寫腳本有一些指示中過成的黨案也是放在這裡嗎？%%
+
+> **Claude 回覆：**
+>
+> **超級常見。** `/tmp` 是 Unix / Linux / macOS 的標準 "scratch space"，幾乎每套 CLI 工具都會用。
+>
+> **為什麼 `/tmp` 特別？** 它是 **Filesystem Hierarchy Standard (FHS)** 裡定義的四個特殊目錄之一，有幾個關鍵特性：
+>
+> | 特性 | 說明 |
+> |---|---|
+> | **World-writable** | 所有 user 都能寫，有 `sticky bit` (`chmod +t`) 只能刪自己的檔，避免亂刪別人的 |
+> | **Volatile（易失性）** | 通常**重開機就清空**（Linux 很多 distro 用 `tmpfs` = RAM，macOS 每 3 天自動清） |
+> | **不 backup** | `/tmp` 預設不會被系統備份工具抓走，適合放 scratch |
+> | **可能很小** | 如果底層是 `tmpfs`（RAM），空間受限於 RAM 大小，不要放 10 GB 檔案 |
+>
+> **常見使用例子（遍地都是）：**
+>
+> - `brew install` 下載 tarball 先到 `/tmp` → 解壓 → 搬到 `/opt/homebrew/...`
+> - `apt-get` / `yum` 同樣模式
+> - `pip install` 解壓 wheel 時過渡到 `/tmp`
+> - `vim` 的 swap files 預設在 `/tmp` 或 `~/.vim/tmp`
+> - `gcc` / `clang` 編譯器的中間產物 `.o` 檔
+> - `ffmpeg` 做兩階段處理時
+> - Docker 建 image 時的 build context
+> - **我們這個 skill 跑 yt-dlp**：VTT 下載、parser 輸出 `.clean.txt` 都進 `/tmp`
+>
+> **規範層面的「專業做法」：**
+>
+> - **用 `mktemp` 而不是自己取名**（避免 race condition 和 collision）：
+>
+>   ```bash
+>   TMPFILE=$(mktemp)                       # 建唯一暫存檔
+>   TMPDIR=$(mktemp -d)                     # 建唯一暫存目錄
+>   trap "rm -rf $TMPDIR" EXIT              # 腳本結束自動清掉
+>   ```
+>
+> - **讀環境變數 `$TMPDIR`**（macOS 預設是 `/var/folders/...` 不是 `/tmp`）：
+>
+>   ```bash
+>   echo ${TMPDIR:-/tmp}                    # fallback 到 /tmp
+>   ```
+>
+> - **不要放機密**。`/tmp` 在某些 OS 上是 world-readable，對 multi-user 系統尤其危險。放 token / key / session cookie 這種應該用 `$XDG_RUNTIME_DIR`（有 600 權限）或寫到 `~/.cache/<app>/` 自己控權限。
+>
+> **相關但常被搞混的目錄：**
+>
+> - **`/tmp`** — 重開機會清；FHS 允許 `tmpfs`（RAM-backed）
+> - **`/var/tmp`** — 類似 `/tmp` 但 **FHS 保證重開機後還在**；放「跨 session 但不重要」的東西
+> - **`~/.cache/<app>/`** — user-scoped cache（持久但可清）；symlinked 的話會走 XDG 規範
+> - **`~/.local/state/<app>/`** — user-scoped 狀態（非快取的持久資料）
+>
+> **你寫腳本有中間檔案也放這裡嗎？** 看性質：
+>
+> - **一次性的中間檔**（解析完就不要了）→ `/tmp` 或 `mktemp` 出來的路徑，✓
+> - **跨次執行想 reuse 的 cache**（例如 yt-dlp 下載過的 VTT 想下次直接用）→ `~/.cache/your-script/` 比較好，不會被系統清掉
+> - **有價值、會想人工查看的產物**（我們的 processed markdown）→ 放 repo / vault 裡，絕對**不要**放 `/tmp`
+>
+> 我這個 skill 把 VTT 放 `/tmp` 是刻意的：VTT 是中間產物，parse 完就不該留；真正要保存的是 `10-Raw/youtube/` 底下的 `.md` 檔。這種分界叫 **"scratch vs artifact"** — scratch 隨便放 `/tmp`，artifact 放 vault。
 
 ---
 
@@ -266,6 +574,87 @@ blocks for readable raw output.
 Reference implementation: see Dev/Deep Dive into youtube video
 extraction and summarization.md § Step 4.
 ```
+
+%%你覺得網路上會有vtt轉成文字的工具嗎？還是你覺得可以用你的parser就好？然後你覺得要寫成script然後把這個vtt->cleaned.text寫成一個小skill，還是你覺得把code包含在skills.md就好？%%
+
+> **Claude 回覆：**
+>
+> 拆成三個子問題回答：
+>
+> **(a) 網路上有 VTT → 文字的工具嗎？**
+>
+> 有，不少。分兩類：
+>
+> 1. **通用 VTT parser**（遵循 WebVTT spec）：
+>    - `webvtt-py`（Python，最常用）：`pip install webvtt-py`，API 很乾淨
+>    - `pycaption`（PBS NewsHour 出的）：支援多種 caption 格式互轉（VTT/SRT/DFXP...）
+>    - Node 有 `webvtt-parser`、`subtitle` 等
+>    - 網頁 UI：subtitle-tools.com 之類
+>
+> 2. **YouTube 專用的 transcript 工具**（繞過 VTT 格式直接用 timedtext API）：
+>    - **`youtube-transcript-api`**（Python）：`pip install youtube-transcript-api`
+>      ```python
+>      from youtube_transcript_api import YouTubeTranscriptApi
+>      transcript = YouTubeTranscriptApi.get_transcript('zjkBMFhNj_g')
+>      # [{'text': 'hi everyone', 'start': 0.16, 'duration': 2.11}, ...]
+>      ```
+>    - 直接拿到乾淨文字 + timestamp，**完全沒有 rolling-caption 問題**
+>
+> **但通用 VTT parser 不能解我們的問題。** 因為它們遵循 VTT spec 忠實 parse — 拿到 13,632 行 YouTube auto-caption VTT，它會老實給你 13k 個 cue，裡面 3-5 次重複的現象還是在。**通用 parser 不知道 YouTube 的 rolling-caption 是「同一句話的 UI 動畫」**，它們會把每個 cue 都當獨立字幕看。
+>
+> 所以選項變成：
+> - **繼續用我的自製 parser**（已經寫好、問題已知、dedup 邏輯對 YouTube 有效）
+> - **換成 `youtube-transcript-api`**（連 VTT 都跳過，從 timedtext API 直接拿乾淨文字）
+>
+> **我會推薦後者。** 它省掉「下載 VTT → 手動 dedup」這整段，程式碼少一半，而且 Google 如果改 VTT 格式這個 library 會更新、你不用自己維護 parser。缺點是多一個 Python 依賴、且 Google 改 API 的話 library 要更新。
+>
+> **(b) 用我的 parser 就好 vs 換 library？**
+>
+> 短期：用現有 parser 沒問題，已經驗證過 5+ 支影片能 work。
+>
+> 長期（如果這個 skill 會用超過 3 個月）：建議換 `youtube-transcript-api`，理由：
+> - 少一個「Google 改 VTT 格式我要 debug」的 failure mode
+> - 多一個可選項：可以同時拿英文 + 翻譯版本
+> - 社群有在維護（>10k GitHub stars）
+> - 程式碼短很多
+>
+> **(c) 獨立 script vs 包在 SKILL.md 裡？**
+>
+> 三個選項的權衡：
+>
+> | 方案 | 優點 | 缺點 |
+> |---|---|---|
+> | **A. 現狀：code 嵌在 SKILL.md** | Skill 自包含；agent 讀一份文件就懂 | 改 parser = 改 skill；Python 嵌 markdown 很醜；無法單獨 test |
+> | **B. 獨立 `parse_vtt.py` + SKILL.md 引用** | 職責分離；script 可 lint / test / version；skill 保持純 workflow 指引 | 多一個檔案；agent 要跨檔案閱讀 |
+> | **C. 獨立「vtt-to-text」sub-skill** | 最「正規」 | **Overkill**。Skill 是「角色/工作流」不是「工具」。一個 parser 是 script，不是 skill |
+>
+> **我的建議是 B。** 放在 `.claude/skills/process-youtube/parse_vtt.py`，SKILL.md 裡只說：
+>
+> ```markdown
+> ## Step 3. Parse VTT
+> Run:
+>     python3 .claude/skills/process-youtube/parse_vtt.py /tmp/yt-<id>.en.vtt
+> Output: `/tmp/yt-<id>.clean.txt` with `[HH:MM:SS] text` lines.
+> ```
+>
+> 這樣 (1) skill 檔乾淨，讀起來是 workflow 不是 code dump；(2) script 自己可以寫 unit test；(3) 未來要換成 `youtube-transcript-api` 只改那支 script，skill 不用動。
+>
+> **Skill 的判準是「角色 / 責任」：**
+> - `process-youtube` 是 skill — 它是一個 "我要把 YouTube 影片變成 processed note" 的 workflow 角色
+> - `parse_vtt` 不是 skill — 它是一個 "把這個格式轉成那個格式" 的 utility 工具
+>
+> 區分原則：**skill 有判斷、有分支、有 orchestration；script 沒有**。我們這個 parser 就是「吃檔案吐檔案」，純工具。
+>
+> **所以最乾淨的版本會是：**
+>
+> ```
+> .claude/skills/process-youtube/
+> ├── SKILL.md                  # workflow 指引
+> ├── parse_vtt.py              # VTT → cleaned txt（或之後換成 youtube-transcript-api）
+> └── EXAMPLE-2026-04-22-*.md   # 範本
+> ```
+>
+> 你如果想我可以實際幫你把 parser 抽出來改成這個結構。
 
 ---
 
