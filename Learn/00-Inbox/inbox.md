@@ -18,6 +18,8 @@
 - [x] https://www.youtube.com/watch?v=EV7WhVT270Q&t=4s
 - [x] https://www.youtube.com/watch?v=PJQPMv8TqLA
 - [x] https://www.youtube.com/watch?v=Z28Wfdf3SRc
+- [x] https://www.youtube.com/watch?v=2rcJdFuNbZQ&t=2s → [[hung-yi-lee-openclaw-ai-agent-anatomy]]
+- [x] https://www.youtube.com/watch?v=zvI4UN2_i-w&list=PLS01nW3RtgorL3AW8REU9nGkzhvtn6Egn&index=10 → [[berkeley-rdi-yu-su-reasoning-memory-planning]]
 <!-- moved to ## 已處理 as -v2 run on 2026-04-27 -->
 
 
@@ -61,6 +63,8 @@
 - [x] https://www.youtube.com/watch?v=k8cnVCMYmNc → [[2026-04-22-ai-engineer-durable-agents-temporal]]
 - [x] https://www.youtube.com/watch?v=zjkBMFhNj_g → [[2026-04-22-karpathy-intro-to-llms]] (deep-dive walkthrough in [[Deep Dive into youtube video extraction and summarization]])
 - [x] https://www.youtube.com/watch?v=zjkBMFhNj_g → [[karpathy-intro-to-llms-v2]] (re-run on 2026-04-27 with updated process-youtube skill; trace in [[2026-04-27-process-youtube-karpathy-v2-trace]])
+- [x] https://www.youtube.com/watch?v=R6fZR_9kmIw → [[hung-yi-lee-harness-engineering]] (processed 2026-04-28; trace in [[2026-04-28-process-youtube-inbox-trace]])
+- [x] https://www.youtube.com/watch?v=cMiu3A7YBks → [[berkeley-rdi-hajishirzi-open-training-recipes-reasoning]] (processed 2026-04-28; trace in [[2026-04-28-process-youtube-inbox-trace]])
 
 <!-- 範例格式：
 - [x] https://www.threads.net/@example/post/EXAMPLE1 → [[2026-04-22-example-threads-post]]

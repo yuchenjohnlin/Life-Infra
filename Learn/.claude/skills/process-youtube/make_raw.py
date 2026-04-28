@@ -128,28 +128,53 @@ def fmt_description_section(description: str) -> str:
     return "# Description\n\n" + description.strip() + "\n"
 
 
-def pick_transcript(listing, fluent_languages=None):
-    """Pick best transcript, translating to a fluent language if original isn't readable.
+def detect_original_lang(transcripts, meta_language=None):
+    """Best-effort detection of the video's original spoken language.
 
-    Auto-captions are always in the video's original spoken language, so we use
-    any auto-caption's language_code as the "original language" signal.
+    Priority (cheapest / most reliable first):
+      1. yt-dlp metadata `language` field — sometimes set by YouTube, free signal.
+      2. Auto-caption language — auto-captions are ALWAYS in the spoken language,
+         and there's only ever one base auto-caption per video (rest are auto-translated).
+      3. Single manual sub's language — if the only track is manual, assume the
+         uploader uploaded it in the spoken language. Not 100% reliable but a
+         reasonable default (covers cases like Hung-yi Lee's zh-TW manual subs
+         with auto-captions disabled).
+      4. None — ambiguous; caller decides (e.g., prefer one in fluent_languages).
+    """
+    if meta_language:
+        return meta_language
+    auto = [t for t in transcripts if t.is_generated]
+    if auto:
+        return auto[0].language_code
+    manual = [t for t in transcripts if not t.is_generated]
+    if len(manual) == 1:
+        return manual[0].language_code
+    return None
+
+
+def pick_transcript(listing, fluent_languages=None, meta_language=None):
+    """Pick best transcript, translating to a fluent language if original isn't readable.
 
     Returns:
         (transcript, is_translation) — transcript is the API object you call .fetch()
-        on; is_translation is True iff we ran .translate(target). Both None on no match.
+        on; is_translation is True iff we ran .translate(target). (None, False) if
+        the video has zero transcripts.
 
-    Logic:
-      Case A — original language is in fluent_languages (use as-is):
-        1. Manual sub in original language
-        2. Auto-caption (in original language by definition)
-        3. Any manual sub
-      Case B — original NOT in fluent_languages (translate to fluent_languages[0]):
-        1. Translate a manual sub if translatable (cleaner source)
-        2. Translate an auto-caption if translatable
-      Case C — translation impossible:
-        Fall back to any transcript (caller can decide whether to skip)
+    Search tiers (try each in order; first hit wins):
+      1. Manual sub in detected original language (when original IS fluent)
+      2. Auto-caption in detected original language (when original IS fluent)
+      3. Any manual sub whose language is in fluent_languages
+         (catches: manual-only videos where original-lang detection failed,
+          e.g., zh-TW manual sub + no auto-caption — was the bug that bit us)
+      4. Any auto-caption whose language is in fluent_languages
+      5. Translate a manual sub to fluent_languages[0] (cleaner source than auto)
+      6. Translate an auto-caption to fluent_languages[0]
+      7. Last resort: return any transcript as-is
 
-    Caller halts only if `transcripts` list is empty.
+    Tiers 3–4 are the key fix vs. the previous version: we now try to find a
+    fluent transcript directly before invoking the translation endpoint, which
+    is rate-limited harder than the base transcript endpoint (the IP-block
+    failure on 2026-04-28 was caused by reaching tier 5 unnecessarily).
     """
     if fluent_languages is None:
         fluent_languages = FLUENT_LANGUAGES
@@ -158,43 +183,33 @@ def pick_transcript(listing, fluent_languages=None):
     if not transcripts:
         return None, False
 
-    # Detect original spoken language from auto-caption presence
-    auto_langs = [t.language_code for t in transcripts if t.is_generated]
-    original_lang = auto_langs[0] if auto_langs else None
+    original_lang = detect_original_lang(transcripts, meta_language)
 
-
-    # Case A — original language is fluent, use as-is
+    # Tiers 1–2 — original-lang track when original is fluent
     if original_lang and original_lang in fluent_languages:
         for t in transcripts:
-            if t.language_code == original_lang and not t.is_generated: # is not generated means that it's uploaded by the creator 
+            if t.language_code == original_lang and not t.is_generated:
                 return t, False
         for t in transcripts:
-            if t.is_generated:
+            if t.language_code == original_lang and t.is_generated:
                 return t, False
-        for t in transcripts:
-            if not t.is_generated:
-                return t, False
-    '''
-        Why 3 loops: they encode strict priority. The first loop finds tier 1 (manual in original); if anything matches,
-        return immediately. Only if tier 1 had nothing do we even start scanning for tier 2 (auto). Same for tier 3.
 
-        1 lopp equivalent : 
-        More state to track (2 sentinel variables)
-        - Have to read carefully to verify "is this implementing the same priority?"
-        - Saves nothing meaningful at this scale: transcripts is typically 1-10 items, sometimes up to ~30 for popular
-        videos. 3-loop is O(3n) ≈ O(n); the constant doesn't matter.
-    '''
+    # Tiers 3–4 — any track in fluent_languages (regardless of original-lang detection)
+    for t in transcripts:
+        if not t.is_generated and t.language_code in fluent_languages:
+            return t, False
+    for t in transcripts:
+        if t.is_generated and t.language_code in fluent_languages:
+            return t, False
 
-    # Case B — original is non-fluent (or unknown), translate to first fluent language
+    # Tiers 5–6 — translate to fluent_languages[0]
     target = fluent_languages[0]
-
     for t in transcripts:
         if not t.is_generated and getattr(t, "is_translatable", False):
             try:
                 return t.translate(target), True
             except Exception:
                 continue
-
     for t in transcripts:
         if t.is_generated and getattr(t, "is_translatable", False):
             try:
@@ -202,7 +217,7 @@ def pick_transcript(listing, fluent_languages=None):
             except Exception:
                 continue
 
-    # Case C — nothing translatable, return any transcript as-is
+    # Tier 7 — give up, return any transcript as-is
     return transcripts[0], False
 
 
@@ -239,7 +254,10 @@ def main() -> int:
                  for t in list(listing)]
     print(f"[make_raw] Available: {available}")
 
-    chosen, is_translation = pick_transcript(api.list(video_id))
+    chosen, is_translation = pick_transcript(
+        api.list(video_id),
+        meta_language=meta.get("language"),
+    )
     if chosen is None:
         print(f"[make_raw] ERROR: no usable transcripts for {video_id}", file=sys.stderr)
         return 2
