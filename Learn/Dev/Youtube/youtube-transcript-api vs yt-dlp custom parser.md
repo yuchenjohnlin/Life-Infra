@@ -265,6 +265,118 @@ Parser 本身比較：Custom **快 60 倍**（本地 regex vs 網路 IO）。但
 
 ---
 
+%%
+可以看一下youtube-transcript裡面其實有url, xml, json攩 xml是texttime api 得到的raw檔然後api在弄成比較clean的 json黨
+%%
+
+## 5.5 `timedtext-url` / `timedtext-raw` / `api-snippets` 的關係
+
+這三個檔案是**同一條資料鏈上的三個層級**：
+
+```text
+timedtext-url.txt
+-> 指向 Google timedtext API 的實際請求 URL
+-> 拿到 timedtext-raw
+-> 經 youtube-transcript-api parse 後得到 api-snippets
+```
+
+### (a) `timedtext-url.txt` — request 層
+
+這不是 transcript 內容，而是：
+
+```text
+「library 實際去打哪個 URL 拿字幕」
+```
+
+用途：
+- debug `youtube-transcript-api` 走的是不是 `youtube.com/api/timedtext`
+- 檢查 query params 長相（`lang=en`, `kind=asr` 等）
+- 之後如果要自己重打 API，可作為參考
+
+### (b) `timedtext-raw` — raw response 層
+
+這是那條 timedtext URL 回來的**原始 response body**。這次 Karpathy 影片拿到的是 XML：
+
+```xml
+<transcript>
+  <text start="0.16" dur="4.08">hi everyone so recently I gave a</text>
+  ...
+</transcript>
+```
+
+這一層最接近 Google 真正回的內容，特性是：
+
+- 最底層、最接近真相
+- 還沒被 library 整理
+- 可能保留 XML / HTML escaping
+  - 例如：`busy person&amp;#39;s`
+- 好處是方便 debug 和驗證 parser
+- 缺點是對下游處理不太友善
+
+### (c) `api-snippets.json` — library parse 後的結構化結果
+
+這是 `youtube-transcript-api` 把 raw timedtext response parse 完之後給你的資料，再由我們 dump 成 pretty JSON：
+
+```json
+{
+  "start": 0.16,
+  "duration": 4.08,
+  "text": "hi everyone so recently I gave a"
+}
+```
+
+這一層不是單純「XML 換成 JSON」而已，至少做了這些加工：
+
+1. **把 XML element 轉成穩定的 snippet 結構**
+   - `<text start="..." dur="...">...</text>`
+   - 變成 `{start, duration, text}`
+
+2. **把字串 decode 成更適合程式處理的文字**
+   - 例如 raw 裡的 `busy person&amp;#39;s`
+   - 變成 snippets 裡的 `busy person's`
+
+3. **把 transcript materialize 成 library object**
+   - Python 裡是 `FetchedTranscript` / snippet objects
+   - 我們才有辦法直接 `for s in fetched.snippets`
+
+4. **附帶語言與 transcript metadata**
+   - `language`
+   - `language_code`
+   - `is_generated`
+
+要注意：`video_id`、`snippet_count` 這兩個欄位是**我們的 dump script 額外包上去的**，不是 library 原生 API 回傳欄位。
+
+### 結論：要不要兩份都留？
+
+**短答案：**
+
+- `api-snippets.json`：**建議保留**
+- `timedtext-raw`：**只在 debug / reverse-engineering / parser regression test 時保留**
+
+原因：
+
+**保留 `api-snippets.json` 的理由**
+- 它是下游最實用的格式
+- 比 raw XML 更 human-readable
+- 最適合拿來做 grouping / summarization / fixture test
+- 可以當成 `process-youtube` 未來 transcript step 的 canonical fixture
+
+**`timedtext-raw` 不一定每支都要留的理由**
+- 平常 workflow 不會直接讀它
+- 它主要是 debug artifact
+- 用來回答「Google 實際回了什麼？」、「library 到底幫我處理了哪些東西？」
+- 一旦 parser 出 bug、YouTube response 形狀改了，這份才有價值
+
+所以比較務實的保存策略是：
+
+```text
+日常 processing:
+  保留 api-snippets
+
+manual_test / tooling research:
+  保留 timedtext-raw + timedtext-url
+```
+
 # 6. 功能對比
 
 ## 6.1 事前檢查字幕是否存在
