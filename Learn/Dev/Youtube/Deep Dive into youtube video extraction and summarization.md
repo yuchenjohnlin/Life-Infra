@@ -651,6 +651,8 @@ extraction and summarization.md § Step 4.
 >
 > 你如果想我可以實際幫你把 parser 抽出來改成這個結構。
 
+[[youtube-transcript-api vs yt-dlp custom parser]] this file demonstrates the difference between using the two ways. 
+
 ---
 
 ## 第 5 步：Raw file 寫入

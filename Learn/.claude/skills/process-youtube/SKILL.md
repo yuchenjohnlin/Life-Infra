@@ -100,7 +100,7 @@ status: raw
 ---
 ```
 
-Chapters live in the body as `# Chapters` (not in frontmatter) so the full chapter list is preserved for re-processing.
+Chapters live in the body as `# Chapters` (not in frontmatter) so the full chapter list is preserved for re-processing. The video description, when present, is written verbatim as `# Description` between `# Chapters` and `# Transcript` — it serves as a disambiguation prior (proper names, links, version numbers) when normalizing auto-caption errors during summarization.
 
 ## 3. Segmentation
 
@@ -141,6 +141,8 @@ Read like a knowledgeable friend's introduction to the segment, not a bulleted s
 ```
 
 The rating (⭐/👀/⏩) goes inline in the segment heading.
+
+> When writing segment paragraphs and takeaways, silently normalize obvious auto-caption errors (filler words, mangled product/version names) using chapter titles, the description, and surrounding context as priors. Keep the raw file verbatim — the processed file is the human-readable artifact, the raw file is the audit trail. Use `[?]` only when context genuinely can't disambiguate.
 
 ## 5. TL;DR + Viewing path
 

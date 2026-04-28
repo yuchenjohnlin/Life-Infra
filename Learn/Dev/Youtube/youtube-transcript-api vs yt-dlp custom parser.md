@@ -220,6 +220,9 @@ snippet 0 結束時間（4.24s）在 snippet 1 開始時間（2.28s）之後 —
 
 ## 5.3 輸出品質 — 實際 diff
 
+%%
+這邊可以看一夏這兩個file來比較 [[yt-zjkBMFhNj_g.clean]] and [[yt-zjkBMFhNj_g.api]]%%
+
 兩份清單 `diff` 後只有 20 行差異（10 對差異點）：
 
 **類別 1 — Custom parser 掉字**（7 處，API 正確、custom 錯）

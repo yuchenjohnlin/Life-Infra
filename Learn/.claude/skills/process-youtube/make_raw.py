@@ -38,6 +38,10 @@ Output file structure:
     - 00:02:30 Title 2
     ...
 
+    # Description      (if metadata has description; verbatim, used as
+                       a disambiguation prior during summarization)
+    <description text>
+
     # Transcript
     [00:00:00] ...
     [00:00:30] ...
@@ -114,6 +118,14 @@ def fmt_chapter_section(chapters) -> str:
         lines.append(f"- {ts} {title}")
     lines.append("")
     return "\n".join(lines)
+
+
+def fmt_description_section(description: str) -> str:
+    """Verbatim description block. Used as a disambiguation prior when normalizing
+    auto-caption errors during summarization (proper names, links, timestamps)."""
+    if not description or not description.strip():
+        return ""
+    return "# Description\n\n" + description.strip() + "\n"
 
 
 def pick_transcript(listing, fluent_languages=None):
@@ -209,6 +221,7 @@ def main() -> int:
     uploader = meta.get("uploader") or "unknown"
     duration = meta.get("duration") or 0
     chapters = meta.get("chapters") or []
+    description = meta.get("description") or ""
 
     api = YouTubeTranscriptApi()
 
@@ -264,11 +277,14 @@ def main() -> int:
     )
 
     chapter_section = fmt_chapter_section(chapters)
+    description_section = fmt_description_section(description)
     transcript_section = "# Transcript\n\n" + "\n".join(fmt_block(b) for b in blocks) + "\n"
 
     parts = [frontmatter, ""]
     if chapter_section:
         parts.append(chapter_section)
+    if description_section:
+        parts.append(description_section)
     parts.append(transcript_section)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
