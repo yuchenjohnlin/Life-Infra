@@ -20,6 +20,7 @@
 - [x] https://www.youtube.com/watch?v=Z28Wfdf3SRc
 - [x] https://www.youtube.com/watch?v=2rcJdFuNbZQ&t=2s → [[hung-yi-lee-openclaw-ai-agent-anatomy]]
 - [x] https://www.youtube.com/watch?v=zvI4UN2_i-w&list=PLS01nW3RtgorL3AW8REU9nGkzhvtn6Egn&index=10 → [[berkeley-rdi-yu-su-reasoning-memory-planning]]
+- [ ] https://www.youtube.com/watch?v=Q3m-CKJmqMo&list=WL&index=5
 <!-- moved to ## 已處理 as -v2 run on 2026-04-27 -->
 
 

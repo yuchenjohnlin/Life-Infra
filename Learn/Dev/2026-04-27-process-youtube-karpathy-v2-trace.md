@@ -1,4 +1,4 @@
-# 2026-04-27 — process-youtube execution trace (Karpathy intro-to-LLMs, v2 run)
+2026-04-27-process-youtube-karpathy-v1-trace is the file [[Deep Dive into youtube video extraction and summarization]]
 
 > **Purpose:** Experimentation log for the updated `process-youtube` skill. The video (`zjkBMFhNj_g`, Karpathy's "Intro to LLMs") was already processed on 2026-04-22 under the old skill version. This run uses the new pipeline (with `make_raw.py` and `youtube-transcript-api`) and writes to a separate `-v2` file so we can compare against the original.
 >
