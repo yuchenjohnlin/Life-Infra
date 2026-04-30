@@ -1,3 +1,4 @@
+You will see this file mentioning the orphan files that didn't run the process successfully, they were manually deleted by me, because they didn't contain anything. However, I have the log file recording what happened. [[scheduled-run-process-youtube-trace-opus]]
 # Deep Dive — Batch Processing of 5 Videos
 
 **Purpose:** Second deep-dive doc for `process-youtube` skill. Previous doc ([[Deep Dive into youtube video extraction and summarization]]) covered a **single video inline** with full step-by-step transparency. This one covers a **batch of 5 videos** with subagent-per-video parallelism — a fundamentally different orchestration mode. It documents every judgment call, the rate-limit failure that interrupted execution, the recovery process, and the SKILL.md gaps uncovered.
@@ -411,3 +412,6 @@ Each is <1 KB, frontmatter-only stubs from interrupted subagents. I did NOT dele
 *Written by Claude (Opus 4.7) as a teaching/reflection artifact.*
 *Execution spanned subagent-parallel + main-thread-recovery modes.*
 *Approx. 3800 words. All commands documented here were actually run.*
+
+
+

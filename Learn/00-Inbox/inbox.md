@@ -62,7 +62,7 @@
 - [x] https://www.youtube.com/watch?v=am_oeAoUhew → [[2026-04-22-ai-engineer-harness-engineering]]
 - [x] https://www.youtube.com/watch?v=njWyDHKYeVA → [[2026-04-22-google-cloud-self-host-gemma]]
 - [x] https://www.youtube.com/watch?v=k8cnVCMYmNc → [[2026-04-22-ai-engineer-durable-agents-temporal]]
-- [x] https://www.youtube.com/watch?v=zjkBMFhNj_g → [[2026-04-22-karpathy-intro-to-llms]] (deep-dive walkthrough in [[Deep Dive into youtube video extraction and summarization]])
+- [x] https://www.youtube.com/watch?v=zjkBMFhNj_g → [[karpathy-intro-to-llms-v1]] (deep-dive walkthrough in [[Deep Dive into youtube video extraction and summarization]])
 - [x] https://www.youtube.com/watch?v=zjkBMFhNj_g → [[karpathy-intro-to-llms-v2]] (re-run on 2026-04-27 with updated process-youtube skill; trace in [[2026-04-27-process-youtube-karpathy-v2-trace]])
 - [x] https://www.youtube.com/watch?v=R6fZR_9kmIw → [[hung-yi-lee-harness-engineering]] (processed 2026-04-28; trace in [[2026-04-28-process-youtube-inbox-trace]])
 - [x] https://www.youtube.com/watch?v=cMiu3A7YBks → [[berkeley-rdi-hajishirzi-open-training-recipes-reasoning]] (processed 2026-04-28; trace in [[2026-04-28-process-youtube-inbox-trace]])

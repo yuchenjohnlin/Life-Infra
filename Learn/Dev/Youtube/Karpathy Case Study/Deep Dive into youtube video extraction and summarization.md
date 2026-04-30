@@ -1440,7 +1440,7 @@ SKILL.md 要求「exactly 3 sentences」。為什麼 3？因為：
 Implementable things我現在是覺得很多餘啦，不過我覺得建議的閱讀路徑是不錯，畢竟有時候我還是不會想要全部看完。不過那個現在就是當作保留像還沒有要做什麼優化。到時候可能就放在檔案最後面，implementable則是先拿掉。
 %%
 
-%%不好意思我可能沒有表達清楚，請你把那個重新寫的summary寫到[[Deep Dive into youtube video extraction and summarization]]裡面，不要寫在這裡，會變得太長。不過為什麼我明明在上面就已經說要在那個file 裏面的每個section重寫了，為什麼你會寫在這個檔案裡面。
+%%不好意思我可能沒有表達清楚，請你把那個重新寫的summary[](Deep%20Dive%20into%20youtube%20video%20extraction%20and%20summarization.md)]]裡面，不要寫在這裡，會變得太長。不過為什麼我明明在上面就已經說要在那個file 裏面的每個section重寫了，為什麼你會寫在這個檔案裡面。
 
 ...結果是我自己搞錯，我真爛，claude你真好
 %%
@@ -1459,7 +1459,7 @@ Implementable things我現在是覺得很多餘啦，不過我覺得建議的閱
 >
 > ## Karpathy 6 sections — TL;DR-style rewrite
 >
-> 完整 rewrite 已 append 到 [[2026-04-22-karpathy-intro-to-llms]] 的 `# v2: Narrative-arc rewrite` 段落（按 CLAUDE.md 不刪舊內容原則，放在 v1 `# 逐段摘要` 下方而非取代）。每段三件事：(i) **講者想傳達** (ii) **你能學到** (iii) **承先啟後**；Key concepts 壓成單行尾註保留（grep 友善但不再 visual 主體）。
+> 完整 rewrite 已 append 到 [[karpathy-intro-to-llms-v1]] 的 `# v2: Narrative-arc rewrite` 段落（按 CLAUDE.md 不刪舊內容原則，放在 v1 `# 逐段摘要` 下方而非取代）。每段三件事：(i) **講者想傳達** (ii) **你能學到** (iii) **承先啟後**；Key concepts 壓成單行尾註保留（grep 友善但不再 visual 主體）。
 >
 > ---
 >
