@@ -75,6 +75,28 @@ from youtube_transcript_api._errors import (
 # Order matters: first entry is the translation target.
 FLUENT_LANGUAGES = ["en", "zh-TW", "zh-CN", "zh"]
 
+# A description line counts as a "chapter line" if it starts with MM:SS or HH:MM:SS.
+# Three or more such lines → treat as description-style chapters.
+CHAPTER_TS_RE = re.compile(r"^\s*(?:\d{1,2}:)?\d{1,2}:\d{2}\b")
+DESCRIPTION_CHAPTER_THRESHOLD = 3
+
+
+def detect_chapters_in_description(description: str) -> bool:
+    if not description:
+        return False
+    count = sum(1 for line in description.splitlines() if CHAPTER_TS_RE.match(line))
+    return count >= DESCRIPTION_CHAPTER_THRESHOLD
+
+
+def fmt_available_transcripts(items) -> str:
+    if not items:
+        return "available_transcripts: []\n"
+    lines = ["available_transcripts:"]
+    for it in items:
+        lines.append(f"  - language_code: {it['language_code']}")
+        lines.append(f"    type: {it['type']}")
+    return "\n".join(lines) + "\n"
+
 
 def slugify(text: str) -> str:
     """Lowercase, dashes, alphanumeric + dash only."""
@@ -250,9 +272,13 @@ def main() -> int:
         print(f"[make_raw] ERROR: video unavailable — {e}", file=sys.stderr)
         return 3
 
-    available = [(t.language_code, "manual" if not t.is_generated else "auto")
-                 for t in list(listing)]
-    print(f"[make_raw] Available: {available}")
+    available_transcripts = [
+        {"language_code": t.language_code,
+         "type": "manual" if not t.is_generated else "auto"}
+        for t in list(listing)
+    ]
+    print(f"[make_raw] Available: "
+          f"{[(a['language_code'], a['type']) for a in available_transcripts]}")
 
     chosen, is_translation = pick_transcript(
         api.list(video_id),
@@ -275,6 +301,9 @@ def main() -> int:
 
     blocks = group_30s(fetched.snippets)
 
+    has_description = bool(description and description.strip())
+    chapters_in_desc = detect_chapters_in_description(description)
+
     frontmatter = (
         "---\n"
         f"source_url: https://www.youtube.com/watch?v={video_id}\n"
@@ -288,8 +317,11 @@ def main() -> int:
         f"language: {chosen.language_code}\n"
         f"is_auto_caption: {str(chosen.is_generated).lower()}\n"
         f"is_translation: {str(is_translation).lower()}\n"
-        f"has_chapters: {str(bool(chapters)).lower()}\n"
+        + fmt_available_transcripts(available_transcripts)
+        + f"has_chapters: {str(bool(chapters)).lower()}\n"
         f"chapter_count: {len(chapters)}\n"
+        f"chapters_in_description: {str(chapters_in_desc).lower()}\n"
+        f"has_description: {str(has_description).lower()}\n"
         "status: raw\n"
         "---\n"
     )

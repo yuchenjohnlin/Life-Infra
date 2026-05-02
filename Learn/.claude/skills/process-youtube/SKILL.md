@@ -94,11 +94,19 @@ duration_seconds: <int>
 language: <transcript-language-code (after translation if applied)>
 is_auto_caption: <bool>
 is_translation: <bool>
+available_transcripts:
+  - language_code: <code>
+    type: <manual | auto>
+  - ...
 has_chapters: <bool>
 chapter_count: <int>
+chapters_in_description: <bool>
+has_description: <bool>
 status: raw
 ---
 ```
+
+`is_auto_caption` and `is_translation` describe the transcript actually used for the body. `available_transcripts` lists every track YouTube exposed for the video — useful for downstream tasks that may want to pick a different track without re-listing. `chapters_in_description` flags description-style chapters (3+ description lines starting with a `MM:SS` or `HH:MM:SS` timestamp); `has_description` flags whether the description block is non-empty.
 
 Chapters live in the body as `# Chapters` (not in frontmatter) so the full chapter list is preserved for re-processing. The video description, when present, is written verbatim as `# Description` between `# Chapters` and `# Transcript` — it serves as a disambiguation prior (proper names, links, version numbers) when normalizing auto-caption errors during summarization.
 
