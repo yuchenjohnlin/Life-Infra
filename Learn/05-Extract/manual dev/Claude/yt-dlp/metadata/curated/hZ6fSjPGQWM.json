@@ -1,0 +1,85 @@
+{
+  "id": "hZ6fSjPGQWM",
+  "webpage_url": "https://www.youtube.com/watch?v=hZ6fSjPGQWM",
+  "original_url": "https://www.youtube.com/watch?v=hZ6fSjPGQWM&t=57s",
+  "title": "什么是LoRA 大模型微调是怎么回事",
+  "fulltitle": "什么是LoRA 大模型微调是怎么回事",
+  "channel": "程序员老王",
+  "channel_id": "UCL7SP6Q4VLVPv_zvzuZ_mwQ",
+  "channel_url": "https://www.youtube.com/channel/UCL7SP6Q4VLVPv_zvzuZ_mwQ",
+  "channel_follower_count": 47700,
+  "uploader": "程序员老王",
+  "uploader_id": "@programmer-wang",
+  "uploader_url": "https://www.youtube.com/@programmer-wang",
+  "duration": 810,
+  "duration_string": "13:30",
+  "upload_date": "20260319",
+  "timestamp": 1773910866,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "加入知识星球（鞠躬感谢！）: https://t.zsxq.com/ubYr8\nhttps://www.youtube.com/watch?v=FOHyospzUd4\nhttps://www.youtube.com/watch?v=qL6ca-mIeMI\n\n---\n00:00:00 介绍\n00:00:21 预训练\n00:02:08 微调\n00:04:55 微调的问题\n00:06:41 LoRA\n00:11:33 为什么LoRA有效\n00:12:46 最后",
+  "chapters": [
+    {
+      "start_time": 0.0,
+      "title": "介绍",
+      "end_time": 21.0
+    },
+    {
+      "start_time": 21.0,
+      "title": "预训练",
+      "end_time": 128.0
+    },
+    {
+      "start_time": 128.0,
+      "title": "微调",
+      "end_time": 295.0
+    },
+    {
+      "start_time": 295.0,
+      "title": "微调的问题",
+      "end_time": 401.0
+    },
+    {
+      "start_time": 401.0,
+      "title": "LoRA",
+      "end_time": 693.0
+    },
+    {
+      "start_time": 693.0,
+      "title": "为什么LoRA有效",
+      "end_time": 766.0
+    },
+    {
+      "start_time": 766.0,
+      "title": "最后",
+      "end_time": 810
+    }
+  ],
+  "tags": [],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 8512,
+  "like_count": 359,
+  "comment_count": 20,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [],
+  "automatic_captions_languages": [],
+  "has_manual_subs": false,
+  "chapters_in_description": true,
+  "chapter_count": 7,
+  "chapter_titles": [
+    "介绍",
+    "预训练",
+    "微调",
+    "微调的问题",
+    "LoRA",
+    "为什么LoRA有效",
+    "最后"
+  ]
+}

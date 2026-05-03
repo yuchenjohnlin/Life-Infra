@@ -1,0 +1,1918 @@
+[
+  {
+    "input_index": 1,
+    "video_id": "rmvDxxNubIg",
+    "original_url": "https://www.youtube.com/watch?v=rmvDxxNubIg&t=275s",
+    "captured_at": "2026-05-03T04:30:16.577125+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 624,
+        "start_seconds": 13.755,
+        "end_seconds": 1232.124,
+        "text_char_count": 23639,
+        "estimated_text_tokens": 5910,
+        "sample_snippets": [
+          {
+            "text": "[music]",
+            "start": 13.755,
+            "duration": 2.02
+          },
+          {
+            "text": "Hi everybody. How y'all doing?",
+            "start": 20.8,
+            "duration": 5.52
+          },
+          {
+            "text": ">> It's exciting. I'm Dex. Uh, as they did",
+            "start": 24.0,
+            "duration": 3.76
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 624,
+    "total_text_char_count": 23639,
+    "total_estimated_text_tokens": 5910,
+    "raw_json_estimated_tokens": 14355,
+    "summary_estimated_tokens": 314
+  },
+  {
+    "input_index": 2,
+    "video_id": "96jN2OCOfLs",
+    "original_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=5s",
+    "captured_at": "2026-05-03T04:30:17.748029+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 893,
+        "start_seconds": 2.08,
+        "end_seconds": 1784.95,
+        "text_char_count": 33232,
+        "estimated_text_tokens": 8308,
+        "sample_snippets": [
+          {
+            "text": "We're so excited for our very first",
+            "start": 2.08,
+            "duration": 4.239
+          },
+          {
+            "text": "special guest. He has helped build",
+            "start": 3.679,
+            "duration": 6.641
+          },
+          {
+            "text": "modern AI, then explain modern AI, and",
+            "start": 6.319,
+            "duration": 8.561
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 893,
+    "total_text_char_count": 33232,
+    "total_estimated_text_tokens": 8308,
+    "raw_json_estimated_tokens": 20059,
+    "summary_estimated_tokens": 320
+  },
+  {
+    "input_index": 3,
+    "video_id": "njWyDHKYeVA",
+    "original_url": "https://www.youtube.com/watch?v=njWyDHKYeVA",
+    "captured_at": "2026-05-03T04:30:18.755799+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 2,
+    "manual_transcript_languages": [
+      "en"
+    ],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "tr",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 17,
+    "fetched_transcripts": [
+      {
+        "language": "English - CC (English)",
+        "language_code": "en",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1116,
+        "start_seconds": 0.0,
+        "end_seconds": 2870.0499999999997,
+        "text_char_count": 45532,
+        "estimated_text_tokens": 11383,
+        "sample_snippets": [
+          {
+            "text": "ANNIE WANG: Hi, everyone.",
+            "start": 0.0,
+            "duration": 1.06
+          },
+          {
+            "text": "Welcome to Hands-on AI where\nwe walk you through AI lab step",
+            "start": 1.06,
+            "duration": 3.78
+          },
+          {
+            "text": "by step.",
+            "start": 4.84,
+            "duration": 0.6
+          }
+        ]
+      },
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1351,
+        "start_seconds": 0.0,
+        "end_seconds": 2875.538,
+        "text_char_count": 47414,
+        "estimated_text_tokens": 11854,
+        "sample_snippets": [
+          {
+            "text": "Hi everyone, welcome to hands-on AI,",
+            "start": 0.0,
+            "duration": 4.36
+          },
+          {
+            "text": "where we walk you through AI lab",
+            "start": 2.36,
+            "duration": 5.16
+          },
+          {
+            "text": "step-by-step and Annie and I am IO.",
+            "start": 4.36,
+            "duration": 4.48
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 2,
+    "fetched_error_count": 0,
+    "total_snippet_count": 2467,
+    "total_text_char_count": 92946,
+    "total_estimated_text_tokens": 23237,
+    "raw_json_estimated_tokens": 55043,
+    "summary_estimated_tokens": 464
+  },
+  {
+    "input_index": 4,
+    "video_id": "kwSVtQ7dziU",
+    "original_url": "https://www.youtube.com/watch?v=kwSVtQ7dziU&t=101s",
+    "captured_at": "2026-05-03T04:30:19.623120+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 2299,
+        "start_seconds": 0.0,
+        "end_seconds": 3990.8,
+        "text_char_count": 82003,
+        "estimated_text_tokens": 20501,
+        "sample_snippets": [
+          {
+            "text": "Code's not even the right verb anymore,",
+            "start": 0.0,
+            "duration": 3.64
+          },
+          {
+            "text": "right? [laughter] But I have to",
+            "start": 1.88,
+            "duration": 4.36
+          },
+          {
+            "text": "express my will to my agents for 16",
+            "start": 3.64,
+            "duration": 4.12
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 2299,
+    "total_text_char_count": 82003,
+    "total_estimated_text_tokens": 20501,
+    "raw_json_estimated_tokens": 49239,
+    "summary_estimated_tokens": 319
+  },
+  {
+    "input_index": 5,
+    "video_id": "cVzf49yg0D8",
+    "original_url": "https://www.youtube.com/watch?v=cVzf49yg0D8",
+    "captured_at": "2026-05-03T04:30:20.597812+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 2445,
+        "start_seconds": 14.719,
+        "end_seconds": 6436.679,
+        "text_char_count": 83315,
+        "estimated_text_tokens": 20829,
+        "sample_snippets": [
+          {
+            "text": "Hello everyone.",
+            "start": 14.719,
+            "duration": 4.281
+          },
+          {
+            "text": ">> Hello.",
+            "start": 16.0,
+            "duration": 3.0
+          },
+          {
+            "text": ">> Perfect.",
+            "start": 22.88,
+            "duration": 4.239
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 2445,
+    "total_text_char_count": 83315,
+    "total_estimated_text_tokens": 20829,
+    "raw_json_estimated_tokens": 51758,
+    "summary_estimated_tokens": 302
+  },
+  {
+    "input_index": 6,
+    "video_id": "YFjfBk8HI5o",
+    "original_url": "https://www.youtube.com/watch?v=YFjfBk8HI5o",
+    "captured_at": "2026-05-03T04:30:21.399117+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 4,
+    "manual_transcript_languages": [
+      "en",
+      "de",
+      "ru"
+    ],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "en",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "tr",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 18,
+    "fetched_transcripts": [
+      {
+        "language": "English",
+        "language_code": "en",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 2879,
+        "start_seconds": 0.08,
+        "end_seconds": 11742.886,
+        "text_char_count": 166130,
+        "estimated_text_tokens": 41532,
+        "sample_snippets": [
+          {
+            "text": "- I watched my agent happily click the \"I'm\nnot a robot\" button. I made the agent",
+            "start": 0.08,
+            "duration": 3.979
+          },
+          {
+            "text": "very aware. Like, it knows\nwhat his source code is. It",
+            "start": 4.22,
+            "duration": 3.5
+          },
+          {
+            "text": "understands th- how it\nsits and runs in its own",
+            "start": 7.76,
+            "duration": 3.58
+          }
+        ]
+      },
+      {
+        "language": "German",
+        "language_code": "de",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 3545,
+        "start_seconds": 0.08,
+        "end_seconds": 11741.17,
+        "text_char_count": 174643,
+        "estimated_text_tokens": 43661,
+        "sample_snippets": [
+          {
+            "text": "Ich habe voller Freude zugesehen,\nwie mein Agent auf",
+            "start": 0.08,
+            "duration": 2.376
+          },
+          {
+            "text": "'Ich bin kein Roboter' geklickt hat.",
+            "start": 2.668,
+            "duration": 1.33
+          },
+          {
+            "text": "Ich habe ihn so gestaltet,\ndass er seine eigene Struktur versteht.",
+            "start": 4.269,
+            "duration": 2.815
+          }
+        ]
+      },
+      {
+        "language": "Russian",
+        "language_code": "ru",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 2837,
+        "start_seconds": 0.0,
+        "end_seconds": 11741.196,
+        "text_char_count": 134164,
+        "estimated_text_tokens": 33541,
+        "sample_snippets": [
+          {
+            "text": "[Питер] Я видел, как мой агент с радостью\nнажимал «Я не робот». Я сделал его",
+            "start": 0.0,
+            "duration": 4.037
+          },
+          {
+            "text": "очень осведомлённым. Он знает\nсвой исходный код,",
+            "start": 4.07,
+            "duration": 3.404
+          },
+          {
+            "text": "он понимает, как устроен и\nкак работает в своей оболочке.",
+            "start": 7.507,
+            "duration": 4.371
+          }
+        ]
+      },
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 5488,
+        "start_seconds": 0.0,
+        "end_seconds": 11743.039999999999,
+        "text_char_count": 162263,
+        "estimated_text_tokens": 40566,
+        "sample_snippets": [
+          {
+            "text": "I watched my agent happily click the I'm",
+            "start": 0.0,
+            "duration": 4.12
+          },
+          {
+            "text": "not a robot button. I made the agent",
+            "start": 1.76,
+            "duration": 4.8
+          },
+          {
+            "text": "very aware. Like it knows what its",
+            "start": 4.12,
+            "duration": 4.88
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 4,
+    "fetched_error_count": 0,
+    "total_snippet_count": 14749,
+    "total_text_char_count": 637200,
+    "total_estimated_text_tokens": 159300,
+    "raw_json_estimated_tokens": 348330,
+    "summary_estimated_tokens": 811
+  },
+  {
+    "input_index": 7,
+    "video_id": "CEvIs9y1uog",
+    "original_url": "https://www.youtube.com/watch?v=CEvIs9y1uog&t=215s",
+    "captured_at": "2026-05-03T04:30:22.861042+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 426,
+        "start_seconds": 13.755,
+        "end_seconds": 979.2909999999999,
+        "text_char_count": 15275,
+        "estimated_text_tokens": 3819,
+        "sample_snippets": [
+          {
+            "text": "[music]",
+            "start": 13.755,
+            "duration": 2.02
+          },
+          {
+            "text": "All right, good morning and thank you",
+            "start": 21.039,
+            "duration": 4.32
+          },
+          {
+            "text": "for having us again. Last time we were",
+            "start": 22.88,
+            "duration": 4.08
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 426,
+    "total_text_char_count": 15275,
+    "total_estimated_text_tokens": 3819,
+    "raw_json_estimated_tokens": 9835,
+    "summary_estimated_tokens": 317
+  },
+  {
+    "input_index": 8,
+    "video_id": "D7_ipDqhtwk",
+    "original_url": "https://www.youtube.com/watch?v=D7_ipDqhtwk&t=125s",
+    "captured_at": "2026-05-03T04:30:24.043703+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 397,
+        "start_seconds": 0.49,
+        "end_seconds": 910.7,
+        "text_char_count": 14410,
+        "estimated_text_tokens": 3602,
+        "sample_snippets": [
+          {
+            "text": "[Music]",
+            "start": 0.49,
+            "duration": 18.47
+          },
+          {
+            "text": "Wow, it's uh incredible to be on the",
+            "start": 17.039,
+            "duration": 3.601
+          },
+          {
+            "text": "same stage as uh so many people I've",
+            "start": 18.96,
+            "duration": 4.559
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 397,
+    "total_text_char_count": 14410,
+    "total_estimated_text_tokens": 3602,
+    "raw_json_estimated_tokens": 9272,
+    "summary_estimated_tokens": 313
+  },
+  {
+    "input_index": 9,
+    "video_id": "2yi4mAN3CtE",
+    "original_url": "https://www.youtube.com/watch?v=2yi4mAN3CtE&list=WL&index=2&t=294s",
+    "captured_at": "2026-05-03T04:30:24.923640+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 845,
+        "start_seconds": 0.61,
+        "end_seconds": 1719.32,
+        "text_char_count": 32149,
+        "estimated_text_tokens": 8037,
+        "sample_snippets": [
+          {
+            "text": "[Music]",
+            "start": 0.61,
+            "duration": 9.72
+          },
+          {
+            "text": "Um, what's up everybody? I'm Dex. Uh, I",
+            "start": 12.08,
+            "duration": 4.48
+          },
+          {
+            "text": "could talk a little bit about myself,",
+            "start": 15.04,
+            "duration": 3.6
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 845,
+    "total_text_char_count": 32149,
+    "total_estimated_text_tokens": 8037,
+    "raw_json_estimated_tokens": 19222,
+    "summary_estimated_tokens": 318
+  },
+  {
+    "input_index": 10,
+    "video_id": "Q3m-CKJmqMo",
+    "original_url": "https://www.youtube.com/watch?v=Q3m-CKJmqMo&t=852s",
+    "captured_at": "2026-05-03T04:30:25.940955+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 16,
+    "fetched_transcripts": [
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 16,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1150,
+        "start_seconds": 64.0,
+        "end_seconds": 2643.44,
+        "text_char_count": 42761,
+        "estimated_text_tokens": 10690,
+        "sample_snippets": [
+          {
+            "text": "Hello everyone, Merri here with Nvidia",
+            "start": 64.0,
+            "duration": 6.08
+          },
+          {
+            "text": "and welcome to another week of TGX Park",
+            "start": 66.799,
+            "duration": 6.241
+          },
+          {
+            "text": "live. Today we have a very special",
+            "start": 70.08,
+            "duration": 5.039
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 1150,
+    "total_text_char_count": 42761,
+    "total_estimated_text_tokens": 10690,
+    "raw_json_estimated_tokens": 25649,
+    "summary_estimated_tokens": 323
+  },
+  {
+    "input_index": 11,
+    "video_id": "nEHNwdrbfGA",
+    "original_url": "https://www.youtube.com/watch?v=nEHNwdrbfGA",
+    "captured_at": "2026-05-03T04:30:26.751535+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 2,
+    "manual_transcript_languages": [
+      "en-US"
+    ],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "tr",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 17,
+    "fetched_transcripts": [
+      {
+        "language": "English (United States)",
+        "language_code": "en-US",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1296,
+        "start_seconds": 4.91,
+        "end_seconds": 3655.515,
+        "text_char_count": 54497,
+        "estimated_text_tokens": 13624,
+        "sample_snippets": [
+          {
+            "text": "Today, we have our\nco-instructor, Div,",
+            "start": 4.91,
+            "duration": 2.59
+          },
+          {
+            "text": "talking about human inspired\napproaches to agents",
+            "start": 7.5,
+            "duration": 2.87
+          },
+          {
+            "text": "and how the path to AGI\nrequires a rethinking of how",
+            "start": 10.37,
+            "duration": 3.18
+          }
+        ]
+      },
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1581,
+        "start_seconds": 4.96,
+        "end_seconds": 3657.64,
+        "text_char_count": 58183,
+        "estimated_text_tokens": 14546,
+        "sample_snippets": [
+          {
+            "text": "Today we have uh our co-instructor",
+            "start": 4.96,
+            "duration": 5.84
+          },
+          {
+            "text": "Divins inspired approaches to agents and",
+            "start": 7.639,
+            "duration": 5.241
+          },
+          {
+            "text": "how the path to AGI requires a",
+            "start": 10.8,
+            "duration": 3.919
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 2,
+    "fetched_error_count": 0,
+    "total_snippet_count": 2877,
+    "total_text_char_count": 112680,
+    "total_estimated_text_tokens": 28170,
+    "raw_json_estimated_tokens": 65354,
+    "summary_estimated_tokens": 478
+  },
+  {
+    "input_index": 12,
+    "video_id": "cMiu3A7YBks",
+    "original_url": "https://www.youtube.com/watch?v=cMiu3A7YBks&list=WL&index=1",
+    "captured_at": "2026-05-03T04:30:27.660727+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 2,
+    "manual_transcript_languages": [
+      "en"
+    ],
+    "generated_transcript_languages": [
+      "en"
+    ],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "tr",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 17,
+    "fetched_transcripts": [
+      {
+        "language": "English - CC (English)",
+        "language_code": "en",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1386,
+        "start_seconds": 0.0,
+        "end_seconds": 4853.92,
+        "text_char_count": 58935,
+        "estimated_text_tokens": 14734,
+        "sample_snippets": [
+          {
+            "text": "HANNA HAJISHIRZI: I am very\nexcited to be here today",
+            "start": 0.0,
+            "duration": 2.99
+          },
+          {
+            "text": "to talk about some\nof our efforts",
+            "start": 2.99,
+            "duration": 2.4
+          },
+          {
+            "text": "in developing training recipes\nfor building language models,",
+            "start": 5.39,
+            "duration": 4.96
+          }
+        ]
+      },
+      {
+        "language": "English (auto-generated)",
+        "language_code": "en",
+        "is_generated": true,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 1672,
+        "start_seconds": 0.04,
+        "end_seconds": 4854.52,
+        "text_char_count": 61641,
+        "estimated_text_tokens": 15410,
+        "sample_snippets": [
+          {
+            "text": "I am very excited to be to be here today",
+            "start": 0.04,
+            "duration": 6.44
+          },
+          {
+            "text": "to talk about some of our efforts in uh",
+            "start": 3.04,
+            "duration": 6.4
+          },
+          {
+            "text": "developing training recipes for building",
+            "start": 6.48,
+            "duration": 5.319
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 2,
+    "fetched_error_count": 0,
+    "total_snippet_count": 3058,
+    "total_text_char_count": 120576,
+    "total_estimated_text_tokens": 30144,
+    "raw_json_estimated_tokens": 69566,
+    "summary_estimated_tokens": 484
+  },
+  {
+    "input_index": 13,
+    "video_id": "F9WrUwcbGPM",
+    "original_url": "https://www.youtube.com/watch?v=F9WrUwcbGPM&list=WL&index=10&t=9s",
+    "captured_at": "2026-05-03T04:30:28.896481+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 252,
+    "summary_estimated_tokens": 154
+  },
+  {
+    "input_index": 14,
+    "video_id": "hZ6fSjPGQWM",
+    "original_url": "https://www.youtube.com/watch?v=hZ6fSjPGQWM&t=57s",
+    "captured_at": "2026-05-03T04:30:29.536554+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 248,
+    "summary_estimated_tokens": 150
+  },
+  {
+    "input_index": 15,
+    "video_id": "0HIlhRl38QA",
+    "original_url": "https://www.youtube.com/watch?v=0HIlhRl38QA&t=93s",
+    "captured_at": "2026-05-03T04:30:30.235349+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 3,
+    "manual_transcript_languages": [
+      "zh",
+      "en-US",
+      "ja"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "en",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "tr",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 18,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese",
+        "language_code": "zh",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 140,
+        "start_seconds": 22.566,
+        "end_seconds": 390.4,
+        "text_char_count": 2515,
+        "estimated_text_tokens": 2023,
+        "sample_snippets": [
+          {
+            "text": "好了，不玩梗了",
+            "start": 22.566,
+            "duration": 1.034
+          },
+          {
+            "text": "我认真锐评一下skill这个东西",
+            "start": 23.7,
+            "duration": 1.9
+          },
+          {
+            "text": "我们都知道，作为业界三巨头",
+            "start": 26.0,
+            "duration": 1.733
+          }
+        ]
+      },
+      {
+        "language": "English (United States)",
+        "language_code": "en-US",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 140,
+        "start_seconds": 22.566,
+        "end_seconds": 390.4,
+        "text_char_count": 7597,
+        "estimated_text_tokens": 1899,
+        "sample_snippets": [
+          {
+            "text": "Okay, enough with the meme, let",
+            "start": 22.566,
+            "duration": 1.034
+          },
+          {
+            "text": "me give a serious critique of the \"skill\" concept.",
+            "start": 23.7,
+            "duration": 1.9
+          },
+          {
+            "text": "We all know that of the top three AI giants in the industry",
+            "start": 26.0,
+            "duration": 1.733
+          }
+        ]
+      },
+      {
+        "language": "Japanese",
+        "language_code": "ja",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 18,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 140,
+        "start_seconds": 22.566,
+        "end_seconds": 390.4,
+        "text_char_count": 3667,
+        "estimated_text_tokens": 1507,
+        "sample_snippets": [
+          {
+            "text": "さて、冗談はこれくらいにして、",
+            "start": 22.566,
+            "duration": 1.034
+          },
+          {
+            "text": "「スキル」という概念について真剣に批判させてください。",
+            "start": 23.7,
+            "duration": 1.9
+          },
+          {
+            "text": "業界の三大巨頭の一つであるOpenAIは宣伝に長けており、",
+            "start": 26.0,
+            "duration": 1.733
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 3,
+    "fetched_error_count": 0,
+    "total_snippet_count": 420,
+    "total_text_char_count": 13779,
+    "total_estimated_text_tokens": 5429,
+    "raw_json_estimated_tokens": 13112,
+    "summary_estimated_tokens": 629
+  },
+  {
+    "input_index": 16,
+    "video_id": "kSFty4XwXS8",
+    "original_url": "https://www.youtube.com/watch?v=kSFty4XwXS8",
+    "captured_at": "2026-05-03T04:30:31.263449+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [
+      "zh-TW"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "en"
+    ],
+    "translation_language_count": 1,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Taiwan) - 繁體中文",
+        "language_code": "zh-TW",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 185,
+        "start_seconds": 0.032,
+        "end_seconds": 1090.927,
+        "text_char_count": 5083,
+        "estimated_text_tokens": 4010,
+        "sample_snippets": [
+          {
+            "text": "各位朋友大家好，我是 Dustin",
+            "start": 0.032,
+            "duration": 1.552
+          },
+          {
+            "text": "我想在用 Claude 一段時間之後，你就會發現",
+            "start": 2.56,
+            "duration": 3.408
+          },
+          {
+            "text": "給他一個適合的環境很重要",
+            "start": 6.512,
+            "duration": 1.904
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 185,
+    "total_text_char_count": 5083,
+    "total_estimated_text_tokens": 4010,
+    "raw_json_estimated_tokens": 6586,
+    "summary_estimated_tokens": 312
+  },
+  {
+    "input_index": 17,
+    "video_id": "2pM-7fBXc_M",
+    "original_url": "https://www.youtube.com/watch?v=2pM-7fBXc_M&t=22s",
+    "captured_at": "2026-05-03T04:30:32.185379+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 2,
+    "manual_transcript_languages": [
+      "zh-Hans",
+      "zh-TW"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "en"
+    ],
+    "translation_language_count": 1,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Simplified)",
+        "language_code": "zh-Hans",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 679,
+        "start_seconds": 2.966,
+        "end_seconds": 1621.766,
+        "text_char_count": 10938,
+        "estimated_text_tokens": 8391,
+        "sample_snippets": [
+          {
+            "text": "嗨，大家好",
+            "start": 2.966,
+            "duration": 1.6
+          },
+          {
+            "text": "今天我要和大家聊聊 Claude Code",
+            "start": 4.566,
+            "duration": 2.5
+          },
+          {
+            "text": "它是一款非常强大的 AI 程式开发助手",
+            "start": 7.066,
+            "duration": 3.167
+          }
+        ]
+      },
+      {
+        "language": "Chinese (Taiwan)",
+        "language_code": "zh-TW",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 679,
+        "start_seconds": 2.966,
+        "end_seconds": 1621.766,
+        "text_char_count": 10938,
+        "estimated_text_tokens": 8391,
+        "sample_snippets": [
+          {
+            "text": "嗨，大家好",
+            "start": 2.966,
+            "duration": 1.6
+          },
+          {
+            "text": "今天我要和大家聊聊 Claude Code",
+            "start": 4.566,
+            "duration": 2.5
+          },
+          {
+            "text": "它是一款非常強大的 AI 程式開發助手",
+            "start": 7.066,
+            "duration": 3.167
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 2,
+    "fetched_error_count": 0,
+    "total_snippet_count": 1358,
+    "total_text_char_count": 21876,
+    "total_estimated_text_tokens": 16782,
+    "raw_json_estimated_tokens": 33856,
+    "summary_estimated_tokens": 457
+  },
+  {
+    "input_index": 18,
+    "video_id": "4gciWspBVHw",
+    "original_url": "https://www.youtube.com/watch?v=4gciWspBVHw",
+    "captured_at": "2026-05-03T04:30:33.313801+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 246,
+    "summary_estimated_tokens": 149
+  },
+  {
+    "input_index": 19,
+    "video_id": "tfLTHCpPsSY",
+    "original_url": "https://www.youtube.com/watch?v=tfLTHCpPsSY&list=WL&index=4&t=29s",
+    "captured_at": "2026-05-03T04:30:34.134941+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 252,
+    "summary_estimated_tokens": 154
+  },
+  {
+    "input_index": 20,
+    "video_id": "I0DrcsDf3Os",
+    "original_url": "https://www.youtube.com/watch?v=I0DrcsDf3Os",
+    "captured_at": "2026-05-03T04:30:34.900875+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 2,
+    "manual_transcript_languages": [
+      "zh-Hans",
+      "en-US"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "th",
+      "tr",
+      "uk",
+      "vi",
+      "zh-Hant"
+    ],
+    "translation_language_count": 17,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Simplified)",
+        "language_code": "zh-Hans",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 3503,
+        "start_seconds": 0.0,
+        "end_seconds": 7364.023,
+        "text_char_count": 39596,
+        "estimated_text_tokens": 31914,
+        "sample_snippets": [
+          {
+            "text": "OpenAI很多这个model release（模型发布）",
+            "start": 0.0,
+            "duration": 1.535
+          },
+          {
+            "text": "都有我的名字",
+            "start": 1.535,
+            "duration": 1.101
+          },
+          {
+            "text": "这个就是因为我在OpenAI的内部",
+            "start": 3.17,
+            "duration": 1.868
+          }
+        ]
+      },
+      {
+        "language": "English (United States)",
+        "language_code": "en-US",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 17,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 3503,
+        "start_seconds": 0.0,
+        "end_seconds": 7364.023,
+        "text_char_count": 100870,
+        "estimated_text_tokens": 25218,
+        "sample_snippets": [
+          {
+            "text": "A lot of OpenAI model releases",
+            "start": 0.0,
+            "duration": 1.535
+          },
+          {
+            "text": "have my name on them.",
+            "start": 1.535,
+            "duration": 1.101
+          },
+          {
+            "text": "That's because inside OpenAI,",
+            "start": 3.17,
+            "duration": 1.868
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 2,
+    "fetched_error_count": 0,
+    "total_snippet_count": 7006,
+    "total_text_char_count": 140466,
+    "total_estimated_text_tokens": 57132,
+    "raw_json_estimated_tokens": 147534,
+    "summary_estimated_tokens": 472
+  },
+  {
+    "input_index": 21,
+    "video_id": "Vk-Zbrrzo3A",
+    "original_url": "https://www.youtube.com/watch?v=Vk-Zbrrzo3A&list=WL&index=9&t=110s",
+    "captured_at": "2026-05-03T04:30:35.888519+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 252,
+    "summary_estimated_tokens": 154
+  },
+  {
+    "input_index": 22,
+    "video_id": "8NGznVwNHGY",
+    "original_url": "https://www.youtube.com/watch?v=8NGznVwNHGY",
+    "captured_at": "2026-05-03T04:30:36.705070+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 246,
+    "summary_estimated_tokens": 149
+  },
+  {
+    "input_index": 23,
+    "video_id": "yDc0_8emz7M",
+    "original_url": "https://www.youtube.com/watch?v=yDc0_8emz7M",
+    "captured_at": "2026-05-03T04:30:37.611235+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 2,
+    "manual_transcript_languages": [
+      "zh-Hans",
+      "zh-Hant"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "en"
+    ],
+    "translation_language_count": 1,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Simplified)",
+        "language_code": "zh-Hans",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 445,
+        "start_seconds": 0.433,
+        "end_seconds": 1061.666,
+        "text_char_count": 7136,
+        "estimated_text_tokens": 5223,
+        "sample_snippets": [
+          {
+            "text": "2025 年 10 月 16 号",
+            "start": 0.433,
+            "duration": 1.367
+          },
+          {
+            "text": "Anthropic 正式推出了 Agent Skill",
+            "start": 1.8,
+            "duration": 2.15
+          },
+          {
+            "text": "起初官方对它的定位相当克制",
+            "start": 3.95,
+            "duration": 2.383
+          }
+        ]
+      },
+      {
+        "language": "Chinese (Traditional)",
+        "language_code": "zh-Hant",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 445,
+        "start_seconds": 0.433,
+        "end_seconds": 1061.666,
+        "text_char_count": 7136,
+        "estimated_text_tokens": 5223,
+        "sample_snippets": [
+          {
+            "text": "2025 年 10 月 16 號",
+            "start": 0.433,
+            "duration": 1.367
+          },
+          {
+            "text": "Anthropic 正式推出了 Agent Skill",
+            "start": 1.8,
+            "duration": 2.15
+          },
+          {
+            "text": "起初官方對它的定位相當剋制",
+            "start": 3.95,
+            "duration": 2.383
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 2,
+    "fetched_error_count": 0,
+    "total_snippet_count": 890,
+    "total_text_char_count": 14272,
+    "total_estimated_text_tokens": 10446,
+    "raw_json_estimated_tokens": 21813,
+    "summary_estimated_tokens": 452
+  },
+  {
+    "input_index": 24,
+    "video_id": "Xq-s_hAjADw",
+    "original_url": "https://www.youtube.com/watch?v=Xq-s_hAjADw&t=593s",
+    "captured_at": "2026-05-03T04:30:38.444872+00:00",
+    "status": "error",
+    "error_type": "TranscriptsDisabled",
+    "available_transcript_count": 0,
+    "manual_transcript_languages": [],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [],
+    "fetched_transcript_count": 0,
+    "fetched_error_count": 0,
+    "total_snippet_count": 0,
+    "total_text_char_count": 0,
+    "total_estimated_text_tokens": 0,
+    "raw_json_estimated_tokens": 248,
+    "summary_estimated_tokens": 150
+  },
+  {
+    "input_index": 25,
+    "video_id": "S36ri23-l60",
+    "original_url": "https://www.youtube.com/watch?v=S36ri23-l60",
+    "captured_at": "2026-05-03T04:30:39.108410+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [
+      "zh-Hans"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [],
+    "translation_language_count": 0,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Simplified)",
+        "language_code": "zh-Hans",
+        "is_generated": false,
+        "is_translatable": false,
+        "translation_language_count": 0,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 562,
+        "start_seconds": 0.233,
+        "end_seconds": 1386.0,
+        "text_char_count": 8895,
+        "estimated_text_tokens": 7004,
+        "sample_snippets": [
+          {
+            "text": "大家好，这里是最佳拍档，我是大飞",
+            "start": 0.233,
+            "duration": 2.6
+          },
+          {
+            "text": "今天这期视频，我们再来聊 Harness",
+            "start": 3.1,
+            "duration": 2.333
+          },
+          {
+            "text": "最近",
+            "start": 5.433,
+            "duration": 0.667
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 562,
+    "total_text_char_count": 8895,
+    "total_estimated_text_tokens": 7004,
+    "raw_json_estimated_tokens": 14128,
+    "summary_estimated_tokens": 298
+  },
+  {
+    "input_index": 26,
+    "video_id": "2rcJdFuNbZQ",
+    "original_url": "https://www.youtube.com/watch?v=2rcJdFuNbZQ",
+    "captured_at": "2026-05-03T04:30:40.085164+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [
+      "zh-TW"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "en"
+    ],
+    "translation_language_count": 1,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Taiwan)",
+        "language_code": "zh-TW",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 2338,
+        "start_seconds": 0.0,
+        "end_seconds": 4996.658,
+        "text_char_count": 31278,
+        "estimated_text_tokens": 24746,
+        "sample_snippets": [
+          {
+            "text": "同學我們就開始來上課吧",
+            "start": 0.0,
+            "duration": 3.303
+          },
+          {
+            "text": "今天這一堂課",
+            "start": 3.303,
+            "duration": 1.835
+          },
+          {
+            "text": "我想要用 OpenClaw 開源的專案",
+            "start": 5.138,
+            "duration": 4.304
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 2338,
+    "total_text_char_count": 31278,
+    "total_estimated_text_tokens": 24746,
+    "raw_json_estimated_tokens": 54620,
+    "summary_estimated_tokens": 297
+  },
+  {
+    "input_index": 27,
+    "video_id": "R6fZR_9kmIw",
+    "original_url": "https://www.youtube.com/watch?v=R6fZR_9kmIw",
+    "captured_at": "2026-05-03T04:30:41.120089+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [
+      "zh-TW"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "en"
+    ],
+    "translation_language_count": 1,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Taiwan)",
+        "language_code": "zh-TW",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 3035,
+        "start_seconds": 0.0,
+        "end_seconds": 5539.867,
+        "text_char_count": 37102,
+        "estimated_text_tokens": 27602,
+        "sample_snippets": [
+          {
+            "text": "各位同學大家好啊",
+            "start": 0.0,
+            "duration": 2.135
+          },
+          {
+            "text": "今天是期中考前一週",
+            "start": 2.135,
+            "duration": 3.303
+          },
+          {
+            "text": "今天的課程是比較輕鬆的",
+            "start": 5.438,
+            "duration": 2.736
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 3035,
+    "total_text_char_count": 37102,
+    "total_estimated_text_tokens": 27602,
+    "raw_json_estimated_tokens": 66340,
+    "summary_estimated_tokens": 296
+  },
+  {
+    "input_index": 28,
+    "video_id": "bJFtcwLSNxI",
+    "original_url": "https://www.youtube.com/watch?v=bJFtcwLSNxI",
+    "captured_at": "2026-05-03T04:30:42.081230+00:00",
+    "status": "ok",
+    "error_type": null,
+    "available_transcript_count": 1,
+    "manual_transcript_languages": [
+      "zh-TW"
+    ],
+    "generated_transcript_languages": [],
+    "translation_language_codes": [
+      "en"
+    ],
+    "translation_language_count": 1,
+    "fetched_transcripts": [
+      {
+        "language": "Chinese (Taiwan)",
+        "language_code": "zh-TW",
+        "is_generated": false,
+        "is_translatable": true,
+        "translation_language_count": 1,
+        "fetch_status": "ok",
+        "error_type": null,
+        "snippet_count": 2266,
+        "start_seconds": 0.0,
+        "end_seconds": 4708.76,
+        "text_char_count": 27331,
+        "estimated_text_tokens": 20436,
+        "sample_snippets": [
+          {
+            "text": "各位同學大家好啊",
+            "start": 0.0,
+            "duration": 2.5
+          },
+          {
+            "text": "那我們就準備來上課吧",
+            "start": 2.5,
+            "duration": 2.259
+          },
+          {
+            "text": "我們本週呢",
+            "start": 4.759,
+            "duration": 1.401
+          }
+        ]
+      }
+    ],
+    "fetched_transcript_count": 1,
+    "fetched_error_count": 0,
+    "total_snippet_count": 2266,
+    "total_text_char_count": 27331,
+    "total_estimated_text_tokens": 20436,
+    "raw_json_estimated_tokens": 48789,
+    "summary_estimated_tokens": 290
+  }
+]

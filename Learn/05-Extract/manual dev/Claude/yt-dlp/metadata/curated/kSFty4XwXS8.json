@@ -1,0 +1,99 @@
+{
+  "id": "kSFty4XwXS8",
+  "webpage_url": "https://www.youtube.com/watch?v=kSFty4XwXS8",
+  "original_url": "https://www.youtube.com/watch?v=kSFty4XwXS8",
+  "title": "Claude 一直忘規則、不了解你？這四個設定一次解決",
+  "fulltitle": "Claude 一直忘規則、不了解你？這四個設定一次解決",
+  "channel": "AgentCrew Academy",
+  "channel_id": "UCAQFESUI6Mgt6V0hmw4LuSw",
+  "channel_url": "https://www.youtube.com/channel/UCAQFESUI6Mgt6V0hmw4LuSw",
+  "channel_follower_count": 6050,
+  "uploader": "AgentCrew Academy",
+  "uploader_id": "@AgentcrewAcademy",
+  "uploader_url": "https://www.youtube.com/@AgentcrewAcademy",
+  "duration": 1091,
+  "duration_string": "18:11",
+  "upload_date": "20260417",
+  "timestamp": 1776425442,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "章節\n0:00 為什麼需要系統規範\n0:38 基礎默契檔寫法與原則\n6:02 條件載入的規則設定\n8:30 動態知識的自動記憶\n11:29 強制執行的邏輯鉤子\n15:50 四大功能實戰經驗分享\n\n你有沒有這種感覺——跟 Claude 說了好幾次「不要用 emoji」「語氣直接一點」，但它每次都當作沒聽過？問題不是 Claude 記性差，是你還沒設定讓它記住你的機制。\n\n這集教你四個工具：\n① CLAUDE.md 全局設定（讓 Claude 每次都知道你是誰、你的偏好）\n② Rules 子檔案（把複雜規則拆到獨立目錄，清晰管理）\n③ Memory 子系統（讓 Claude 在對話過程中自動記錄重要資訊）\n④ Hook 機制（在 Claude 執行工具前後，自動插入你的檢查邏輯）\n\n設定一次，之後每個 session 都受用。\n\n──────────────────────────────\nAgentCrew Academy — 非技術人員的 Claude Code 實戰課\n課程報名：https://agentcrew.cc\n──────────────────────────────\n17:00 收尾\n---\n相關資源\n\n相關工具\n▸ Claude Code 官方文件: https://docs.anthropic.com/en/docs/claude-code",
+  "chapters": [
+    {
+      "start_time": 0.0,
+      "title": "為什麼需要系統規範",
+      "end_time": 38.0
+    },
+    {
+      "start_time": 38.0,
+      "title": "基礎默契檔寫法與原則",
+      "end_time": 362.0
+    },
+    {
+      "start_time": 362.0,
+      "title": "條件載入的規則設定",
+      "end_time": 510.0
+    },
+    {
+      "start_time": 510.0,
+      "title": "動態知識的自動記憶",
+      "end_time": 689.0
+    },
+    {
+      "start_time": 689.0,
+      "title": "強制執行的邏輯鉤子",
+      "end_time": 950.0
+    },
+    {
+      "start_time": 950.0,
+      "title": "四大功能實戰經驗分享",
+      "end_time": 1020.0
+    },
+    {
+      "start_time": 1020.0,
+      "title": "收尾",
+      "end_time": 1091
+    }
+  ],
+  "tags": [
+    "AI助理",
+    "AI工具",
+    "AgentCrew",
+    "CLAUDE.md",
+    "Claude Code",
+    "工作效率",
+    "提示詞",
+    "非技術人員"
+  ],
+  "categories": [
+    "Education"
+  ],
+  "language": null,
+  "view_count": 17863,
+  "like_count": 490,
+  "comment_count": 15,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [
+    "zh-TW",
+    "zh-TW-RsSZZSfhlqk"
+  ],
+  "automatic_captions_languages": [
+    "zh-TW"
+  ],
+  "has_manual_subs": true,
+  "chapters_in_description": true,
+  "chapter_count": 7,
+  "chapter_titles": [
+    "為什麼需要系統規範",
+    "基礎默契檔寫法與原則",
+    "條件載入的規則設定",
+    "動態知識的自動記憶",
+    "強制執行的邏輯鉤子",
+    "四大功能實戰經驗分享",
+    "收尾"
+  ]
+}

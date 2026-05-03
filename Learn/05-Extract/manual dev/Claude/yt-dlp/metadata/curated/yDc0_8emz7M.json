@@ -1,0 +1,99 @@
+{
+  "id": "yDc0_8emz7M",
+  "webpage_url": "https://www.youtube.com/watch?v=yDc0_8emz7M",
+  "original_url": "https://www.youtube.com/watch?v=yDc0_8emz7M",
+  "title": "Agent Skill 从使用到原理，一次讲清",
+  "fulltitle": "Agent Skill 从使用到原理，一次讲清",
+  "channel": "马克的技术工作坊",
+  "channel_id": "UCbIeBdHsfTpHsICZy59ZzhA",
+  "channel_url": "https://www.youtube.com/channel/UCbIeBdHsfTpHsICZy59ZzhA",
+  "channel_follower_count": 97800,
+  "uploader": "马克的技术工作坊",
+  "uploader_id": "@马克的技术工作坊",
+  "uploader_url": "https://www.youtube.com/@马克的技术工作坊",
+  "duration": 1062,
+  "duration_string": "17:42",
+  "upload_date": "20251231",
+  "timestamp": 1767218202,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "Agent Skill —— 从使用到原理，一次讲清 #agent #skills #anthropic #llm #modelcontextprotocol \n\n📌 本视频带你彻底搞懂 Agent Skill 的方方面面，具体包括：\n1. Agent Skill 本质是什么\n2. Agent Skill 的使用方法\n3. Agent Skill 背后所使用的渐进式披露机制是什么\n4. Agent Skill 与 MCP 的区别，到底应该选择哪一个\n\n🎥 其他相关视频：\n- https://www.youtube.com/watch?v=GE0pFiFJTKo\n- https://www.youtube.com/watch?v=25DEMZ7wsSM&t=16s\n- https://www.youtube.com/watch?v=geEDnyFY_dw\n\n🔗 相关链接：\n- Agent Skill 官方规范：https://agentskills.io/home\n- Skills explained（含 Anthropic 对 Skill vs MCP 解释）：https://claude.com/blog/skills-explained\n- Claude Code 接入说明：https://code.claude.com/docs/en/skills\n- Codex 接入说明：https://developers.openai.com/codex/skills/\n- Cursor 接入说明：https://cursor.com/cn/docs/context/skills\n- VS Code 接入说明：https://code.visualstudio.com/docs/copilot/customization/agent-skills\n\n⏱ 时间轴：\n 00:00 视频内容简介\n 01:25 Agent Skill 是什么\n 02:22 Agent Skill 的基本用法\n 07:21 Agent Skill 的高级用法（Reference）\n 11:21 Agent Skill 的高级用法（Script）\n 13:49 渐进式披露机制\n 15:42 Agent Skill vs MCP",
+  "chapters": [
+    {
+      "start_time": 0.0,
+      "title": "视频内容简介",
+      "end_time": 85.0
+    },
+    {
+      "start_time": 85.0,
+      "title": "Agent Skill 是什么",
+      "end_time": 142.0
+    },
+    {
+      "start_time": 142.0,
+      "title": "Agent Skill 的基本用法",
+      "end_time": 441.0
+    },
+    {
+      "start_time": 441.0,
+      "title": "Agent Skill 的高级用法（Reference）",
+      "end_time": 681.0
+    },
+    {
+      "start_time": 681.0,
+      "title": "Agent Skill 的高级用法（Script）",
+      "end_time": 829.0
+    },
+    {
+      "start_time": 829.0,
+      "title": "渐进式披露机制",
+      "end_time": 942.0
+    },
+    {
+      "start_time": 942.0,
+      "title": "Agent Skill vs MCP",
+      "end_time": 1062
+    }
+  ],
+  "tags": [
+    "agent",
+    "llm",
+    "agentskills",
+    "anthropic",
+    "claude",
+    "mcp",
+    "modelcontextprotocol"
+  ],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 308022,
+  "like_count": 8181,
+  "comment_count": 251,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "automatic_captions_languages": [
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "has_manual_subs": true,
+  "chapters_in_description": true,
+  "chapter_count": 7,
+  "chapter_titles": [
+    "视频内容简介",
+    "Agent Skill 是什么",
+    "Agent Skill 的基本用法",
+    "Agent Skill 的高级用法（Reference）",
+    "Agent Skill 的高级用法（Script）",
+    "渐进式披露机制",
+    "Agent Skill vs MCP"
+  ]
+}

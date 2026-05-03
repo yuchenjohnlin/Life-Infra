@@ -1,0 +1,59 @@
+{
+  "id": "2rcJdFuNbZQ",
+  "webpage_url": "https://www.youtube.com/watch?v=2rcJdFuNbZQ",
+  "original_url": "https://www.youtube.com/watch?v=2rcJdFuNbZQ",
+  "title": "解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理",
+  "fulltitle": "解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理",
+  "channel": "Hung-yi Lee",
+  "channel_id": "UC2ggjtuuWvxrHHHiaDH1dlQ",
+  "channel_url": "https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ",
+  "channel_follower_count": 419000,
+  "uploader": "Hung-yi Lee",
+  "uploader_id": "@HungyiLeeNTU",
+  "uploader_url": "https://www.youtube.com/@HungyiLeeNTU",
+  "duration": 4997,
+  "duration_string": "1:23:17",
+  "upload_date": "20260309",
+  "timestamp": 1773019161,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "教學怪物競賽\nhttps://teaching.monster/\n\n背景知識：語言模型基本原理\nhttps://youtu.be/TigfpYPJk1s?si=Vq73vVihiP67EYdZ\n\n6:15 此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息\n\n過去講過的 AI Agent 相關課程\nhttps://youtu.be/eQNADlR0jSs?si=s3iGxeqSLx5IeTjG (2023 年機器學習)\nhttps://youtu.be/bJZTJ7MjYqg?si=it6o9S3CSZdMBXwz (2024 年生成式AI導論)\nhttps://youtu.be/M2Yg1kwPpts?si=gIXWWvuweqAPskyR (2025年機器學習)\nhttps://youtu.be/lVdajtNpaGI?si=djH7GAMtS1hH2RYe (2025 年生成式人工智慧與機器學習導論)\n\n影片剪輯：李一駿助教",
+  "chapters": [
+    {
+      "start_time": 0,
+      "end_time": 375.0,
+      "title": "<Untitled Chapter 1>"
+    },
+    {
+      "start_time": 375.0,
+      "title": "此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息",
+      "end_time": 4997
+    }
+  ],
+  "tags": [],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 864640,
+  "like_count": 21167,
+  "comment_count": 551,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [
+    "zh-TW"
+  ],
+  "automatic_captions_languages": [
+    "zh-TW"
+  ],
+  "has_manual_subs": true,
+  "chapters_in_description": false,
+  "chapter_count": 2,
+  "chapter_titles": [
+    "<Untitled Chapter 1>",
+    "此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "R6fZR_9kmIw",
+  "webpage_url": "https://www.youtube.com/watch?v=R6fZR_9kmIw",
+  "original_url": "https://www.youtube.com/watch?v=R6fZR_9kmIw",
+  "title": "Harness Engineering：有時候語言模型不是不夠聰明，只是沒有人類好好引導",
+  "fulltitle": "Harness Engineering：有時候語言模型不是不夠聰明，只是沒有人類好好引導",
+  "channel": "Hung-yi Lee",
+  "channel_id": "UC2ggjtuuWvxrHHHiaDH1dlQ",
+  "channel_url": "https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ",
+  "channel_follower_count": 419000,
+  "uploader": "Hung-yi Lee",
+  "uploader_id": "@HungyiLeeNTU",
+  "uploader_url": "https://www.youtube.com/@HungyiLeeNTU",
+  "duration": 5541,
+  "duration_string": "1:32:21",
+  "upload_date": "20260412",
+  "timestamp": 1776023865,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "字幕：李一駿助教\n\n關於如何訓練語言模型\n【生成式人工智慧與機器學習導論2025】第 7 講：大型語言模型的學習歷程 https://youtu.be/YJoegm7kiUM?si=6idTFlUG9MkNgUQ5\n【生成式人工智慧與機器學習導論2025】第 8 講：通用模型的終身學習 (Fine-tuning, Model Editing, Model Merging, Test-Time Training)\nhttps://youtu.be/EnWz5XuOnIQ?si=pXLKotxfFb9pDPqR\n\n語言模型內部機制分析\n【生成式AI時代下的機器學習(2025)】第三講：AI 的腦科學 — 語言模型內部運作機制剖析 (解析單一神經元到整群神經元的運作機制、如何讓語言模型說出自己的內心世界)\nhttps://youtu.be/Xnil63UDW2o?si=gQwKi0EWP9sJqSo7\n【生成式人工智慧與機器學習導論2025】第3講：解剖大型語言模型\nhttps://youtu.be/8iFvM7WUUs8?si=w2T4I_tLuTnOyrDx\n\n1:25:50 就我所知，在小金做這個實驗時，Antropic 官方的 Haiku 3.5 API 已經退役，小金的  Haiku 3.5 是在 Open Router 的服務上用的",
+  "chapters": [
+    {
+      "start_time": 0,
+      "end_time": 5150.0,
+      "title": "<Untitled Chapter 1>"
+    },
+    {
+      "start_time": 5150.0,
+      "title": "就我所知，在小金做這個實驗時，Antropic 官方的 Haiku 3.5 API 已經退役，小金的  Haiku 3.5 是在 Open Router 的服務上用的",
+      "end_time": 5541
+    }
+  ],
+  "tags": [],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 93097,
+  "like_count": 2151,
+  "comment_count": 104,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [
+    "zh-TW"
+  ],
+  "automatic_captions_languages": [
+    "zh-TW"
+  ],
+  "has_manual_subs": true,
+  "chapters_in_description": false,
+  "chapter_count": 2,
+  "chapter_titles": [
+    "<Untitled Chapter 1>",
+    "就我所知，在小金做這個實驗時，Antropic 官方的 Haiku 3.5 API 已經退役，小金的  Haiku 3.5 是在 Open Router 的服務上用的"
+  ]
+}

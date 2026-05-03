@@ -1,0 +1,75 @@
+{
+  "id": "0HIlhRl38QA",
+  "webpage_url": "https://www.youtube.com/watch?v=0HIlhRl38QA",
+  "original_url": "https://www.youtube.com/watch?v=0HIlhRl38QA&t=93s",
+  "title": "一位程序员安装了300个Skill，这是他的大脑发生的变化",
+  "fulltitle": "一位程序员安装了300个Skill，这是他的大脑发生的变化",
+  "channel": "Peter Pang",
+  "channel_id": "UCdyIYolHVk-vx4EK_Su6C6w",
+  "channel_url": "https://www.youtube.com/channel/UCdyIYolHVk-vx4EK_Su6C6w",
+  "channel_follower_count": 54700,
+  "uploader": "Peter Pang",
+  "uploader_id": "@yuan_zi_neng",
+  "uploader_url": "https://www.youtube.com/@yuan_zi_neng",
+  "duration": 391,
+  "duration_string": "6:31",
+  "upload_date": "20260122",
+  "timestamp": 1769081672,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "00:00 Agent Skill\n01:27 本质软件工程\n03:01 Skill 300\n05:17 Skill Pro Max Plus",
+  "chapters": [
+    {
+      "start_time": 0.0,
+      "title": "Agent Skill",
+      "end_time": 87.0
+    },
+    {
+      "start_time": 87.0,
+      "title": "Back to Software Engineering",
+      "end_time": 181.0
+    },
+    {
+      "start_time": 181.0,
+      "title": "Skill 300",
+      "end_time": 317.0
+    },
+    {
+      "start_time": 317.0,
+      "title": "Skill Pro Max Plus",
+      "end_time": 391
+    }
+  ],
+  "tags": [],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 39399,
+  "like_count": 1058,
+  "comment_count": 133,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [
+    "en-US",
+    "ja",
+    "zh"
+  ],
+  "automatic_captions_languages": [
+    "en-US",
+    "ja",
+    "zh"
+  ],
+  "has_manual_subs": true,
+  "chapters_in_description": true,
+  "chapter_count": 4,
+  "chapter_titles": [
+    "Agent Skill",
+    "Back to Software Engineering",
+    "Skill 300",
+    "Skill Pro Max Plus"
+  ]
+}

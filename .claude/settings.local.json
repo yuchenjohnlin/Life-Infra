@@ -13,7 +13,11 @@
       "WebFetch(domain:help.obsidian.md)",
       "WebFetch(domain:practicalpkm.com)",
       "WebFetch(domain:obsidian.md)",
-      "WebFetch(domain:releasebot.io)"
+      "WebFetch(domain:releasebot.io)",
+      "Bash(rm -rf metadata)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python run_metadata.py)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python)",
+      "Bash(~/anaconda3/envs/life_infra/bin/pip show *)"
     ]
   }
 }

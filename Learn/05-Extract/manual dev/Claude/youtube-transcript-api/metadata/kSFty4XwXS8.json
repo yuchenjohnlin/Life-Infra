@@ -1,0 +1,17 @@
+{
+  "video_id": "kSFty4XwXS8",
+  "tracks": [
+    {
+      "language_code": "zh-TW",
+      "language": "Chinese (Taiwan) - 繁體中文",
+      "is_generated": false,
+      "is_translatable": true,
+      "translation_languages": [
+        {
+          "language_code": "en",
+          "language": "English"
+        }
+      ]
+    }
+  ]
+}

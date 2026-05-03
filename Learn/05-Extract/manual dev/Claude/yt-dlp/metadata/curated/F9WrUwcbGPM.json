@@ -1,0 +1,97 @@
+{
+  "id": "F9WrUwcbGPM",
+  "webpage_url": "https://www.youtube.com/watch?v=F9WrUwcbGPM",
+  "original_url": "https://www.youtube.com/watch?v=F9WrUwcbGPM&list=WL&index=10&t=9s",
+  "title": "OpenAI 居然把 Agent 的调度大脑源码开了",
+  "fulltitle": "OpenAI 居然把 Agent 的调度大脑源码开了",
+  "channel": "硅基生命贾克斯",
+  "channel_id": "UCTGEp6G2nZdbOnietZQTR0w",
+  "channel_url": "https://www.youtube.com/channel/UCTGEp6G2nZdbOnietZQTR0w",
+  "channel_follower_count": 237,
+  "uploader": "硅基生命贾克斯",
+  "uploader_id": "@jax_builder",
+  "uploader_url": "https://www.youtube.com/@jax_builder",
+  "duration": 222,
+  "duration_string": "3:42",
+  "upload_date": "20260421",
+  "timestamp": 1776749854,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "OpenAI 把 Agents SDK 升级了。Harness 源码公开、原生 Sandbox、七家云厂商自选。\n\n时间戳:\n00:00 OpenAI 居然开源了一回\n00:14 open 了三件事(Harness / Sandbox / BYOC)\n00:37 架构解耦:harness + compute 分家\n01:00 七家云厂商同步站台\n01:22 三条硬规则:凭证外隔离、断线接着跑、一对多并行\n01:43 时间线揭示:谁把它逼 open 的?\n02:13 架构撞车:两家给的是同一份答卷\n02:33 商业分野:Apple vs Android\n02:50 金句收尾\n\n关联视频:我上一期讲 Anthropic Managed Agents 的视频\n\n#openai  #AgentsSDK #agent  #ai  #harness  #anthropic  #开源",
+  "chapters": [
+    {
+      "start_time": 0.0,
+      "title": "OpenAI 居然开源了一回",
+      "end_time": 14.0
+    },
+    {
+      "start_time": 14.0,
+      "title": "open 了三件事(Harness / Sandbox / BYOC)",
+      "end_time": 37.0
+    },
+    {
+      "start_time": 37.0,
+      "title": "架构解耦:harness + compute 分家",
+      "end_time": 60.0
+    },
+    {
+      "start_time": 60.0,
+      "title": "七家云厂商同步站台",
+      "end_time": 82.0
+    },
+    {
+      "start_time": 82.0,
+      "title": "三条硬规则:凭证外隔离、断线接着跑、一对多并行",
+      "end_time": 103.0
+    },
+    {
+      "start_time": 103.0,
+      "title": "时间线揭示:谁把它逼 open 的?",
+      "end_time": 133.0
+    },
+    {
+      "start_time": 133.0,
+      "title": "架构撞车:两家给的是同一份答卷",
+      "end_time": 153.0
+    },
+    {
+      "start_time": 153.0,
+      "title": "商业分野:Apple vs Android",
+      "end_time": 170.0
+    },
+    {
+      "start_time": 170.0,
+      "title": "金句收尾",
+      "end_time": 222
+    }
+  ],
+  "tags": [],
+  "categories": [
+    "People & Blogs"
+  ],
+  "language": null,
+  "view_count": 5235,
+  "like_count": 125,
+  "comment_count": 6,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [],
+  "automatic_captions_languages": [],
+  "has_manual_subs": false,
+  "chapters_in_description": true,
+  "chapter_count": 9,
+  "chapter_titles": [
+    "OpenAI 居然开源了一回",
+    "open 了三件事(Harness / Sandbox / BYOC)",
+    "架构解耦:harness + compute 分家",
+    "七家云厂商同步站台",
+    "三条硬规则:凭证外隔离、断线接着跑、一对多并行",
+    "时间线揭示:谁把它逼 open 的?",
+    "架构撞车:两家给的是同一份答卷",
+    "商业分野:Apple vs Android",
+    "金句收尾"
+  ]
+}

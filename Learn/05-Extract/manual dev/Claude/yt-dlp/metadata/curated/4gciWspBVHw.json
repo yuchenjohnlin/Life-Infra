@@ -1,0 +1,130 @@
+{
+  "id": "4gciWspBVHw",
+  "webpage_url": "https://www.youtube.com/watch?v=4gciWspBVHw",
+  "original_url": "https://www.youtube.com/watch?v=4gciWspBVHw",
+  "title": "Codex (APP) 保姆级全攻略，海量实战教程， 一期精通Codex",
+  "fulltitle": "Codex (APP) 保姆级全攻略，海量实战教程， 一期精通Codex",
+  "channel": "技术爬爬虾  TechShrimp",
+  "channel_id": "UCa6D2k5qhpOI9I-WT8fpd6g",
+  "channel_url": "https://www.youtube.com/channel/UCa6D2k5qhpOI9I-WT8fpd6g",
+  "channel_follower_count": 110000,
+  "uploader": "技术爬爬虾  TechShrimp",
+  "uploader_id": "@tech-shrimp",
+  "uploader_url": "https://www.youtube.com/@tech-shrimp",
+  "duration": 2292,
+  "duration_string": "38:12",
+  "upload_date": "20260428",
+  "timestamp": 1777376938,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "会员频道有自制课程《小白玩转Git/Github，全功能精讲》\n\n最近Codex APP的能力越来越全面，变成了Codex四大形态里最强一个。 Codex APP 比起 Claude Code，额度更高，功能更全，免费账户也能用。而且不会出现限速、封号、降智等问题，用过的小伙伴直呼真香。本期视频带来一个Codex APP的完整教程\n\n00:30 安装\n01:48 基础使用\n09:03 画图\n11:57 计划模式\n14:00 代码管理\n19:42 云端模式\n21:40 记忆系统\n24:40 插件与自动化\n27:06 Skills\n32:36 MCP\n35:18 项目部署\n36:04 电脑自动化",
+  "chapters": [
+    {
+      "start_time": 0,
+      "end_time": 30.0,
+      "title": "<Untitled Chapter 1>"
+    },
+    {
+      "start_time": 30.0,
+      "title": "安装",
+      "end_time": 108.0
+    },
+    {
+      "start_time": 108.0,
+      "title": "基础使用",
+      "end_time": 543.0
+    },
+    {
+      "start_time": 543.0,
+      "title": "画图",
+      "end_time": 717.0
+    },
+    {
+      "start_time": 717.0,
+      "title": "计划模式",
+      "end_time": 840.0
+    },
+    {
+      "start_time": 840.0,
+      "title": "代码管理",
+      "end_time": 1182.0
+    },
+    {
+      "start_time": 1182.0,
+      "title": "云端模式",
+      "end_time": 1300.0
+    },
+    {
+      "start_time": 1300.0,
+      "title": "记忆系统",
+      "end_time": 1480.0
+    },
+    {
+      "start_time": 1480.0,
+      "title": "插件与自动化",
+      "end_time": 1626.0
+    },
+    {
+      "start_time": 1626.0,
+      "title": "Skills",
+      "end_time": 1956.0
+    },
+    {
+      "start_time": 1956.0,
+      "title": "MCP",
+      "end_time": 2118.0
+    },
+    {
+      "start_time": 2118.0,
+      "title": "项目部署",
+      "end_time": 2164.0
+    },
+    {
+      "start_time": 2164.0,
+      "title": "电脑自动化",
+      "end_time": 2292
+    }
+  ],
+  "tags": [
+    "计算机",
+    "电脑",
+    "编程",
+    "程序",
+    "操作系统",
+    "软件",
+    "网站",
+    "Github"
+  ],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 45710,
+  "like_count": 1449,
+  "comment_count": 132,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [],
+  "automatic_captions_languages": [],
+  "has_manual_subs": false,
+  "chapters_in_description": true,
+  "chapter_count": 13,
+  "chapter_titles": [
+    "<Untitled Chapter 1>",
+    "安装",
+    "基础使用",
+    "画图",
+    "计划模式",
+    "代码管理",
+    "云端模式",
+    "记忆系统",
+    "插件与自动化",
+    "Skills",
+    "MCP",
+    "项目部署",
+    "电脑自动化"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "2pM-7fBXc_M",
+  "webpage_url": "https://www.youtube.com/watch?v=2pM-7fBXc_M",
+  "original_url": "https://www.youtube.com/watch?v=2pM-7fBXc_M&t=22s",
+  "title": "還在羨慕別人用 AI 開發酷產品？Claude Code 保姆級教學讓你輕鬆體驗 Vibe Coding, 動動嘴就能做出 Anything！",
+  "fulltitle": "還在羨慕別人用 AI 開發酷產品？Claude Code 保姆級教學讓你輕鬆體驗 Vibe Coding, 動動嘴就能做出 Anything！",
+  "channel": "PAPAYA 電腦教室",
+  "channel_id": "UCdEpz2A4DzV__4C1x2quKLw",
+  "channel_url": "https://www.youtube.com/channel/UCdEpz2A4DzV__4C1x2quKLw",
+  "channel_follower_count": 1690000,
+  "uploader": "PAPAYA 電腦教室",
+  "uploader_id": "@papayaclass",
+  "uploader_url": "https://www.youtube.com/@papayaclass",
+  "duration": 1623,
+  "duration_string": "27:03",
+  "upload_date": "20260322",
+  "timestamp": 1774168387,
+  "release_timestamp": null,
+  "release_year": null,
+  "description": "🔹 內容綱要\n00:00 Claude Code 安裝\n03:31 Claude Code 基本操作簡介\n07:39 建立 CLAUDE.md 文件\n09:41 還原對話或檔案\n10:25 Skills 簡介\n16:09 Hooks 簡介\n16:57 Subagents 簡介\n19:15 MCP 簡介\n20:42 壓縮對話和用量檢查\n21:30 Vibe Coding 實作範例\n\n🔹 網站連結\nClaude Code 安裝 https://code.claude.com/docs/en/overview\nGitHub Anthropics 官方 Skills https://github.com/anthropics/skills \nNano Banana 2 Skill https://github.com/kingbootoshi/nano-banana-2-skill\nGoogle AI Studio https://aistudio.google.com/\nNotion MCP https://developers.notion.com/guides/mcp/get-started-with-mcp\n\n🔹 請 Papaya 喝咖啡 ☕️\nhttps://buymeacoffee.com/papayaclass\n\n🔹 頻道會員影片目錄\nhttps://bit.ly/3PaC4Jj\n\n#教學 #ClaudeCode #Claude #VibeCoding #AI #程式開發",
+  "chapters": [
+    {
+      "start_time": 0.0,
+      "title": "Claude Code 安裝",
+      "end_time": 211.0
+    },
+    {
+      "start_time": 211.0,
+      "title": "Claude Code 基本操作簡介",
+      "end_time": 459.0
+    },
+    {
+      "start_time": 459.0,
+      "title": "建立 CLAUDE.md 文件",
+      "end_time": 581.0
+    },
+    {
+      "start_time": 581.0,
+      "title": "還原對話或檔案",
+      "end_time": 625.0
+    },
+    {
+      "start_time": 625.0,
+      "title": "Skills 簡介",
+      "end_time": 969.0
+    },
+    {
+      "start_time": 969.0,
+      "title": "Hooks 簡介",
+      "end_time": 1017.0
+    },
+    {
+      "start_time": 1017.0,
+      "title": "Subagents 簡介",
+      "end_time": 1155.0
+    },
+    {
+      "start_time": 1155.0,
+      "title": "MCP 簡介",
+      "end_time": 1242.0
+    },
+    {
+      "start_time": 1242.0,
+      "title": "壓縮對話和用量檢查",
+      "end_time": 1290.0
+    },
+    {
+      "start_time": 1290.0,
+      "title": "Vibe Coding 實作範例",
+      "end_time": 1623
+    }
+  ],
+  "tags": [
+    "教學",
+    "AI",
+    "Claude",
+    "Claude Code",
+    "Vibe Coding",
+    "程式",
+    "開發"
+  ],
+  "categories": [
+    "Education"
+  ],
+  "language": null,
+  "view_count": 370267,
+  "like_count": 12624,
+  "comment_count": 327,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [
+    "zh-Hans",
+    "zh-TW"
+  ],
+  "automatic_captions_languages": [
+    "zh-Hans",
+    "zh-TW"
+  ],
+  "has_manual_subs": true,
+  "chapters_in_description": true,
+  "chapter_count": 10,
+  "chapter_titles": [
+    "Claude Code 安裝",
+    "Claude Code 基本操作簡介",
+    "建立 CLAUDE.md 文件",
+    "還原對話或檔案",
+    "Skills 簡介",
+    "Hooks 簡介",
+    "Subagents 簡介",
+    "MCP 簡介",
+    "壓縮對話和用量檢查",
+    "Vibe Coding 實作範例"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "id": "tfLTHCpPsSY",
+  "webpage_url": "https://www.youtube.com/watch?v=tfLTHCpPsSY",
+  "original_url": "https://www.youtube.com/watch?v=tfLTHCpPsSY&list=WL&index=4&t=29s",
+  "title": "硅谷坐标 x 田渊栋: 解析大模型护城河、记忆存储瓶颈与Agent对社会冲击",
+  "fulltitle": "硅谷坐标 x 田渊栋: 解析大模型护城河、记忆存储瓶颈与Agent对社会冲击",
+  "channel": "Silicon Valley Vector 硅谷坐标",
+  "channel_id": "UCsiOlr6emY5OxXF848EYqGw",
+  "channel_url": "https://www.youtube.com/channel/UCsiOlr6emY5OxXF848EYqGw",
+  "channel_follower_count": 9790,
+  "uploader": "Silicon Valley Vector 硅谷坐标",
+  "uploader_id": "@SiliconValleyVector",
+  "uploader_url": "https://www.youtube.com/@SiliconValleyVector",
+  "duration": 3710,
+  "duration_string": "1:01:50",
+  "upload_date": "20260306",
+  "timestamp": 1772829786,
+  "release_timestamp": 1772829786,
+  "release_year": 2026,
+  "description": "【本期内容】田渊栋在Meta深耕11年，主导了强化学习、大模型推理与长上下文等多项前沿研究，近期刚刚以Co-founder身份开启新的创业旅程。本次对话涵盖大模型竞争、记忆与存储、推理前沿路线、Agents对社会的冲击等议题。\n\n【主播】\n曹卿云，硅谷坐标Silicon Valley Vector创始人。\n\n【采访嘉宾】\n田渊栋，CMU机器人学博士。在Meta AI（FAIR）深耕11年，担任研究总监。\n\n【本期看点】\n01:40 大模型的护城河：数据，算法，infra，人才\n09:00 开源vs闭源模型比较\n12:24 大模型有两种记忆：上下文是工作记忆，权重是世界观\n20:20 记忆研究的核心难题：从死记硬背到顿悟的跃迁\n26:16 Context Window没有天花板，需求正在质变\n37:39 存储危机：模型训练和推理引发的内存供应链瓶颈\n36:53 预训练的天花板与强化学习的上界\n41:20 推理的未来：隐空间叠加态与并行推理\n50:00 小龙虾Agent：一个握有你所有秘密的笨小孩\n55:30 Agent时代的社会冲击：洪水已来，大多数人浑然不觉\n\n【关于硅谷坐标 Silicon Valley Vector】\n立足美国硅谷, 聚焦前沿科技与科技投资趋势。在 AI 重新定义人类边界的时代，我们深入科技与资本的第一现场，为全球受众提供准确、深度、独立的专业报道。\n\n🌐网站地址：https://www.sv-vector.com \n✉️联系我们： team@sv-vector.com \n\n【关注我们】\nB站 ｜ 小宇宙 ｜ 微信公众号 ｜ 喜马拉雅 \nYoutube ｜ Apple Podcast ｜ Spotify ｜ LinkedIn ｜ X\n\n话题标签\n#科技 #AI #投资 #硅谷 #软件 #硬件 #趋势",
+  "chapters": [
+    {
+      "start_time": 0,
+      "end_time": 100.0,
+      "title": "<Untitled Chapter 1>"
+    },
+    {
+      "start_time": 100.0,
+      "title": "大模型的护城河：数据，算法，infra，人才",
+      "end_time": 540.0
+    },
+    {
+      "start_time": 540.0,
+      "title": "开源vs闭源模型比较",
+      "end_time": 744.0
+    },
+    {
+      "start_time": 744.0,
+      "title": "大模型有两种记忆：上下文是工作记忆，权重是世界观",
+      "end_time": 1220.0
+    },
+    {
+      "start_time": 1220.0,
+      "title": "记忆研究的核心难题：从死记硬背到顿悟的跃迁",
+      "end_time": 1576.0
+    },
+    {
+      "start_time": 1576.0,
+      "title": "Context Window没有天花板，需求正在质变",
+      "end_time": 2213.0
+    },
+    {
+      "start_time": 2213.0,
+      "title": "预训练的天花板与强化学习的上界",
+      "end_time": 2259.0
+    },
+    {
+      "start_time": 2259.0,
+      "title": "存储危机：模型训练和推理引发的内存供应链瓶颈",
+      "end_time": 2480.0
+    },
+    {
+      "start_time": 2480.0,
+      "title": "推理的未来：隐空间叠加态与并行推理",
+      "end_time": 3000.0
+    },
+    {
+      "start_time": 3000.0,
+      "title": "小龙虾Agent：一个握有你所有秘密的笨小孩",
+      "end_time": 3330.0
+    },
+    {
+      "start_time": 3330.0,
+      "title": "Agent时代的社会冲击：洪水已来，大多数人浑然不觉",
+      "end_time": 3710
+    }
+  ],
+  "tags": [
+    "AI",
+    "田渊栋",
+    "meta",
+    "ai",
+    "fair",
+    "大语言模型",
+    "强化学习",
+    "扎克伯格",
+    "agi",
+    "scaling law",
+    "开源",
+    "AI存储",
+    "数据中心",
+    "人工智能",
+    "模型训练"
+  ],
+  "categories": [
+    "Science & Technology"
+  ],
+  "language": null,
+  "view_count": 53837,
+  "like_count": 905,
+  "comment_count": 93,
+  "availability": "public",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "age_limit": 0,
+  "subtitles_languages": [],
+  "automatic_captions_languages": [],
+  "has_manual_subs": false,
+  "chapters_in_description": true,
+  "chapter_count": 11,
+  "chapter_titles": [
+    "<Untitled Chapter 1>",
+    "大模型的护城河：数据，算法，infra，人才",
+    "开源vs闭源模型比较",
+    "大模型有两种记忆：上下文是工作记忆，权重是世界观",
+    "记忆研究的核心难题：从死记硬背到顿悟的跃迁",
+    "Context Window没有天花板，需求正在质变",
+    "预训练的天花板与强化学习的上界",
+    "存储危机：模型训练和推理引发的内存供应链瓶颈",
+    "推理的未来：隐空间叠加态与并行推理",
+    "小龙虾Agent：一个握有你所有秘密的笨小孩",
+    "Agent时代的社会冲击：洪水已来，大多数人浑然不觉"
+  ]
+}

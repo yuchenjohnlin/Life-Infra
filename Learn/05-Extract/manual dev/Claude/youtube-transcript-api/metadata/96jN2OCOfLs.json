@@ -1,0 +1,77 @@
+{
+  "video_id": "96jN2OCOfLs",
+  "tracks": [
+    {
+      "language_code": "en",
+      "language": "English (auto-generated)",
+      "is_generated": true,
+      "is_translatable": true,
+      "translation_languages": [
+        {
+          "language_code": "ar",
+          "language": "Arabic"
+        },
+        {
+          "language_code": "zh-Hant",
+          "language": "Chinese (Traditional)"
+        },
+        {
+          "language_code": "nl",
+          "language": "Dutch"
+        },
+        {
+          "language_code": "fr",
+          "language": "French"
+        },
+        {
+          "language_code": "de",
+          "language": "German"
+        },
+        {
+          "language_code": "hi",
+          "language": "Hindi"
+        },
+        {
+          "language_code": "id",
+          "language": "Indonesian"
+        },
+        {
+          "language_code": "it",
+          "language": "Italian"
+        },
+        {
+          "language_code": "ja",
+          "language": "Japanese"
+        },
+        {
+          "language_code": "ko",
+          "language": "Korean"
+        },
+        {
+          "language_code": "pt",
+          "language": "Portuguese"
+        },
+        {
+          "language_code": "ru",
+          "language": "Russian"
+        },
+        {
+          "language_code": "es",
+          "language": "Spanish"
+        },
+        {
+          "language_code": "th",
+          "language": "Thai"
+        },
+        {
+          "language_code": "uk",
+          "language": "Ukrainian"
+        },
+        {
+          "language_code": "vi",
+          "language": "Vietnamese"
+        }
+      ]
+    }
+  ]
+}
