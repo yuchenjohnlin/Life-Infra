@@ -1,0 +1,294 @@
+{
+  "api_call": "YouTubeTranscriptApi().list(video_id)",
+  "available_languages": [
+    "en-US",
+    "ja",
+    "zh"
+  ],
+  "captured_at": "2026-05-03T04:39:09.665988+00:00",
+  "generated_languages": [],
+  "generated_track_count": 0,
+  "index": 15,
+  "json_chars": 3869,
+  "manual_languages": [
+    "en-US",
+    "ja",
+    "zh"
+  ],
+  "manual_track_count": 3,
+  "metadata_tokens_cl100k": 1147,
+  "source_url": "https://www.youtube.com/watch?v=0HIlhRl38QA&t=93s",
+  "status": "ok",
+  "track_count": 3,
+  "tracks": [
+    {
+      "is_generated": false,
+      "is_translatable": true,
+      "language": "Chinese",
+      "language_code": "zh",
+      "translation_language_count": 18,
+      "translation_languages": [
+        {
+          "language": "Arabic",
+          "language_code": "ar"
+        },
+        {
+          "language": "Chinese (Traditional)",
+          "language_code": "zh-Hant"
+        },
+        {
+          "language": "Dutch",
+          "language_code": "nl"
+        },
+        {
+          "language": "English",
+          "language_code": "en"
+        },
+        {
+          "language": "French",
+          "language_code": "fr"
+        },
+        {
+          "language": "German",
+          "language_code": "de"
+        },
+        {
+          "language": "Hindi",
+          "language_code": "hi"
+        },
+        {
+          "language": "Indonesian",
+          "language_code": "id"
+        },
+        {
+          "language": "Italian",
+          "language_code": "it"
+        },
+        {
+          "language": "Japanese",
+          "language_code": "ja"
+        },
+        {
+          "language": "Korean",
+          "language_code": "ko"
+        },
+        {
+          "language": "Portuguese",
+          "language_code": "pt"
+        },
+        {
+          "language": "Russian",
+          "language_code": "ru"
+        },
+        {
+          "language": "Spanish",
+          "language_code": "es"
+        },
+        {
+          "language": "Thai",
+          "language_code": "th"
+        },
+        {
+          "language": "Turkish",
+          "language_code": "tr"
+        },
+        {
+          "language": "Ukrainian",
+          "language_code": "uk"
+        },
+        {
+          "language": "Vietnamese",
+          "language_code": "vi"
+        }
+      ],
+      "video_id": "0HIlhRl38QA"
+    },
+    {
+      "is_generated": false,
+      "is_translatable": true,
+      "language": "English (United States)",
+      "language_code": "en-US",
+      "translation_language_count": 18,
+      "translation_languages": [
+        {
+          "language": "Arabic",
+          "language_code": "ar"
+        },
+        {
+          "language": "Chinese (Traditional)",
+          "language_code": "zh-Hant"
+        },
+        {
+          "language": "Dutch",
+          "language_code": "nl"
+        },
+        {
+          "language": "English",
+          "language_code": "en"
+        },
+        {
+          "language": "French",
+          "language_code": "fr"
+        },
+        {
+          "language": "German",
+          "language_code": "de"
+        },
+        {
+          "language": "Hindi",
+          "language_code": "hi"
+        },
+        {
+          "language": "Indonesian",
+          "language_code": "id"
+        },
+        {
+          "language": "Italian",
+          "language_code": "it"
+        },
+        {
+          "language": "Japanese",
+          "language_code": "ja"
+        },
+        {
+          "language": "Korean",
+          "language_code": "ko"
+        },
+        {
+          "language": "Portuguese",
+          "language_code": "pt"
+        },
+        {
+          "language": "Russian",
+          "language_code": "ru"
+        },
+        {
+          "language": "Spanish",
+          "language_code": "es"
+        },
+        {
+          "language": "Thai",
+          "language_code": "th"
+        },
+        {
+          "language": "Turkish",
+          "language_code": "tr"
+        },
+        {
+          "language": "Ukrainian",
+          "language_code": "uk"
+        },
+        {
+          "language": "Vietnamese",
+          "language_code": "vi"
+        }
+      ],
+      "video_id": "0HIlhRl38QA"
+    },
+    {
+      "is_generated": false,
+      "is_translatable": true,
+      "language": "Japanese",
+      "language_code": "ja",
+      "translation_language_count": 18,
+      "translation_languages": [
+        {
+          "language": "Arabic",
+          "language_code": "ar"
+        },
+        {
+          "language": "Chinese (Traditional)",
+          "language_code": "zh-Hant"
+        },
+        {
+          "language": "Dutch",
+          "language_code": "nl"
+        },
+        {
+          "language": "English",
+          "language_code": "en"
+        },
+        {
+          "language": "French",
+          "language_code": "fr"
+        },
+        {
+          "language": "German",
+          "language_code": "de"
+        },
+        {
+          "language": "Hindi",
+          "language_code": "hi"
+        },
+        {
+          "language": "Indonesian",
+          "language_code": "id"
+        },
+        {
+          "language": "Italian",
+          "language_code": "it"
+        },
+        {
+          "language": "Japanese",
+          "language_code": "ja"
+        },
+        {
+          "language": "Korean",
+          "language_code": "ko"
+        },
+        {
+          "language": "Portuguese",
+          "language_code": "pt"
+        },
+        {
+          "language": "Russian",
+          "language_code": "ru"
+        },
+        {
+          "language": "Spanish",
+          "language_code": "es"
+        },
+        {
+          "language": "Thai",
+          "language_code": "th"
+        },
+        {
+          "language": "Turkish",
+          "language_code": "tr"
+        },
+        {
+          "language": "Ukrainian",
+          "language_code": "uk"
+        },
+        {
+          "language": "Vietnamese",
+          "language_code": "vi"
+        }
+      ],
+      "video_id": "0HIlhRl38QA"
+    }
+  ],
+  "translatable_track_count": 3,
+  "translation_target_language_count": 18,
+  "translation_target_languages": [
+    "ar",
+    "de",
+    "en",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "nl",
+    "pt",
+    "ru",
+    "th",
+    "tr",
+    "uk",
+    "vi",
+    "zh-Hant"
+  ],
+  "video_id": "0HIlhRl38QA"
+}

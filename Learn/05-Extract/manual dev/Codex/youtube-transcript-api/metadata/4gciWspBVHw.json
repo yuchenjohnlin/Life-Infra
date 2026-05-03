@@ -1,0 +1,22 @@
+{
+  "api_call": "YouTubeTranscriptApi().list(video_id)",
+  "available_languages": [],
+  "captured_at": "2026-05-03T04:39:12.043910+00:00",
+  "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=4gciWspBVHw! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!",
+  "error_type": "TranscriptsDisabled",
+  "generated_languages": [],
+  "generated_track_count": 0,
+  "index": 18,
+  "json_chars": 1121,
+  "manual_languages": [],
+  "manual_track_count": 0,
+  "metadata_tokens_cl100k": 291,
+  "source_url": "https://www.youtube.com/watch?v=4gciWspBVHw",
+  "status": "error",
+  "track_count": 0,
+  "tracks": [],
+  "translatable_track_count": 0,
+  "translation_target_language_count": 0,
+  "translation_target_languages": [],
+  "video_id": "4gciWspBVHw"
+}

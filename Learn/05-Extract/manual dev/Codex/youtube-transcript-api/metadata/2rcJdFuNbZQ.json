@@ -1,0 +1,41 @@
+{
+  "api_call": "YouTubeTranscriptApi().list(video_id)",
+  "available_languages": [
+    "zh-TW"
+  ],
+  "captured_at": "2026-05-03T04:39:18.482575+00:00",
+  "generated_languages": [],
+  "generated_track_count": 0,
+  "index": 26,
+  "json_chars": 750,
+  "manual_languages": [
+    "zh-TW"
+  ],
+  "manual_track_count": 1,
+  "metadata_tokens_cl100k": 235,
+  "source_url": "https://www.youtube.com/watch?v=2rcJdFuNbZQ",
+  "status": "ok",
+  "track_count": 1,
+  "tracks": [
+    {
+      "is_generated": false,
+      "is_translatable": true,
+      "language": "Chinese (Taiwan)",
+      "language_code": "zh-TW",
+      "translation_language_count": 1,
+      "translation_languages": [
+        {
+          "language": "English",
+          "language_code": "en"
+        }
+      ],
+      "video_id": "2rcJdFuNbZQ"
+    }
+  ],
+  "translatable_track_count": 1,
+  "translation_target_language_count": 1,
+  "translation_target_languages": [
+    "en"
+  ],
+  "video_id": "2rcJdFuNbZQ"
+}

@@ -1,0 +1,57 @@
+{
+  "api_call": "YouTubeTranscriptApi().list(video_id)",
+  "available_languages": [
+    "zh-Hans",
+    "zh-TW"
+  ],
+  "captured_at": "2026-05-03T04:39:11.167140+00:00",
+  "generated_languages": [],
+  "generated_track_count": 0,
+  "index": 17,
+  "json_chars": 1027,
+  "manual_languages": [
+    "zh-Hans",
+    "zh-TW"
+  ],
+  "manual_track_count": 2,
+  "metadata_tokens_cl100k": 324,
+  "source_url": "https://www.youtube.com/watch?v=2pM-7fBXc_M&t=22s",
+  "status": "ok",
+  "track_count": 2,
+  "tracks": [
+    {
+      "is_generated": false,
+      "is_translatable": true,
+      "language": "Chinese (Simplified)",
+      "language_code": "zh-Hans",
+      "translation_language_count": 1,
+      "translation_languages": [
+        {
+          "language": "English",
+          "language_code": "en"
+        }
+      ],
+      "video_id": "2pM-7fBXc_M"
+    },
+    {
+      "is_generated": false,
+      "is_translatable": true,
+      "language": "Chinese (Taiwan)",
+      "language_code": "zh-TW",
+      "translation_language_count": 1,
+      "translation_languages": [
+        {
+          "language": "English",
+          "language_code": "en"
+        }
+      ],
+      "video_id": "2pM-7fBXc_M"
+    }
+  ],
+  "translatable_track_count": 2,
+  "translation_target_language_count": 1,
+  "translation_target_languages": [
+    "en"
+  ],
+  "video_id": "2pM-7fBXc_M"
+}

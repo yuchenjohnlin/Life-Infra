@@ -14,6 +14,7 @@ Companion to `Claude/yt-dlp/Claude log.md`. Same testset (28 YouTube URLs from `
 
 *1. What can the library actually return?*
 Before writing anything, I probed the API surface in a one-off REPL. The client class `YouTubeTranscriptApi` has only two methods: `list(video_id)` and `fetch(video_id, languages=...)`. `list()` returns a `TranscriptList`; iterating it yields `Transcript` objects with five attributes: `language_code`, `language` (human-readable), `is_generated`, `is_translatable`, and `translation_languages`. **That's the entire metadata surface.**
+This is how Claude looked at the metadata surface if interested : [[api-metadata-surface]]
 
 So the user's intuition is right — this library gives you nothing about the *video* (no title, duration, channel, chapters, description, view count). It gives you everything about the *transcript tracks*. The interesting question therefore isn't "does it replace yt-dlp" (no, obviously) but "for the things it does cover, is it more accurate than yt-dlp?". That framing drove the rest of this step.
 

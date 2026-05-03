@@ -1,0 +1,34 @@
+{
+  "api_call": "YouTubeTranscriptApi().list(video_id)",
+  "available_languages": [
+    "zh-Hans"
+  ],
+  "captured_at": "2026-05-03T04:39:17.744141+00:00",
+  "generated_languages": [],
+  "generated_track_count": 0,
+  "index": 25,
+  "json_chars": 711,
+  "manual_languages": [
+    "zh-Hans"
+  ],
+  "manual_track_count": 1,
+  "metadata_tokens_cl100k": 213,
+  "source_url": "https://www.youtube.com/watch?v=S36ri23-l60",
+  "status": "ok",
+  "track_count": 1,
+  "tracks": [
+    {
+      "is_generated": false,
+      "is_translatable": false,
+      "language": "Chinese (Simplified)",
+      "language_code": "zh-Hans",
+      "translation_language_count": 0,
+      "translation_languages": [],
+      "video_id": "S36ri23-l60"
+    }
+  ],
+  "translatable_track_count": 0,
+  "translation_target_language_count": 0,
+  "translation_target_languages": [],
+  "video_id": "S36ri23-l60"
+}

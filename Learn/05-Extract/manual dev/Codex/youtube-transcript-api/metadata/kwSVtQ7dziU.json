@@ -1,0 +1,116 @@
+{
+  "api_call": "YouTubeTranscriptApi().list(video_id)",
+  "available_languages": [
+    "en"
+  ],
+  "captured_at": "2026-05-03T04:39:00.817019+00:00",
+  "generated_languages": [
+    "en"
+  ],
+  "generated_track_count": 1,
+  "index": 4,
+  "json_chars": 1591,
+  "manual_languages": [],
+  "manual_track_count": 0,
+  "metadata_tokens_cl100k": 488,
+  "source_url": "https://www.youtube.com/watch?v=kwSVtQ7dziU&t=101s",
+  "status": "ok",
+  "track_count": 1,
+  "tracks": [
+    {
+      "is_generated": true,
+      "is_translatable": true,
+      "language": "English (auto-generated)",
+      "language_code": "en",
+      "translation_language_count": 16,
+      "translation_languages": [
+        {
+          "language": "Arabic",
+          "language_code": "ar"
+        },
+        {
+          "language": "Chinese (Traditional)",
+          "language_code": "zh-Hant"
+        },
+        {
+          "language": "Dutch",
+          "language_code": "nl"
+        },
+        {
+          "language": "French",
+          "language_code": "fr"
+        },
+        {
+          "language": "German",
+          "language_code": "de"
+        },
+        {
+          "language": "Hindi",
+          "language_code": "hi"
+        },
+        {
+          "language": "Indonesian",
+          "language_code": "id"
+        },
+        {
+          "language": "Italian",
+          "language_code": "it"
+        },
+        {
+          "language": "Japanese",
+          "language_code": "ja"
+        },
+        {
+          "language": "Korean",
+          "language_code": "ko"
+        },
+        {
+          "language": "Portuguese",
+          "language_code": "pt"
+        },
+        {
+          "language": "Russian",
+          "language_code": "ru"
+        },
+        {
+          "language": "Spanish",
+          "language_code": "es"
+        },
+        {
+          "language": "Thai",
+          "language_code": "th"
+        },
+        {
+          "language": "Ukrainian",
+          "language_code": "uk"
+        },
+        {
+          "language": "Vietnamese",
+          "language_code": "vi"
+        }
+      ],
+      "video_id": "kwSVtQ7dziU"
+    }
+  ],
+  "translatable_track_count": 1,
+  "translation_target_language_count": 16,
+  "translation_target_languages": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "nl",
+    "pt",
+    "ru",
+    "th",
+    "uk",
+    "vi",
+    "zh-Hant"
+  ],
+  "video_id": "kwSVtQ7dziU"
+}
