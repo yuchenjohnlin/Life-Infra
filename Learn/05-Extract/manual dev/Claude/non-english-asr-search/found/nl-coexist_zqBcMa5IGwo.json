@@ -1,0 +1,15 @@
+{
+  "video_id": "zqBcMa5IGwo",
+  "tracks": [
+    {
+      "code": "nl",
+      "name": "Dutch",
+      "is_generated": false
+    },
+    {
+      "code": "nl",
+      "name": "Dutch (auto-generated)",
+      "is_generated": true
+    }
+  ]
+}

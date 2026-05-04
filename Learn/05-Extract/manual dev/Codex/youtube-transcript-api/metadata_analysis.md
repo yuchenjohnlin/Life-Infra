@@ -4,7 +4,7 @@
 
 - Script: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05-Extract/manual dev/Codex/youtube-transcript-api/run_metadata.py`
 - Raw serialized API records: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05-Extract/manual dev/Codex/youtube-transcript-api/transcript_api_metadata_raw.jsonl`
-- Per-video JSON files: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05-Extract/manual dev/Codex/youtube-transcript-api/metadata/<video_id>.json`
+- Per-video JSON files: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05@-Extract/manual dev/Codex/youtube-transcript-api/metadata/<video_id>.json`
 - Summary JSON: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05-Extract/manual dev/Codex/youtube-transcript-api/metadata/summary.json`
 - Error log: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05-Extract/manual dev/Codex/youtube-transcript-api/transcript_api_errors.log`
 - Field inventory: `/Users/yuchenlin/Desktop/Life-Infra/Learn/05-Extract/manual dev/Codex/youtube-transcript-api/field_inventory.md`

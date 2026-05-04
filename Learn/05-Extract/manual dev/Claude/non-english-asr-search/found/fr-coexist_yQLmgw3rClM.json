@@ -1,0 +1,15 @@
+{
+  "video_id": "yQLmgw3rClM",
+  "tracks": [
+    {
+      "code": "fr",
+      "name": "French",
+      "is_generated": false
+    },
+    {
+      "code": "fr",
+      "name": "French (auto-generated)",
+      "is_generated": true
+    }
+  ]
+}

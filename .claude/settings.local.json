@@ -17,7 +17,30 @@
       "Bash(rm -rf metadata)",
       "Bash(~/anaconda3/envs/life_infra/bin/python run_metadata.py)",
       "Bash(~/anaconda3/envs/life_infra/bin/python)",
-      "Bash(~/anaconda3/envs/life_infra/bin/pip show *)"
+      "Bash(~/anaconda3/envs/life_infra/bin/pip show *)",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c ' *)",
+      "Read(//private/tmp/**)",
+      "Bash(yt-dlp --skip-download --write-auto-subs --sub-langs \"zh-Hans\" --sub-format vtt -o \"test_%\\(id\\)s\" \"https://www.youtube.com/watch?v=2pM-7fBXc_M\")",
+      "Bash(yt-dlp --skip-download --write-auto-subs --sub-langs \"en\" --sub-format vtt -o \"auto_%\\(id\\)s\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --write-subs --sub-langs \"en\" --sub-format vtt -o \"manual_%\\(id\\)s\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --write-subs --sub-langs \"en-j3PyPqV-e1s\" --sub-format vtt -o \"manual_%\\(id\\)s\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(sed -n '5,20p' /tmp/auto_njWyDHKYeVA.en.vtt)",
+      "Bash(sed -n '5,20p' /tmp/manual_njWyDHKYeVA.en-j3PyPqV-e1s.vtt)",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).80s\" \"ytsearch10:Dot CSV inteligencia artificial\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:人工智慧 解說\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:AI 解説 日本語\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:인공지능 설명 한국어\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:intelligence artificielle explication\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:kunstmatige intelligentie uitleg\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:股癌 podcast\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:百靈果 News\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:博恩夜夜秀\")",
+      "Bash(yt-dlp --skip-download --no-warnings --print \"%\\(id\\)s\\\\t%\\(channel\\)s\\\\t%\\(duration_string\\)s\\\\t%\\(title\\).70s\" \"ytsearch15:于北辰 政論\")",
+      "Bash(mkdir -p bilibili-test)",
+      "Bash(yt-dlp --skip-download --no-warnings --print 'title=%\\(title\\)s' --print 'uploader=%\\(uploader\\)s' --print 'duration=%\\(duration_string\\)s' --list-subs https://www.bilibili.com/video/__TRACKED_VAR__/)",
+      "Bash(yt-dlp --skip-download --no-warnings --write-auto-subs --sub-langs all --convert-subs srt -o \"%\\(id\\)s\" \"https://www.bilibili.com/video/BV1T7zzBQEaA/\")",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://api.bilibili.com/x/web-interface/view?bvid=BV1T7zzBQEaA\")"
     ]
   }
 }

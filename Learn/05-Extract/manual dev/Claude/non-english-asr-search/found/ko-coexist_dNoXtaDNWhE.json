@@ -1,0 +1,15 @@
+{
+  "video_id": "dNoXtaDNWhE",
+  "tracks": [
+    {
+      "code": "ko",
+      "name": "Korean - ko",
+      "is_generated": false
+    },
+    {
+      "code": "ko",
+      "name": "Korean (auto-generated)",
+      "is_generated": true
+    }
+  ]
+}

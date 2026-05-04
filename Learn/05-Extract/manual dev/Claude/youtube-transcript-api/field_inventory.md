@@ -106,36 +106,36 @@ For 3 videos, yt-dlp's manual-subs dict has codes like `en-j3PyPqV-e1s`, `zh-TW-
 
 `Δ` = transcript-api differs from yt-dlp.
 
-| video_id | yt-dlp manual | tapi manual | yt-dlp auto | tapi auto | tapi #trans |
-|---|---|---|---|---|---|
-| 0HIlhRl38QA | en-US,ja,zh | en-US,ja,zh | en-US,ja,zh,…155 more | en-US,ja,zh `Δ` | 18 |
-| 2pM-7fBXc_M | zh-Hans,zh-TW | zh-Hans,zh-TW | zh-Hans,zh-TW | zh-Hans,zh-TW | 1 |
-| 2rcJdFuNbZQ | zh-TW | zh-TW | zh-TW | zh-TW | 1 |
-| 2yi4mAN3CtE | — | — | aa,ab,af,…157 more | en `Δ` | 16 |
-| 4gciWspBVHw | — | DISABLED | — | DISABLED | — |
-| 8NGznVwNHGY | — | DISABLED | — | DISABLED | — |
-| 96jN2OCOfLs | — | — | aa,ab,af,…157 more | en `Δ` | 16 |
-| CEvIs9y1uog | live_chat | — `Δ` | aa,ab,af,…157 more | en `Δ` | 16 |
-| D7_ipDqhtwk | live_chat | — `Δ` | aa,ab,af,…157 more | en `Δ` | 16 |
-| F9WrUwcbGPM | — | DISABLED | — | DISABLED | — |
-| I0DrcsDf3Os | en-US,zh-Hans | en-US,zh-Hans | en-US,zh-Hans,…155 more | en-US,zh-Hans `Δ` | 17 |
-| Q3m-CKJmqMo | live_chat | — `Δ` | aa,ab,af,…157 more | en `Δ` | 16 |
-| R6fZR_9kmIw | zh-TW | zh-TW | zh-TW | zh-TW | 1 |
-| S36ri23-l60 | zh-Hans | zh-Hans | zh-Hans | zh-Hans | 0 |
-| Vk-Zbrrzo3A | — | DISABLED | — | DISABLED | — |
-| Xq-s_hAjADw | — | DISABLED | — | DISABLED | — |
-| YFjfBk8HI5o | de,en,ru | de,en,ru | aa,ab,af,…157 more | en `Δ` | 18 |
-| bJFtcwLSNxI | zh-TW | zh-TW | zh-TW | zh-TW | 1 |
-| cMiu3A7YBks | en-j3PyPqV-e1s | en `Δ` | aa,ab,af,…157 more | en `Δ` | 17 |
-| cVzf49yg0D8 | live_chat | — `Δ` | aa,ab,af,…157 more | en `Δ` | 16 |
-| hZ6fSjPGQWM | — | DISABLED | — | DISABLED | — |
-| kSFty4XwXS8 | zh-TW,zh-TW-RsSZZSfhlqk | zh-TW `Δ` | zh-TW | zh-TW | 1 |
-| kwSVtQ7dziU | — | — | aa,ab,af,…157 more | en `Δ` | 16 |
-| nEHNwdrbfGA | en-US | en-US | aa,ab,af,…157 more | en `Δ` | 17 |
-| njWyDHKYeVA | en-j3PyPqV-e1s | en `Δ` | aa,ab,af,…157 more | en `Δ` | 17 |
-| rmvDxxNubIg | — | — | aa,ab,af,…157 more | en `Δ` | 16 |
-| tfLTHCpPsSY | — | DISABLED | — | DISABLED | — |
-| yDc0_8emz7M | zh-Hans,zh-Hant | zh-Hans,zh-Hant | zh-Hans,zh-Hant | zh-Hans,zh-Hant | 1 |
+| video_id    | yt-dlp manual           | tapi manual     | yt-dlp auto             | tapi auto         | tapi #trans |
+| ----------- | ----------------------- | --------------- | ----------------------- | ----------------- | ----------- |
+| 0HIlhRl38QA | en-US,ja,zh             | en-US,ja,zh     | en-US,ja,zh,…155 more   | en-US,ja,zh `Δ`   | 18          |
+| 2pM-7fBXc_M | zh-Hans,zh-TW           | zh-Hans,zh-TW   | zh-Hans,zh-TW           | zh-Hans,zh-TW     | 1           |
+| 2rcJdFuNbZQ | zh-TW                   | zh-TW           | zh-TW                   | zh-TW             | 1           |
+| 2yi4mAN3CtE | —                       | —               | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| 4gciWspBVHw | —                       | DISABLED        | —                       | DISABLED          | —           |
+| 8NGznVwNHGY | —                       | DISABLED        | —                       | DISABLED          | —           |
+| 96jN2OCOfLs | —                       | —               | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| CEvIs9y1uog | live_chat               | — `Δ`           | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| D7_ipDqhtwk | live_chat               | — `Δ`           | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| F9WrUwcbGPM | —                       | DISABLED        | —                       | DISABLED          | —           |
+| I0DrcsDf3Os | en-US,zh-Hans           | en-US,zh-Hans   | en-US,zh-Hans,…155 more | en-US,zh-Hans `Δ` | 17          |
+| Q3m-CKJmqMo | live_chat               | — `Δ`           | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| R6fZR_9kmIw | zh-TW                   | zh-TW           | zh-TW                   | zh-TW             | 1           |
+| S36ri23-l60 | zh-Hans                 | zh-Hans         | zh-Hans                 | zh-Hans           | 0           |
+| Vk-Zbrrzo3A | —                       | DISABLED        | —                       | DISABLED          | —           |
+| Xq-s_hAjADw | —                       | DISABLED        | —                       | DISABLED          | —           |
+| YFjfBk8HI5o | de,en,ru                | de,en,ru        | aa,ab,af,…157 more      | en `Δ`            | 18          |
+| bJFtcwLSNxI | zh-TW                   | zh-TW           | zh-TW                   | zh-TW             | 1           |
+| cMiu3A7YBks | en-j3PyPqV-e1s          | en `Δ`          | aa,ab,af,…157 more      | en `Δ`            | 17          |
+| cVzf49yg0D8 | live_chat               | — `Δ`           | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| hZ6fSjPGQWM | —                       | DISABLED        | —                       | DISABLED          | —           |
+| kSFty4XwXS8 | zh-TW,zh-TW-RsSZZSfhlqk | zh-TW `Δ`       | zh-TW                   | zh-TW             | 1           |
+| kwSVtQ7dziU | —                       | —               | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| nEHNwdrbfGA | en-US                   | en-US           | aa,ab,af,…157 more      | en `Δ`            | 17          |
+| njWyDHKYeVA | en-j3PyPqV-e1s          | en `Δ`          | aa,ab,af,…157 more      | en `Δ`            | 17          |
+| rmvDxxNubIg | —                       | —               | aa,ab,af,…157 more      | en `Δ`            | 16          |
+| tfLTHCpPsSY | —                       | DISABLED        | —                       | DISABLED          | —           |
+| yDc0_8emz7M | zh-Hans,zh-Hant         | zh-Hans,zh-Hant | zh-Hans,zh-Hant         | zh-Hans,zh-Hant   | 1           |
 
 **21 of 28 videos differ in at least one subtitle field.** All 21 are yt-dlp surfacing more than transcript-api (translations as auto-tracks, live_chat as manual, internal IDs as codes), not the other way around.
 
@@ -148,3 +148,82 @@ Use **yt-dlp for everything except subtitle inventory**, and use **youtube-trans
 - Add a new field `translation_targets_count` (from transcript-api) — a clean integer instead of the inflated language list.
 
 The 7 `TranscriptsDisabled` videos are correctly identified by both libraries, so we already have a reliable "no transcript available" signal — but transcript-api raises an exception while yt-dlp returns an empty `automatic_captions`. Either signal works; pick one.
+
+## Addendum — yt-dlp's "phantom" auto-tracks for Chinese videos
+
+After re-reading the per-video table I noticed that for every Chinese video that has manual subs (e.g. `2pM-7fBXc_M`, `yDc0_8emz7M`, `S36ri23-l60`, `I0DrcsDf3Os`, …), yt-dlp's `automatic_captions` lists the same languages as `subtitles`, while transcript-api shows **zero** auto-generated tracks. That's a 4th yt-dlp quirk on top of the three bugs above, and it's worth verifying rather than assuming.
+
+**Experiment** (on `2pM-7fBXc_M`, manual `zh-Hans` per both libraries; yt-dlp also lists "auto" `zh-Hans`):
+
+```bash
+yt-dlp --skip-download --write-auto-subs --sub-langs zh-Hans -o auto_%(id)s URL
+yt-dlp --skip-download --write-subs      --sub-langs zh-Hans -o manual_%(id)s URL
+diff auto_2pM-7fBXc_M.zh-Hans.vtt manual_2pM-7fBXc_M.zh-Hans.vtt
+```
+
+**Result**: the two files are **byte-identical** (2044 vs 2041 lines, no differing content). yt-dlp's "auto-caption" URL has `caps=asr&lang=zh-Hans` in the query string, but YouTube serves the manual track when manual exists in that language.
+
+**Conclusion**: yt-dlp's `automatic_captions` field lists URL endpoints that *might* serve ASR content. When YouTube didn't actually run ASR on the video, the endpoint silently returns the manual content instead. transcript-api correctly reports "no separate auto track". This means:
+
+- yt-dlp is over-eager: it surfaces every endpoint URL whether or not it has its own content.
+- transcript-api obeys what YouTube actually serves as separate tracks.
+- For "is there a real ASR track for this video", **trust transcript-api's `is_generated == True` count**, not yt-dlp's `automatic_captions` keys.
+
+This is why for 9 of our 16 Chinese videos transcript-api shows zero auto tracks despite yt-dlp listing them — the listings are real URL endpoints, but they don't have separate ASR content.
+
+**Important correction**: this phantom behavior does NOT mean "YouTube hides the auto-track when manual exists in the same language". For 3 English videos in the testset (`njWyDHKYeVA`, `cMiu3A7YBks`, `YFjfBk8HI5o`), transcript-api lists both `manual=en` and `auto=en` as separate tracks — and a direct diff between the two fetched files confirms ~15,000 lines of differing content (manual = human captioner with speaker labels; auto = raw ASR with word-timing markers). When YouTube actually runs ASR, both tracks coexist independently in the same language. The phantom-URL behavior only happens when ASR didn't run on the video at all (most Chinese in our testset). transcript-api correctly distinguishes these two cases via the `is_generated` flag; yt-dlp does not.
+
+## Addendum 2 — The 16 vs 157 translation-language mystery
+
+The YouTube web player's "Auto-translate" dropdown shows ~157 languages. yt-dlp's `automatic_captions` for an English video has 157 keys. But transcript-api's `translation_languages` reports only 16. Which is right?
+
+**Both are right — they read different YouTube endpoints.**
+
+Verified by direct comparison on `rmvDxxNubIg` (English, no manual subs, has auto):
+
+```
+yt-dlp automatic_captions keys:                     157
+transcript-api translation_languages codes:          16
+intersection (transcript-api ⊂ yt-dlp):              16
+in transcript-api but NOT in yt-dlp:                  0
+```
+
+The 16 are: `ar de es fr hi id it ja ko nl pt ru th uk vi zh-Hant`. Every one of them is in yt-dlp's 157. The 141 extras are the long tail (Akan, Quechua, Yiddish, Hawaiian, Filipino, Polish, Turkish, Swahili, …).
+
+### Why the difference
+
+YouTube exposes translation through **two different internal APIs with different cardinalities**:
+
+| Source | Endpoint | Returns | Used by |
+|---|---|---|---|
+| **Player captions endpoint** | `playerResponse.captions.playerCaptionsTracklistRenderer.captionTracks` | All ~157 Google-Translate target languages | yt-dlp; the YouTube web player's auto-translate dropdown |
+| **Transcript list endpoint** | the InnerTube `get_transcript` metadata | A curated 16 "officially supported" translation targets | youtube-transcript-api |
+
+The 16 is YouTube's polished / officially blessed translation set. The 157 is "everything Google Translate can possibly produce, no quality guarantee".
+
+### Can transcript-api translate?
+
+**Yes** — `transcript.translate(target_code).fetch()` returns a translated transcript. **But only for languages in its 16-language list.** Verified by trying targets outside the 16:
+
+```python
+t.translate("pl").fetch()   # → TranslationLanguageNotAvailable
+t.translate("tr").fetch()   # → TranslationLanguageNotAvailable
+t.translate("sw").fetch()   # → TranslationLanguageNotAvailable
+t.translate("fil").fetch()  # → TranslationLanguageNotAvailable
+t.translate("yi").fetch()   # → TranslationLanguageNotAvailable
+t.translate("haw").fetch()  # → TranslationLanguageNotAvailable
+```
+
+All raise `TranslationLanguageNotAvailable`. The 16 is a hard whitelist for transcript-api, not a "preferred subset". (Hitting one of the 16 in our test ran into `IpBlocked` — separate rate-limit issue from this run, not the library's fault.)
+
+### What this means for the curated record
+
+- **"native tracks"** (your wording) = entries in transcript-api's `tracks` list = real subtitle files YouTube serves for the video (manual + auto). This is what we want for "does this video have a transcript at all".
+- **"translation targets"** = languages YouTube can derive on the fly via Google Translate. Not real tracks. yt-dlp confuses the two; transcript-api keeps them separate.
+- The right model is: each track has 0–N translation targets it can be translated *to*. We have 16 (transcript-api view) or 157 (yt-dlp / web-player view) depending on which API you trust. **For the metadata record, neither number is critical** — we just need the boolean "is the source track translatable" and maybe a coarse target-count.
+
+### Practical implication if we ever want to translate
+
+- Need **one of the 16**: use transcript-api's `translate(code).fetch()`.
+- Need **a target outside the 16** (Polish, Turkish, Swahili, etc.): use yt-dlp with `--write-auto-subs --sub-langs <code>`, which hits the player endpoint and gets the broader translation set.
+- Want LLM-translated to *anything*: skip both, fetch the source-language transcript and translate locally with an LLM. This is usually higher quality than YouTube's built-in translation anyway.
