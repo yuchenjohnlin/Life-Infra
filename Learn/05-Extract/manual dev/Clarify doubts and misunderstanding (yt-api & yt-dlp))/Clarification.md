@@ -226,6 +226,6 @@ Else if TranscriptsDisabled or empty:
 
 ## Companion files
 
-- [`Claude/yt-dlp/Claude log.md`](Claude/yt-dlp/Claude%20log.md), [`field_inventory.md`](Claude/yt-dlp/field_inventory.md) — Step 2 detail
-- [`Claude/youtube-transcript-api/Claude log.md`](Claude/youtube-transcript-api/Claude%20log.md), [`field_inventory.md`](Claude/youtube-transcript-api/field_inventory.md) — Steps 3–5 detail
-- [`Claude/youtube-transcript-api/regional_alternatives.md`](Claude/youtube-transcript-api/regional_alternatives.md) — non-YouTube platform table
+- [`Claude/yt-dlp/Claude log.md`](Learn/05-Extract/manual%20dev/yt-dlp/Claude/Claude%20log.md), [`field_inventory.md`](Learn/05-Extract/manual%20dev/yt-dlp/Claude/field_inventory.md) — Step 2 detail
+- [`Claude/youtube-transcript-api/Claude log.md`](Learn/05-Extract/manual%20dev/youtube-transcript-api/Claude/Claude%20log.md), [`field_inventory.md`](Learn/05-Extract/manual%20dev/youtube-transcript-api/Claude/field_inventory.md) — Steps 3–5 detail
+- [`Claude/youtube-transcript-api/regional_alternatives.md`](regional_alternatives.md) — non-YouTube platform table
