@@ -40,7 +40,13 @@
       "Bash(mkdir -p bilibili-test)",
       "Bash(yt-dlp --skip-download --no-warnings --print 'title=%\\(title\\)s' --print 'uploader=%\\(uploader\\)s' --print 'duration=%\\(duration_string\\)s' --list-subs https://www.bilibili.com/video/__TRACKED_VAR__/)",
       "Bash(yt-dlp --skip-download --no-warnings --write-auto-subs --sub-langs all --convert-subs srt -o \"%\\(id\\)s\" \"https://www.bilibili.com/video/BV1T7zzBQEaA/\")",
-      "Bash(curl -s -A \"Mozilla/5.0\" \"https://api.bilibili.com/x/web-interface/view?bvid=BV1T7zzBQEaA\")"
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://api.bilibili.com/x/web-interface/view?bvid=BV1T7zzBQEaA\")",
+      "WebFetch(domain:www.shoots.video)",
+      "WebFetch(domain:www.quora.com)",
+      "WebFetch(domain:support.google.com)",
+      "WebFetch(domain:www.happyscribe.com)",
+      "WebFetch(domain:sonix.ai)",
+      "WebFetch(domain:chinesecopywriter.com)"
     ]
   }
 }

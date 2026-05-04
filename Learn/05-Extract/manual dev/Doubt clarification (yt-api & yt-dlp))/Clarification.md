@@ -52,6 +52,33 @@ Two patterns worth noting:
 2. **No Chinese video in the testset has a separate ASR track**, even when YouTube supports Chinese ASR in principle. Either the video has manual subs only (9 videos) or it has nothing at all (7 videos). The ASR didn't run, often because the creator uploaded manual subs that satisfied YouTube's "captions present" check, or because Chinese ASR was suppressed for that video. This is an empirical pattern in the testset, not a rule.
 3. **The auto track, when present, is always in the spoken language** — typically `en`, even when manual subs are in `de`, `ru`, etc. (`YFjfBk8HI5o` has manual `de`, `en`, `ru` plus auto `en`). YouTube doesn't generate one ASR track per manual language; ASR runs once on the audio.
 
+### YouTube auto-captioning for Mandarin: official policy vs observed behavior
+
+YouTube's [official help page](https://support.google.com/youtube/answer/6373554) lists "Chinese" as a supported auto-captioning language (with "Cantonese/Hong Kong" listed separately). **In practice, Mandarin auto-captions are not generated for any video we've sampled** — clicking CC on a Mandarin-only video typically shows "Subtitles/closed captions unavailable". The "policy says yes, practice says no" gap is the actual finding, and YouTube does not document this gap.
+#### Evidence
+**Strongest piece — direct empirical probe.** Tested 30+ Mandarin candidates across 7 content categories (AI explainers, news, vlogs, podcasts, comedy, lectures, political commentary) via `youtube-transcript-api`. Zero auto-generated Mandarin tracks found. All 16 Chinese videos in the testset confirm the same pattern. Full process in [`Claude/non-english-asr-process-log.md`](../Claude/non-english-asr-process-log.md).
+
+**Independent third-party reports (practitioner blogs):**
+- [Shoots.video — *3 Absolutely Smart Ways to Get Chinese Subtitles*](https://www.shoots.video/post/3-absolutely-smart-ways-to-get-chinese-subtitles-for-youtube-videos/) (Apr 2024):
+  > "If you click the 'CC' button of the YouTube video in Mandarin or Cantonese, it pops up a message 'Subtitles/closed captions unavailable'."
+
+- [ChineseCopywriter — *Chinese Subtitles for YouTube Videos*](https://chinesecopywriter.com/chinese-subtitles-for-youtube-videos/) (Nov 2025):
+  > "YouTube also offers auto-generated captions, but they don't work for Mandarin. If you've ever clicked the 'CC' button on a Mandarin or Cantonese video, you've probably seen that little message saying subtitles aren't available."
+
+- [HappyScribe — *YouTube Auto Captions: 4 Things You Should Know*](https://www.happyscribe.com/blog/youtube-auto-captions-4-things-you-should-know-before-using):
+  > "If your video is in Mandarin, Arabic, Greek, or any other non-supported language, you'll need to look elsewhere."
+#### Caveats worth being honest about
+
+1. **YouTube's official documentation contradicts the claim.** The supported-languages list explicitly includes "Chinese". So we're inferring from observation that the deployment doesn't match the documentation.
+2. **Two of the three practitioner sources also lump Cantonese in as "unavailable"** — but our own probing on TVB News and 香港01 found that Cantonese (`yue`) auto-captions work reliably. Those sources are correct on Mandarin but partially wrong on Cantonese, so treat them as observation-based reports, not authoritative.
+3. **HappyScribe lists only 10 supported languages**, vs YouTube's 80+. The article looks outdated even though its Mandarin claim is consistent with the others.
+4. **A previously cited [Quora thread](https://www.quora.com/Why-cant-YouTube-generate-Mandarin-subtitles)** returned HTTP 403 when re-fetched — I cannot independently verify what the answers say, so it is not counted as evidence here.
+
+The strongest single piece of evidence is our own empirical probe; the third-party blogs corroborate it but should not be treated as Google-internal sources. The folk explanation that surfaces in those blogs ("Mandarin homophones make ASR hard") is plausible but unverified — the operational answer is the same regardless of cause.
+#### Pipeline implication
+
+Treat YouTube Mandarin auto-captions as "do not rely on" regardless of whether the cause is policy, deployment gap, or audio-quality threshold. Use Bilibili AI subs (when a mirror exists), Paraformer/FunASR locally, or Whisper-via-Groq as fallbacks — see [`Generate Chinese Subtitle/`](../Generate%20Chinese%20Subtitle/) for the full evaluation.
+
 ## Three specific bugs in yt-dlp's subtitle reporting
 
 ### Bug 1 — Auto-caption inflation (~20×)
