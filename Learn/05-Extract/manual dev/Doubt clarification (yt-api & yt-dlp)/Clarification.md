@@ -51,34 +51,6 @@ Two patterns worth noting:
 1. **All 4 "manual + auto" videos are English** (`njWyDHKYeVA`, `cMiu3A7YBks`, `nEHNwdrbfGA`, `YFjfBk8HI5o`). In 3 of them (`njWyDHKYeVA`, `cMiu3A7YBks`, `YFjfBk8HI5o`) the manual *and* auto tracks share the same language code `en` — i.e. YouTube exposes them as **two separate, simultaneously available tracks in the same language**. They are genuinely independent: a side-by-side diff on `njWyDHKYeVA` shows ~15,000 differing lines (manual track has speaker labels and copy-edited punctuation; auto track is raw ASR with word-level timing markers).
 2. **No Chinese video in the testset has a separate ASR track**, even when YouTube supports Chinese ASR in principle. Either the video has manual subs only (9 videos) or it has nothing at all (7 videos). The ASR didn't run, often because the creator uploaded manual subs that satisfied YouTube's "captions present" check, or because Chinese ASR was suppressed for that video. This is an empirical pattern in the testset, not a rule.
 3. **The auto track, when present, is always in the spoken language** — typically `en`, even when manual subs are in `de`, `ru`, etc. (`YFjfBk8HI5o` has manual `de`, `en`, `ru` plus auto `en`). YouTube doesn't generate one ASR track per manual language; ASR runs once on the audio.
-
-### YouTube auto-captioning for Mandarin: official policy vs observed behavior
-
-YouTube's [official help page](https://support.google.com/youtube/answer/6373554) lists "Chinese" as a supported auto-captioning language (with "Cantonese/Hong Kong" listed separately). **In practice, Mandarin auto-captions are not generated for any video we've sampled** — clicking CC on a Mandarin-only video typically shows "Subtitles/closed captions unavailable". The "policy says yes, practice says no" gap is the actual finding, and YouTube does not document this gap.
-#### Evidence
-**Strongest piece — direct empirical probe.** Tested 30+ Mandarin candidates across 7 content categories (AI explainers, news, vlogs, podcasts, comedy, lectures, political commentary) via `youtube-transcript-api`. Zero auto-generated Mandarin tracks found. All 16 Chinese videos in the testset confirm the same pattern. Full process in [`Claude/non-english-asr-process-log.md`](../Claude/non-english-asr-process-log.md).
-
-**Independent third-party reports (practitioner blogs):**
-- [Shoots.video — *3 Absolutely Smart Ways to Get Chinese Subtitles*](https://www.shoots.video/post/3-absolutely-smart-ways-to-get-chinese-subtitles-for-youtube-videos/) (Apr 2024):
-  > "If you click the 'CC' button of the YouTube video in Mandarin or Cantonese, it pops up a message 'Subtitles/closed captions unavailable'."
-
-- [ChineseCopywriter — *Chinese Subtitles for YouTube Videos*](https://chinesecopywriter.com/chinese-subtitles-for-youtube-videos/) (Nov 2025):
-  > "YouTube also offers auto-generated captions, but they don't work for Mandarin. If you've ever clicked the 'CC' button on a Mandarin or Cantonese video, you've probably seen that little message saying subtitles aren't available."
-
-- [HappyScribe — *YouTube Auto Captions: 4 Things You Should Know*](https://www.happyscribe.com/blog/youtube-auto-captions-4-things-you-should-know-before-using):
-  > "If your video is in Mandarin, Arabic, Greek, or any other non-supported language, you'll need to look elsewhere."
-#### Caveats worth being honest about
-
-1. **YouTube's official documentation contradicts the claim.** The supported-languages list explicitly includes "Chinese". So we're inferring from observation that the deployment doesn't match the documentation.
-2. **Two of the three practitioner sources also lump Cantonese in as "unavailable"** — but our own probing on TVB News and 香港01 found that Cantonese (`yue`) auto-captions work reliably. Those sources are correct on Mandarin but partially wrong on Cantonese, so treat them as observation-based reports, not authoritative.
-3. **HappyScribe lists only 10 supported languages**, vs YouTube's 80+. The article looks outdated even though its Mandarin claim is consistent with the others.
-4. **A previously cited [Quora thread](https://www.quora.com/Why-cant-YouTube-generate-Mandarin-subtitles)** returned HTTP 403 when re-fetched — I cannot independently verify what the answers say, so it is not counted as evidence here.
-
-The strongest single piece of evidence is our own empirical probe; the third-party blogs corroborate it but should not be treated as Google-internal sources. The folk explanation that surfaces in those blogs ("Mandarin homophones make ASR hard") is plausible but unverified — the operational answer is the same regardless of cause.
-#### Pipeline implication
-
-Treat YouTube Mandarin auto-captions as "do not rely on" regardless of whether the cause is policy, deployment gap, or audio-quality threshold. Use Bilibili AI subs (when a mirror exists), Paraformer/FunASR locally, or Whisper-via-Groq as fallbacks — see [`Generate Chinese Subtitle/`](../Generate%20Chinese%20Subtitle/) for the full evaluation.
-
 ## Three specific bugs in yt-dlp's subtitle reporting
 
 ### Bug 1 — Auto-caption inflation (~20×)
@@ -256,3 +228,208 @@ Else if TranscriptsDisabled or empty:
 - [`Claude/yt-dlp/Claude log.md`](Learn/05-Extract/manual%20dev/yt-dlp/Claude/Claude%20log.md), [`field_inventory.md`](Learn/05-Extract/manual%20dev/yt-dlp/Claude/field_inventory.md) — Step 2 detail
 - [`Claude/youtube-transcript-api/Claude log.md`](Learn/05-Extract/manual%20dev/youtube-transcript-api/Claude/Claude%20log.md), [`field_inventory.md`](Learn/05-Extract/manual%20dev/youtube-transcript-api/Claude/field_inventory.md) — Steps 3–5 detail
 - [`Claude/youtube-transcript-api/regional_alternatives.md`](regional_alternatives.md) — non-YouTube platform table
+
+---
+## More
+
+Below provides more explanation for Mandarin auto-caption found on the internet. Corresponding to [[non-english-asr-process-log]]
+## YouTube auto-captioning for Mandarin: official policy vs observed behavior
+
+YouTube's [official help page](https://support.google.com/youtube/answer/6373554) lists "Chinese" as a supported auto-captioning language (with "Cantonese/Hong Kong" listed separately). **In practice, Mandarin auto-captions are not generated for any video we've sampled** — clicking CC on a Mandarin-only video typically shows "Subtitles/closed captions unavailable". The "policy says yes, practice says no" gap is the actual finding, and YouTube does not document this gap.
+### Evidence
+
+**Strongest piece — direct empirical probe.** Tested 30+ Mandarin candidates across 7 content categories (AI explainers, news, vlogs, podcasts, comedy, lectures, political commentary) via `youtube-transcript-api`. Zero auto-generated Mandarin tracks found. All 16 Chinese videos in the testset confirm the same pattern. Full process in [`Claude/non-english-asr-process-log.md`](../Claude/non-english-asr-process-log.md).
+
+**Independent third-party reports (practitioner blogs):**
+
+- [Shoots.video — *3 Absolutely Smart Ways to Get Chinese Subtitles*](https://www.shoots.video/post/3-absolutely-smart-ways-to-get-chinese-subtitles-for-youtube-videos/) (Apr 2024):
+  > "If you click the 'CC' button of the YouTube video in Mandarin or Cantonese, it pops up a message 'Subtitles/closed captions unavailable'."
+
+- [ChineseCopywriter — *Chinese Subtitles for YouTube Videos*](https://chinesecopywriter.com/chinese-subtitles-for-youtube-videos/) (Nov 2025):
+  > "YouTube also offers auto-generated captions, but they don't work for Mandarin. If you've ever clicked the 'CC' button on a Mandarin or Cantonese video, you've probably seen that little message saying subtitles aren't available."
+
+- [HappyScribe — *YouTube Auto Captions: 4 Things You Should Know*](https://www.happyscribe.com/blog/youtube-auto-captions-4-things-you-should-know-before-using):
+  > "If your video is in Mandarin, Arabic, Greek, or any other non-supported language, you'll need to look elsewhere."
+
+### Caveats worth being honest about
+
+1. **YouTube's official documentation contradicts the claim.** The supported-languages list explicitly includes "Chinese". So we're inferring from observation that the deployment doesn't match the documentation.
+2. **Two of the three practitioner sources also lump Cantonese in as "unavailable"** — but our own probing on TVB News and 香港01 found that Cantonese (`yue`) auto-captions work reliably. Those sources are correct on Mandarin but partially wrong on Cantonese, so treat them as observation-based reports, not authoritative.
+3. **HappyScribe lists only 10 supported languages**, vs YouTube's 80+. The article looks outdated even though its Mandarin claim is consistent with the others.
+4. **A previously cited [Quora thread](https://www.quora.com/Why-cant-YouTube-generate-Mandarin-subtitles)** returned HTTP 403 when re-fetched — I cannot independently verify what the answers say, so it is not counted as evidence here.
+
+The strongest single piece of evidence is our own empirical probe; the third-party blogs corroborate it but should not be treated as Google-internal sources. The folk explanation that surfaces in those blogs ("Mandarin homophones make ASR hard") is plausible but unverified — the operational answer is the same regardless of cause.
+
+### Pipeline implication
+
+Treat YouTube Mandarin auto-captions as "do not rely on" regardless of whether the cause is policy, deployment gap, or audio-quality threshold. Use Bilibili AI subs (when a mirror exists), Paraformer/FunASR locally, or Whisper-via-Groq as fallbacks — see [`Generate Chinese Subtitle/`](../Generate%20Chinese%20Subtitle/) for the full evaluation.
+
+## Subtitle file formats: VTT, JSON3, and what `youtube-transcript-api` actually fetches
+
+The user noticed: yt-dlp downloads of auto-captions come back as `.vtt` with the rolling-caption effect (words appearing one at a time on screen), but `youtube-transcript-api` returns plain `(start, duration, text)` snippets with no rolling effect — even on the same auto-track. Question: does transcript-api transform the VTT into something else, or is it fetching a different file altogether?
+
+**Short answer: it's fetching a different file altogether.** YouTube serves the same underlying caption data in multiple wire formats, and transcript-api requests `json3` instead of `vtt`. It never sees the VTT, so there's no conversion to do.
+
+### YouTube has multiple subtitle wire formats
+
+When YouTube returns a caption track, you can request it in any of:
+
+| Format | Extension | What it is |
+|---|---|---|
+| `vtt` | `.vtt` | WebVTT — the W3C standard format browsers use to render captions on `<video>` elements |
+| `json3` | `.json3` | YouTube's native serialization — structured events with millisecond timing |
+| `srv1` / `srv2` / `srv3` | `.srv1` etc. | Older XML formats (legacy, mostly superseded by json3) |
+| `ttml` | `.ttml` | W3C Timed Text Markup Language |
+
+All five describe the **same underlying caption data** — just serialized differently. yt-dlp can fetch any of them via `--sub-format <name>`; the YouTube player itself uses json3 for newer features and vtt for direct playback.
+
+### What's in each format — direct comparison on `njWyDHKYeVA`
+
+This video has both a manual track (key `en-j3PyPqV-e1s`) and an auto-generated track (key `en`), so we can show all four (manual/auto × vtt/json3) side by side.
+
+#### Manual VTT (78 KB) — plain timed cues
+
+```
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:01.060
+ANNIE WANG: Hi, everyone.
+
+00:00:01.060 --> 00:00:04.840
+Welcome to Hands-on AI where
+we walk you through AI lab step
+
+00:00:04.840 --> 00:00:05.440
+by step.
+```
+
+Each cue is one timestamp range + one text block. **No per-word timing markers.** No rolling effect — when a manual subtitle is on screen, the entire line is shown at once. (This is what professional captioners produce; word-by-word timing isn't part of their workflow.)
+
+#### Auto VTT (442 KB) — overlapping cues with inline word timing
+
+```
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.350 align:start position:0%
+ 
+Hi<00:00:00.200><c> everyone,</c><00:00:00.920><c> welcome</c><00:00:01.360><c> to</c><00:00:01.520><c> hands-on</c><00:00:02.000><c> AI,</c>
+
+00:00:02.350 --> 00:00:02.360 align:start position:0%
+Hi everyone, welcome to hands-on AI,
+ 
+
+00:00:02.360 --> 00:00:04.350 align:start position:0%
+Hi everyone, welcome to hands-on AI,
+where<00:00:02.600><c> we</c><00:00:02.800><c> walk</c><00:00:03.040><c> you</c><00:00:03.160><c> through</c><00:00:03.600><c> AI</c><00:00:03.920><c> lab</c>
+```
+
+Two things to notice:
+
+1. **Per-word timestamp tags** like `<00:00:00.200><c> everyone,</c>` — these are how the rolling effect is encoded. The browser reveals each `<c>...</c>` chunk at its corresponding timestamp.
+2. **Overlapping cues that build up the line cumulatively** — the next cue at `00:00:02.360` repeats `Hi everyone, welcome to hands-on AI,` *and* adds the next phrase. So as the auto-caption progresses, each new cue copies the existing on-screen text and appends new words being spoken. That's the cumulative scroll-building effect.
+
+The rolling-caption UI is **specific to auto-captions**. It's not a vtt feature — it's a YouTube-auto-track encoding choice that vtt happens to be expressive enough to carry.
+
+#### Manual JSON3 — same data, structured
+
+```json
+{
+  "wireMagic": "pb3",
+  "events": [
+    {
+      "tStartMs": 0,
+      "dDurationMs": 1060,
+      "segs": [{"utf8": "ANNIE WANG: Hi, everyone."}]
+    },
+    {
+      "tStartMs": 1060,
+      "dDurationMs": 3780,
+      "segs": [{"utf8": "Welcome to Hands-on AI where\nwe walk you through AI lab step"}]
+    }
+  ]
+}
+```
+
+One event per cue. Each event has one `seg`. No per-word data because there is none in manual captions. **1116 events** total for this video, exactly matching the cue count in the VTT.
+
+#### Auto JSON3 — same per-word data, but explicit
+
+```json
+{
+  "events": [
+    {
+      "tStartMs": 0, "dDurationMs": 4360,
+      "segs": [
+        {"utf8": "Hi"},
+        {"utf8": " everyone,",  "tOffsetMs":  200},
+        {"utf8": " welcome",    "tOffsetMs":  920},
+        {"utf8": " to",         "tOffsetMs": 1360},
+        {"utf8": " hands-on",   "tOffsetMs": 1520},
+        {"utf8": " AI,",        "tOffsetMs": 2000}
+      ]
+    },
+    {
+      "tStartMs": 2350, "dDurationMs": 2010,
+      "wWinId": 1, "aAppend": 1,
+      "segs": [{"utf8": "\n"}]
+    }
+  ]
+}
+```
+
+The per-word timing is now in a clean structured form: each word gets its own `seg` with a `tOffsetMs` saying when, relative to `tStartMs`, that word should appear. The cumulative-scroll effect uses `aAppend: 1` events to extend the on-screen text rather than replacing it. **2702 events** for this video — more than the manual track because every word appearance is its own event.
+
+### What `youtube-transcript-api` actually does
+
+Reading [the library source](https://github.com/jdepoix/youtube-transcript-api) confirms it: when you call `Transcript.fetch()`, the request URL includes `&fmt=json3` (or older `srv1`/`srv3` for fallback). It downloads the JSON3 file directly — VTT is never involved.
+
+The parser then walks `events[]` and builds one `FetchedTranscriptSnippet` per event:
+
+```python
+@dataclass
+class FetchedTranscriptSnippet:
+    text: str       # joined utf8 of all segs in the event
+    start: float    # tStartMs / 1000
+    duration: float # dDurationMs / 1000
+```
+
+Two simplifications happen during this walk:
+
+1. **Per-word `tOffsetMs` data is dropped.** All `segs` in an event get joined into one string, so the result is "what was said during this time window" — not "which word at which millisecond". This is why the rolling effect disappears.
+2. **`aAppend` events are typically de-duplicated.** The cumulative-scroll structure of auto-captions creates a lot of redundancy (each new event repeats the previous text plus a few new words). transcript-api / similar parsers usually keep only the events that introduce new content — that's why my live test on `njWyDHKYeVA` showed the auto track collapsing from 2702 json3 events to 1351 transcript-api snippets (about 2:1 ratio).
+
+For the manual track, neither simplification matters because the structure is already simple — 1116 json3 events ↔ 1116 transcript-api snippets, perfect 1:1 mapping.
+
+### Direct demonstration on `njWyDHKYeVA`
+
+| Source / format | What it returns | Size / count |
+|---|---|---|
+| yt-dlp manual VTT | plain timed cues | 78 KB / ~1116 cues |
+| yt-dlp auto VTT | cues with `<HH:MM:SS><c>word</c>` per-word tags + overlapping/cumulative cues | 442 KB / ~2700 cues |
+| yt-dlp manual JSON3 | events with one `seg` each, no `tOffsetMs` | 154 KB / 1116 events |
+| yt-dlp auto JSON3 | events with multi-segs and `tOffsetMs` per word + `aAppend` events | 750 KB / 2702 events |
+| transcript-api manual `.fetch()` | `[FetchedTranscriptSnippet(start, duration, text), ...]` | 1116 snippets |
+| transcript-api auto `.fetch()` | `[FetchedTranscriptSnippet(start, duration, text), ...]` | 1351 snippets (after de-dup) |
+| yt-dlp `--convert-subs srt` from manual | SRT — same plain-cue model as VTT, no rolling | 84 KB |
+
+### Direct answer to the user's question
+
+> Does youtube-transcript-api turn the VTT file into a file that is not rolling caption? Or does a subtitle without rolling caption already exist and is fetched?
+
+It's the second — **YouTube serves a non-rolling representation directly** (`json3`), and `youtube-transcript-api` requests that one instead of VTT. The library never sees a VTT file, so it never has to strip rolling tags. The structured json3 format already separates "when does this cue start / how long / what's the text" from the per-word `tOffsetMs` data; the library just keeps the first three and drops the fourth.
+
+The rolling caption effect you saw on the Karpathy video was an auto-track property visible *only* in the VTT representation (and in the json3 if you look at the `tOffsetMs` fields). It doesn't exist in manual tracks at all, in any format.
+
+### Implications for our pipeline
+
+- For our use (LLM summarization), the per-word timing is irrelevant — we want clean "what was said" text. transcript-api's `(start, duration, text)` shape is exactly right.
+- If we ever wanted to display captions on a custom video player (rolling effect included), we'd want VTT instead, and from yt-dlp not transcript-api.
+- If we wanted the cleanest possible text without any timing at all, joining `[snippet.text for snippet in fetched]` with spaces is the simplest path. transcript-api's `FetchedTranscriptSnippet` is friendlier than parsing VTT for this.
+
+### What I previously thought without testing
+
+Before running the demo above, I assumed transcript-api was just returning a parsed VTT with rolling tags stripped. Looking at the json3 directly made the picture more honest: there isn't a separate "stripping" step at all — the format YouTube serves to transcript-api already lacks the rolling-display structure (or rather, segregates it into optional `tOffsetMs` fields the library ignores). The two libraries genuinely fetch different files from YouTube.

@@ -40,6 +40,7 @@ I tried Mandarin candidates across seven content categories. **Zero auto-generat
 | Political / commentary | 博恩夜夜秀 (1), 于北辰 commentary (3)                            | Manual-only or TranscriptsDisabled                      |
 
 Confirmed against the web ([YouTube help](https://support.google.com/youtube/answer/6373554), Quora discussions, Sonix/HappyScribe blog posts): YouTube's auto-caption feature is officially listed as supporting "Chinese", but in practice **Mandarin auto-captions are not generated** — clicking CC on a Mandarin-only video typically shows "Subtitles/closed captions unavailable". **Cantonese**, listed separately as `yue`, *is* the variety of Chinese that YouTube ASR actually produces.
+Look at the end of [[Clarification]] for more information. 
 
 This explains the original testset finding (16 Chinese videos, 0 auto-tracks): every video in the testset is in Mandarin (zh-Hans / zh-Hant / zh-TW), none in Cantonese.
 

@@ -46,7 +46,16 @@
       "WebFetch(domain:support.google.com)",
       "WebFetch(domain:www.happyscribe.com)",
       "WebFetch(domain:sonix.ai)",
-      "WebFetch(domain:chinesecopywriter.com)"
+      "WebFetch(domain:chinesecopywriter.com)",
+      "Bash(rm -f sub_demo*.vtt sub_demo*.json3 sub_demo*.srt sub_demo*.json)",
+      "Bash(yt-dlp --skip-download --write-subs --sub-langs \"en-j3PyPqV-e1s\" --sub-format vtt -o \"sub_demo_manual\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --write-auto-subs --sub-langs \"en\" --sub-format vtt -o \"sub_demo_auto\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --write-subs --sub-langs \"en-j3PyPqV-e1s\" --sub-format json3 -o \"sub_demo_manual\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --write-auto-subs --sub-langs \"en\" --sub-format json3 -o \"sub_demo_auto\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --write-subs --sub-langs \"en-j3PyPqV-e1s\" --convert-subs srt -o \"sub_demo_manual_srt\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
+      "Bash(yt-dlp --skip-download --no-warnings -F \"https://www.bilibili.com/video/BV1T7zzBQEaA/\")",
+      "Bash(yt-dlp --skip-download --no-warnings --list-subs \"https://www.bilibili.com/video/BV1T7zzBQEaA/\")",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://api.bilibili.com/x/player/v2?bvid=BV1T7zzBQEaA&cid=35577007583\")"
     ]
   }
 }
