@@ -23,7 +23,7 @@ To learn from videos,
 	2. I often test on other videos, but I usually just randomly look for more videos, and not actually keeping a record. Having a mindset of, "oh, the more that I run the more that I would win." Yet, I don't even go look into the results because I think it's not good. We'll see if these files can be used as a comparison in the future or not. 
 5. Came up with a test set. 
 6. Worked from the beginning, starting from metadata extraction. After some research, no auto-generated subtitles can be extracted from Chinese videos. I have to decide if we have to solve this issue or not. 
-   One critical concept or goal I bare in mind when designing the extraction process is that the temporary goal is to **get a metadata & subtitle file**. It serves as a record as well as an input to the following workflow.
+   One critical concept or goal I bare in mind when designing the extraction process is that the temporary goal is to **get a metadata & subtitle file**. It serves as a record as well as an input to the following workflow. This will set a standard for video resources.
 	1. Try solving the issue
 		1. Get subtitles from bilibili - However, there would be subsequent problems
 			1. Look for the bilibili url for the youtube video - another searching step 
@@ -40,4 +40,16 @@ To learn from videos,
 		3. Test on the test set
 7. Then summarization ..........
 
+## Decision - Don't solve the issue - focus on finishing the flow
 
+So where am I right now ? Going back to the step before [[../Generate Chinese Subtitle/]], I just finished the clarification for yt-dlp and yt-api. 
+Now I have enough understanding to come up with the skill, but there is still a long way from a well written skill. 
+1. Confirm the steps for extracting metadata and subtitles. 
+	1. Decide if the extraction for metadata and subtitles should be put in the same skill. Do they share enough relevant context to be put in the same skill ?
+2. What is the seam or the format for the extracted metadata and subtitles. 
+	1. Would I look at the raw subtitles ? 
+	2. Do I need an interface to interact and manage the intermediate files ? 
+	3. What if there are too much records to keep track of, will the file become too big ? 
+3. How do I write good skills ? 
+	1. Any references or resources ? 
+	2. Should I have a file for reference so that in the future when I ask AI to generate skill, it can refer to the principles and methodology of the file ? 

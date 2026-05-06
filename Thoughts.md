@@ -1,0 +1,2 @@
+05/06
+- 我原本想說把想法都放在scratchpad裡面，但是現在我在開發的過程很多時候都把想法寫在一些file裏面，[[Learn/Dev/Extract Skill Develop/Claude/Discussion|Discussion]] 但這種時候如果要用scratchpad就必須要把這些file跟scratchpad又連在一起這部分也要想一下

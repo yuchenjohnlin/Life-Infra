@@ -1,7 +1,15 @@
 ---
 name: process-youtube
-description: Fetch transcript, segment by content, summarize each segment, score, and write to Learn/20-Processed/youtube/. Invoke on any youtube.com / youtu.be URL or when processing YouTube items from Learn/00-Inbox/inbox.md.
+description: DEPRECATED — split into `extracting-youtube` (URL → raw markdown file with metadata + transcript) and `summarize-youtube` (raw → processed markdown with segmentation, TL;DR, viewing path, score). New invocations should chain those two skills instead. Kept for audit-trail and reference; do not invoke unless explicitly asked.
 ---
+
+> [!warning] Deprecated as of 2026-05-05
+> This skill bundled four jobs (metadata, transcript fetch, segmentation+summary, inbox update) into one pipeline. Bundling hurt summary quality (extraction context became noise — see `Learn/Dev/Progress Review/2026-05-05 - Route decision after extraction.md`), so the skill was split:
+>
+> - **`extracting-youtube`** — URL → `Learn/10-Raw/youtube/<slug>-<id>.md`. Replaces sections 1–2 below.
+> - **`summarize-youtube`** — raw → `Learn/20-Processed/youtube/<slug>-<title>.md`. Replaces sections 3–8 below.
+>
+> The frontmatter schema, helper script (`make_raw.py`), and conventions below remain the source of truth and were lifted into the two new skills. This file is retained as the historical record of the original kitchen-sink pipeline.
 
 # When to use
 

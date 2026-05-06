@@ -1,0 +1,33 @@
+{
+  "skill_name": "extracting-youtube",
+  "evals": [
+    {
+      "id": 1,
+      "name": "english-with-chapters-bare-url-paste",
+      "prompt": "https://www.youtube.com/watch?v=njWyDHKYeVA",
+      "expected_output": "Skill triggers on bare URL. Produces Learn/10-Raw/youtube/google-cloud-tech-njWyDHKYeVA.md with frontmatter (language: en, is_auto_caption: false, is_translation: false, has_chapters: true, chapter_count: 6, status: raw), and body with # Chapters, # Description, # Transcript. The transcript is the manual track, not auto.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "chinese-manual-only-conversational",
+      "prompt": "Hey can you fetch the transcript and metadata for this video and add it to my learning raw folder? https://www.youtube.com/watch?v=2pM-7fBXc_M I want to read it later and run summarization on it",
+      "expected_output": "Skill triggers. Produces Learn/10-Raw/youtube/papaya-2pM-7fBXc_M.md (or similar channel-slug) with frontmatter language: zh-TW or zh-Hans, is_auto_caption: false, is_translation: false. Crucially the language picked is one of the manual tracks (zh-Hans, zh-TW), NOT a phantom auto-caption — `make_raw.py` Tier 3 should win. Skill stops after writing the raw file; does not attempt segmentation or update inbox.md.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "transcripts-disabled-graceful-halt",
+      "prompt": "process this for the inbox please https://www.youtube.com/watch?v=F9WrUwcbGPM",
+      "expected_output": "Skill triggers. yt-dlp metadata fetch succeeds. make_raw.py exits 2 (TranscriptsDisabled). Skill reports the failure to the user explicitly: video has no transcript available, Whisper STT fallback is not yet implemented, suggests skipping or revisiting later. Does NOT invent a transcript. Does NOT write any file under Learn/10-Raw/youtube/. Does NOT update inbox.md.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "should-not-trigger-bilibili",
+      "prompt": "fetch the subtitles for this https://www.bilibili.com/video/BV1darmBcE4A/",
+      "expected_output": "Skill should NOT trigger. The description explicitly scopes to youtube.com / youtu.be only. Bilibili extraction is out of scope. If Claude tries to invoke this skill anyway, the SKILL.md's failure-mode table should redirect it to halt and tell the user this skill is YouTube-only.",
+      "files": []
+    }
+  ]
+}
