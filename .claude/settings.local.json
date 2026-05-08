@@ -67,7 +67,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl -sL \"https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/yt_dlp/extractor/youtube/_video.py\")",
       "Bash(curl -sL \"https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/yt_dlp/extractor/common.py\")",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(awk 'NR==4 || NR==18 || NR==23 || NR==38 || NR==66 || NR==77 || NR==126 || NR==158 || NR==170 || NR==201 || NR==370 || NR==383' \"Learn/Dev/Extract Skill Develop/Claude/Discussion.md\")"
     ]
   }
 }
