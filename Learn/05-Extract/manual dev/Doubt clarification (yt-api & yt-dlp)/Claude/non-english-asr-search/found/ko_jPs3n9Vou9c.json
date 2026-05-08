@@ -4,7 +4,10 @@
     {
       "code": "ko",
       "name": "Korean (auto-generated)",
-      "is_generated": true
+      "is_generated": true,
+      "is_translatable": false,
+      "translation_language_count": 0,
+      "translation_languages": []
     }
   ]
 }

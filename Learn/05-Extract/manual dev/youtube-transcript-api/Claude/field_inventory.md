@@ -6,14 +6,14 @@ What `youtube-transcript-api` exposes when you call `YouTubeTranscriptApi().list
 
 The library has only two methods on the client: `list(video_id)` and `fetch(video_id, languages=...)`. `list()` returns a `TranscriptList`; iterating it yields `Transcript` objects with these attributes:
 
-| attribute | type | notes |
-|---|---|---|
-| `video_id` | str | echoed back |
-| `language_code` | str | e.g. `en`, `zh-Hans`, `zh-TW` — **already normalized** |
-| `language` | str | human-readable, e.g. `English (auto-generated)`, `Chinese (Simplified)` |
-| `is_generated` | bool | true = auto-caption, false = uploader-provided |
-| `is_translatable` | bool | whether YouTube can translate this track to other languages |
-| `translation_languages` | list of `_TranslationLanguage` | each has `.language_code`, `.language` |
+| attribute               | type                           | notes                                                                   |
+| ----------------------- | ------------------------------ | ----------------------------------------------------------------------- |
+| `video_id`              | str                            | echoed back                                                             |
+| `language_code`         | str                            | e.g. `en`, `zh-Hans`, `zh-TW` — **already normalized**                  |
+| `language`              | str                            | human-readable, e.g. `English (auto-generated)`, `Chinese (Simplified)` |
+| `is_generated`          | bool                           | true = auto-caption, false = uploader-provided                          |
+| `is_translatable`       | bool                           | whether YouTube can translate this track to other languages             |
+| `translation_languages` | list of `_TranslationLanguage` | each has `.language_code`, `.language`                                  |
 
 That's the entire metadata surface. No title, duration, channel, chapters, description, view count, upload date — none of the things `yt-dlp` provides. The library is single-purpose: list and fetch transcripts.
 

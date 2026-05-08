@@ -6,15 +6,15 @@ Originally drafted by Codex; this version replaces the speculative claims with f
 
 ## TL;DR
 
-| Question | Verified answer |
-|---|---|
-| Which library for video-level metadata (title, duration, chapters, channel, …)? | **yt-dlp** — transcript-api doesn't expose any of it. |
-| Which library for subtitle inventory? | **youtube-transcript-api** — yt-dlp's `subtitles` / `automatic_captions` fields have three documented bugs (below). |
-| Are manual and ASR tracks independent? | **Yes — both in generation and in availability.** Manual subs and ASR run on different paths. When transcript-api lists both `is_generated=True` and `is_generated=False` for the same language (3 English videos in the testset do), they are separate tracks with genuinely different content (verified by 14,960-line diff on `njWyDHKYeVA`). |
-| Why does yt-dlp show "auto-captions" for Chinese videos that actually have only manual subs? | **YouTube didn't run ASR on those videos** (most Chinese videos in the testset). yt-dlp lists the URL endpoint anyway; that endpoint silently serves the manual content. Verified by byte-identical diff on `2pM-7fBXc_M`. transcript-api correctly shows only the manual track. |
-| Why does the YouTube web player offer 157 translation targets but transcript-api reports 16? | **Two different YouTube APIs.** Player endpoint = 157 (full Google Translate). InnerTube transcript-list endpoint = 16 (curated). 16 ⊂ 157 exactly. |
-| Can transcript-api translate? | Yes, via `Transcript.translate(code).fetch()`, **but only for the 16 codes** in `translation_languages`. Anything outside raises `TranslationLanguageNotAvailable`. |
-| Pipeline rule for "no transcript at all" | Both libraries agree on the 7 testset videos with neither manual nor ASR. Use Whisper on yt-dlp-extracted audio as the universal fallback. |
+| Question                                                                                     | Verified answer                                                                                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Which library for video-level metadata (title, duration, chapters, channel, …)?              | **yt-dlp** — transcript-api doesn't expose any of it.                                                                                                                                                                                                                                                                                            |
+| Which library for subtitle inventory?                                                        | **youtube-transcript-api** — yt-dlp's `subtitles` / `automatic_captions` fields have three documented bugs (below).                                                                                                                                                                                                                              |
+| Are manual and ASR tracks independent?                                                       | **Yes — both in generation and in availability.** Manual subs and ASR run on different paths. When transcript-api lists both `is_generated=True` and `is_generated=False` for the same language (3 English videos in the testset do), they are separate tracks with genuinely different content (verified by 14,960-line diff on `njWyDHKYeVA`). |
+| Why does yt-dlp show "auto-captions" for Chinese videos that actually have only manual subs? | **YouTube didn't run ASR on those videos** (most Chinese videos in the testset). yt-dlp lists the URL endpoint anyway; that endpoint silently serves the manual content. Verified by byte-identical diff on `2pM-7fBXc_M`. transcript-api correctly shows only the manual track.                                                                 |
+| Why does the YouTube web player offer 157 translation targets but transcript-api reports 16? | **Two different YouTube APIs.** Player endpoint = 157 (full Google Translate). InnerTube transcript-list endpoint = 16 (curated). 16 ⊂ 157 exactly.                                                                                                                                                                                              |
+| Can transcript-api translate?                                                                | Yes, via `Transcript.translate(code).fetch()`, **but only for the 16 codes** in `translation_languages`. Anything outside raises `TranslationLanguageNotAvailable`.                                                                                                                                                                              |
+| Pipeline rule for "no transcript at all"                                                     | Both libraries agree on the 7 testset videos with neither manual nor ASR. Use Whisper on yt-dlp-extracted audio as the universal fallback.                                                                                                                                                                                                       |
 
 ## Foundational concept: "track" vs "translation target"
 
@@ -158,6 +158,9 @@ If you need a target outside the 16:
 - yt-dlp `--write-auto-subs --sub-langs <code>` hits the player endpoint and supports all 157.
 - Or — usually best — fetch the source-language transcript and translate locally with an LLM. LLM translation typically beats YouTube's built-in.
 
+
+## Chinese videos with subtitles can only be translated into English 
+While I was reviewing the youtube-transcript-api I found that the Chinese videos that had manually uploaded subtitles had translatable transcripts but were only translatable to English. But there are actually two exceptions in the test set : `0HIlhRl38QA` and `I0DrcsDf3Os` two Chinese videos had 18 translatable, because it had English subtitles, which were translatable to multiple other languages I think. 
 ## When YouTube auto-generates ASR — and when it doesn't
 
 YouTube auto-runs ASR whenever (a) the spoken language is in its supported list (~70 languages, including English, Spanish, French, German, Portuguese, Italian, Russian, Japanese, Korean, **Chinese**, Hindi, Arabic, Indonesian, Vietnamese, Thai), and (b) the audio passes its quality / length / clarity bar.
@@ -264,6 +267,7 @@ The strongest single piece of evidence is our own empirical probe; the third-par
 
 Treat YouTube Mandarin auto-captions as "do not rely on" regardless of whether the cause is policy, deployment gap, or audio-quality threshold. Use Bilibili AI subs (when a mirror exists), Paraformer/FunASR locally, or Whisper-via-Groq as fallbacks — see [`Generate Chinese Subtitle/`](../Generate%20Chinese%20Subtitle/) for the full evaluation.
 
+---
 ## Subtitle file formats: VTT, JSON3, and what `youtube-transcript-api` actually fetches
 
 The user noticed: yt-dlp downloads of auto-captions come back as `.vtt` with the rolling-caption effect (words appearing one at a time on screen), but `youtube-transcript-api` returns plain `(start, duration, text)` snippets with no rolling effect — even on the same auto-track. Question: does transcript-api transform the VTT into something else, or is it fetching a different file altogether?
@@ -433,3 +437,248 @@ The rolling caption effect you saw on the Karpathy video was an auto-track prope
 ### What I previously thought without testing
 
 Before running the demo above, I assumed transcript-api was just returning a parsed VTT with rolling tags stripped. Looking at the json3 directly made the picture more honest: there isn't a separate "stripping" step at all — the format YouTube serves to transcript-api already lacks the rolling-display structure (or rather, segregates it into optional `tOffsetMs` fields the library ignores). The two libraries genuinely fetch different files from YouTube.
+
+---
+
+## Addendum — transcript-api translation metadata is not YouTube's full translation capability
+
+Initial discovery: many Chinese videos with manual subtitles looked "translatable", but `youtube-transcript-api` reported only one translation target:
+
+```json
+{
+  "is_translatable": true,
+  "translation_language_count": 1,
+  "translation_languages": [
+    {
+      "language_code": "en",
+      "language": "English"
+    }
+  ]
+}
+```
+
+At first this looked Chinese-specific (the test set and results only included Chinese and English videos, see metadata folder under youtube-transcript-api/Claude): Chinese manual subtitles could only be translated to English, while English tracks had the larger transcript-api target list (roughly 16-18 languages). Later checks on Japanese, Korean, Spanish, Dutch, French, and Cantonese auto-generated tracks showed the same pattern: **non-English source tracks often expose only English (`en`) through `youtube-transcript-api`, while English source tracks expose many more target languages.**
+
+There are exceptions even inside the Chinese testset. `0HIlhRl38QA` and `I0DrcsDf3Os` have Chinese tracks with many transcript-api translation targets, likely because those videos also have English/manual multilingual subtitle metadata. So the corrected statement is not "Chinese can only translate to English." It is:
+
+> For many non-English source tracks, the transcript-api endpoint only advertises English as the translation target; English source tracks usually advertise a broader target whitelist.
+
+Second discovery: some non-English auto-generated tracks showed this in `youtube-transcript-api` metadata: Look at found folder under Doubt clarification/ Claude
+
+```json
+{
+  "is_translatable": false,
+  "translation_language_count": 0,
+  "translation_languages": []
+}
+```
+
+At first glance this looks like "YouTube cannot translate this video." That is **also not** the right interpretation.
+
+Verified examples:
+
+- `jPs3n9Vou9c` — Korean auto-generated track, transcript-api reports `is_translatable=false`, `translation_language_count=0`.
+- `zVinG10A_CM` — Cantonese auto-generated track, transcript-api reports `is_translatable=false`, `translation_language_count=0`.
+
+But checking the same videos in the YouTube player showed that translated subtitles are still available. `yt-dlp --list-subs` also exposes the broad player-side auto-translation list for them. So `translation_language_count=0` means only:
+
+> The InnerTube transcript-list endpoint used by `youtube-transcript-api` did not advertise translation targets for this track.
+
+It does **not** mean:
+
+> YouTube's player cannot auto-translate this video's captions.
+
+This gives us a clearer API split:
+
+| Question | Trust |
+|---|---|
+| Does a real manual or generated transcript track exist? | `youtube-transcript-api` |
+| Is the track manual or ASR? | `youtube-transcript-api` `is_generated` |
+| What translation targets can `Transcript.translate(code)` use? | `youtube-transcript-api` `translation_languages` |
+| What translation targets does the YouTube player expose? | yt-dlp / player captions endpoint |
+| Can YouTube UI auto-translate even when transcript-api says count 0? | Yes, sometimes |
+
+Observed pattern after re-checking the non-English generated examples:
+
+- Non-English tracks often show `translation_language_count=1` with only English (`en`) in transcript-api.
+- A smaller number show `translation_language_count=0`, but can still be translated in the YouTube web player.
+- English tracks are different: English manual or generated tracks commonly expose the larger transcript-api whitelist (roughly 16-18 targets), and the player endpoint exposes the broader ~157-language list.
+
+So there were two related misunderstandings:
+
+1. `translation_language_count=1` does not mean the video is globally limited to English translation; it only means transcript-api's endpoint advertised English as the only target for that track.
+2. `translation_language_count=0` does not mean YouTube cannot translate the video; it only means transcript-api's endpoint advertised no translation targets for that track.
+
+This does not appear to be a normal uploader-facing setting like "allow translation." YouTube Studio lets creators upload subtitles, edit/remove captions, set the video language, and manage some dubbing/translation assets, but there is no documented switch that simply turns transcript-api `translation_languages: []` into `["en"]`. It looks like an internal endpoint/product policy difference.
+
+### Pipeline implication
+
+Use `youtube-transcript-api` translation fields only for the narrow question "can this library translate this track through `Transcript.translate()`?"
+
+Do **not** use `translation_language_count=0` to mark the video as untranslatable in general. If translation is needed:
+
+1. Fetch the source transcript track with `youtube-transcript-api` when available.
+2. If using YouTube's built-in translation, use yt-dlp / player captions endpoint for the player-side target list.
+3. Otherwise translate the fetched source transcript locally with an LLM or another translation system.
+
+---
+
+## Addendum — yt-dlp `language` is useful when present, but not reliable enough alone
+
+Follow-up question: can yt-dlp's video-level `language` field be used to detect the original spoken language?
+
+Result: **sometimes, but not as the only signal.**
+
+For the non-English ASR examples in the Doubt clarification search, yt-dlp's `language` field was populated and matched the expected source language:
+
+| Video | yt-dlp `language` | Original auto-caption key |
+|---|---|---|
+| `anZyBLW9OGQ` | `yue` | `yue-orig` |
+| `kfnktRxFlFQ` | `ja` | `ja-orig` |
+| `_qLLLTgjOEA` | `ko` | `ko-orig` |
+| `_tA5cinv0U8` | `es` | `es-orig` |
+| `0frShBqt2Xc` | `nl-NL` | `nl-orig` |
+| `wThbY9Odp2I` | `fr` | `fr-orig` |
+| `p_S6NIEfu-U` | `es-US` | `es-orig` |
+| `yQLmgw3rClM` | `fr-FR` | `fr-orig` |
+| `TfL-H8goDF0` | `fr` | `fr-orig` |
+| `IEco7QIxZwc` | `ja` | `ja-orig` |
+| `dNoXtaDNWhE` | `ko` | `ko-orig` |
+| `jPs3n9Vou9c` | `ko` | `ko-orig` |
+| `zqBcMa5IGwo` | `nl` | `nl-orig` |
+| `wpuwReFEoI8` | `nl-NL` | `nl-orig` |
+| `zVinG10A_CM` | `yue` | `yue-orig` |
+
+Contrast with the Chinese manual-subtitle testset: current yt-dlp still returned `language: null` for these videos:
+
+`0HIlhRl38QA`, `kSFty4XwXS8`, `2pM-7fBXc_M`, `I0DrcsDf3Os`, `yDc0_8emz7M`, `S36ri23-l60`, `2rcJdFuNbZQ`, `R6fZR_9kmIw`, `bJFtcwLSNxI`.
+
+Those videos do have subtitle tracks, often Chinese manual subtitles, but yt-dlp's video-level `language` field is still empty. So the field appears strongest when YouTube has a native/original auto-caption track (`*-orig`) or otherwise knows the original audio language, and weakest for manual-subtitle-only Chinese videos.
+
+### Pipeline implication
+
+Use a ranked original-language inference rule:
+
+1. Prefer `youtube-transcript-api` generated track language when a real `is_generated=true` track exists.
+2. Else use yt-dlp's video-level `language` if it is non-null.
+3. Else use manual subtitle languages as weak evidence, especially when there is a single manual language.
+4. If multiple manual languages exist or yt-dlp says `language=null`, fall back to title/channel/description language detection or ASR.
+
+Do **not** rely on yt-dlp `language` alone. It correctly identifies many non-English ASR examples, but misses the Chinese manual-subtitle cases that matter for this pipeline.
+
+---
+
+## Addendum — `live_chat` under yt-dlp `subtitles` can mean livestream replay or Premiere replay
+
+Follow-up question: why does yt-dlp sometimes show `live_chat` under the `subtitles` dict for videos that are not actually livestreams?
+
+Result: **`live_chat` is a chat replay sidecar, not a subtitle/transcript track. It can come from either an actual livestream or a YouTube Premiere.**
+
+This matters because yt-dlp exposes it inside the same top-level `subtitles` dict that normally contains uploader-provided subtitle tracks. If extraction code only checks `bool(info["subtitles"])`, it can falsely mark a video as having manual subtitles.
+
+Example raw yt-dlp shape for `cVzf49yg0D8`:
+
+```json
+{
+  "id": "cVzf49yg0D8",
+  "live_status": "not_live",
+  "is_live": false,
+  "was_live": false,
+  "subtitles": {
+    "live_chat": [
+      {
+        "url": "https://www.youtube.com/watch?v=cVzf49yg0D8&bpctr=9999999999&has_verified=1",
+        "video_id": "cVzf49yg0D8",
+        "ext": "json",
+        "protocol": "youtube_live_chat_replay"
+      }
+    ]
+  }
+}
+```
+
+That video is not a livestream according to yt-dlp (`live_status: "not_live"`, `was_live: false`), but it still has a chat replay because it appears to have been published as a Premiere.
+
+Downloaded chat replay files confirmed two cases:
+
+| Video | yt-dlp live status | Chat replay system message | Interpretation |
+|---|---|---|---|
+| `CEvIs9y1uog` | `not_live`, `was_live=false` | "Messages that appeared during the Premiere will show up here." | Premiere chat replay |
+| `D7_ipDqhtwk` | `not_live`, `was_live=false` | "Messages that appeared during the Premiere will show up here." | Premiere chat replay |
+| `cVzf49yg0D8` | `not_live`, `was_live=false` | "Messages that appeared during the Premiere will show up here." | Premiere chat replay |
+| `Q3m-CKJmqMo` | `was_live`, `was_live=true` | "Messages that appeared when the stream was live will show up here." | Actual livestream replay chat |
+
+The downloaded files are newline-delimited JSON, not normal subtitle formats. They contain YouTube chat renderers such as:
+
+```json
+{
+  "replayChatItemAction": {
+    "videoOffsetTimeMsec": "18779",
+    "actions": [
+      {
+        "addChatItemAction": {
+          "item": {
+            "liveChatTextMessageRenderer": {
+              "timestampText": {
+                "simpleText": "0:18"
+              },
+              "authorName": {
+                "simpleText": "@NVIDIADeveloper"
+              },
+              "message": {
+                "runs": [
+                  {
+                    "text": "Welcome to another DGX Spark livestream"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+For the three Premiere cases, the files were tiny: 4 JSON objects each, with one system message and three chat messages. For `Q3m-CKJmqMo`, the file had 101 JSON objects: one system message, 99 chat messages, and one placeholder item.
+
+### Pipeline implication
+
+Treat `live_chat` as **non-transcript subtitle data**:
+
+```python
+NON_TRANSCRIPT_SUBTITLE_KEYS = {"live_chat"}
+
+subtitle_keys = set(info.get("subtitles", {}).keys())
+
+manual_subtitle_languages = sorted(
+    subtitle_keys - NON_TRANSCRIPT_SUBTITLE_KEYS
+)
+
+non_transcript_subtitle_keys = sorted(
+    subtitle_keys & NON_TRANSCRIPT_SUBTITLE_KEYS
+)
+```
+
+Recommended curated metadata:
+
+```json
+{
+  "manual_subtitle_languages": [],
+  "non_transcript_subtitle_keys": ["live_chat"],
+  "live_chat_replay_type": "premiere"
+}
+```
+
+or, for actual livestreams:
+
+```json
+{
+  "manual_subtitle_languages": [],
+  "non_transcript_subtitle_keys": ["live_chat"],
+  "live_chat_replay_type": "livestream"
+}
+```
+
+`live_chat_replay_type` is optional debugging metadata. It should not affect transcript extraction. For transcript availability, use `youtube-transcript-api`, which filters `live_chat` out and returns only real transcript tracks.

@@ -1,460 +1,93 @@
-# Extracting YouTube Skill Discussion
+Now I have enough understanding to come up with the skill, let's have a thorough plan by discussing with AI. 
+1. Confirm the steps for extracting metadata and subtitles. 
 
-Date: 2026-05-05
+> [!note]+ Extraction process — yt-dlp for video metadata, transcript-api for subtitles
+> The normal extraction flow should be: normalize the YouTube URL into a canonical `video_id`; use `yt-dlp` to fetch video metadata; use `youtube-transcript-api` to list transcript tracks; choose the best transcript track; fetch transcript snippets; write one durable raw record; return a typed status such as `ok`, `no_youtube_transcript`, `video_unavailable`, or `tool_missing`.
+>
+> The important division is: `yt-dlp` is for video metadata, while `youtube-transcript-api` is the authority for YouTube transcript inventory and transcript fetching. Recommended transcript priority: manual Chinese/original-language track first, generated Chinese/original-language track second, readable manual track third, readable generated track fourth, translated transcript only when useful, and ASR/Bilibili fallback outside this first normal-flow skill.
 
-Context: after clarifying `yt-dlp`, `youtube-transcript-api`, and the Chinese no-subtitle problem, the current decision is to not solve missing Chinese subtitles yet. The immediate goal is to finish the normal flow: turn a YouTube URL into a stable raw metadata + subtitle record that later skills can consume.
+   I kind of forgot about what we discussed before, let me refresh myself. And also mention some of the points that I have thought  about. 
+	1. Do I have to specify the input format ? Previously, I have always manually told AI "where" to get it. I think I don't need to specify how to understand the input format, because I think an url is enough, but I think I can mention the fact that we don't need the list or the timestamp. Yeah, even if I want AI to go through every video of a list on youtube, it would be another skill doing this, maybe a skill between inbox and the input contract. Because there are several issues about the inbox. First of all, I think I would want to see a board interface that let's me know what kind of videos I already have, with the metadata and the picture or something, and after clicking links I can go to the summarized file, like a small library interface. However, then I would need to run the skill before putting it into the inbox. Ok I won't think about this anymore. 
 
-## Short Recommendation
+> [!note]+ Input format — small contract, flexible source
+> Yes, specify a small input contract, but keep it flexible. The skill should accept either a single YouTube URL/video ID or a path to a simple batch file. For URLs, support normal `watch?v=...`, `youtu.be/...`, Shorts URLs, mobile URLs, and raw video IDs. Canonicalize away playlist/list parameters and timestamps because this skill extracts one video at a time. If later you want every video in a playlist, that should be a queue/playlist-expansion skill that feeds this extractor.
+>
+> The simplest contract is: "Input may be one YouTube URL/video ID, or a Markdown/text file containing one YouTube URL per non-empty line." Do not require manually supplied title, channel, duration, or language. Those are fetched by the extractor.
 
-Build a new `extracting-youtube` skill whose job is:
+Solution : Help me pick a flexible input format, might have to be able to be processed in batches. I don't know. Maybe this file is just too trivial too talk about that much. Just pick a simple one for me. 
 
-> Given a YouTube URL, create a durable raw YouTube record: metadata, transcript inventory, selected transcript, chapters/description, and extraction status.
+> [!note]+ Batch input — use a plain queue file
+> Pick a plain queue file. Example: `Learn/00-Inbox/youtube_queue.md`, with one URL per bullet or line. The extractor should scan the file, extract YouTube URLs, deduplicate by `video_id`, and process each URL independently. This is enough for batch use without designing a database or interface too early.
+>
+> Example input:
+>
+> ```markdown
+> - https://www.youtube.com/watch?v=VIDEO_ID_1
+> - https://youtu.be/VIDEO_ID_2
+> - VIDEO_ID_3
+> ```
 
-Keep `summarize-youtube` separate. Extraction is a data-acquisition workflow; summarization is a semantic writing workflow. They use different context and fail for different reasons.
+   Wait, but my worry makes sense right ? Let's use the [[Testset]] for example, I am able to read the test set because I manually added the title and several metadata. Now I have two options. 1. For now create a simple file that lists all of the to be fetched. 2. I don't know
 
-Keep `extracting-youtube-metadata` as either:
+> [!note]+ Testset vs production input — keep them separate
+> Your worry makes sense, but the solution should be simple for now. Keep `[[Testset]]` as an evaluation/reference file, not the production input format. For production input, create a simple queue file that only lists URLs. The extractor should create the metadata-rich raw records after it runs.
+>
+> So choose option 1: create a simple file that lists videos to fetch. The "board interface" can come later by reading the output frontmatter from raw files and building an index. Do not make the board a dependency of the extractor.
 
-- a metadata-only utility skill for testset verification, or
-- a mode/subcommand of the new extractor later.
+   2. Use yt-dlp to get metadata
+   1. How much metadata should I get  ? 
 
-Do not merge extraction and summarization back into one large `process-youtube` skill until the two smaller skills are stable.
+> [!note]+ Metadata scope — fetch full dict, persist curated fields
+> Fetch full `yt-dlp` JSON during execution, but persist only a compact selected subset into the raw markdown frontmatter/body. The extractor needs enough metadata to identify, sort, debug, and summarize the video, not every field `yt-dlp` can produce.
+>
+> Keep: `id`, `webpage_url`, `title`, `uploader`/`channel`, `channel_id`, `channel_url`, `duration`, `upload_date`, `language`, `description`, `chapters`, `thumbnail`, `availability`, `live_status`, and maybe `view_count` if you want context. Do not preserve the entire `yt-dlp` dump by default.
 
-## Question 1: Confirm The Steps For Extracting Metadata And Subtitles
+   Previously, I  thought we can use --print-json to get all of the metadata, but that is not necessary and I already confirmed. But then if we are able to fetch metadata easily with API then why do we have to store a metadata file locally. Hence, I think we can just store necessary information ? Like do we need the tags ? the tags are tagged by the video uploaders right ? for advertising ? or maybe categorizing ? but sometimes the uploader's tags don't make sense at all, I could've asked AI to do it. I just don't like it when there is so much metadata in Or should I be conservative and just keep them ? 
 
-Recommended extraction steps:
+> [!note]+ Local metadata — keep only what makes the raw record durable
+> Store necessary information, not all metadata. The reason to store local metadata is reproducibility: titles, descriptions, availability, thumbnails, and even channels can change or disappear. The local raw record is your durable snapshot for later summarization.
+>
+> For tags: do not keep them in the main frontmatter by default. Uploader tags are often noisy and can pollute your knowledge system. If you want them for debugging, keep them behind a debug flag or in a separate compact field like `uploader_tags`, but the better long-term category/tags should be generated later by your summarization or classification skill.
 
-1. Normalize the input URL.
-   - Accept `youtube.com/watch?v=...` and `youtu.be/...`.
-   - Extract canonical `video_id`.
-   - Reject Bilibili and other platforms for this skill.
+   2. We are not using yt-dlp to get subtitles since we have youtube-transcript-api. Then do we need the auto_caption_languages, has_atuo_captions, auto_caption_language_count and all that ? I think several won't be needed right ? 
 
-2. Run prerequisites.
-   - `yt-dlp` must be available for YouTube metadata.
-   - `life_infra` conda env must have `youtube-transcript-api`.
-   - If either is missing, halt with setup instructions.
+> [!note]+ yt-dlp subtitle fields — drop them from the production record
+> Correct, most `yt-dlp` subtitle/caption fields are not needed in the production raw record. Use `youtube-transcript-api` for `available_transcripts`, manual/generated status, language code, translatability, and selected transcript.
+>
+> You can ignore `auto_caption_languages`, `has_auto_captions`, `auto_caption_language_count`, and similar `yt-dlp` caption fields unless you are debugging a mismatch between tools. In the final artifact, keep transcript inventory from `youtube-transcript-api`, not duplicate caption inventory from `yt-dlp`.
 
-3. Fetch structural metadata with `yt-dlp`.
-   - Use `yt-dlp --skip-download --print-json`.
-   - Keep title, uploader, channel id/url if available, duration, upload date, language, chapters, description, availability flags.
-   - Use `yt-dlp` as the source of truth for video structure, not transcript selection.
+   3. Should we keep the downloaded metadata file ? Isn't this just a duplicate ? Personally, I don't want to keep them because when the number of files become very large, it would be hard to remove, but also hard to add. What do you think ? If we don't keep should we ask AI to delete this to cleanup storage, if they are stored in /tmp? 
 
-4. List transcript tracks with `youtube-transcript-api`.
-   - Use `YouTubeTranscriptApi().list(video_id)`.
-   - Record manual vs generated through `is_generated`.
-   - Record `language_code`, `language`, `is_translatable`, and translation targets if needed.
-   - Treat this as the source of truth for YouTube transcript inventory.
+> [!note]+ Intermediate metadata file — do not keep it by default
+> Do not keep the full downloaded `yt-dlp` metadata file by default. Treat it as an execution detail. The durable artifact should be the raw markdown record, with compact frontmatter plus transcript/description/chapters in the body.
+>
+> If the script needs a temporary JSON file, put it in `/tmp` or a run-specific temp directory and delete it automatically. The skill should not ask the AI/user to clean it up each time. Add an optional debug mode later if you want to preserve raw `yt-dlp` JSON for failed cases.
 
-5. Choose the transcript.
-   - Prefer original-language manual subtitles.
-   - Then original-language auto captions.
-   - Then any directly readable manual subtitle in fluent languages.
-   - Then any directly readable auto caption in fluent languages.
-   - Translate only when the original language is not readable and translation is available.
-   - If no transcript exists, do not try to solve it here. Emit a clear `no_youtube_transcript` status.
+   4. I don't know the rate-limit for youtube but can we do batch fetches ? and is this needed ? Pros and cons ? Maybe a small system for my personal use doesn't need this ? 
 
-6. Fetch transcript snippets.
-   - Use `transcript.fetch()` from `youtube-transcript-api`.
-   - Preserve snippet-level `start`, `duration`, and `text` in a structured artifact or internal JSON.
-   - Write a readable grouped transcript into the raw markdown file.
+> [!note]+ Batch fetching — sequential loop is enough
+> Yes, batch fetching is useful, but keep it conservative. For personal use, implement batch mode as sequential processing with optional small delays and resume behavior. Do not start with high concurrency.
+>
+> Pros: you can process a queue, recover from partial progress, and avoid manual repeated prompts. Cons: YouTube may throttle, failures become more varied, and large batches need status tracking. The practical first version should process one video at a time, but allow a queue file so the same code can loop over many URLs safely.
 
-7. Write the raw record.
-   - One raw markdown file per video.
-   - Include frontmatter, chapters, description, and transcript.
-   - The file should be directly usable by `summarize-youtube`.
+   5. After getting the data should we write to the raw file immediately ? I don't know if this actually matters. Maybe this doesn't matter at all. If it was in computer architecture, then I will definitely store immediately, but in case of prompt engineering I don't know. I don't know how agents do this. Wait but I think it's the python script file that does this. Ok then I guess it doesn't matter. 
 
-8. Return or log the extraction result.
-   - `ok`, `no_youtube_transcript`, `video_unavailable`, `blocked`, `private_or_age_restricted`, `tool_missing`, etc.
-   - The skill should distinguish failure modes instead of collapsing them into "failed".
+> [!note]+ Write timing — write one completed video at a time
+> For a single video, gather metadata, transcript inventory, selected transcript, and extraction status first, then write one complete raw file atomically. For a batch, write each video's raw file as soon as that video finishes so progress is not lost if the batch stops midway.
+>
+> This should be handled by the helper script, not by the LLM improvising file writes. Use a temporary output path and rename it into place after the file is complete. That avoids half-written raw records.
 
-## Should Metadata And Subtitles Be In The Same Skill?
-
-Yes, for the production extraction skill.
-
-They share enough context because subtitle selection depends on metadata:
-
-- `video_id` is needed by both.
-- original language affects transcript choice.
-- chapters and description are needed later to interpret noisy auto captions.
-- output filename and frontmatter depend on title/uploader/video id.
-- failure handling should happen once, so the system can decide whether the video is processable.
-
-The clean boundary is not "metadata skill" vs "subtitle skill". The clean boundary is:
-
-| Layer | Responsibility |
-|---|---|
-| `extracting-youtube` skill | Orchestrate the workflow and produce a raw record |
-| helper script | Deterministically fetch metadata/transcripts and write files |
-| `summarize-youtube` skill | Read an existing raw record and write a human-readable note |
-
-So metadata and subtitles belong in the same extraction skill, but the code inside the skill should still have separate functions for metadata fetch, transcript listing, transcript choice, transcript fetch, and file writing.
-
-## Question 2: What Is The Seam Or Format For Extracted Metadata And Subtitles?
-
-There should be two seams:
-
-1. Script-to-skill seam: structured JSON.
-2. Extraction-to-summarization seam: raw markdown.
-
-The script should be testable without an LLM. It should be able to emit a structured extraction result like:
-
-```json
-{
-  "schema_version": "youtube_extraction_v1",
-  "status": "ok",
-  "video_id": "zjkBMFhNj_g",
-  "source_url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
-  "metadata": {
-    "title": "...",
-    "uploader": "...",
-    "duration_seconds": 4567,
-    "language": "en",
-    "has_chapters": true,
-    "chapter_count": 21,
-    "chapters_in_description": false,
-    "has_description": true
-  },
-  "available_transcripts": [
-    {
-      "language_code": "en",
-      "type": "auto",
-      "is_translatable": true
-    }
-  ],
-  "chosen_transcript": {
-    "language_code": "en",
-    "type": "auto",
-    "is_translation": false
-  },
-  "output_file": "Learn/10-Raw/youtube/karpathy-zjkBMFhNj_g.md"
-}
-```
-
-The markdown file should be the stable long-term artifact:
-
-```markdown
----
-schema_version: youtube_raw_v1
-source_url: https://www.youtube.com/watch?v=<video_id>
-source_type: youtube
-title: "<title>"
-author: <uploader>
-channel_slug: <channel-slug>
-video_id: <video_id>
-captured_at: <YYYY-MM-DD>
-duration_seconds: <int>
-source_language: <best-effort original language>
-transcript_language: <language actually used>
-is_auto_caption: <bool>
-is_translation: <bool>
-transcript_status: ok
-available_transcripts:
-  - language_code: <code>
-    type: <manual | auto>
-has_chapters: <bool>
-chapter_count: <int>
-chapters_in_description: <bool>
-has_description: <bool>
-status: raw
 ---
 
-# Chapters
-
-- 00:00:00 Intro
-
-# Description
-
-<verbatim description, when useful>
-
-# Transcript
-
-[00:00:00] grouped transcript text...
-```
-
-Do not put the full transcript or full chapter list into frontmatter. Frontmatter should stay indexable metadata. The body should hold human-readable source material.
-
-## Would I Look At The Raw Subtitles?
-
-Usually, no.
-
-The raw transcript is mainly:
-
-- an audit trail,
-- a stable input for summarization,
-- a searchable record for later re-processing,
-- a debugging artifact when the processed note seems wrong.
-
-You will sometimes inspect it when:
-
-- transcript language selection looks wrong,
-- auto-caption errors are affecting the summary,
-- timestamps or chapters do not align,
-- the model's summary seems unsupported by the source.
-
-So the raw file should be readable, but not optimized as the main reading experience. The main reading experience is the processed summary/walkthrough.
-
-If using `youtube-transcript-api`, there is no need to preserve raw VTT by default. Keep snippet timestamps and grouped transcript text. If later you use `yt-dlp --write-auto-subs`, then VTT should be treated as a temporary or debug artifact, because auto-caption VTT requires dedup/cleanup before it is useful.
-
-## Do I Need An Interface To Interact With Intermediate Files?
-
-Not yet.
-
-The first interface should be the filesystem convention:
-
-- `Learn/10-Raw/youtube/` for one raw record per video.
-- `Learn/20-Processed/youtube/` for the processed note.
-- `Learn/00-Inbox/inbox.md` or `Testset.md` for queue/status.
-- Optional generated `_index.md` later if browsing becomes painful.
-
-Avoid building a UI now. It will slow the flow before the data contract is stable.
-
-The minimum useful management layer is:
-
-- consistent filenames,
-- clear frontmatter,
-- extraction status fields,
-- a testset with expected categories,
-- one command to batch extract and report mismatches.
-
-Only build an interface after repeated friction appears, for example:
-
-- you have many dozens of raw records,
-- you need filtering by language/status/channel/content type,
-- you frequently re-run extraction after changing transcript policy,
-- you cannot tell which files are stale or failed.
-
-At that point, a generated index or small local dashboard is justified. Before that, it is premature.
-
-## What If There Are Too Many Records Or A File Becomes Too Big?
-
-Use one file per video. Do not append every extraction into one giant markdown file.
-
-Recommended layout:
-
-```text
-Learn/10-Raw/youtube/
-  karpathy-zjkBMFhNj_g.md
-  hung-yi-lee-2rcJdFuNbZQ.md
-  _artifacts/
-    zjkBMFhNj_g.extraction.json
-    zjkBMFhNj_g.transcript.json
-```
-
-The markdown file is the durable human/LLM input. Optional artifacts are for debugging and regression tests.
-
-For now, only the markdown file is required. Add `_artifacts/` when the extractor needs test fixtures or when you want to compare transcript-selection behavior across versions.
-
-Avoid a single JSONL database until there is a real query need. Obsidian-style markdown plus frontmatter is enough for the current learning workflow.
-
-## Question 3: How Do I Write Good Skills?
-
-A good skill is not a long prompt. It is a repeatable operational procedure with clear boundaries.
-
-Principles:
-
-1. One skill should do one workflow.
-   - `extracting-youtube`: create raw record.
-   - `summarize-youtube`: create processed learning note from raw record.
-   - `generate-chinese-subtitle`: future ASR fallback.
-
-2. The description must say both what it does and when to use it.
-   - This matters because skills are loaded by matching the user request against the description.
-
-3. The skill should define inputs, outputs, halt cases, and success criteria.
-   - A future agent should know when to continue, skip, or ask the user.
-
-4. The skill should orchestrate; deterministic logic should live in scripts.
-   - Transcript selection, timestamp formatting, JSON parsing, slug generation, and markdown writing should be script behavior.
-   - The skill tells the agent what to run and how to reason about results.
-
-5. Keep the skill body short enough to load often.
-   - Put long schemas, examples, and rationale in `references/`.
-   - Put runnable code in scripts.
-   - Put example outputs in `examples/`.
-
-6. Include failure policy explicitly.
-   - "No transcript" is not the same as "video unavailable".
-   - "Chinese video with no captions" should be a contained unsupported case, not a reason to redesign the whole flow.
-
-7. Include a verification section.
-   - Run on the fixed testset.
-   - Compare expected language/chapter/subtitle labels.
-   - Confirm raw file exists and frontmatter parses.
-   - Confirm `summarize-youtube` can consume the output.
-
-8. Avoid invisible product decisions.
-   - If the skill leaves novelty score to the user, say that.
-   - If it does not use Bilibili or ASR yet, say that.
-   - If it keeps raw transcript verbatim and only normalizes in processed notes, say that.
-
-## References And Resources
-
-Useful external references:
-
-- Claude custom skills docs: https://claude.com/docs/skills/how-to
-- Claude Code skills docs: https://code.claude.com/docs/en/skills
-- Claude skill authoring best practices: https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices
-- `youtube-transcript-api` PyPI docs: https://pypi.org/project/youtube-transcript-api/
-- `yt-dlp` README subtitle options: https://github.com/yt-dlp/yt-dlp/blob/master/README.md
-- Addy Osmani `agent-skills` repo, useful as a skill-structure reference: https://github.com/addyosmani/agent-skills
-
-Useful local references:
-
-- `Learn/.claude/skills/process-youtube/SKILL.md`
-- `Learn/.claude/skills/process-youtube/make_raw.py`
-- `Learn/.claude/skills/extracting-youtube-metadata/SKILL.md`
-- `Learn/.claude/skills/extracting-youtube-metadata/extract.py`
-- `Learn/.claude/skills/summarize-youtube/SKILL.md`
-- `Learn/Dev/Youtube/Karpathy Case Study/Deep Dive into youtube video extraction and summarization.md`
-
-## Should There Be A Reference File For Future AI?
-
-Yes.
-
-The skill should have a reference file, but the reference file should not replace `SKILL.md`.
-
-Recommended structure:
-
-```text
-Learn/.claude/skills/extracting-youtube/
-  SKILL.md
-  extract.py
-  references/
-    schema.md
-    transcript-policy.md
-    failure-policy.md
-  examples/
-    raw-ok.md
-    extraction-no-transcript.json
-```
-
-`SKILL.md` should contain only the workflow and links:
-
-- when to use,
-- prerequisites,
-- commands,
-- decision points,
-- output path,
-- verification,
-- failure handling.
-
-`references/schema.md` should define the raw markdown frontmatter and extraction JSON schema.
-
-`references/transcript-policy.md` should explain transcript choice:
-
-- manual vs auto,
-- original language vs translation,
-- fluent languages,
-- Chinese no-subtitle status,
-- why Bilibili/ASR is out of scope for phase 1.
-
-`references/failure-policy.md` should define:
-
-- skip,
-- halt,
-- retry,
-- ask user,
-- mark as pending,
-- unsupported for now.
-
-This gives future agents stable methodology without bloating the active skill.
-
-## Development Plan
-
-### Phase 1: Freeze The Contract
-
-- Decide the canonical raw filename pattern.
-- Decide the raw markdown schema version: `youtube_raw_v1`.
-- Decide the extraction JSON schema version: `youtube_extraction_v1`.
-- Decide status values: `ok`, `no_youtube_transcript`, `video_unavailable`, `blocked`, `private_or_age_restricted`, `tool_missing`, `unexpected_error`.
-- Decide transcript policy and write it down before coding more.
-
-Deliverable: `references/schema.md` and `references/transcript-policy.md`.
-
-### Phase 2: Create The New Skill Skeleton
-
-- Create `Learn/.claude/skills/extracting-youtube/`.
-- Add `SKILL.md` with a narrow description:
-  - use for creating raw YouTube metadata + transcript records,
-  - not for summarization,
-  - not for Bilibili,
-  - not for ASR fallback yet.
-- Add references and examples folders.
-
-Deliverable: first usable `SKILL.md`.
-
-### Phase 3: Consolidate The Extractor Script
-
-- Reuse logic from `extracting-youtube-metadata/extract.py`.
-- Reuse proven raw-writing logic from `process-youtube/make_raw.py`.
-- Remove duplicated transcript-selection logic where possible.
-- Add modes:
-  - single URL to JSON,
-  - single URL to raw markdown,
-  - batch URLs to JSONL/status report.
-- Make no-transcript a normal status, not a crash.
-
-Deliverable: `extract.py` that can produce both extraction JSON and raw markdown.
-
-### Phase 4: Test Against The Fixed Testset
-
-Run the extractor against the planned test categories:
-
-- English with manual subtitles.
-- English with auto captions only.
-- Chinese with manual subtitles.
-- Chinese with auto captions if available.
-- Chinese with no YouTube transcript.
-- Videos with YouTube chapters.
-- Videos with chapters only in description.
-- Videos with no chapters.
-- Long podcast or lecture.
-
-For each item, verify:
-
-- language,
-- duration,
-- chapter status,
-- available transcript inventory,
-- selected transcript,
-- raw file output,
-- failure status when unsupported.
-
-Deliverable: test report with mismatches and extractor changes.
-
-### Phase 5: Connect To `summarize-youtube`
-
-- Confirm `summarize-youtube` can read the raw file without extra context.
-- Confirm the raw body order is enough: frontmatter, chapters, description, transcript.
-- Run one successful raw file through summarization.
-- Do not optimize summary quality in this phase unless the raw schema blocks it.
-
-Deliverable: one end-to-end YouTube URL -> raw file -> processed note.
-
-### Phase 6: Decide What Happens To Older Skills
-
-After the new extraction skill works:
-
-- Keep `extracting-youtube-metadata` if it is still useful for testset classification.
-- Otherwise deprecate it by pointing to `extracting-youtube --metadata-only`.
-- Keep `process-youtube` as a high-level wrapper only if it adds value.
-- Prefer explicit smaller skills until the flow is stable.
-
-Deliverable: skill map showing current responsibilities.
-
-### Phase 7: Defer Chinese Subtitle Fallback
-
-Record unsupported cases cleanly:
-
-- `transcript_status: no_youtube_transcript`
-- `fallback_candidates: ["asr_phase_2"]`
-- optional note: `bilibili_not_attempted`
-
-Do not build Bilibili or ASR into the extraction skill yet. When ready, make ASR a separate fallback skill that starts from a raw extraction failure record.
-
-Deliverable: contained failure record, not solved fallback.
-
-## Final Position
-
-The next best move is not to improve Chinese fallback. It is to make YouTube extraction boring and reliable.
-
-The extraction skill should produce the same kind of raw record every time, including when it cannot fetch subtitles. Once this seam is stable, summarization, rating, inbox automation, and future ASR fallback can be developed independently.
+   1. Use youtube-transcript-api to get metadata about subtitle and make decision 
+   1. I forgot the structure 
+
+
+   2. Decide if the extraction for metadata and subtitles should be put in the same skill. Do they share enough relevant context to be put in the same skill ? Yes.
+3. What is the seam or the format for the extracted metadata and subtitles. 
+	1. Would I look at the raw subtitles ? 
+	2. Do I need an interface to interact and manage the intermediate files ? 
+	3. What if there are too much records to keep track of, will the file become too big ? 
+4. How do I write good skills ? 
+	1. Any references or resources ? 
+	2. Should I have a file for reference so that in the future when I ask AI to generate skill, it can refer to the principles and methodology of the file ? 

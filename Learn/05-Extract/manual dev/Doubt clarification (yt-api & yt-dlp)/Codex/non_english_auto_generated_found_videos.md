@@ -35,14 +35,26 @@ Chinese note: the accepted Chinese-family result is Cantonese (`yue`), not Manda
         "language": "Cantonese (Hong Kong)",
         "is_generated": false,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       },
       {
         "language_code": "yue",
         "language": "Cantonese (auto-generated)",
         "is_generated": true,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       }
     ],
     "tested_before_accept": 208,
@@ -66,7 +78,13 @@ Chinese note: the accepted Chinese-family result is Cantonese (`yue`), not Manda
         "language": "Japanese (auto-generated)",
         "is_generated": true,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       }
     ],
     "tested_before_accept": 1
@@ -89,14 +107,26 @@ Chinese note: the accepted Chinese-family result is Cantonese (`yue`), not Manda
         "language": "Korean - ko",
         "is_generated": false,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       },
       {
         "language_code": "ko",
         "language": "Korean (auto-generated)",
         "is_generated": true,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       }
     ],
     "tested_before_accept": 1
@@ -119,7 +149,13 @@ Chinese note: the accepted Chinese-family result is Cantonese (`yue`), not Manda
         "language": "Spanish (auto-generated)",
         "is_generated": true,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       }
     ],
     "tested_before_accept": 1
@@ -142,7 +178,13 @@ Chinese note: the accepted Chinese-family result is Cantonese (`yue`), not Manda
         "language": "Dutch (auto-generated)",
         "is_generated": true,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       }
     ],
     "tested_before_accept": 2
@@ -165,7 +207,13 @@ Chinese note: the accepted Chinese-family result is Cantonese (`yue`), not Manda
         "language": "French (auto-generated)",
         "is_generated": true,
         "is_translatable": true,
-        "translation_language_count": 1
+        "translation_language_count": 1,
+        "translation_languages": [
+          {
+            "language_code": "en",
+            "language": "English"
+          }
+        ]
       }
     ],
     "tested_before_accept": 1

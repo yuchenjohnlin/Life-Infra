@@ -49,13 +49,13 @@ No model tokenizer is installed in this local environment. Token counts below ar
 
 ## Biggest Raw Metadata Records
 
-| Rank | Video ID | Title | Raw JSON est. tokens | Description chars | Format count | Auto-caption languages |
-|---:|---|---|---:|---:|---:|---:|
-| 1 | `njWyDHKYeVA` | Self host Gemma 4: Deploy LLMs on Cloud Run GPUs | 254,702 | 1,487 | 141 | 157 |
-| 2 | `96jN2OCOfLs` | Andrej Karpathy: From Vibe Coding to Agentic Engineering | 247,334 | 989 | 141 | 157 |
-| 3 | `Q3m-CKJmqMo` | DGX Spark Live:  Ask the Experts - Gemma 4 on DGX Spark | 226,449 | 461 | 111 | 157 |
-| 4 | `CEvIs9y1uog` | Don't Build Agents, Build Skills Instead – Barry Zhang & Mahesh Murag, | 223,509 | 775 | 111 | 157 |
-| 5 | `rmvDxxNubIg` | No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Hor | 222,433 | 2,391 | 111 | 157 |
+| Rank | Video ID      | Title                                                                  | Raw JSON est. tokens | Description chars | Format count | Auto-caption languages |
+| ---: | ------------- | ---------------------------------------------------------------------- | -------------------: | ----------------: | -----------: | ---------------------: |
+|    1 | `njWyDHKYeVA` | Self host Gemma 4: Deploy LLMs on Cloud Run GPUs                       |              254,702 |             1,487 |          141 |                    157 |
+|    2 | `96jN2OCOfLs` | Andrej Karpathy: From Vibe Coding to Agentic Engineering               |              247,334 |               989 |          141 |                    157 |
+|    3 | `Q3m-CKJmqMo` | DGX Spark Live:  Ask the Experts - Gemma 4 on DGX Spark                |              226,449 |               461 |          111 |                    157 |
+|    4 | `CEvIs9y1uog` | Don't Build Agents, Build Skills Instead – Barry Zhang & Mahesh Murag, |              223,509 |               775 |          111 |                    157 |
+|    5 | `rmvDxxNubIg` | No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Hor |              222,433 |             2,391 |          111 |                    157 |
 
 ## Metadata Worth Storing
 

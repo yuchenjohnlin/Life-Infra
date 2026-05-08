@@ -4,12 +4,28 @@
     {
       "code": "nl",
       "name": "Dutch",
-      "is_generated": false
+      "is_generated": false,
+      "is_translatable": true,
+      "translation_language_count": 1,
+      "translation_languages": [
+        {
+          "language_code": "en",
+          "language": "English"
+        }
+      ]
     },
     {
       "code": "nl",
       "name": "Dutch (auto-generated)",
-      "is_generated": true
+      "is_generated": true,
+      "is_translatable": true,
+      "translation_language_count": 1,
+      "translation_languages": [
+        {
+          "language_code": "en",
+          "language": "English"
+        }
+      ]
     }
   ]
 }
