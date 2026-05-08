@@ -55,7 +55,19 @@
       "Bash(yt-dlp --skip-download --write-subs --sub-langs \"en-j3PyPqV-e1s\" --convert-subs srt -o \"sub_demo_manual_srt\" \"https://www.youtube.com/watch?v=njWyDHKYeVA\")",
       "Bash(yt-dlp --skip-download --no-warnings -F \"https://www.bilibili.com/video/BV1T7zzBQEaA/\")",
       "Bash(yt-dlp --skip-download --no-warnings --list-subs \"https://www.bilibili.com/video/BV1T7zzBQEaA/\")",
-      "Bash(curl -s -A \"Mozilla/5.0\" \"https://api.bilibili.com/x/player/v2?bvid=BV1T7zzBQEaA&cid=35577007583\")"
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://api.bilibili.com/x/player/v2?bvid=BV1T7zzBQEaA&cid=35577007583\")",
+      "WebFetch(domain:www.youtube.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.youtube.com/watch?v=cVzf49yg0D8\" -o /tmp/yt_cVzf49yg0D8.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.youtube.com/watch?v=4gciWspBVHw\" -o /tmp/yt_4gciWspBVHw.html)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.youtube.com/watch?v=I0DrcsDf3Os\" -o /tmp/yt_I0DrcsDf3Os.html)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.youtube.com/watch?v=tfLTHCpPsSY\" -o /tmp/yt_tfLTHCpPsSY.html)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.youtube.com/watch?v=YFjfBk8HI5o\" -o /tmp/yt_YFjfBk8HI5o.html)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/yt_dlp/extractor/youtube/_video.py\")",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/yt_dlp/extractor/common.py\")",
+      "Bash(git checkout *)"
     ]
   }
 }
