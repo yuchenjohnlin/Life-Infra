@@ -1,0 +1,47 @@
+{
+  "list_errors": [
+    {
+      "input_index": 13,
+      "video_id": "F9WrUwcbGPM",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=F9WrUwcbGPM! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "input_index": 14,
+      "video_id": "hZ6fSjPGQWM",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=hZ6fSjPGQWM! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "input_index": 18,
+      "video_id": "4gciWspBVHw",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=4gciWspBVHw! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "input_index": 19,
+      "video_id": "tfLTHCpPsSY",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=tfLTHCpPsSY! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "input_index": 21,
+      "video_id": "Vk-Zbrrzo3A",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=Vk-Zbrrzo3A! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "input_index": 22,
+      "video_id": "8NGznVwNHGY",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=8NGznVwNHGY! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    },
+    {
+      "input_index": 24,
+      "video_id": "Xq-s_hAjADw",
+      "error_type": "TranscriptsDisabled",
+      "error": "\nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=Xq-s_hAjADw! This is most likely caused by:\n\nSubtitles are disabled for this video\n\nIf you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!"
+    }
+  ],
+  "fetch_errors": []
+}

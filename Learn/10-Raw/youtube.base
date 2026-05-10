@@ -1,0 +1,109 @@
+filters:
+  and:
+    - file.inFolder("Learn/10-Raw/youtube")
+    - file.name != "_template"
+formulas:
+  duration_min: floor(note.duration / 60)
+  yt_url: '"https://www.youtube.com/watch?v=" + note.id'
+properties:
+  note.title:
+    displayName: Title
+  note.channel:
+    displayName: Channel
+  note.duration:
+    displayName: Duration (s)
+  note.upload_date:
+    displayName: Uploaded
+  note.language:
+    displayName: yt-dlp lang
+  note.original_language:
+    displayName: Detected lang
+  note.transcript_status:
+    displayName: Transcript
+  note.transcript_source:
+    displayName: Source track
+  note.is_translated:
+    displayName: Translated
+  note.chapters_authoritative:
+    displayName: Real chapters
+  note.view_count:
+    displayName: Views
+  note.like_count:
+    displayName: Likes
+  note.state:
+    displayName: State
+  note.thumbnail:
+    displayName: Thumbnail
+views:
+  - type: table
+    name: All videos
+    filters:
+      and:
+        - note.state != "archived"
+    order:
+      - file.name
+      - title
+      - channel
+      - formula.duration_min
+      - upload_date
+      - original_language
+      - transcript_status
+      - chapters_authoritative
+      - view_count
+    sort:
+      - property: upload_date
+        direction: DESC
+  - type: table
+    name: Failed / unavailable transcripts
+    filters:
+      and:
+        - note.transcript_status != "available"
+    order:
+      - file.name
+      - title
+      - channel
+      - transcript_status
+      - manual_track_languages
+      - auto_track_languages
+  - type: table
+    name: Chinese videos
+    filters:
+      and:
+        - note.original_language == "zh"
+    order:
+      - file.name
+      - title
+      - channel
+      - original_language
+      - transcript_source
+      - is_translated
+  - type: table
+    name: Authoritative chapters only
+    filters:
+      and:
+        - note.chapters_authoritative == true
+    order:
+      - file.name
+      - title
+      - channel
+      - formula.duration_min
+  - type: cards
+    name: Browse by thumbnail
+    order:
+      - title
+      - channel
+      - formula.duration_min
+    sort:
+      - property: upload_date
+        direction: DESC
+    image: note.thumbnail
+  - type: table
+    name: Archived
+    filters:
+      and:
+        - note.state == "archived"
+    order:
+      - file.name
+      - title
+      - channel
+      - upload_date
