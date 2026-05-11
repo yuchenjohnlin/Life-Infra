@@ -1121,4 +1121,5 @@ Now I have enough understanding to come up with the skill, let's have a thorough
 
 Don't need to reply the below questions. 
 4. Any references or resources ? 
-   1. Should I have a file for reference so that in the future when I ask AI to generate skill, it can refer to the principles and methodology of the file ? 
+   5. Should I have a file for reference so that in the future when I ask AI to generate skill, it can refer to the principles and methodology of the file ? 
+
