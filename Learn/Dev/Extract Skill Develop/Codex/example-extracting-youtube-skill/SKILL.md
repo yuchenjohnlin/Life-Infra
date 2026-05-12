@@ -1,9 +1,6 @@
 ---
 name: extracting-youtube-reference
-description: >
-  Fetches YouTube metadata and transcript tracks, then writes one raw markdown record for later summarization.
-  Use when the user gives a YouTube URL, raw video ID, or a markdown/text queue file and wants a durable raw note under Learn/10-Raw/youtube.
-  This reference skill demonstrates configurable input, output, environment checks, scripts, and assets for skill authoring.
+description: Fetches YouTube metadata and transcript tracks, then writes one raw markdown record for later summarization. Use when the user gives a YouTube URL, raw video ID, or a markdown/text queue file and wants a durable raw note under Learn/10-Raw/youtube. This reference skill demonstrates configurable input, output, environment checks, scripts, and assets for skill authoring.
 ---
 
 # Extracting YouTube Reference

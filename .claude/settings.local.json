@@ -68,7 +68,14 @@
       "Bash(curl -sL \"https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/yt_dlp/extractor/youtube/_video.py\")",
       "Bash(curl -sL \"https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/yt_dlp/extractor/common.py\")",
       "Bash(git checkout *)",
-      "Bash(awk 'NR==4 || NR==18 || NR==23 || NR==38 || NR==66 || NR==77 || NR==126 || NR==158 || NR==170 || NR==201 || NR==370 || NR==383' \"Learn/Dev/Extract Skill Develop/Claude/Discussion.md\")"
+      "Bash(awk 'NR==4 || NR==18 || NR==23 || NR==38 || NR==66 || NR==77 || NR==126 || NR==158 || NR==170 || NR==201 || NR==370 || NR==383' \"Learn/Dev/Extract Skill Develop/Claude/Discussion.md\")",
+      "Bash(~/anaconda3/envs/life_infra/bin/pip install *)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python -c \"import yt_dlp; print\\('yt_dlp:', yt_dlp.version.__version__\\)\")",
+      "Bash(mkdir -p /tmp/yt-smoke)",
+      "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'https://www.youtube.com/watch?v=YFjfBk8HI5o' --output-dir /tmp/yt-smoke)",
+      "Bash(mkdir -p /tmp/yt-testrun)",
+      "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'Learn/05-Extract/manual dev/yt-dlp/Claude/urls.md' --output-dir /tmp/yt-testrun --sleep 0.5)",
+      "Bash(echo \"exit=$?\")"
     ]
   }
 }
