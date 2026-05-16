@@ -1,6 +1,6 @@
 ---
 name: extracting-youtube-content
-description: Fetch a YouTube video's metadata and transcript and write a single raw markdown file at Learn/10-Raw/youtube/<video_id>.md, conformant to Learn/10-Raw/youtube/_template.md. Invoke whenever the user provides a youtube.com / youtu.be URL, asks to "fetch the transcript", "extract this video", or asks to extract YouTube items from Learn/00-Inbox/inbox.md. Accepts either a single URL or a file path containing URLs; greps URLs via regex internally. Stops after writing the raw file — segmentation and summarization belong to `summarize-youtube`. For metadata-only batch classification (no transcript fetch), use `extracting-youtube-metadata`. Bilibili and other non-YouTube sources are out of scope.
+description: Fetch a YouTube video's metadata and transcript and write a single raw markdown file at Learn/10-Raw/youtube/<video_id>.md, conformant to Learn/10-Raw/youtube/_template.md. Invoke whenever the user provides a youtube.com / youtu.be URL, asks to "fetch the transcript", "extract this video", or asks to extract YouTube items from Learn/00-Inbox/inbox.md. Accepts either a single URL or a file path containing URLs; greps URLs via regex internally. Stops after writing the raw file — segmentation and summarization belong to `summarize-youtube`. Bilibili and other non-YouTube sources are out of scope.
 ---
 
 # When to use
@@ -12,7 +12,6 @@ description: Fetch a YouTube video's metadata and transcript and write a single 
 
 - Bilibili / Niconico / other non-YouTube sources — the script will skip them with a warning.
 - Summarization or segmentation — that's `summarize-youtube`'s job; this skill stops after writing the raw file.
-- Metadata-only batch classification without fetching transcripts — use `extracting-youtube-metadata`.
 
 # Input
 
@@ -24,7 +23,7 @@ Query suffixes (`&t=`, `&list=`, `&index=`) are stripped. Bilibili and non-YouTu
 # Output
 
 - One markdown file per video at `Learn/10-Raw/youtube/<video_id>.md`.
-- Front-matter schema and body layout: see [`Learn/10-Raw/youtube/_template.md`](../../../10-Raw/youtube/_template.md). ~26 fields covering identity, creator, time, visual, content structure (`chapters` + `chapters_authoritative`), language, subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, status, lifecycle. Body has `## Description` and `## Transcript` sections.
+- Front-matter schema and body layout: see [`assets/_template.md`](assets/_template.md). ~26 fields covering identity, creator, time, visual, content structure (`chapters` + `chapters_authoritative`), language, subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, status, lifecycle. Body has `## Description` and `## Transcript` sections.
 - Re-running is idempotent: existing files are skipped unless `--force`.
 
 # Prereq check
@@ -74,5 +73,3 @@ The script prints a JSON summary line per video to stdout (`{vid, transcript_sta
 # Stop here
 
 Segmentation, summarization, inbox updates → `summarize-youtube`.
-
-Design decisions and rationale: see [Discussion.md](../../../Dev/Extract%20Skill%20Develop/Claude/Discussion.md).
