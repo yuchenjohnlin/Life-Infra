@@ -1,39 +1,30 @@
 ---
-# === identity ===
 id: 0HIlhRl38QA
-url: "https://www.youtube.com/watch?v=0HIlhRl38QA"
+url: https://www.youtube.com/watch?v=0HIlhRl38QA
 title: 一位程序员安装了300个Skill，这是他的大脑发生的变化
 aliases:
   - 一位程序员安装了300个Skill，这是他的大脑发生的变化
-
-# === creator ===
 channel: Peter Pang
-channel_url: "https://www.youtube.com/channel/UCdyIYolHVk-vx4EK_Su6C6w"
+channel_url: https://www.youtube.com/channel/UCdyIYolHVk-vx4EK_Su6C6w
 channel_follower_count: 54800
-
-# === time ===
 duration: 391
 upload_date: 20260122
-fetched_at: "2026-05-16T07:58:03+00:00"
-
-# === visual ===
-thumbnail: "https://i.ytimg.com/vi/0HIlhRl38QA/maxresdefault.jpg"
-
-# === content structure ===
+fetched_at: 2026-05-16T07:58:03+00:00
+thumbnail: https://i.ytimg.com/vi/0HIlhRl38QA/maxresdefault.jpg
 chapters:
-  - {start: 0, title: Agent Skill}
-  - {start: 87, title: Back to Software Engineering}
-  - {start: 181, title: Skill 300}
-  - {start: 317, title: Skill Pro Max Plus}
+  - start: 0
+    title: Agent Skill
+  - start: 87
+    title: Back to Software Engineering
+  - start: 181
+    title: Skill 300
+  - start: 317
+    title: Skill Pro Max Plus
 chapters_authoritative: true
 has_real_chapters: true
 has_key_moments: false
-
-# === language ===
-language: null
+language:
 original_language: zh
-
-# === subtitles ===
 manual_track_languages:
   - zh
   - en-US
@@ -41,18 +32,12 @@ manual_track_languages:
 auto_track_languages: []
 transcript_status: available
 transcript_source: manual_zh
-transcript_target: null
+transcript_target:
 is_translated: false
-
-# === engagement ===
 view_count: 39621
 like_count: 1062
-
-# === status ===
 availability: public
 live_status: not_live
-
-# === lifecycle ===
 state: active
 ---
 

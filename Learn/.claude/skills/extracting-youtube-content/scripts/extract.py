@@ -365,11 +365,21 @@ def _snippet_text(snip: Any) -> str:
     return snip.text if hasattr(snip, "text") else snip.get("text", "")
 
 
-def build_paragraphs(snippets: list[Any]) -> str:
-    """Join snippets into clean prose paragraphs. No VTT timing tags. No bracket timestamps.
+def _format_timestamp(seconds: float) -> str:
+    """Format seconds as `HH:MM:SS` (e.g. 195.7s → `00:03:15`)."""
+    secs = int(seconds)
+    h, rem = divmod(secs, 3600)
+    m, s = divmod(rem, 60)
+    return f"{h:02d}:{m:02d}:{s:02d}"
 
-    Heuristic: start a new paragraph after a long pause (~3s) between adjacent snippets, OR
-    when accumulated text reaches ~400 chars. Avoids one giant blob and one-line-per-snippet.
+
+def build_paragraphs(snippets: list[Any]) -> str:
+    """Join snippets into prose paragraphs, prefixed with `[HH:MM:SS]` per paragraph.
+
+    Paragraph boundary heuristic: new paragraph after a long pause (~3s) OR when
+    accumulated text reaches ~400 chars. Each paragraph carries the start timestamp
+    of its first snippet so the summarizer can produce time-anchored sections even
+    for videos with no chapters.
     """
     if not snippets:
         return ""
@@ -377,6 +387,7 @@ def build_paragraphs(snippets: list[Any]) -> str:
     current: list[str] = []
     current_len = 0
     last_end = 0.0
+    para_start: float | None = None  # start time of the first snippet in `current`
     for snip in snippets:
         text = _snippet_text(snip).strip()
         if not text:
@@ -385,14 +396,19 @@ def build_paragraphs(snippets: list[Any]) -> str:
         dur = float(snip.duration if hasattr(snip, "duration") else snip.get("duration", 0.0))
         pause = start - last_end
         if current and (pause >= 3.0 or current_len >= 400):
-            paragraphs.append(" ".join(current))
+            stamp = _format_timestamp(para_start if para_start is not None else 0.0)
+            paragraphs.append(f"[{stamp}] " + " ".join(current))
             current = []
             current_len = 0
+            para_start = None
+        if para_start is None:
+            para_start = start
         current.append(text)
         current_len += len(text) + 1
         last_end = start + dur
     if current:
-        paragraphs.append(" ".join(current))
+        stamp = _format_timestamp(para_start if para_start is not None else 0.0)
+        paragraphs.append(f"[{stamp}] " + " ".join(current))
     return "\n\n".join(paragraphs)
 
 
