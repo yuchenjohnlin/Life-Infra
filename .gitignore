@@ -17,3 +17,6 @@ env/
 
 # Local-only scratch
 /tmp_local/
+
+# Claude Code worktrees (local-only; never commit)
+.claude/worktrees/
