@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: Silicon Valley Vector 硅谷坐标
 channel_url: "https://www.youtube.com/channel/UCsiOlr6emY5OxXF848EYqGw"
-channel_follower_count: 18700
+channel_follower_count: 18400
 
 # === time ===
 duration: 3710
 upload_date: 20260306
-fetched_at: "2026-05-17T08:20:17+00:00"
+fetched_at: "2026-05-16T07:58:16+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/tfLTHCpPsSY/maxresdefault.jpg"
@@ -49,8 +49,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 64256
-like_count: 1068
+view_count: 63616
+like_count: 1060
 
 # === status ===
 availability: public

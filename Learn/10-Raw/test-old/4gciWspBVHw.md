@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: 技术爬爬虾  TechShrimp
 channel_url: "https://www.youtube.com/channel/UCa6D2k5qhpOI9I-WT8fpd6g"
-channel_follower_count: 114000
+channel_follower_count: 113000
 
 # === time ===
 duration: 2292
 upload_date: 20260428
-fetched_at: "2026-05-17T08:20:13+00:00"
+fetched_at: "2026-05-16T07:58:13+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/4gciWspBVHw/maxresdefault.jpg"
@@ -51,8 +51,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 133631
-like_count: 3528
+view_count: 128936
+like_count: 3426
 
 # === status ===
 availability: public

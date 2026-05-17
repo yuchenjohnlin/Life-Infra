@@ -14,7 +14,7 @@ channel_follower_count: 1370000
 # === time ===
 duration: 2882
 upload_date: 20260418
-fetched_at: "2026-05-17T08:19:16+00:00"
+fetched_at: "2026-05-16T07:57:20+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/njWyDHKYeVA/maxresdefault.jpg"
@@ -46,8 +46,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 10558
-like_count: 391
+view_count: 10521
+like_count: 390
 
 # === status ===
 availability: public
@@ -102,7 +102,7 @@ Products Mentioned: Agent Development Kit, Gemini API, Cloud Run
 
 ## Transcript
 
-[00:00:00] ANNIE WANG: Hi, everyone. Welcome to Hands-on AI where
+ANNIE WANG: Hi, everyone. Welcome to Hands-on AI where
 we walk you through AI lab step by step. I'm Annie. AYO ADEDEJI: And I'm Ayo. ANNIE WANG: And
 today, you're going to learn how to deploy Gemma
 4 model with Ollama or VM to Cloud Run. And essentially, you can connect
@@ -110,7 +110,7 @@ your agentic system to Gemma 4. But before we dive into in this
 architecture on the screen, let's take a step
 back to understanding
 
-[00:00:26] this end-to-end agent
+this end-to-end agent
 system management. So Ayo, why don't you start to
 explain the cost and capacity for [INAUDIBLE]. AYO ADEDEJI: Oh, yes,
 so as you mentioned, so throughout this
@@ -120,7 +120,7 @@ different considerations that go into that. There's cost and
 capacity considerations. So how do you optimize
 your resources,
 
-[00:00:45] such as GPUs, when you're
+such as GPUs, when you're
 deploying self-hosted models? Model strategy, when
 do you select open versus closed models
 for your use cases? Serving at scale,
@@ -131,7 +131,7 @@ the pillars we're going to be covering as
 part of this lab, and yeah. ANNIE WANG: Yeah,
 so before we go
 
-[00:01:10] through how to
+through how to
 deploy Gemma 4, we need to understand the
 difference between closed model and open model. Closed model like
 Gemini, it's great. It's state-of-art. It's fully managed,
@@ -141,7 +141,7 @@ Gemma 4 today, right? Why would you want
 to use open model IO? AYO ADEDEJI: Yeah,
 you mentioned, you
 
-[00:01:32] just talked about a lot of
+just talked about a lot of
 the pros of using open models. A lot of industries, such
 as healthcare or finance, they're working in
 industries where you may not be able to pass data
@@ -151,7 +151,7 @@ to call these models on premise or in isolated scenarios,
 running self-hosted models is a really good
 solution for that.
 
-[00:01:55] As you mentioned, you
+As you mentioned, you
 can customize the model. So a lot of use cases have
 very domain-specific data, where you can improve
 performance by tuning. And you can do that
@@ -162,7 +162,7 @@ general, but you may not be able to customize it
 as much beyond tuning-- I mean, beyond prompting
 and system instructions
 
-[00:02:20] of that nature. So those are the benefits
+of that nature. So those are the benefits
 of using open models. ANNIE WANG: Yeah, and cost is
 also another consideration. You can take a look
 at this diagram that the more you use,
@@ -172,7 +172,7 @@ using open model, like Gemma, the cost is not linear growth
 because it's based on the infra. AYO ADEDEJI: Yeah. ANNIE WANG: So coming back
 to this model strategy--
 
-[00:02:52] AYO ADEDEJI: Yeah, there's
+AYO ADEDEJI: Yeah, there's
 many dimensions to consider. We talked about a few of
 them, but those are just the ones to keep in mind. But beyond that, it's
 also important to know that the reason why we're
@@ -182,7 +182,7 @@ behind your agents. So when you're using something
 like Google's Agent Development Kit, not only could
 you use Gemini
 
-[00:03:12] as the brain behind
+as the brain behind
 these agents, you can use open models as well. So that's something that people
 sometimes they don't know. They think you can
 only use Gemini. But in reality, you
@@ -192,7 +192,7 @@ allows you to connect models as you see fit. So later on in this
 lab, we're going to learn how can you use Gemma
 4 as the brain behind an agent.
 
-[00:03:34] ANNIE WANG: Yeah, so
+ANNIE WANG: Yeah, so
 essentially, agent is that you're using
 the model as a brain, and then to reasoning, to
 pick which two you want to pick to make a decision. And as you can see
@@ -201,7 +201,7 @@ model you're choosing really can determine the upper bound,
 the capability of your agent system. That's why it's very important. And you want to be smart
 to choose your model.
 
-[00:03:58] And when you choose
+And when you choose
 the model, you can think about the performance
 of the model, the use case you want, and also the cost. You have different angle
 to pick your model smartly. And so this is the
@@ -210,7 +210,7 @@ this right-hand side, we're going to start
 with this Runtime. So today, we will deploy Gemma
 4 model, this service, vLLM and Ollama.
 
-[00:04:27] But yeah, why we have
+But yeah, why we have
 this two different way? What is the real difference
 between Ollama and vLLM? AYO ADEDEJI: Yeah, they're
 both LLM serving frameworks. But you tend to see Ollama used
@@ -220,7 +220,7 @@ experimental POCs. And you can also use it for
 multi-GPU support use cases. vLLM is great for
 production use cases.
 
-[00:04:49] It comes with Paged
+It comes with Paged
 Attention, it's great for memory
 efficiency, and it allows you to do multiple
 concurrency when it comes to calls and dynamic batching. So again, so Ollama is great
@@ -229,7 +229,7 @@ serving frameworks, as well, like TensorRT-LLM and such. So there's a lot of opt
 to choose from in the world. But for this lab, we're
 focusing on Ollama and vLLM.
 
-[00:05:14] ANNIE WANG: And
+ANNIE WANG: And
 don't forget, you can also deploy a model to
 Vertex AI through Model Garden. That's also another choice. It's a managed service for you. Yeah, so Ollama is
 very easy to install. And it's very good
@@ -238,7 +238,7 @@ started with Ollama. So as you can see from this
 diagram, what we want to do is we want to first pull
 the model from Ollama.
 
-[00:05:40] And then we want to build
+And then we want to build
 this image with Docker. So once we have
 this image, we're going to send it to the
 Artifact Registry, which is a container on Cloud. And you can essentially
@@ -248,7 +248,7 @@ how your agentic system agent is going to connect
 to your deployed Gemma 4. And if you're interested, let's
 start by going through this lab.
 
-[00:06:07] So we will have this link
+So we will have this link
 on the screen about what is this lab link about. But as usual, Ayo,
 usually we want to start with the equipment
 check with the credit. But today, we're going
@@ -257,7 +257,7 @@ credits because this lab does require GPU, such as when
 we're deploying to Cloud Run, we will be equipping
 our Cloud Run instances with L4 accelerators and such.
 
-[00:06:33] Because of that, we won't be
+Because of that, we won't be
 giving credits for this lab. But please feel free
 to follow along. You could use your own credit
 accounts if you have them, or you can sign up for free
@@ -267,7 +267,7 @@ free to follow along. ANNIE WANG: As always, we
 want to start our development in Cloud Shell on Google Cloud. To open that, making sure you
 go to console.cloud.google.com.
 
-[00:07:00] And on the top right
+And on the top right
 there's a button. It's saying to
 Activate Cloud Shell. Just click that,
 and you will see this VS is similar to our
@@ -277,7 +277,7 @@ as you mentioned, so the Cloud Shell
 editor is essentially like a VS Code on Cloud. It's persistent over time. So any code that you develop
 or files that you create,
 
-[00:07:31] you can come back to
+you can come back to
 it a day, a week later. So please feel free to use it
 as your development environment. That's actually what we're going
 to be doing for today's lab. ANNIE WANG: Yeah, but one
@@ -287,7 +287,7 @@ error for IP address missing or some weird
 issue, or [INAUDIBLE] asking you to re
 authenticate it,
 
-[00:07:51] and just making sure
+and just making sure
 to refresh the page to refresh the token so that
 it will keep you authenticated. And to get start, let's
 just set up our environment so that we are ready to deploy
@@ -296,7 +296,7 @@ copy this [INAUDIBLE] code. Also, I'm going to zoom in. I'm going to copy this a
 then paste it to my terminal. So you can see this terminal. And I paste it so that making
 sure this Gmail account
 
-[00:08:21] is the same account you have
+is the same account you have
 your billing account connected. And next, we need to
 clone this to repo. We'll clone those to repo. And one is the
 agentverse-dungeon and another one is the
@@ -306,7 +306,7 @@ our previous episodes? They don't know about
 the agentverse concept. AYO ADEDEJI: Yeah, so we're
 cloning two different repos.
 
-[00:08:48] The first one
+The first one
 agentverse-devopssre, that one has all the template
 files for the agent we're going to be deploying later
 on, the cloudbuild.yaml scripts that we're going to be using for
@@ -316,7 +316,7 @@ and running a lot quicker. The dungeon repo has
 essentially the boss dungeon and files that we're
 using for the boss fight
 
-[00:09:15] later on in the lab. So once we build our
+later on in the lab. So once we build our
 agent, essentially, we're going to be building
 up to a boss fight, where our agent is
 fighting with another agent in the cloud via A2A. So that one just has files
@@ -325,7 +325,7 @@ time we get to that point, our boss fight is ready to go. ANNIE WANG: Yeah, let'
 back to this setup page. And next, you need to initialize
 a new project so that you have
 
-[00:09:41] a Google Cloud project ready. And you can see that you always
+a Google Cloud project ready. And you can see that you always
 start with agentverse-guardian. You may have a
 different number here. Essentially, the script is
 creating a Google Cloud project for you. And it's trying to link the
@@ -334,7 +334,7 @@ this full setup complete. But for you, if you're
 running the script, you'll probably notice that when
 you fetch the billing account,
 
-[00:10:08] it has a fetch failure. That because it's looking
+it has a fetch failure. That because it's looking
 for a trial account. So what you can do is if
 you happen to have a billing account with your credit
 card linked to it, this is where you
@@ -343,7 +343,7 @@ console.cloud.google.com. And then in the search bar-- so
 I just click this Search icon in the search bar. I will search resources. So when I type resources,
 I have something
 
-[00:10:36] called Manage Resources. So when I open the
+called Manage Resources. So when I open the
 Manage Resources, this is where you can
 manage all your projects and its corresponding
 billing account. So you can select this
@@ -353,7 +353,7 @@ attached to my account. For your case, you'll
 probably see a pop-up window to see manage
 billing, And you can
 
-[00:11:01] select the billing that has
+select the billing that has
 your payment information linked to it. Next is, as always, we want
 to Gcloud config set project. And why we need to
 configure the project? AYO ADEDEJI: Yeah. We're just making
@@ -363,7 +363,7 @@ Cloud Shell, you want to make sure that you
 see your project ID in yellow. And beyond that, you
 also want to make sure
 
-[00:11:25] that again, the Gcloud is
+that again, the Gcloud is
 set to the right project. So what we just
 did was making sure that the Gcloud is set to
 the right project, which should match your Agentverse
@@ -374,7 +374,7 @@ including the storage. API platform-specific
 storage is, essentially, you want to store
 your-- later on, moving to vLLM,
 
-[00:11:56] we want to store our model
+we want to store our model
 in Google Cloud Storage. And we want to
 deploy to Cloud Run. We want to enable Cloud
 Build, and we also want to have Artifact
@@ -384,7 +384,7 @@ Secret Manager. Yeah. Anything you want
 to mention, Ayo? AYO ADEDEJI: Yeah. So only thing I would
 add is that just
 
-[00:12:21] by enabling these
+by enabling these
 APIs does not mean you're going to be charged
 immediately for these APIs. Essentially, you're
 just enabling them to be used in the project. A lot of people ask, if
@@ -393,7 +393,7 @@ example, will I start being charged by the second? No, you won't. You're only go
 when you actually use the API. So that's just one
 thing to keep in mind. ANNIE WANG: Yeah.
 
-[00:12:43] And it's coming back to this. Yeah. So now, we successfully
+And it's coming back to this. Yeah. So now, we successfully
 finish enabling. And next is, we need to create
 this artifact repository so that later on, we can
 deploy our image to it. So coming back to
@@ -402,7 +402,7 @@ from Ollama and build the image and later, deploy this
 to image repository. Yeah. I don't know why we want
 to have this design.
 
-[00:13:16] Is there any other
+Is there any other
 way we can do? AYO ADEDEJI: No, this
 is just best practice when it comes to CI in
 context of Google Cloud, where essentially,
@@ -413,7 +413,7 @@ is the build process that we're going to be enabling
 with Cloud Build that allows us to programmatically specify
 each of these steps,
 
-[00:13:36] and then we can go ahead and
+and then we can go ahead and
 just execute that Cloud Build YAML file. So you can see that later
 on, once we get to that step. ANNIE WANG: Yeah. And also, you can see that
 the model, essentially, we directly build it
@@ -423,7 +423,7 @@ soon in our lab. Yeah. So now, we have this repo,
 artifact repository created. And next one is set
 up the permission.
 
-[00:14:08] I don't know, what
+I don't know, what
 is service account? Why we need to grant this
 role to the service account? AYO ADEDEJI: Yeah,
 great question. So every Google Cloud project
@@ -433,7 +433,7 @@ files to Cloud Storage or executing a Cloud
 Build deployment, you want to make sure that
 default service account has
 
-[00:14:31] certain permissions. So that's pretty much
+certain permissions. So that's pretty much
 all we're doing here. We're making sure that the
 default service account has the ability to interact
 with Cloud Storage, has the ability to
@@ -443,7 +443,7 @@ with Secret Manager, which we're going to be using
 later on for storing our Hugging Face Secret Manager key. So as Annie just
 mentioned, for Ollama,
 
-[00:14:54] we're going to be
+we're going to be
 baking in the model directly into the
 container image. But when we actually
 use VLM, we're going to be doing a
@@ -454,7 +454,7 @@ approaches that are being enabled through
 this IAM permissioning. ANNIE WANG: Now, one
 metaphor I can think of
 
-[00:15:14] is, you can think of
+is, you can think of
 service kind of a robot-- [LAUGHS] AYO ADEDEJI: Yeah. ANNIE WANG: --of yourself. And then you have different
 robots controlling different permissions, and so
 that you can manage the project permission. And here, we're using the
@@ -462,7 +462,7 @@ same account for easy demo. But in production, you can
 have different robot account and different service account
 for different permission configuration.
 
-[00:15:37] And the last step is to warm up. We need to run this warm
+And the last step is to warm up. We need to run this warm
 up, the [INAUDIBLE] script. So essentially, we want to
 essentially using GCS fields for our VLM deployment. We want to run this
 warm-up script here to warm up our GCS fields cache. And if you want to
@@ -470,7 +470,7 @@ know, what is GCS FUSE and why we want to
 use that, stay tuned. We will talk about
 it in VLM deployment. AYO ADEDEJI: Yes.
 
-[00:16:08] ANNIE WANG: Now, it's finished. Let's start host
+ANNIE WANG: Now, it's finished. Let's start host
 our Java for Ollama. Let's get started. All right, so let's get started. So first, we want to pull
 the image from Ollama. As I mentioned
 earlier, you know, Ollama is great for
@@ -478,7 +478,7 @@ local development, and it's great for quickly
 testing any model because Gemma 4 is baked in Ollama. And you can see, it's very easy. First, we want to create this
 Dockerfile build the image.
 
-[00:16:36] And with only this
+And with only this
 line of the code, you just need to run Ollama and
 pull this Gemma 4 from Ollama. So now, you can just have
 this model from Ollama. So it's very straightforward. And just copy this, and
@@ -487,7 +487,7 @@ a Dockerfile folder. And what's next is
 we want to create this cloudbuild.yaml file. So Ayo, maybe you can explain,
 what is cloudbuild.yaml file,
 
-[00:17:12] before we explain what are
+before we explain what are
 inside the cloudbuild.yaml file? AYO ADEDEJI: Yeah. So as mentioned
 before, Cloud Build is essentially the engine
 for CI/CD on Google Cloud. So essentially, it allows you to
@@ -496,7 +496,7 @@ we're doing here is we just created
 the Dockerfile that defines our container image. Now, we're going to build
 the container image.
 
-[00:17:34] In step one. We're going to push the
+In step one. We're going to push the
 container image to Artifact Registry in step two. And then we're going to deploy
 that container image to Cloud Run in step number three. So that's all we're specifying
 here in the Cloud Build YAML file. ANNIE WANG: Yeah. So basically, it's
@@ -505,7 +505,7 @@ steps you need to do, and exactly we're
 showing on this diagram. So we just did is we have
 this Dockerfile to explain
 
-[00:17:58] how to pull this image. So you want to build
+how to pull this image. So you want to build
 this image and then push to Artifact Registry,
 and deploy the image. It's like a blueprint file to
 including all this process we want to have over here. And let's just copy this, and
@@ -514,7 +514,7 @@ set the CPU to before, and why we want to build
 a concurrency to before? For auto setting,
 anything we need
 
-[00:18:28] to be aware of when we're trying
+to be aware of when we're trying
 to deploy our image to Cloud Run? AYO ADEDEJI: Yeah. Cloud Run is a really
 powerful serverless platform. It gives us a lot of
 configuration capability. So as you can see here, we're
@@ -522,7 +522,7 @@ specifying 4 CPU minimum for each machine of the service. We're specifying memor
 at least 16 gigabytes, which is really important if we're
 going to be storing Ollama or Gemma 4 model on the image.
 
-[00:18:53] You have to have a lot
+You have to have a lot
 of memory capacity. So we're working with a
 2D version of Gemma 4. So 16 gigabytes is
 sufficient memory for that. So that's why we're
@@ -533,7 +533,7 @@ to four parallel calls against the service. And yeah. So again, Cloud Run gives
 us a lot of configuration capabilities, and
 we're just trying
 
-[00:19:19] to optimize for how we're going
+to optimize for how we're going
 to be using it in the lab. As you can see at the
 bottom, we have Min instances equals 1, Max
 instances equal to 1. That's not going to be
@@ -543,7 +543,7 @@ you're not allocating more GPUs than you need, we're kind
 of just minimizing it to one machine per
 service for this lab. ANNIE WANG: Yeah.
 
-[00:19:40] Also, we have this allow
+Also, we have this allow
 unauthenticated for this lab purpose, but you can
 make it authenticated for security reason, for
 your actual image deployment. All right. So next one is, we want--
@@ -552,7 +552,7 @@ follow this blueprint in the cloudbuild.yaml file,
 and then finish this process with Cloud Build. So just copy this. Basically, you put this Cloud
 Build YAML file in the config
 
-[00:20:10] file, and then do the
+file, and then do the
 setting with the region and the repo name
 Project ID you have. And let's just go ahead
 and go to our terminal, and go ahead to deploy
@@ -562,7 +562,7 @@ Console in the Cloud Build to see the process. So now, you can see that we just
 finished the environment setup. And now, we're waiting
 for the build to complete.
 
-[00:20:39] It's trying to pull
+It's trying to pull
 in the interval. So it's basically
 following the process, trying to first build
 the image, this Docker. AYO ADEDEJI: Yeah. And keep in mind, this
@@ -572,7 +572,7 @@ long things take. So feel free to take a coffee
 break and grab some coffee. But yeah, we'll be back once
 our Cloud Build job completes.
 
-[00:21:08] ANNIE WANG: Yay! It finished! Finally. And as you can see, that we
+ANNIE WANG: Yay! It finished! Finally. And as you can see, that we
 can go to Google Cloud Console to also see the process, let
 you research Cloud Build. We can see the process
 we just had earlier. And yeah, this is
@@ -581,7 +581,7 @@ we have two building processes. One is for Dungeon. Another one is for
 this deployment. You can also see, this image is
 [INAUDIBLE] deploy to Cloud Run.
 
-[00:21:44] So let's just go to
+So let's just go to
 Cloud Run, making sure that on the top left, it's
 selecting the project. And go to the Gemma Ollama
 baked service, and here we go. We have this URL that later on,
@@ -591,7 +591,7 @@ to verify this is working by sending it the POST request. So here, basically, wh
 you want to do is this step. You know? This Ollama URL, this step
 is to try to grab that URL.
 
-[00:22:13] You can also grab this
+You can also grab this
 URL just by copy this. But here, this is a command
 for you to grab this URL. And once you have
 this URL, you're trying to test this URL
@@ -601,10 +601,10 @@ is behind the scenes, you want this Gemma 4 model
 answering this question. And let's see, what
 is the response?
 
-[00:22:38] I'm just going to copy this
+I'm just going to copy this
 and paste it to the terminal.
 
-[00:22:45] Time to verify if
+Time to verify if
 everything is working. AYO ADEDEJI: Yes. And now, all it's doing is
 resetting the environmental variables because we're running
 that set_env.sh file each time, just to make sure that
@@ -614,7 +614,7 @@ lab, we're setting that set_env multiple
 times at the very top. So that's the reason why it
 takes a little bit longer
 
-[00:23:08] for each step. But it's just important
+for each step. But it's just important
 to run, just in case you lose any context. And then, yeah, it's going to
 print out the Cloud Run URL. And then we're going
 to call the URL and see if we can get a
@@ -623,7 +623,7 @@ you can send a POST request. We are expected to see a
 response look like this. But maybe you're not exactly
 the same response here,
 
-[00:23:34] because AI cannot generate the
+because AI cannot generate the
 same result every single time. But oh, let's see. This is a result. Oh, wow. OK. Here-- oh, yeah. The context. Oh. Here's the result.
 This is the response. As a Guardian of the
 Agentverse, the primary duty is this-- safeguard
@@ -631,7 +631,7 @@ because of the Agentverse representing reality. Yeah. Great. So that means the G
 on Cloud Run with Ollama is working. All right. So Ayo, you know that
 we are using a Ollama,
 
-[00:24:07] and it's really
+and it's really
 easy to get started, and it's really easy to use. And we have this model baking,
 so that we have really fast code start. You do not have to start waiting
 for it to load in the model, and to have the initial
@@ -640,7 +640,7 @@ disadvantages, right? So Ayo, what are
 some disadvantages with this Ollama use case? AYO ADEDEJI: Oh, yeah. So since we're baking in
 the model into the image,
 
-[00:24:31] as you mentioned, it leads
+as you mentioned, it leads
 to very fast code starts because the fact that the
 image is already deployed, essentially, if
 you want to create a new version of or new instance
@@ -649,7 +649,7 @@ we're only limited to 1. But if we were, it would
 be really easy to spin up more instances for the service. But the downside to that
 is because we're baking it
 
-[00:24:51] into the container image, if
+into the container image, if
 you want to change the model version or the
 parameters of the model, so you want to go from 2 B to a
 larger version of the same model to a different model, you have
@@ -658,7 +658,7 @@ these images can take some time. So as mentioned before, it's
 really good for development use cases. Oftentimes, when you're
 running these models locally,
 
-[00:25:16] you may want to use Ollama. But if you're baking it
+you may want to use Ollama. But if you're baking it
 into the container image, it can be pretty inflexible
 when it comes to rapid changes. But of course, when you're using
 something like Cloud Build, you can automate the
@@ -668,14 +668,14 @@ worth mentioning is if your production use
 case serve huge traffic and you want to improve
 the performance, that
 
-[00:25:42] is where you should really
+is where you should really
 consider using vLLM. And different from Ollama-- Ollama has a model baked in. But here, you want to grab
 the model from Hugging Face, and save that to Cloud Storage. And then, this process
 is a little bit similar where we have this model. The Ci pipeline is
 kind of similar. You want to build the image. But this image does
 not contain the model. It only contain the vLLM code.
 
-[00:26:10] And then once you
+And then once you
 save that, push that to the image repository, and
 then deploy them to Cloud Run. And now, you can see that
 the container image is tiny because you only have vLLM code. And then the Gemma is going
@@ -684,7 +684,7 @@ Cloud Storage FUSE to mount the bucket as a local folder. So anything you change
 local folder will reflect it. Ayo, can you explain more
 about Cloud Storage FUSE?
 
-[00:26:37] AYO ADEDEJI: Yeah. So Cloud Storage
+AYO ADEDEJI: Yeah. So Cloud Storage
 FUSE is a great way of representing Cloud
 Storage folders and paths as local paths for your machine
 for the Cloud Run service, and that's what makes
@@ -695,7 +695,7 @@ can actually access GCS files the same way
 that it would access local files, temp files that are
 running directly on the machine.
 
-[00:27:02] So Cloud Storage
+So Cloud Storage
 uses, essentially, what mediates that connection
 between the Cloud Storage bucket and it being mounted as
 a local folder for access directly on the
@@ -705,7 +705,7 @@ it really powerful is that not only could you read
 from that local folder that's been mounted the same way
 that you would read from a GCS
 
-[00:27:28] bucket, any files that you
+bucket, any files that you
 write to that local folder is almost as if you're writing
 to that GCS bucket as well, for persistence down the line. ANNIE WANG: So it's
 bidirectional sync. AYO ADEDEJI: Yeah,
@@ -714,7 +714,7 @@ going to save the model to Cloud Storage, and how to go
 through all the Ci pipeline, and set up that
 Cloud Storage FUSE.
 
-[00:27:52] Let's get to step five. All right. Let's get started by
+Let's get to step five. All right. Let's get started by
 first, download this model from Hugging Face, and then
 save that to Cloud Storage. So let's get started. And what you need
 to do is first, you need to go to step five. And when you're scrolling
@@ -723,7 +723,7 @@ Hugging Face account, you can just create
 an account over here, or you can Create
 Account over here.
 
-[00:28:19] If you already have it,
+If you already have it,
 you can just click Login. And now, you're in
 this page to log in. And what's next is you
 need to click on this link to generate a token. So now, I'm at this page. I'm going to click,
@@ -732,7 +732,7 @@ Agentverse workshop token as a name, or any name you want. So just copy here for
 Agentverse workshop name. When it comes to the permission,
 you can just use the Read rule.
 
-[00:28:48] So we can choose Read for this
+So we can choose Read for this
 use case, and create a token. And now, you have
 this token ready. I just copy this to save it. So yeah, next
 thing we want to do is we want to run this
@@ -742,7 +742,7 @@ terminal, I will paste it. So first, we want to
 enable this script, and then we want
 to run the script.
 
-[00:29:14] Essentially, behind
+Essentially, behind
 the scenes is we want to save the
 token to Secret Manager. And Ayo, do you know
 what Secret Manager? Might you explain to everyone
@@ -751,7 +751,7 @@ essentially, it's eponymous. It speaks for its name. It's our best practice way
 for managing secret API keys in Google Cloud context. So if you're working in a
 Google Cloud environment,
 
-[00:29:40] rather than you storing your API
+rather than you storing your API
 keys as environmental variables or sometimes, really
 not good practices to embed it directly
 into the file, what you can do with something
@@ -761,7 +761,7 @@ actually pull the secret during your actual runtime
 into your application. So it's a way of preventing
 you from having to actually
 
-[00:30:04] make visible your secrets
+make visible your secrets
 directly in the code, or having to store it
 in environmental file. That adds more data governance
 issues because now, you have to start managing
@@ -770,7 +770,7 @@ get pushed to your code version in repo, and stuff like that. So overall, Secret
 is the best practice way for storing and managing
 your application secrets. ANNIE WANG: All right.
 
-[00:30:26] So now, if you're
+So now, if you're
 coming back, it's asked you to paste your
 Hugging Face token. So what we want to
 do is we just want to copy the token here
@@ -781,7 +781,7 @@ can update the token. And once it's finished, you
 will see the token saved in Secret Manager in Google
 Cloud Console, over here.
 
-[00:30:58] All right. It says, success. And we can double
+All right. It says, success. And we can double
 check by refresh it. And yeah, we have
 this token created, and we have this one version. And if you want
 to see the value, you can also see
@@ -792,7 +792,7 @@ model from Hugging Face, and we have this token
 saved to Secret Manager. What's next is you want to save
 this model to Cloud Storage.
 
-[00:31:31] So how to do that? First, you need to create
+So how to do that? First, you need to create
 this Gcloud Storage bucket using this command
 to create a Cloud Storage. And next is, you're making
 sure the permission is ready. So I'm just copy this
@@ -801,7 +801,7 @@ save my model to Cloud Storage. Yeah. Now, I finished,
 so we can verify it by go to Google Cloud Storage. Store, Cloud Storage. You can Search Cloud storage
 here, and making sure
 
-[00:32:07] we select Agentverse. And here in the
+we select Agentverse. And here in the
 bucket, as you can see, we have two Cloud Storage ready. So this is the latest one,
 because we have the previous one for our Dungeon deployment. And yeah, we have this
 Guardians storage ready, and then we can
@@ -810,7 +810,7 @@ Cloud Build YAML file again. What does this file do? AYO ADEDEJI: Yeah,
 great question. So what we're doing
 here is essentially,
 
-[00:32:43] we're not going to go
+we're not going to go
 through the Cloud Build process of actually
 specifying the model that we want to download,
 checking if the bucket exists. So that's step number one. We want to make sure that we've
@@ -819,7 +819,7 @@ its environmental variable. That's all going to be true. Two, we actually now wa
 to download, actually, from Hugging Face. So we're specifying
 the model that we want
 
-[00:33:02] to download based off the ID. We're pip installing the
+to download based off the ID. We're pip installing the
 Hugging Face hub library. We're authenticating
 with the token that we downloaded and saved
 as part of Secret Manager. And then we're
@@ -830,7 +830,7 @@ on in the setup, we did the warm up for
 the GCS FUSE cache. We're specifying the
 model ID, and then
 
-[00:33:27] ultimately, just copying
+ultimately, just copying
 that model to the GCS bucket. Yeah. ANNIE WANG: Great. So let's go ahead and create
 this Cloud Build download YAML file so that we can continue. Let's continue. And first, it will create
 this Cloud Build download YAML file for us to follow. AYO ADEDEJI: This will take
@@ -838,14 +838,14 @@ about anywhere from two to three minutes. It's a pretty
 quick process here. ANNIE WANG: Yeah. So here, we're just creating
 this Cloud Build download
 
-[00:33:56] file with our command. And next is, let's using Gcloud
+file with our command. And next is, let's using Gcloud
 Build command to run this Cloud Build download YAML file
 so that it will actually do all the processes we
 wrote in the blueprint. So let's go ahead and copy this. Yeah. So while we're waiting, we can
 just mapping each little step to our diagram over here. As I mentioned earlier, that
 first step is making sure our model bucket exists. So this is like a pre-check.
 
-[00:34:31] And once we have, we want
+And once we have, we want
 to log in to Hugging Face, and using the token-- so
 basically, this is a step. We want to make sure we
 get access to Hugging Face. And then we copy the
@@ -855,7 +855,7 @@ we download the model, and then from the GCS bucket. And once we have
 this, we want to make sure the secret available
 for this build environments.
 
-[00:34:57] Yeah, it finished! So what we've done so far
+Yeah, it finished! So what we've done so far
 is, we have this token so that we can install this
 model, and copy the model, and save everything to
 the Google Cloud Storage. So this will be done, so far,
@@ -863,7 +863,7 @@ with this Cloud Build download YAML file. So this is basically, the
 downloading processing, and we can verify
 everything in the bucket. I'm going to refresh the page. You can see. Yay! We have Gemma 4.
 
-[00:35:25] Everything downloaded
+Everything downloaded
 in our Cloud storage. Great. What's next is--
 oh, you can also verify Cloud GCS bucket
 with a command over here. You can just copy this with
@@ -872,7 +872,7 @@ things in the Gcloud bucket. There's another verify. AYO ADEDEJI: All the
 weight's downloaded, the optimizers, all of that. So yeah, it's just
 listing out the files. ANNIE WANG: Yeah. So now, we verified it.
 
-[00:36:06] So the next thing is, we
+So the next thing is, we
 need to finish this pipeline. So Ayo, do you know what is-- when we talk about network
 subnet, what is the subnet, and why we need to compute
 this networks subnet here? AYO ADEDEJI: Yeah,
@@ -881,7 +881,7 @@ great kind of tool and feature that you can use when you have
 different services communicating with each other. In our use case, what we
 have is our model weights
 
-[00:36:31] being stored in Cloud
+being stored in Cloud
 Storage, and then we're going to have it deployed
 model on Cloud Run. We want to be able to pull these
 weights without the data having to traverse over
@@ -891,7 +891,7 @@ our Cloud Run service to communicate
 with our GCS files without actually
 having to pull the data over the public internet.
 
-[00:36:53] So it's going to traverse
+So it's going to traverse
 through our private subnet. So it's a really smart
 way of keeping data secure when you have,
 again, connections between different
@@ -901,7 +901,7 @@ to pull the model weights. So that's the benefit of that. ANNIE WANG: Yeah. So y
 this line over here-- Cloud Run, pull
 from Cloud Storage.
 
-[00:37:15] All right. So let's just copy
+All right. So let's just copy
 this and continue. All right. So we should continue. Once we download this
 model and we set our VPC, and next, we want to
 configure our CM pipeline. So Ayo, why we want to create
@@ -910,7 +910,7 @@ to do all those process here with Dockerfile? AYO ADEDEJI: Yeah,
 great question. So what we're doing at the very
 first step, since Gemma 4 just
 
-[00:37:48] was released just
+was released just
 last week, there's actually a version
 of VLM image that's kind of specialized for Gemma 4. Essentially, what we're pulling
 is the Gemma 4 version of VLM, just so it's optimized for
@@ -921,7 +921,7 @@ newest version of Gemma 4. So all we're doing
 is making sure that we are setting
 the right version
 
-[00:38:14] of the transformers
+of the transformers
 library to a version that's compatible with Gemma 4. And then all we're
 doing afterwards is cleaning up any default
 models that were pulled, and setting the environment as
@@ -931,7 +931,7 @@ Cloud Run, and that's it. So pretty much, all
 we're doing, again, is we're specifying the
 VLM default container
 
-[00:38:39] image that we want to use, one
+image that we want to use, one
 that's specialized for Gemma 4. We're making sure that
 our transformers library is compatible from a
 version standpoint. And then we're just doing
@@ -941,7 +941,7 @@ right transformer for the version for
 this Gemma 4 vLLM, or how do we change it
 for a different model?
 
-[00:39:01] AYO ADEDEJI: Yeah,
+AYO ADEDEJI: Yeah,
 great question. So there's multiple
 ways you can do this. Sometimes, if you just
 want to be a little bit more general, you can just say,
@@ -952,7 +952,7 @@ look at the documentation and see what version
 of the library was used for a particular model. So you take a look at the
 Gemma 4 documentation vLLM,
 
-[00:39:24] you'll notice that
+you'll notice that
 it's using 5.50. So it's just a good way
 of being consistent. But yeah. ANNIE WANG: Got it. Thank you. So let's configure it by
 quoting this on our Dockerfile. So now, we want to create
@@ -961,7 +961,7 @@ pipeline, basically, is we want to
 define the blueprint for this whole process. And the first is,
 as always, we want to build the image with Docker. So we want to build this image.
 
-[00:39:52] So we have this image with vLLM. And then next is, you want to
+So we have this image with vLLM. And then next is, you want to
 push this to Artifact Registry, like this. And then this next
 step is you want to deploy everything,
 the service, a vLLM FUSE service
@@ -970,7 +970,7 @@ I'm going to copy this. I'm going to create this
 cloudbuild.yaml file. Ayo, do we have different
 setting here for vLLM, compared to Ollama settings previously? AYO ADEDEJI: Great question.
 
-[00:40:24] It's pretty similar. There are some
+It's pretty similar. There are some
 slight differences, especially because we're taking
 a mounted approach with vLLM. So especially before, we have
 the model weights in GCS, and we're mounting it on
@@ -980,7 +980,7 @@ when you actually look at the machine sizing, the
 memory, the CPU, it's the same. And reason why is because
 we're pretty much using
 
-[00:40:44] the same exact model with the
+the same exact model with the
 same exact amount of parameters, so the same memory
 constraints are the same across Ollama and vLLM. But as I mentioned before, we
 have a few other parameters to one, address the
@@ -989,7 +989,7 @@ sure that we can communicate with Cloud Storage
 over private network, and then two, to actually
 mount the Cloud Storage bucket as a local path.
 
-[00:41:08] So you can see, there's
+So you can see, there's
 some volume mounds that have been added as parameters. But beyond that,
 it's very similar. ANNIE WANG: Hmm. Great. So once we have
 this Cloud Build-- so this is the
@@ -999,7 +999,7 @@ earlier, we mentioned. And so, yeah, we have this Cloud
 Storage FUSE explanation before. And you can check these
 flags over here by configure
 
-[00:41:36] the volume for enable
+the volume for enable
 Cloud Storage views. Next, we have this Cloud
 Build YAML file configured. And next is, let's run this
 Gcloud Builds Submit file, as always, to follow
@@ -1008,7 +1008,7 @@ follow this Ci pipeline. AYO ADEDEJI: Yeah. Build, push, and then
 deploy to Cloud Run. Yeah. ANNIE WANG: Yeah. And it probably take 20
 minutes or so, right? AYO ADEDEJI: Yeah. 20 to 30 minutes.
 
-[00:42:11] ANNIE WANG: All right. Looks like it's finished. AYO ADEDEJI: Yay. ANNIE WANG: Yay. So what's next is, let's take a
+ANNIE WANG: All right. Looks like it's finished. AYO ADEDEJI: Yay. ANNIE WANG: Yay. So what's next is, let's take a
 look at this Google Cloud Build history. So if you click this
 link, it will take a look at this whole building
 summary, the building process. And also, you can see the
@@ -1016,7 +1016,7 @@ Cloud Run service page by go to Cloud Run
 Service, and making sure you pick this project. And you can see
 that we have Ollama
 
-[00:42:36] that deployed from the previous
+that deployed from the previous
 one, and vLLM is this one. Again, you can see that
 we have this URL here. This is the link you can
 connect to Gemma 4 model. And now, we want to verify
@@ -1026,14 +1026,14 @@ with a check completion. And we want to ask
 the same question, like, as our Guardian
 of Agentverse, what is my primary duty?
 
-[00:43:04] And we want to verify if this
+And we want to verify if this
 whole deployed version of Gemma 4 hosted on Cloud Run,
 is that working or not? So let's give it a try. I copy this. So I'm going to come
 into the terminal, and I'm going to paste it here. So let's take a look
 at what is the result. Yeah. As you can see, because the
 first time initial load, we have some cold start. AYO ADEDEJI: Yeah. So let's look. So we see the response.
 
-[00:43:38] As a Guardian of Agentverse,
+As a Guardian of Agentverse,
 your primary duty is multifaceted, and so on. If you recall the
 response from Ollama before, as Annie mentioned,
 these models are stochastic. So you can call the same
@@ -1041,7 +1041,7 @@ model multiple times, and get a different response. But overall, very similar
 response to the same question as before. And overall, everything
 looks like it's working. Yeah. ANNIE WANG: Great. All right.
 
-[00:43:59] So just have a quick
+So just have a quick
 overview of what we've done so far with vLLM. So first, we
 download this image. We download the model
 from Hugging Face to Google Cloud
@@ -1052,7 +1052,7 @@ the GCS views so that it will sync-- we
 will mount the Cloud Storage with a local file. And let's talk about the
 advantages or disadvantages
 
-[00:44:28] of this approach because
+of this approach because
 compared to Ollama, Ollama is very easy to
 start and try anything, do the local development. VLLM is a great option
 for production use case, and it's very flexible to
@@ -1062,7 +1062,7 @@ initial code start because it doesn't have the
 model baked in, as Ollama does. Anything to add, Ayo, for
 the trade-off with vLLM?
 
-[00:44:57] AYO ADEDEJI: No. That's a great summary
+AYO ADEDEJI: No. That's a great summary
 where essentially, with VLM, with the process
 that we took, essentially, you can use something
 like GS FUSE to dynamically update the
@@ -1073,7 +1073,7 @@ invocation or initial user. If you have multiple
 concurrent users, 1,000 users calling the
 same endpoint at a time,
 
-[00:45:19] that warm instance
+that warm instance
 actually won't, obviously, have that cold start
 for future users. So it's really meant--
 that cold start you tend to experience, really
@@ -1082,7 +1082,7 @@ is an overview of-- so far, we have Ollama and vLLM. So those are the advantages
 Ollama, for local development and prototyping, and also
 has multiple GPU support.
 
-[00:45:45] However, if you use the
+However, if you use the
 production use case, like vLLM has the page
 attention for product efficiency and parallelism for
 maximize GPU usage. So yeah, it's really good
@@ -1093,7 +1093,7 @@ with Ollama, vLLM to Cloud Run? So this is the piece
 we covered for today. We cover how do you
 pull model from Ollama
 
-[00:46:18] and host on Cloud
+and host on Cloud
 Run, and we also know how to download the
 model from Hugging Face and then host it with vLLM. And what's next, Ayo? What are we going to cover next? AYO ADEDEJI: Oh
 yeah, great question. We're going to learn
@@ -1102,7 +1102,7 @@ how can you serve and scale these models at a global
 scale using something like a load balancer? How can you secure
 these models and protect
 
-[00:46:39] against things like model
+against things like model
 prompt injection, jailbreaking? How can you determine if
 your model is actually leaking sensitive data? The answer for that is also
 something like Model Armor. How can you use these
@@ -1112,7 +1112,7 @@ to put this in practice tomorrow and use
 Lightroom to connect with our self-deployed
 models, so we
 
-[00:47:00] can use them as the brain
+can use them as the brain
 behind these agents. And lastly, we're going
 to learn, how can you actually observe the metrics
 being generated by these models? So we talked about cost earlier,
@@ -1121,7 +1121,7 @@ being generated by these models? You can use something like a
 Prometheus Sidecar associated with the Cloud Run instance to
 actually be extracting metrics
 
-[00:47:21] such as, how many tokens
+such as, how many tokens
 are being generated, what is the GPU
 utilization, and so on. So we're going to be
 learning a lot tomorrow. I hope you guys all stay tuned. And-- ANNIE WANG: That's a
@@ -1129,4 +1129,4 @@ really good summary. So by the end of
 these two episodes, you're going to learn everything
 about this end-to-end agentic system management. Yeah. AYO ADEDEJI: Yeah. So stay tuned. But until next time, I'm Ayo.
 
-[00:47:43] ANNIE WANG: I'm Annie. Bye. [MUSIC PLAYING]
+ANNIE WANG: I'm Annie. Bye. [MUSIC PLAYING]

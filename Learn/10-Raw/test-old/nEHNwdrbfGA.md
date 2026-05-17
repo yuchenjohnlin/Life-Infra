@@ -14,7 +14,7 @@ channel_follower_count: 1110000
 # === time ===
 duration: 3661
 upload_date: 20250513
-fetched_at: "2026-05-17T08:19:46+00:00"
+fetched_at: "2026-05-16T07:57:50+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/nEHNwdrbfGA/maxresdefault.jpg"
@@ -40,7 +40,7 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 6950
+view_count: 6947
 like_count: 133
 
 # === status ===
@@ -72,7 +72,7 @@ View the entire CS25 Transformers United playlist: https://www.youtube.com/playl
 
 ## Transcript
 
-[00:00:04] Today, we have our
+Today, we have our
 co-instructor, Div, talking about human inspired
 approaches to agents and how the path to AGI
 requires a rethinking of how we design, evaluate,
@@ -83,14 +83,14 @@ AGI into everyday life. Div previously founded
 MultiOn, the first AI agent startup, developing agents that
 can interact with computers
 
-[00:00:32] and assist with everyday tasks,
+and assist with everyday tasks,
 funded by top Silicon Valley VCs. Div has spent his career at
 the intersection of AI research and startups and was previously
 a CS PhD student here at Stanford, focused on RL. His work spans across
 various high impact areas, ranging from self-driving cars,
 robotics, computer control, and Minecraft AI agents. With that, I'll hand it to him. take. It away. Yes, excited to be here.
 
-[00:01:01] Great. So yeah, excited to be here. And the topic for
+Great. So yeah, excited to be here. And the topic for
 this lecture is we want to talk about
 a lot of new things that are happening in
 the AI world right now. So there's been a lot of
@@ -100,7 +100,7 @@ some of superintelligence when it comes to chat and
 reasoning already there, compared to average humans. And it's going to
 be very interesting,
 
-[00:01:29] over the next few years,
+over the next few years,
 as we figure out what does intelligence look like? What is something like AGI? And what's the form factor? How can this be
 something that's useful? And how will this be
 applied in society? Cool. So let's take the first
@@ -109,14 +109,14 @@ concept right now. No one has visualized it
 or given it a meaning. Is this some sort
 of supercomputer?
 
-[00:02:00] Is it just like ChatGPT
+Is it just like ChatGPT
 but just 10x better? Is it something that's more
 of a personal companion? It's something that's
 embedded in your life. And that's not clear yet. And those are the
 questions, I think, we really need to
 go and figure out.
 
-[00:02:16] This is one diagram
+This is one diagram
 on how AI agents work. So this is an architecture from
 a OpenAI researcher Lillian Wang. She recently left and
 joined a new company. So this is showing how
@@ -126,7 +126,7 @@ of different things that you require to
 make this agents work. So the first layer is memory. You need to have some
 short-term memory.
 
-[00:02:42] You want to have some
+You want to have some
 of long term memory. And this is, like, you have
 some short representation that's maybe a chat window if
 you're using ChatGPT. And you might also have a
@@ -135,7 +135,7 @@ what the user likes. This is what they don't like. The second thing that
 you need is tools. You want this kind of agents
 to be able to use tools like how humans use tools.
 
-[00:03:03] So you want them to be
+So you want them to be
 able to use calculators. You want them to be able to use
 calendars, web search, coding, and so on. The third part over here is you
 want to have advanced planning. And that means you
@@ -144,7 +144,7 @@ where if something goes wrong, they can have
 failover mechanisms, error correct, and recover. You want self-criticism. And you want a
 decomposition, where
 
-[00:03:27] you have chains of thoughts. So the agent can do their
+you have chains of thoughts. So the agent can do their
 own reasoning loops. They can also break down a
 complex task into subgoals. And the final
 fourth ingredient is actions, where you
@@ -154,7 +154,7 @@ level encapsulates how agents look
 like, fundamentally. And this is maybe what will-- as these systems become
 more powerful over time,
 
-[00:03:51] will eventually lead to
+will eventually lead to
 something that's like AGI. This is one thing that
 we're also building. So I recently started this new
 AI lab called AGI Incorporated. And we're looking a lot into,
@@ -163,7 +163,7 @@ applied to daily life? This is one of the demos
 of some technologies we built in the past. This shows how an AI agent can
 be applied in the real world.
 
-[00:04:21] So this is a bit old. And it shows how
+So this is a bit old. And it shows how
 an AI agent can be applied to pass a real
 driving test in California. And so this is an actual DMV
 test that the agent took. Let me share the screen
@@ -174,7 +174,7 @@ hands over the keyboard. They're not actually
 touching the screen. And it's an agent that's going
 and taking all the exams.
 
-[00:04:53] And there's 40
+And there's 40
 questions in this test. And the agent is really good. So it can go and
 pass the whole thing. And we did this live. So the DMV was actually screen
 recording what we're doing. They were also watching
@@ -184,7 +184,7 @@ setup and pass the exam. So this was really fun. We did this as a
 [INAUDIBLE] attempt, so we informed the DMV
 afterwards that we did this.
 
-[00:05:20] Funnily enough, they actually
+Funnily enough, they actually
 sent us a driving license, afterwards. So that was really
 fun, actually. So at the end, the agent is
 able to pass and get a pass, get a full score
@@ -194,7 +194,7 @@ applied in the real world. And there's so many
 things that are possible. In this vein, how can we
 make agents more useful, apply them in real life.
 
-[00:05:45] We have been working on a
+We have been working on a
 lot of different efforts, along with a lot of
 the AI community. One of those things
 is agent evaluations. How can we evaluate this kind
@@ -204,7 +204,7 @@ are these agents working on different websites
 or different use cases? How can we trust them? How can know where to deploy
 them and how to use them?
 
-[00:06:10] Another thing we are doing have
+Another thing we are doing have
 been doing is agent training. Can we train agents
 to be able to do advanced planning,
 self-correction, and improve themselves? And this uses a combination
@@ -214,7 +214,7 @@ also been looking a lot into agent communication. How can you have an agent
 communicate with other agents? And there's been a lot of new
 breakthroughs in this area,
 
-[00:06:34] recently. So if you've looked at
+recently. So if you've looked at
 model context protocol MCP, that's a very new thing
 that has been coming out. Similarly, there's a
 lot of work around A2A, that's Google's Agent2Agent
@@ -224,12 +224,12 @@ we have been allowing other different kind of agents
 to communicate to each other. So you can have a
 coding agent that
 
-[00:06:58] can talk to a web agent that
+can talk to a web agent that
 can talk to an API based agent and so on. And that allows you to do
 much, much more complex things than what's possible
 with just a single agent.
 
-[00:07:09] Cool. So before we dive more deeper
+Cool. So before we dive more deeper
 into how a lot of these things works, I want to bring out,
 like, why do we need agents? Why are they useful? Why do we actually want
 to go and build them? And there's a lot of things
@@ -238,17 +238,17 @@ lot of different topics in the introduction, going
 from the architectures, building more human-like agents,
 using computer interactions,
 
-[00:07:33] maybe memory communication, and
+maybe memory communication, and
 what are the future directions.
 
-[00:07:40] So when you think
+So when you think
 about building agents, there's a lot of things,
 questions you have to answer. The first one is,
 why is this useful? How can you actually build them? What are the different
 building blocks? And finally, what
 can you do with them?
 
-[00:07:57] And to first answer
+And to first answer
 the why question, we have this key
 thesis that agents will be more efficient
 in interfacing with computers in the digital
@@ -259,10 +259,10 @@ that can go and do whatever you want
 on your behalf. And you can just talk to
 them using a human interface.
 
-[00:08:25] And that's the vision we
+And that's the vision we
 have been moving towards.
 
-[00:08:30] I also have a blog post about
+I also have a blog post about
 this called Software 3.0 that you can check
 out, which touches upon some of those ideas. Cool. So we want to go
 and build agents because, usually, large language
@@ -272,7 +272,7 @@ productivity and go do things. And this also allows us to
 build more complex systems. There's a lot of techniques
 involved in actually building
 
-[00:08:56] this, such as chaining
+this, such as chaining
 different models together, reflection, and a bunch
 of other mechanisms. And as I showed before in the
 architecture, on slide two, there's a lot of different
@@ -283,7 +283,7 @@ different applications we can apply them to? There's also a
 question of, why do we want to build
 human-like agents?
 
-[00:09:29] Why can't we just
+Why can't we just
 have API agents? Or why can't we have a bunch
 of other kind of agents you can imagine, which are not
 mimicking human interactions? And one reason we want to push
@@ -293,7 +293,7 @@ internet, and the web, and computers are
 designed for humans. So they're designed for
 keyboard and mouse interactions,
 
-[00:09:53] so that we can go and
+so that we can go and
 navigate interfaces. We can use our keyboards. And if agents are able to
 use interfaces like we do, that allows them to
 directly communicate and do a lot of things without
@@ -303,13 +303,13 @@ work on 100% of the internet without any bottlenecks. If you think about
 APIs, there's only 5% of APIs on the internet are
 public that are accessible.
 
-[00:10:18] And it's very hard
+And it's very hard
 to build agents that are fully reliable over APIs. And so there's a
 lot of contention between human-like
 agents versus API agents. And that's an ongoing battle
 that's happening right now.
 
-[00:10:31] Second thing is you can imagine
+Second thing is you can imagine
 a lot of human-like agents as becoming a digital
 extension of you. So they can learn about you. They can have a
 context about you. They can do tasks like
@@ -319,7 +319,7 @@ agents can handle logins, they can handle payments. And they're able to interact
 with any of the services without restrictions
 in terms of API access.
 
-[00:10:55] So you don't need to
+So you don't need to
 pay for using an API or you don't need to go
 to a service provider and ask them for, can you
 give me access to this API? You can just go and use an
@@ -329,13 +329,13 @@ learn how to click and type. And if they're able to
 do that very effectively, they can generalize
 to any interface.
 
-[00:11:19] And they can also
+And they can also
 improve over time. So the more you teach them, the
 more data you can give them. They can learn from user
 recordings, feedback, and become better
 and better over time.
 
-[00:11:33] And so when it comes to this
+And so when it comes to this
 API versus more direct computer control agents, these are how we
 think about the pros and cons. API agents are usually
 easier to build. They are more controllable. They are more safer. But APIs are more
@@ -343,7 +343,7 @@ have high viability. So you have to build
 different agents for each API. And then APIs can keep changing. You never have a full guarantee
 that this agent will always work 100%.
 
-[00:12:01] When it comes to this
+When it comes to this
 more direct interaction computer controlled agents,
 it's easier to take actions, in this case. It's also more
 freeform interactions because you're not restricted
@@ -353,10 +353,10 @@ what the agent will do. So if anyone here has played
 with agents like Operator, it's a work in progress. It's not really there. There's a lot of issues
 that it turns into.
 
-[00:12:28] And that's the boundaries
+And that's the boundaries
 where agents are right now.
 
-[00:12:34] There's also different
+There's also different
 levels of autonomy when you think about agents. This is usually goes
 from level 1 to level 5. So level 1 to level 2 is
 when a human is in control and the agent is
@@ -365,7 +365,7 @@ like if you've used like a code editor like Cursor. That's a L2 agent, where you
 have partial automation, where the human is in control, the
 human is writing the code,
 
-[00:12:57] but the agent is helping them. When it comes to
+but the agent is helping them. When it comes to
 something like L3, this is where there's still
 a human fallback mechanism, but the agent is in control. So this is if you use Cursor
 Composer, or Windsurf, or any of the newer code editors
@@ -373,7 +373,7 @@ that are more agentic. The agent is writing
 most of the code, but a human is monitoring,
 giving it feedback. OK, this went wrong. Can you correct that for me? Can you fix this issue?
 
-[00:13:17] And that is more of a L3 system. And then you have
+And that is more of a L3 system. And then you have
 more advanced systems which are like L4 and L5. And L4 systems, you don't
 have a human in the loop. So it's the agent that's
 going and doing everything. You might still have some of
@@ -383,11 +383,11 @@ car is driving itself, but there's human
 operators that are remotely monitoring it, making
 sure nothing goes wrong.
 
-[00:13:40] And then you have L5 system. In that case, there's
+And then you have L5 system. In that case, there's
 no humans in the loop. There's no monitoring. And the AI agent is able to
 operate itself autonomously, fully, fully, independently.
 
-[00:13:56] So when we are building this
+So when we are building this
 agents, one hard thing is trust. How do we trust these
 agents are actually going to go do what
 we want them to do? How can we go and deploy
@@ -397,26 +397,26 @@ is a miniature version of the internet, where
 we have cloned the top 20 websites on the internet. And we are benchmarking,
 how do agents go and perform
 
-[00:14:23] on all these interfaces? And this is actually live. So you can go check
+on all these interfaces? And this is actually live. So you can go check
 it out, realevals.xyz. And what we have
 done is we have built digital clones of
 websites like Airbnb, and Amazon, and Door
 Dash, and LinkedIn. And the agents can go and
 navigate these interfaces on predefined tasks. And you can get a final score.
 
-[00:14:47] This is showing the
+This is showing the
 evolution results for GPT 4o. We find that GPT 4o, actually,
 is not very good on when it comes to being agentic. And it only reaches 14%
 successful accuracy, in this case. We tried this on 11
 different environments that we are showing
 on the right.
 
-[00:15:09] And we have our
+And we have our
 different environments. We have DashDish, which is our
 Door Dash clone, and Omnizon, and so on. So you can actually
 go and check this out.
 
-[00:15:24] We also compare a lot of open
+We also compare a lot of open
 source frameworks out there. Some of them are like
 the OpenAI computer use model that's powering Operator. We actually find
 it's not very good when it comes to these tasks. So it's only able to
@@ -425,7 +425,7 @@ like our email environment or our calendar environments. But on a lot of the
 other environments, it's not able to actually
 go and do really well.
 
-[00:15:49] We also tried a bunch of
+We also tried a bunch of
 other frameworks out there-- Stagehand, if you're
 familiar-- if you've seen that, it's an open source
 framework for automating web agents, browser-use, and one
@@ -434,11 +434,11 @@ agents are still early when it comes to,
 actually, automating a lot of these interfaces. And we are able to reach, maybe
 I would say, up to 50% success
 
-[00:16:11] rate, but a lot of these
+rate, but a lot of these
 agents are actually failing when you are applying
 them in all of these real world websites.
 
-[00:16:20] Similarly, we benchmark
+Similarly, we benchmark
 all the different models that are available, including
 all the closed source APIs and all the open source models. And we find, again,
 on ethnic tasks, most models are
@@ -449,7 +449,7 @@ around 40% accuracy. Gemini 2.5 and O3 follow
 very closely with it. The other models
 tend to taper off.
 
-[00:16:52] And so the interesting
+And so the interesting
 learning has been, for us, is that a
 lot of these models are not fully ready to be
 deployed in the real world because if you have, say, an
@@ -459,23 +459,23 @@ that this will actually go do what you want it to do. And that's not good enough
 question of, what is it that is required to
 make these agents even better?
 
-[00:17:17] How can they improve? And how can they be applied for
+How can they improve? And how can they be applied for
 your actual practical use cases?
 
-[00:17:24] And so this brings
+And so this brings
 us to our next topic for the lecture, which is, how
 can we train AI agent models? So how can we have models that
 are more custom fine tuned and are better on
 the generic tasks?
 
-[00:17:41] This is one of our past works
+This is one of our past works
 called Agent Q, which is a self-improving agent system.
 
-[00:17:54] [VIDEO PLAYBACK]
+[VIDEO PLAYBACK]
 
-[00:18:10] [MUSIC PLAYING]
+[MUSIC PLAYING]
 
-[00:19:02] [END PLAYBACK] So this is Agent Q. That's a
+[END PLAYBACK] So this is Agent Q. That's a
 system that can self-improve. It can learn by
 corrections and planning. And how the system works is
 it's able to go and self-correct itself. So whenever it
@@ -484,7 +484,7 @@ in its past memory. And it's able to use that to
 do a lot of trial and error learning, similar to humans. So suppose the first time
 you learn how to ride a bike,
 
-[00:19:27] you make a lot of mistakes. You fall over a lot of times. But over time, you're able
+you make a lot of mistakes. You fall over a lot of times. But over time, you're able
 to improve your policy and go and do that really well. We apply a similar mechanisms
 to make these agents actually work really, really
 well in the real world. And so what's happening
@@ -493,7 +493,7 @@ the space of interfaces and see, what are the things
 that it did that went wrong? What are the things
 that went right?
 
-[00:19:51] And it's able to
+And it's able to
 use reinforcement learning to self-improve and
 become better and better. So Agent Q combines a S
 of different techniques. The first method is
@@ -504,7 +504,7 @@ unlock advanced reasoning. A second thing that we do
 is self critic mechanisms. So the agent can self
 verify and get feedback
 
-[00:20:18] whenever it makes a mistake. And it's able to learn
+whenever it makes a mistake. And it's able to learn
 from that feedback. And finally, we use RLAIF
 techniques like DPO, direct preference
 optimization to be able to improve
@@ -513,7 +513,7 @@ three techniques together, we are able to build some
 very powerful systems. Agent Q is also available on
 arXiv as a research paper, so you go and check it out.
 
-[00:20:54] For the sake of time, I will
+For the sake of time, I will
 skip some of the lectures here. But how Agent Q
 normally works is we have this Monte Carlo Tree
 Search, where the agent is exploring the different states. It's estimating rewards. If we were to visit
@@ -522,12 +522,12 @@ future predicted reward? And based on that, it's able to
 improve its prediction model. Should we go take this path or
 a different path in the tree?
 
-[00:21:30] And then over time, the
+And then over time, the
 agent can become very good at exploring the right
 states and figuring out, what are the right paths
 in the state space? And what are the wrong ones?
 
-[00:21:43] We also do
+We also do
 self-critic mechanism. In this case, what happens is
 if you have a particular task, in this case, where,
 say, a user says, book me a reservation
@@ -537,7 +537,7 @@ state of the screen, where you can see the screenshot. Then the agent
 can go and propose a bunch of different actions. So it can choose to go and
 select the date and time.
 
-[00:22:12] It can choose to also
+It can choose to also
 select the number of people and then open the date selector. It can instead search for
 Terra Eataly Silicon Valley restaurant and type that
 in the search bar or it can decide to go to
@@ -546,13 +546,13 @@ mechanism works is all these proposed actions
 are passed to a critic network. And the critic LLM is able
 to go and predict, OK, what's the best action to take?
 
-[00:22:44] And it's able to
+And it's able to
 give a ranking order. OK, this is the best action
 that we should go and use. So this is rank 1. This is rank 2. And this is ranked 3. And based on that, we can
 go and optimize the system to take the correct actions
 and improve over time.
 
-[00:23:00] And finally, we
+And finally, we
 use reinforcement learning from human
 feedback, where we used methods
 like GRPO and DPO, which are different
@@ -560,13 +560,13 @@ RL algorithms, to be able to use
 all the failures and successful trajectories
 you've collected so far and improve the agent over them.
 
-[00:23:28] And so DPO is a
+And so DPO is a
 spatial technique based on [INAUDIBLE] where
 you can train an LLM using preference data like
 failures and successes, and use that to improve
 the model overall.
 
-[00:23:44] And so this is
+And so this is
 how agent Q works, where we create this
 Monte Carlo Tree Search to create trajectories
 of successes and failures. We can then use
@@ -575,10 +575,10 @@ the proposed actions that actually succeeded and failed? And then we're able to
 pass them through a DPO to actually go and
 optimize the network.
 
-[00:24:08] This is an example
+This is an example
 of how this works.
 
-[00:24:16] So the agent starts
+So the agent starts
 in the first state. And the task, in
 this case, is we want to go and book a restaurant
 reservation on OpenTable. So first, it makes a mistake
@@ -588,14 +588,14 @@ here shows that it's going and backtracking. Then it can go and navigate
 to the correct restaurant. In this case, if the agent
 accidentally makes a mistake
 
-[00:24:46] and chooses the incorrect date,
+and chooses the incorrect date,
 then it can again backtrack, recover back. Open the date selector,
 choose the right date, open the seat selection,
 and then finally complete the reservation. And so this is how the
 system is learning over time. It's making a lot of mistakes,
 but it's saving the mistakes and over time improving on them.
 
-[00:25:10] We tried Agent Q in a lot
+We tried Agent Q in a lot
 of real world scenarios, including OpenTable
 actual reservations. So we actually spun up thousands
 of robots, more like hundred thousands of bots
@@ -605,7 +605,7 @@ reservations, and do a bunch of other things. And we tried this with a lot
 of different methods and models out there. So we tried GPT 4o
 and then we found,
 
-[00:25:38] on this OpenTable
+on this OpenTable
 reservation task, we are only able to reach
 around 62.6% accuracies. When it comes to
 something like DPO, the accuracy actually go
@@ -615,7 +615,7 @@ accuracy without any MCTS as part of the method. And when we apply
 the whole technique with MCTS, and DPO, and the
 self-critique mechanisms.
 
-[00:26:08] We are actually able to reach
+We are actually able to reach
 close to 95.4% accuracies. And this is using a lot of
 self-learning for the agent to improve itself. This takes usually less
 than one day of training for the agent to go from, I
@@ -623,10 +623,10 @@ would say, here, 20% accuracy. That's 18.6%. That's roughly 20%,
 all the way to 95.4. So that's a 4x improvement in
 agent performance in less than one day.
 
-[00:26:47] As a next topic, I'll touch
+As a next topic, I'll touch
 on memory and personalization.
 
-[00:26:57] So one way to think
+So one way to think
 about AI agents is that they are taking
 information, processing them. OK, so imagine you
 have an AI model. What an AI model is doing,
@@ -637,7 +637,7 @@ similar to a processor, where if you have a CPU,
 what happens is you have some instructions,
 which are usually binary
 
-[00:27:28] encoded that go into the CPU. And then you have some
+encoded that go into the CPU. And then you have some
 instructions that come out, which are also binary encoded. And then you do a loop
 over them again and again. And that's how normal
 computers work. You can do a very similar
@@ -646,11 +646,11 @@ to a computer, where you have language tokens that
 are going in that are encoded in the prompt. And you have language
 tokens coming out.
 
-[00:27:53] And this allows you to
+And this allows you to
 think about an AI model as being a processor that's
 operating over natural language.
 
-[00:28:02] So this is something that
+So this is something that
 you can think about GPT 4, for example, going
 and doing this. This is similar to some of the
 older processor like MIPS32 that used 32-bit instructions. Right now, if you
@@ -659,14 +659,14 @@ big context lengths. So that's very interesting. And when GPT 4
 initially came out, it was constrained to 8k tokens. Now, we have 32k
 tokens, and 128k tokens, and 1 million tokens.
 
-[00:28:30] So the context length
+So the context length
 of these models is just increasing and
 increasing over time.
 
-[00:28:38] And as the context
+And as the context
 length increases that also allows us to have--
 
-[00:28:47] A question from online can you
+A question from online can you
 speak to the compute budget for the day long run? Was it H100s or a cluster? The results. Yes. So that was all H100. So actually, we trained the
 whole models on 50 H100s in less than one day. Got you. And then one
 question from before, as AI agents increasingly
@@ -674,7 +674,7 @@ emulate human behavior, what protocols do you foresee
 being implemented to help users
 distinguish between AI
 
-[00:29:16] and humans in conversation? Yeah, that's very interesting. I think that becomes a
+and humans in conversation? Yeah, that's very interesting. I think that becomes a
 question of security, of how can we identify whether
 it's a human or an agent. It's actually a very
 hard question right now because you actually
@@ -683,13 +683,13 @@ able to mimic humans and are able to pass as humans. And that's actually happeni
 in the real world right now. Over time, we will need
 human proof of identity.
 
-[00:29:40] So this could be biometrics. This could also be a combination
+So this could be biometrics. This could also be a combination
 of maybe some personal data, or some of password, or
 secrets that only you know, and you can use
 that to authenticate that you're talking to an
 actual human and not an agent.
 
-[00:30:02] Any more questions? Yeah. So, [INAUDIBLE] systems fail? So they did some
+Any more questions? Yeah. So, [INAUDIBLE] systems fail? So they did some
 comprehensive study. First of all, they
 say MLS has been there for more than 20 years. You have distributed systems,
 transaction processing. So we are just having AI
@@ -699,7 +699,7 @@ an agent which, instead of just having
 API people coding all the logic in
 the program, you
 
-[00:30:43] have an agent will be
+have an agent will be
 able to do something. If given a prompt, it will
 give you some results. So how can you just putting
 all agents together, the intelligence
@@ -710,7 +710,7 @@ between agents is only vehicle to
 elevate intelligence. But I'm missing that part
 today in the lecture.
 
-[00:31:13] This is actually something
+This is actually something
 that's coming next. But just to answer
 your question, the biggest issue
 is just reliability. What happens is when all
@@ -720,7 +720,7 @@ where maybe your agent got the wrong instruction or failed
 to understand what's happening. And the more agents you add,
 the more communication overhead is there.
 
-[00:31:36] So you can imagine
+So you can imagine
 if you have an agent system with n different agents. Then there's n squared
 communication rules. And so the amount of
 error in the system increases as quadratic. And that makes that allows for
@@ -729,7 +729,7 @@ read [INAUDIBLE] they've all pretty much
 all the problems solved, 15 chapters of the book. Yeah, totally. That could be very interesting
 also for the audience here.
 
-[00:32:09] So let's come back to this. So one way to think
+So let's come back to this. So one way to think
 about agents is when you have this transformer model. The transformer model is
 acting as a processor. So it's taking
 this input prompts. And it's giving out
@@ -739,7 +739,7 @@ a memory system. So you want to have something
 like a file disk or RAM, where you are saving
 what's happening and being
 
-[00:32:38] able to process that over time. So you want to have
+able to process that over time. So you want to have
 repeated operations. So you do the first
 pass over a model. You get some output tokens. You can save them in
 a RAM-like system. And then you have some new
@@ -747,7 +747,7 @@ instructions that come out. Like now, here's
 step two of the plan. Go execute that. Here's step three of the plan. Here's step four of the plan. And that looping behavior,
 this is, in a sense,
 
-[00:32:57] giving rise to agents, where
+giving rise to agents, where
 you can imagine this is-- the transformer
 is the processor. The memory system, and the
 instructions, and the planning are acting similar to the
@@ -758,10 +758,10 @@ as a computer system with the memory processors,
 which is the compute and then being able to
 use browsers, and actions,
 
-[00:33:29] and multi-modality, which can
+and multi-modality, which can
 be inputs like audio, and voice, and so on.
 
-[00:33:39] When we think about
+When we think about
 long-term memory, based on the analogy
 before, you can think of this as similar to
 a disk, where you want a user memory that's long
@@ -772,7 +772,7 @@ for long-term memories. The prevalent one is embeddings. So you have
 retrieval models that can go and fetch the right
 user embeddings on the fly.
 
-[00:34:09] So if I have a question like,
+So if I have a question like,
 OK, does this person, Joe, is he allergic to peanuts? Then can the system
 go and find that? And if we have a lot of
 user data about the user, then we can use a retrieval
@@ -781,7 +781,7 @@ something that we already know about the user or not. And based on that,
 make a right judgment. And this is something
 that is very important.
 
-[00:34:37] You are able to see early traces
+You are able to see early traces
 of this in systems like ChatGPT right now. There's still a lot
 of open questions when it comes to
 long-term memory. The first one is hierarchy. How do we decompose memory into
@@ -790,13 +790,13 @@ temporal persistence. You can have more structures. And you might also want to
 think about memory as something that is adaptable because human
 memory is usually not static.
 
-[00:35:03] It's changing over time. And so you also
+It's changing over time. And so you also
 want to think about when you have agent
 memory, how can it change? How can it be dynamic? How can it self-adjust? Because the systems
 are also learning. They're improving. And what does this dynamic
 memory systems look like?
 
-[00:35:25] And memory leads
+And memory leads
 to personalization, where the goal with
 having long-term memory is that you can personalize
 this agents to the user. And they're able to
@@ -807,7 +807,7 @@ peanuts and you want to have an agent that's
 ordering food on Door Dash, then you want it
 to be personalized,
 
-[00:35:53] so it doesn't accidentally
+so it doesn't accidentally
 order something that you're allergic to, and
 how can you go and build that. And everyone has
 different preferences, likes, and dislikes. So when you're
@@ -816,7 +816,7 @@ actually make sure that you can account for this. So there might be a lot of
 explicit personalization information that
 you can collect. What does the user like? Are they allergic to something?
 
-[00:36:12] What are their favorite dishes? What seat preferences they have,
+What are their favorite dishes? What seat preferences they have,
 if they're flying, and so on. There's also a lot of
 implicit preferences. So there's a lot of things
 around, which brand do you like? Do you like Adidas versus Nike? If there were 10
@@ -824,11 +824,11 @@ items on a list, suppose you're looking for a
 housing, which one do you prefer and why? And those things
 are very implicit. So they're not explicitly known.
 
-[00:36:36] And then there are
+And then there are
 mechanisms where you can collect a lot of
 these implicit preferences and then personalize over time.
 
-[00:36:45] There's a lot of challenges
+There's a lot of challenges
 when you're building these personalization systems. The first one is just
 user privacy and trust. How do you actually go
 and actively collect this information? And how do you get people
@@ -837,7 +837,7 @@ methods you can go and use to actually
 collect this information. So one is just active learning,
 where you're explicitly asking the user for their preferences.
 
-[00:37:09] You're asking them, OK, are
+You're asking them, OK, are
 you allergic to something? Or do you have this seat
 preference and so on? And there might also
 be passive learning, where if you can
@@ -848,7 +848,7 @@ shoes because that's where-- what you have seen them
 do on the computer. And the agent is learning
 from your behavior
 
-[00:37:28] and become better and better. And you can learn to personalize
+and become better and better. And you can learn to personalize
 by supervised fine tuning, where you are collecting a
 lot of interactions. This can also be
 through human feedback, where you can get
@@ -857,14 +857,14 @@ do the right thing. And this is something
 similar to ChatGPT, where if you like the
 chat outputs, then you can give it a thumbs up.
 
-[00:37:50] If you don't like it, you
+If you don't like it, you
 give it a thumbs down. And then this can be
 used to personalize the system over time.
 
-[00:37:58] So now going to agent
+So now going to agent
 to agent communication.
 
-[00:38:05] One question online. How do you do evaluations
+One question online. How do you do evaluations
 on the performance of agents that collaborate with humans? And is it a moving target? At what point is human
 performance redundant and agents can be fully autonomous? I would say it's
 a hard question. You just have to go
@@ -872,7 +872,7 @@ and build benchmarks because it's very hard
 to know what's going to happen in the real world. Right now, I would say, based
 on a lot of current state
 
-[00:38:28] of evaluations and
+of evaluations and
 what I showed before, agents are not really there. The most successful
 agents we have seen so far are coding agents. So if you have your, whatever,
 intelligent code editor. You can already see the traces. They are automating a lot
@@ -881,7 +881,7 @@ have to go and write a lot of boilerplate
 code, or you have to spend a lot of
 your own time fixing bugs.
 
-[00:38:51] So at some point, we'll see this
+So at some point, we'll see this
 thing where humans become more like managers. And we are giving them feedback. We are giving them
 direction, OK, we want this-- suppose you have systems
 of different agents. So you give them, OK, I want
@@ -889,12 +889,12 @@ agent 1 to go and do this. Agent 2 to go and
 do this, so on. See what the final output is. And over using that, improve
 the overall generation process that you are going towards.
 
-[00:39:14] And so this is likely
+And so this is likely
 what's going to happen is the agent systems will become
 better and better executors, where the humans
 become the managers for the systems of agents.
 
-[00:39:29] So when it comes to agent
+So when it comes to agent
 to agent communication, we think about
 multi-agent architectures and multi-agent
 systems, where you have all this cute little
@@ -905,7 +905,7 @@ you want to go and build multi-agent systems. The first one is
 parallelization. By dividing a task
 into smaller chunks
 
-[00:40:01] and having multiple agents. If you have n agents
+and having multiple agents. If you have n agents
 instead of one agent, you can improve the overall
 speeds and efficiencies. The second thing
 is specialization. If you have different
@@ -915,11 +915,11 @@ you have a web browser agent. Then you can also
 route different tasks to different agents. Each agent can become really,
 really good at their tasks.
 
-[00:40:23] And this is similar to having
+And this is similar to having
 a degree in a specific major or having an occupation--
 specializing in that occupation.
 
-[00:40:36] There's a lot of challenges
+There's a lot of challenges
 when it comes to agent to agent in communication. The biggest one is that
 this communication is lossy. When you have one agent company
 communicating to another agent, it's possible that it
@@ -928,7 +928,7 @@ happens in human organizations. Maybe your manager will
 ask you to go do something, but you maybe misunderstood
 them and did something different
 
-[00:40:59] or they were like, oh,
+or they were like, oh,
 why does this happen? And similarly, agent
 to agent communication is also fundamentally
 lossy, where whenever you are
@@ -937,7 +937,7 @@ you are losing some percentage of the information. And that allows for mistakes
 to propagate in that system and become like
 increasingly more prevalent.
 
-[00:41:22] And there's different mechanisms
+And there's different mechanisms
 for multi-agent system. This is a very novel
 field right now. People are still trying
 to figure this out. No one has actually
@@ -948,7 +948,7 @@ manager agents that are working with worker agents. You might have managers
 or manager agents. And you might have maybe
 flat agents organizations,
 
-[00:41:44] where maybe one manager is
+where maybe one manager is
 managing hundreds of agents, or it could be a
 vertical tree, where you have maybe 10 different
 hierarchies of agents that are managing each other. And so a lot of these
@@ -957,13 +957,13 @@ the task of what you're doing and specializing on. And the biggest challenge
 with this kind of systems is, how do you exchange
 communication effectively without losing that information?
 
-[00:42:08] How do you build
+How do you build
 syncing primitives? How can communication
 from one agent that's very far away from maybe
 another agent in the hierarchy go and be communicated
 very, very effectively across the chain?
 
-[00:42:25] There's a couple of
+There's a couple of
 frameworks out there that are looking to solve
 these problems on how do we make this communication
 protocols robust and how can we add mechanisms
@@ -974,7 +974,7 @@ are using right now. It's a simple
 wrapper around APIs. So what it does is it gives you
 a streamlined standard format
 
-[00:42:52] around each API. And by creating an MCP
+around each API. And by creating an MCP
 wrapper around your service-- so this could maybe you
 have a file server service that exposes an API. You can create MCP wrapper
 for your file server, or maybe for your email client,
@@ -984,20 +984,20 @@ connected servers can go and communicate with each
 other and do things for you. And so this allows for very
 effective communication,
 
-[00:43:17] where you are able to
+where you are able to
 control the routing and make the systems modular. So you're able to plug-in
 new services as you want to.
 
-[00:43:28] Similarly, another
+Similarly, another
 framework in this space is Agent to Agent protocol. So this is a new protocol that
 came from Google very recently, that's allowing for
 agents to also communicate with other agents and add a
 lot of reliability and fallback mechanisms.
 
-[00:43:48] I'm not sure how many people
+I'm not sure how many people
 here in the room have used MCPs.
 
-[00:43:54] Yeah, not many. OK, cool. So MCPs are actually very cool. What they are doing is they
+Yeah, not many. OK, cool. So MCPs are actually very cool. What they are doing is they
 are abstracting your APIs and making them
 very, very modular so that you can go and plug
 your API into an MCP protocol. And once it's
@@ -1007,13 +1007,13 @@ that's supported by MCPs. So it becomes, in a sense, like
 having a standard interface for communication for
 your different services
 
-[00:44:31] or applications you have, and
+or applications you have, and
 exposing them, and letting them connect and talk to each other. So similar to how
 you have something like HTTPS for communication
 on the normal internet, MCP becomes an interesting
 protocol for communication to happen over different agents.
 
-[00:44:49] And so if you have a client
+And so if you have a client
 like Claude, or Replit, or some other model,
 you can connect that to servers that are
 supporting the MCP protocol. You can have a bunch
@@ -1021,7 +1021,7 @@ of different services. Each services could be some of
 data tool, like a database, API, or pretty much else. And they can all interconnect
 and do modular things for you.
 
-[00:45:14] And because MCPs are not
+And because MCPs are not
 dependent on the spec of your API. They can allow you to absorb a
 lot of changes and at this level of modularity and
 abstraction by standardizing the whole interface. You can also have
@@ -1031,10 +1031,10 @@ plug in MCP servers that you like and
 connect to them. So you can plug in new
 tools, spread them out.
 
-[00:45:46] And you can route information
+And you can route information
 based on what you want to do.
 
-[00:45:54] Finally, touching on some
+Finally, touching on some
 of the issues when it comes to agent systems. So far, we have seen a lot
 of different things, OK, how can this agents work? How can we evaluate them? How can we train them? How can we think
 about communicating with different agent systems? And even though a lot of these
@@ -1042,7 +1042,7 @@ things are very interesting, a lot of these things
 are taking off, there remains a lot key
 problems in the space
 
-[00:46:19] that we still have to
+that we still have to
 solve for these agents to be practical, for them to
 be applied in everyday life, and for them to
 become useful for you. The biggest one is
@@ -1052,7 +1052,7 @@ reliable if you're giving them access to your payments and
 your bank details, for example, or maybe they're connected
 to your emails, calendars,
 
-[00:46:40] and whatever services. And then you want to
+and whatever services. And then you want to
 really trust them. You don't want the systems to go
 rogue and maybe post something wrong for you on socials-- on your Twitter,
 or your LinkedIn, or you don't want them to
@@ -1062,7 +1062,7 @@ like how can you trust an agentic system
 that's operating autonomously? And that's where reliability
 becomes a big thing.
 
-[00:47:03] The second issue with
+The second issue with
 autonomous agents is looping. This agent can go
 do something wrong, so they can get stuck in a loop. And they might just go
 and repeat that process again and again. So if you give them
@@ -1072,7 +1072,7 @@ to the wrong restaurant, and it got stuck,
 and maybe just trying to do the same thing
 again and again.
 
-[00:47:25] It doesn't know what to do. And that kind of issues
+It doesn't know what to do. And that kind of issues
 can happen to a lot with agents, where you might
 end up wasting a lot of money and compute. And it's very important
 to be able to figure that out and correct that. And that leads to a lot
@@ -1081,7 +1081,7 @@ benchmark them in the real world on a
 lot of different use cases and make sure we are
 learning from that?
 
-[00:47:43] And how can we also, once
+And how can we also, once
 we deploy the systems, be able to observe them? And that becomes, how can
 we know what is happening? Can we monitor them online? Can we have some
 of safety, which could be based on
@@ -1091,7 +1091,7 @@ have human overrides, that if something goes wrong,
 we have some of human fallback, where maybe a remote operator
 can take control of the agent,
 
-[00:48:08] and correct it, and
+and correct it, and
 fix it or maybe you are able to go and directly
 take control and fix it. This is similar to
 autopilot in Tesla. So when you're
@@ -1101,12 +1101,12 @@ and override the system. And that becomes
 very interesting when you're thinking about real
 world deployment of agents.
 
-[00:48:32] Yeah, so that was a
+Yeah, so that was a
 whole lecture on agents. Sorry, there was some things
 that were a bit messy. Yeah, we had to put
 together some final slides. Happy to take questions. Yeah, go on.
 
-[00:48:51] When you say an accuracy,
+When you say an accuracy,
 say, of 40% or something on a task over the
 course of a day, do you think that there's a
 plan to get to 99 or 99.9999? And do you have a
@@ -1116,7 +1116,7 @@ possible, especially with reinforcement learning. And I showed the
 Agent Q method before. So right now, a lot
 of these models--
 
-[00:49:21] even if you have Claude
+even if you have Claude
 Sonnet or GPT 4o, or Gemini, they're not trained on these
 agentic interfaces tasks. So that's why-- they're
 working zero shot. So they are never trained in
@@ -1126,7 +1126,7 @@ this new interfaces or this new tasks in the
 real world, they often fail. But if you're able to
 train the systems directly
 
-[00:49:42] to work on this task
+to work on this task
 using reinforcement learning, and corrections,
 and self-improvement, then you can actually reach
 very, very high accuracies. So in the OpenTable
@@ -1136,7 +1136,7 @@ them, reach close to 99.9% The hard thing becomes is
 there's a diversity of tasks. So I can imagine there's
 millions of websites.
 
-[00:50:04] And if you want to
+And if you want to
 train an agent that's using 99.9% on each website,
 that's a hard challenge. And that's something
 that's very interesting. How can you build
@@ -1146,11 +1146,11 @@ you will have agents that can do automate
 all of voice calling, all of computer to control. Maybe they can also use all
 of the APIs and everything.
 
-[00:50:24] And something like that is
+And something like that is
 possible, theoretically. It's just very
 hard to build that.
 
-[00:50:31] Do you know whether AI agents
+Do you know whether AI agents
 are able to solve captchas? They can. What do you think
 the implications of that are for, how
 the internet's going to work in the next 10 years? It's definitely
@@ -1161,7 +1161,7 @@ and harder to solve. And I think it's very
 hard to beat this because if a human can
 do it, theoretically,
 
-[00:50:55] an agent can also go
+an agent can also go
 and do the same thing. So over time, I think we'll
 have to just figure out better methods of identity. Biometrics can be
 a big part of that. If you are able to use
@@ -1169,7 +1169,7 @@ fingerprints or some of proof mechanisms,
 then we know this is an actual
 human, not an agent.
 
-[00:51:25] There's this article
+There's this article
 called "AI 2027" that you've probably heard of,
 that outlined where AI research is going to go and
 what might happen. And in 2027, after '27, when we
@@ -1179,7 +1179,7 @@ the process of creating AI agents? Because from what I
 understand, the main bottleneck is, how am I going
 to access UIs, APIs?
 
-[00:51:54] How am I going to be
+How am I going to be
 able to access data that is enclosed in those, I
 guess, complex and somewhat dynamic systems? So what if, very
 simply, someone designed an agent that was optimized
@@ -1190,7 +1190,7 @@ specific architectures that you can use to
 train agents, whatever. Do you think we will see, in
 the future, people automating,
 
-[00:52:26] with confidence, our process
+with confidence, our process
 of creating AI agents, making all these niche
 specific AI agents that we're seeing on the market obsolete? Yeah, I absolutely think so. So this is going to happen. And I think it's already
 happening in the bigger labs. So if you have labs
@@ -1198,7 +1198,7 @@ like OpenAI, they have a lot of research agents. There's also papers
 from-- if you've seen from [INAUDIBLE] people
 are working on AI research
 
-[00:52:50] or agents that can go and
+or agents that can go and
 write research papers, and train models, and
 do a bunch of things. So it's totally
 possible for agents to go and self-improve
@@ -1208,12 +1208,12 @@ possible to train on a lot of this data
 sources, and APIs, and find ways to represent
 them, and collect the right sets of data, and improve that.
 
-[00:53:12] I do think that seems to be
+I do think that seems to be
 the future of a lot of maybe hard research, especially
 around protein designs and a lot of hard sciences. So we'll definitely see
 a lot of that happen.
 
-[00:53:32] Hi, Garg. Nice to meet you again. Just to give you
+Hi, Garg. Nice to meet you again. Just to give you
 context, we're building the Slack for AI agents. Basically, it's
 Uber for AI agents. So I've been working on
 agents for a long time. The biggest problem
@@ -1223,7 +1223,7 @@ we try to work on is, how do we prevent agent--
 prevention from hallucinating. The next thing is what models
 were best at executing actions?
 
-[00:54:02] So for my research, we
+So for my research, we
 realized that Claude is great. Better still, we
 have GPT at the end. So we have-- just like Slack. So we have a team of
 agents doing work. And then the one
@@ -1233,7 +1233,7 @@ great at taking action. And other models of GPT
 seem to not work well. Claude and other stuff. So I think the biggest
 challenge with building agents
 
-[00:54:34] is-- also the third one is
+is-- also the third one is
 the fact that end users can take one hit. So my wife here doesn't
 give-- if I give out hotel as the product and
 it makes one mistake, there is no space for
@@ -1244,7 +1244,7 @@ and I lost trust. So the problem is to
 work in the real world, our agents should prevent making
 mistakes in the real world.
 
-[00:55:02] s that brings us
+s that brings us
 to sandbox, which I love what you're
 doing with sandbox and doing clones
 of this website. The challenge with sandbox is
@@ -1253,7 +1253,7 @@ fact that if given a new task, they figure their way around. So these are challe
 that we have with agents. And I'm happy if you
 can talk more about it or we can talk about it later.
 
-[00:55:27] Totally, totally. Just to get the gist of it,
+Totally, totally. Just to get the gist of it,
 what's the exact question there? So I think the question
 is, how do we make them ready for the real world? We have a body which does
 good job with calling, but makes mistakes. We have email agent, my own,
@@ -1261,7 +1261,7 @@ that got stuck in a loop and kept sending email
 five times to an investor. We have coding agent that wiped
 up 3,000 lines of code for me yesterday. I had to redo it.
 
-[00:55:56] So we have these challenges
+So we have these challenges
 in the real world. And people like my wife are
 not going to take one shot hit and they will just
 stop using it. So I think the question is,
@@ -1271,7 +1271,7 @@ improving the agents. Even if you look at maybe a
 lot of the initial models that came out, when you had the first
 versions of GPT 3 and so on,
 
-[00:56:20] they hallucinated a lot. But as you have bigger
+they hallucinated a lot. But as you have bigger
 models, more parameter size and are trained
 on more data, they start hallucinating less, so
 if you see the new generation of models GPT 4 and Claude. I think over time, I
@@ -1281,7 +1281,7 @@ in the systems go down, especially hallucinations and
 other things that can happen. You just require a
 lot of monitoring,
 
-[00:56:43] and evaluations, and
+and evaluations, and
 a lot of testing. And this also becomes
 very domain specific. So if you're working
 on something that's a domain specific
@@ -1291,7 +1291,7 @@ to do is you want to create the right test cases. You can be like, OK, here's
 1,000 scenarios that we really go and care about. Can we go and test this agent
 on this 1,000 scenarios all
 
-[00:57:05] the time, which could
+the time, which could
 be in production, when you are actually running
 this with your users or this could be some of
 offline simulation, where you have daily testing. Is there any regressions
@@ -1300,7 +1300,7 @@ change a prompt? What will this look like? And if you're able to build
 a lot of very robust testing, then you can also verify
 your accuracies are going up. And then it becomes stable.
 
-[00:57:25] Can you fine tune this agents
+Can you fine tune this agents
 to become better and better for your use cases? So I think I would say
 the correct answer is a combination of
 models will become better and better over time, so
@@ -1311,7 +1311,7 @@ specific testing and evaluation. So for your own
 use case, can you go and have some ways to rank
 which model is doing what?
 
-[00:57:47] How good is it? And make the right judgment,
+How good is it? And make the right judgment,
 and be able to fine tune, and use reinforcement
 learning and other techniques to make them better over time. What do you think about smaller
 model [INAUDIBLE] reinforcement learning because I think the
@@ -1320,7 +1320,7 @@ need bigger brains. You just need smarter brains. [INAUDIBLE] much
 smaller language models. So the question
 again is what do you
 
-[00:58:17] think about small language
+think about small language
 models versus large language models for agents, specifically? Yeah, so that's an
 interesting question. I would say we are already
 seeing some hints of this. So if you look at a
@@ -1330,7 +1330,7 @@ you can actually train smaller models
 on reasoning traces and have a better accuracies. So a lot of the newer GPT
 4 models, all the GPT 4o,
 
-[00:58:42] and all the new
+and all the new
 series of O3 Mini, and so on, they're actually
 distilled small models, but they're just fine tuned
 using reinforcement learning and other techniques to
@@ -1340,7 +1340,7 @@ models that are coming out and all the O1 and O3 series. So that's showing this
 that smaller models with better reasoning,
 better processing,
 
-[00:59:04] it's actually the right answer. It will be interesting to see
+it's actually the right answer. It will be interesting to see
 how far can you push the limits and what will this look
 like maybe over this year. What are the best
 accuracies we can expect from this kind
@@ -1350,7 +1350,7 @@ a lot of this specific domains? I think the litmus
 test is real world. And my approach architecture,
 which I think may work,
 
-[00:59:33] is the manager agent could
+is the manager agent could
 be large language model. And the worker agent could
 be small language models because I think this
 distillation happening when they are collaborating in a team. The last question
@@ -1359,7 +1359,7 @@ respect to a computer. We have random access memory. We have the ROM. And then w
 right now, I just think they have
 random access memory.
 
-[01:00:03] And with Mem 0, we are
+And with Mem 0, we are
 just giving it ROM. I don't think they have the hard
 drive and this consciousness while they are working. I think that's a challenge. I would like to know, how
 do we implement that system to make it like a computer? Yeah, that's an
@@ -1368,7 +1368,7 @@ if you actually try and experiment and
 see how that works. Obviously, there's no
 straight answer to this.
 
-[01:00:29] It just depends on
+It just depends on
 what you're building, what your applications are. And then just depending
 on what you're doing, there can be different sizes of
 models that might work better. If you're doing a
@@ -1378,5 +1378,5 @@ more chat-based, or actions, and so on. And I think you just have to
 find the right ingredients, in a sense, the right
 components for your application.
 
-[01:00:50] And then go and build that. Yeah, so there's no right
+And then go and build that. Yeah, so there's no right
 answer to it in a sense.

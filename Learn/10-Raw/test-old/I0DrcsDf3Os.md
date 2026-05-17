@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: WhynotTV
 channel_url: "https://www.youtube.com/channel/UC5xLV_gJAP9psKcyrJ3ZIcw"
-channel_follower_count: 20400
+channel_follower_count: 20300
 
 # === time ===
 duration: 7365
 upload_date: 20260117
-fetched_at: "2026-05-17T08:20:21+00:00"
+fetched_at: "2026-05-16T07:58:21+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi_lc/I0DrcsDf3Os/maxresdefault_en-US.jpg"
@@ -77,8 +77,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 240455
-like_count: 5295
+view_count: 238937
+like_count: 5280
 
 # === status ===
 availability: public

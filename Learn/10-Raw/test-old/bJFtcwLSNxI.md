@@ -1,52 +1,33 @@
 ---
-# === identity ===
 id: bJFtcwLSNxI
-url: "https://www.youtube.com/watch?v=bJFtcwLSNxI"
+url: https://www.youtube.com/watch?v=bJFtcwLSNxI
 title: 【生成式AI時代下的機器學習(2025)】第七講：DeepSeek-R1 這類大型語言模型是如何進行「深度思考」（Reasoning）的？
 aliases:
   - 【生成式AI時代下的機器學習(2025)】第七講：DeepSeek-R1 這類大型語言模型是如何進行「深度思考」（Reasoning）的？
-
-# === creator ===
 channel: Hung-yi Lee
-channel_url: "https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ"
+channel_url: https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ
 channel_follower_count: 424000
-
-# === time ===
 duration: 4709
 upload_date: 20250425
-fetched_at: "2026-05-17T08:20:50+00:00"
-
-# === visual ===
-thumbnail: "https://i.ytimg.com/vi/bJFtcwLSNxI/sddefault.jpg"
-
-# === content structure ===
+fetched_at: 2026-05-16T07:58:50+00:00
+thumbnail: https://i.ytimg.com/vi/bJFtcwLSNxI/sddefault.jpg
 chapters: []
 chapters_authoritative: false
 has_real_chapters: false
 has_key_moments: false
-
-# === language ===
-language: null
+language:
 original_language: zh
-
-# === subtitles ===
 manual_track_languages:
   - zh-TW
 auto_track_languages: []
 transcript_status: failed
 transcript_source: none
-transcript_target: null
+transcript_target:
 is_translated: false
-
-# === engagement ===
-view_count: 60305
+view_count: 60264
 like_count: 1034
-
-# === status ===
 availability: public
 live_status: not_live
-
-# === lifecycle ===
 state: active
 ---
 

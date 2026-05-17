@@ -57,4 +57,4 @@ state: active                       # active | archived
 
 ## Transcript
 
-{Flattened transcript snippets joined as paragraphs. No VTT timing tags. Optionally prepend `[MM:SS]` brackets every ~30 seconds for debug cross-reference; skip otherwise. The summarizer reads this; you don't.}
+{Flattened transcript snippets joined as paragraphs. Each paragraph is prefixed with `[HH:MM:SS]` corresponding to the start of its first snippet, so the summarizer can produce time-anchored sections even for videos with no Chapters. No VTT timing tags or word-level timing markers.}

@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: 程序员老王
 channel_url: "https://www.youtube.com/channel/UCL7SP6Q4VLVPv_zvzuZ_mwQ"
-channel_follower_count: 48800
+channel_follower_count: 48500
 
 # === time ===
 duration: 810
 upload_date: 20260319
-fetched_at: "2026-05-17T08:19:57+00:00"
+fetched_at: "2026-05-16T07:58:00+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/hZ6fSjPGQWM/maxresdefault.jpg"
@@ -45,8 +45,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 8933
-like_count: 367
+view_count: 8902
+like_count: 366
 
 # === status ===
 availability: public
