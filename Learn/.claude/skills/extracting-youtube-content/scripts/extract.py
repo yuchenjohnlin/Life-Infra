@@ -243,34 +243,39 @@ def _timestamp_to_seconds(h: str | None, m: str, s: str) -> int:
     return (int(h) if h else 0) * 3600 + int(m) * 60 + int(s)
 
 
-def parse_description_timestamps(description: str) -> list[tuple[int, bool]]:
-    """Return (seconds, is_line_start) for each MM:SS or HH:MM:SS occurrence."""
-    out = []
+def parse_description_timestamps(description: str) -> list[int]:
+    """Return seconds for every line where a `MM:SS` or `HH:MM:SS` timestamp is the
+    first non-whitespace token on the line.
+
+    Leading whitespace before the timestamp is tolerated — YouTube's own chapter
+    parser accepts indented timestamp lists. See `chapter-detection-analysis.md`
+    (yDc0_8emz7M case) for the empirical evidence.
+    """
+    out: list[int] = []
     for ln in (description or "").splitlines():
         m = CHAPTER_TS_RE.match(ln.lstrip())
-        if not m:
-            continue
-        is_line_start = ln.startswith(m.group())  # no leading whitespace
-        secs = _timestamp_to_seconds(m.group(1), m.group(2), m.group(3))
-        out.append((secs, is_line_start))
+        if m:
+            out.append(_timestamp_to_seconds(m.group(1), m.group(2), m.group(3)))
     return out
 
 
 def chapters_authoritative(description: str) -> bool:
-    """5-rule check per Discussion.md §1.2.iii / YouTube Help:
-    (1) ≥3 timestamps, (2) first is 0:00, (3) strictly ascending,
-    (4) gaps ≥10s, (5) each at line-start (no leading whitespace).
+    """4-rule check on the description (R5 was dropped — see chapter-detection-analysis.md):
+    (1) ≥3 timestamps, (2) first is 0:00, (3) strictly ascending, (4) gaps ≥10s.
+
+    The original "R5: each at line-start with no leading whitespace" was too strict
+    relative to YouTube's actual parser. The regex match against `lstrip()` in
+    `parse_description_timestamps` already enforces the relevant invariant
+    (timestamp is the first non-whitespace token on its line).
     """
     hits = parse_description_timestamps(description or "")
     if len(hits) < MIN_CHAPTER_COUNT:
         return False
-    if hits[0][0] != 0:
+    if hits[0] != 0:
         return False
-    if not all(a[0] < b[0] for a, b in zip(hits, hits[1:])):
+    if not all(a < b for a, b in zip(hits, hits[1:])):
         return False
-    if not all(b[0] - a[0] >= MIN_CHAPTER_GAP_SECONDS for a, b in zip(hits, hits[1:])):
-        return False
-    if not all(h[1] for h in hits):
+    if not all(b - a >= MIN_CHAPTER_GAP_SECONDS for a, b in zip(hits, hits[1:])):
         return False
     return True
 
