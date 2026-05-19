@@ -1,54 +1,37 @@
 ---
-# === identity ===
 id: 2rcJdFuNbZQ
-url: "https://www.youtube.com/watch?v=2rcJdFuNbZQ"
+url: https://www.youtube.com/watch?v=2rcJdFuNbZQ
 title: 解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理
 aliases:
   - 解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理
-
-# === creator ===
 channel: Hung-yi Lee
-channel_url: "https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ"
+channel_url: https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ
 channel_follower_count: 424000
-
-# === time ===
 duration: 4997
 upload_date: 20260309
-fetched_at: "2026-05-17T08:20:43+00:00"
-
-# === visual ===
-thumbnail: "https://i.ytimg.com/vi/2rcJdFuNbZQ/sddefault.jpg"
-
-# === content structure ===
+fetched_at: 2026-05-17T08:20:43+00:00
+thumbnail: https://i.ytimg.com/vi/2rcJdFuNbZQ/sddefault.jpg
 chapters:
-  - {start: 0, title: "<Untitled Chapter 1>"}
-  - {start: 375, title: "此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息"}
+  - start: 0
+    title: <Untitled Chapter 1>
+  - start: 375
+    title: 此處現場用手機跟 "小金" (在現場的另外一台筆電上) 傳訊息
 chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
-
-# === language ===
-language: null
+has_real_chapters:
+has_key_moments:
+language:
 original_language: zh
-
-# === subtitles ===
 manual_track_languages:
   - zh-TW
 auto_track_languages: []
 transcript_status: failed
 transcript_source: none
-transcript_target: null
+transcript_target:
 is_translated: false
-
-# === engagement ===
 view_count: 923755
 like_count: 21688
-
-# === status ===
 availability: public
 live_status: not_live
-
-# === lifecycle ===
 state: active
 ---
 

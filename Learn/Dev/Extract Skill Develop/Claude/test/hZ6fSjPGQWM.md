@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: 程序员老王
 channel_url: "https://www.youtube.com/channel/UCL7SP6Q4VLVPv_zvzuZ_mwQ"
-channel_follower_count: 48800
+channel_follower_count: 48900
 
 # === time ===
 duration: 810
 upload_date: 20260319
-fetched_at: "2026-05-17T08:19:57+00:00"
+fetched_at: "2026-05-19T04:48:12+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/hZ6fSjPGQWM/maxresdefault.jpg"
@@ -28,9 +28,7 @@ chapters:
   - {start: 401, title: LoRA}
   - {start: 693, title: 为什么LoRA有效}
   - {start: 766, title: 最后}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -45,8 +43,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 8933
-like_count: 367
+view_count: 8997
+like_count: 368
 
 # === status ===
 availability: public

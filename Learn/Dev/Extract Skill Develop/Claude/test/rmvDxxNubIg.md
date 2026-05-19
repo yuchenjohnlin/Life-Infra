@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: AI Engineer
 channel_url: "https://www.youtube.com/channel/UCLKPca3kwwd-B59HNr-_lvA"
-channel_follower_count: 473000
+channel_follower_count: 477000
 
 # === time ===
 duration: 1231
 upload_date: 20251202
-fetched_at: "2026-05-17T08:19:07+00:00"
+fetched_at: "2026-05-19T04:47:29+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/rmvDxxNubIg/maxresdefault.jpg"
@@ -36,9 +36,7 @@ chapters:
   - {start: 1058, title: "don't outsource think"}
   - {start: 1125, title: "rpi: smart zone"}
   - {start: 1186, title: cultural change hard ‍‍}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: en-US
@@ -54,8 +52,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 549045
-like_count: 16483
+view_count: 552241
+like_count: 16538
 
 # === status ===
 availability: public

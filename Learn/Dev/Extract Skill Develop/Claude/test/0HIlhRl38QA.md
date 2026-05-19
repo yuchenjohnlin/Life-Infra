@@ -14,7 +14,7 @@ channel_follower_count: 54800
 # === time ===
 duration: 391
 upload_date: 20260122
-fetched_at: "2026-05-17T08:20:03+00:00"
+fetched_at: "2026-05-19T04:48:15+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/0HIlhRl38QA/maxresdefault.jpg"
@@ -25,9 +25,7 @@ chapters:
   - {start: 87, title: Back to Software Engineering}
   - {start: 181, title: Skill 300}
   - {start: 317, title: Skill Pro Max Plus}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -45,7 +43,7 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 39646
+view_count: 39677
 like_count: 1062
 
 # === status ===

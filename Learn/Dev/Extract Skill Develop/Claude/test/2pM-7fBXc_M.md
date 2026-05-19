@@ -14,7 +14,7 @@ channel_follower_count: 1690000
 # === time ===
 duration: 1623
 upload_date: 20260322
-fetched_at: "2026-05-17T08:20:10+00:00"
+fetched_at: "2026-05-19T04:48:21+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/2pM-7fBXc_M/maxresdefault.jpg"
@@ -31,9 +31,7 @@ chapters:
   - {start: 1155, title: MCP 簡介}
   - {start: 1242, title: 壓縮對話和用量檢查}
   - {start: 1290, title: Vibe Coding 實作範例}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -50,8 +48,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 395877
-like_count: 13128
+view_count: 398544
+like_count: 13186
 
 # === status ===
 availability: public

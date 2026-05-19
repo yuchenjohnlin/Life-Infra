@@ -9,21 +9,19 @@ aliases:
 # === creator ===
 channel: TGLTommy
 channel_url: "https://www.youtube.com/channel/UCVezb06mOvkXDwB8ibaOlYQ"
-channel_follower_count: 10300
+channel_follower_count: 10400
 
 # === time ===
 duration: 1356
 upload_date: 20260330
-fetched_at: "2026-05-17T08:20:34+00:00"
+fetched_at: "2026-05-19T04:48:48+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/Xq-s_hAjADw/maxresdefault.jpg"
 
 # === content structure ===
 chapters: []
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: null
@@ -38,8 +36,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 80518
-like_count: 1781
+view_count: 80918
+like_count: 1787
 
 # === status ===
 availability: public

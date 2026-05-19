@@ -14,7 +14,7 @@ channel_follower_count: 424000
 # === time ===
 duration: 5541
 upload_date: 20260412
-fetched_at: "2026-05-17T08:20:46+00:00"
+fetched_at: "2026-05-19T04:49:01+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/R6fZR_9kmIw/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFQgYyhlMA8=&rs=AOn4CLAfbCs7OI-gYgYYm__yjmruRq5T3A"
@@ -23,9 +23,7 @@ thumbnail: "https://i.ytimg.com/vi/R6fZR_9kmIw/hqdefault.jpg?sqp=-oaymwEmCOADEOg
 chapters:
   - {start: 0, title: "<Untitled Chapter 1>"}
   - {start: 5150, title: 就我所知，在小金做這個實驗時，Antropic 官方的 Haiku 3.5 API 已經退役，小金的  Haiku 3.5 是在 Open Router 的服務上用的}
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: null
@@ -41,8 +39,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 112683
-like_count: 2398
+view_count: 114398
+like_count: 2424
 
 # === status ===
 availability: public

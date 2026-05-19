@@ -14,7 +14,7 @@ channel_follower_count: 4990000
 # === time ===
 duration: 11752
 upload_date: 20260212
-fetched_at: "2026-05-17T08:19:26+00:00"
+fetched_at: "2026-05-19T04:47:47+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/YFjfBk8HI5o/maxresdefault.jpg"
@@ -42,9 +42,7 @@ chapters:
   - {start: 10340, title: "AI agents will replace 80% of apps"}
   - {start: 10857, title: "Will AI replace programmers?"}
   - {start: 11577, title: Future of OpenClaw community}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: en-US
@@ -63,8 +61,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 1237845
-like_count: 22485
+view_count: 1240915
+like_count: 22518
 
 # === status ===
 availability: public

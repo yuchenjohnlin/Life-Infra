@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: Sequoia Capital
 channel_url: "https://www.youtube.com/channel/UCWrF0oN6unbXrWsTN7RctTw"
-channel_follower_count: 194000
+channel_follower_count: 197000
 
 # === time ===
 duration: 1789
 upload_date: 20260429
-fetched_at: "2026-05-17T08:19:11+00:00"
+fetched_at: "2026-05-19T04:47:33+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/96jN2OCOfLs/maxresdefault.jpg"
@@ -31,9 +31,7 @@ chapters:
   - {start: 819, title: Founder Advice and Automation}
   - {start: 946, title: From Vibe Coding to Agent Engineering}
   - {start: 1517, title: Agents Everywhere and Learning}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: en-US
@@ -49,8 +47,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 925465
-like_count: 21516
+view_count: 963964
+like_count: 21974
 
 # === status ===
 availability: public

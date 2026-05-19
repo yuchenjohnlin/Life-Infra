@@ -14,16 +14,14 @@ channel_follower_count: 19200
 # === time ===
 duration: 703
 upload_date: 20260126
-fetched_at: "2026-05-17T08:20:27+00:00"
+fetched_at: "2026-05-19T04:48:42+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/8NGznVwNHGY/maxresdefault.jpg"
 
 # === content structure ===
 chapters: []
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: null
@@ -38,8 +36,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 9316
-like_count: 221
+view_count: 9347
+like_count: 223
 
 # === status ===
 availability: public

@@ -14,7 +14,7 @@ channel_follower_count: 424000
 # === time ===
 duration: 4997
 upload_date: 20260309
-fetched_at: "2026-05-17T08:20:43+00:00"
+fetched_at: "2026-05-19T04:48:56+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/2rcJdFuNbZQ/sddefault.jpg"
@@ -23,9 +23,7 @@ thumbnail: "https://i.ytimg.com/vi/2rcJdFuNbZQ/sddefault.jpg"
 chapters:
   - {start: 0, title: "<Untitled Chapter 1>"}
   - {start: 375, title: "此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息"}
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: null
@@ -41,8 +39,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 923755
-like_count: 21688
+view_count: 929457
+like_count: 21730
 
 # === status ===
 availability: public

@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: AI Engineer
 channel_url: "https://www.youtube.com/channel/UCLKPca3kwwd-B59HNr-_lvA"
-channel_follower_count: 473000
+channel_follower_count: 477000
 
 # === time ===
 duration: 6453
 upload_date: 20260430
-fetched_at: "2026-05-17T08:19:23+00:00"
+fetched_at: "2026-05-19T04:47:44+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/cVzf49yg0D8/maxresdefault.jpg"
@@ -36,9 +36,7 @@ chapters:
   - {start: 5217, title: Real-world business use cases for conversational agents}
   - {start: 5702, title: Multimodal grounding and handling audio inputs}
   - {start: 6000, title: Discussion on personalization and speaker identification}
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: true
+chapters_usable: true
 
 # === language ===
 language: en-US
@@ -54,7 +52,7 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 5723
+view_count: 5760
 like_count: 131
 
 # === status ===

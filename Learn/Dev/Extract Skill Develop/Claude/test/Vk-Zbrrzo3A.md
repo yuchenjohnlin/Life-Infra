@@ -9,21 +9,19 @@ aliases:
 # === creator ===
 channel: Why QQ
 channel_url: "https://www.youtube.com/channel/UClkMmnf9yOKbYRMfOv1HvwA"
-channel_follower_count: 2510
+channel_follower_count: 2590
 
 # === time ===
 duration: 436
 upload_date: 20260405
-fetched_at: "2026-05-17T08:20:24+00:00"
+fetched_at: "2026-05-19T04:48:39+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/Vk-Zbrrzo3A/maxresdefault.jpg"
 
 # === content structure ===
 chapters: []
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: null
@@ -38,8 +36,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 19378
-like_count: 524
+view_count: 19633
+like_count: 527
 
 # === status ===
 availability: public

@@ -14,7 +14,7 @@ channel_follower_count: 1370000
 # === time ===
 duration: 2882
 upload_date: 20260418
-fetched_at: "2026-05-17T08:19:16+00:00"
+fetched_at: "2026-05-19T04:47:37+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/njWyDHKYeVA/maxresdefault.jpg"
@@ -27,9 +27,7 @@ chapters:
   - {start: 967, title: "Forging the power core: Self hosted LLMs"}
   - {start: 1682, title: "Forging the citadel's central core: Deploy vLLM"}
   - {start: 2639, title: Summary}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: en-US
@@ -46,8 +44,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 10558
-like_count: 391
+view_count: 10629
+like_count: 393
 
 # === status ===
 availability: public

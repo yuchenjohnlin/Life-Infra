@@ -11,7 +11,7 @@
 | Extractor script | [`Learn/.claude/skills/extracting-youtube-content/scripts/extract.py`](../../.claude/skills/extracting-youtube-content/scripts/extract.py) (~430 lines, 27 KB) |
 | Output schema | [`Learn/10-Raw/youtube/_template.md`](../../../10-Raw/youtube/_template.md) (written earlier) |
 | Downstream view | [`Learn/10-Raw/youtube.base`](../../../10-Raw/youtube.base) (written earlier) |
-| Design rationale | [`Discussion.md`](Discussion.md) (locked design, 1000+ lines) |
+| Design rationale | [`Discussion.md`](Learn/Dev/Extract%20Skill%20Develop/Claude/Initial%20Implementation/Discussion.md) (locked design, 1000+ lines) |
 
 Canonical invocation:
 ```bash
@@ -25,7 +25,7 @@ The skill name now appears in the available-skills list and will trigger on any 
 
 ## 2. Decisions diff vs Discussion.md
 
-Implementation matched the locked design in [Discussion.md](Discussion.md) almost exactly. Three small things to flag:
+Implementation matched the locked design in [Discussion.md](Learn/Dev/Extract%20Skill%20Develop/Claude/Initial%20Implementation/Discussion.md) almost exactly. Three small things to flag:
 
 1. **`transcript_source` preserves the exact track code, not the normalized one.** When the cascade matches `manual` track `en-US` because `en` is in `fluent_languages`, `transcript_source` is recorded as `manual_en-US` (not `manual_en`). The match logic normalizes; the recorded artifact preserves provenance. Verified on `nEHNwdrbfGA` (manual `en-US` + auto `en` → picked `manual_en-US`). This is intentional and matches the template's `transcript_source: manual_<lang>` doc-comment.
 2. **`aliases` list always populated** with the title even when the title contains characters that complicate wikilink resolution (e.g. `[`, `]`, `:`). Obsidian aliases tolerate this — verified by reading back a sample file. No quoting issues observed.

@@ -2,7 +2,7 @@
 
 Analysis of how `chapters_authoritative`, `has_real_chapters`, and `has_key_moments` resolve across all 28 testset videos. Surfaces one real bug in the 5-rule check (R5 is too strict) and confirms the rest of the design is correct.
 
-Source data: 28 raw files under [`./test/`](test/) (copy of `Learn/10-Raw/test/` taken 2026-05-18). View as a table via [`./test.base`](test.base).
+Source data: 28 raw files under [`./test/`](test/) (copy of `Learn/10-Raw/test/` taken 2026-05-18). View as a table via [`./test.base`](Learn/Dev/Extract%20Skill%20Develop/Claude/test.base).
 
 ## TL;DR
 

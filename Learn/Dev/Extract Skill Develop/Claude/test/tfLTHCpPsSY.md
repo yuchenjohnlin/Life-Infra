@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: Silicon Valley Vector 硅谷坐标
 channel_url: "https://www.youtube.com/channel/UCsiOlr6emY5OxXF848EYqGw"
-channel_follower_count: 18700
+channel_follower_count: 19000
 
 # === time ===
 duration: 3710
 upload_date: 20260306
-fetched_at: "2026-05-17T08:20:17+00:00"
+fetched_at: "2026-05-19T04:48:29+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/tfLTHCpPsSY/maxresdefault.jpg"
@@ -32,9 +32,7 @@ chapters:
   - {start: 2480, title: 推理的未来：隐空间叠加态与并行推理}
   - {start: 3000, title: 小龙虾Agent：一个握有你所有秘密的笨小孩}
   - {start: 3330, title: Agent时代的社会冲击：洪水已来，大多数人浑然不觉}
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -49,8 +47,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 64256
-like_count: 1068
+view_count: 65118
+like_count: 1078
 
 # === status ===
 availability: public

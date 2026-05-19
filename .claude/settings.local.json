@@ -75,7 +75,27 @@
       "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'https://www.youtube.com/watch?v=YFjfBk8HI5o' --output-dir /tmp/yt-smoke)",
       "Bash(mkdir -p /tmp/yt-testrun)",
       "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'Learn/05-Extract/manual dev/yt-dlp/Claude/urls.md' --output-dir /tmp/yt-testrun --sleep 0.5)",
-      "Bash(echo \"exit=$?\")"
+      "Bash(echo \"exit=$?\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(gh pr create --title 'Drop R5 \\(line-start\\) from chapters_authoritative; add 28-video chapter analysis' --body ' *)",
+      "Bash(mkdir -p /tmp/yt-postfix)",
+      "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'Learn/05-Extract/manual dev/yt-dlp/Claude/urls.md' --output-dir /tmp/yt-postfix --force --sleep 0.5)",
+      "Bash(awk '-F: ' '{print $NF}')",
+      "Bash(sed -n '1,40p' \"/Users/yuchenlin/Desktop/Life-Infra/Learn/Dev/Extract Skill Develop/Claude/test/cVzf49yg0D8.md\")",
+      "Bash(sed -n '1,40p' \"/Users/yuchenlin/Desktop/Life-Infra/Learn/Dev/Extract Skill Develop/Claude/test/R6fZR_9kmIw.md\")",
+      "Bash(sed -n '1,40p' \"/Users/yuchenlin/Desktop/Life-Infra/Learn/Dev/Extract Skill Develop/Claude/test/tfLTHCpPsSY.md\")",
+      "Bash(mkdir -p /tmp/yt-verify)",
+      "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'https://www.youtube.com/watch?v=cVzf49yg0D8' --output-dir /tmp/yt-verify --force)",
+      "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'https://www.youtube.com/watch?v=R6fZR_9kmIw' --output-dir /tmp/yt-verify --force)",
+      "Bash('~/anaconda3/envs/life_infra/bin/python' Learn/.claude/skills/extracting-youtube-content/scripts/extract.py 'https://www.youtube.com/watch?v=tfLTHCpPsSY' --output-dir /tmp/yt-verify --force)",
+      "Bash(gh repo *)",
+      "Bash(gh issue create --title '[extracting-youtube-content] chapters_authoritative over-rejects useful chapters; watch-page fields don'\\\\''t drive any decision' --body ' *)",
+      "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "Bash(git stash *)",
+      "Bash(git reset *)",
+      "Bash(git push *)"
     ]
   }
 }
