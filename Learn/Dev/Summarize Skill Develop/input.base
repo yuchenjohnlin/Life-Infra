@@ -3,7 +3,7 @@ views:
     name: Chapter Info
     filters:
       and:
-        - file.inFolder("Learn/Dev/Extract Skill Develop/Claude/test")
+        - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
     groupBy:
       property: transcript_status
       direction: ASC
@@ -22,8 +22,8 @@ views:
       - property: channel
         direction: ASC
     columnSize:
-      note.url: 59
-      note.channel: 198
+      note.channel: 112
+      note.title: 141
       note.transcript_status: 82
       note.manual_track_languages: 130
       note.auto_track_languages: 56

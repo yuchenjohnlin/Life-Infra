@@ -1,3 +1,4 @@
+Work following up from [[Summarization Tests]] to create the separate summarization skill. 
 ## Summarization process 
 1. The raw file contains all of the content that we can possibly get, so it's kind of the ground truth, unless I start using speech detection. 
 2. We need to clean this ground truth and input, given the fact that transcripts would have llama 270b, which should be llama2 70b (find in Karpathy Case Study) However, where should this cleaning process live ? 
@@ -85,10 +86,11 @@ The following is the needed iterative discussion with AI to come up with the pla
 	So I guess we would use 5 videos, I0DrcsDf3Os, 96jN2OCOfLs, D7_ipDqhtwk, CEvIs9y1uog, 2pM-7fBXc_M, put them into another input folder.
 	
 1. Define several things the skill has to do 
-	1. Output Format - What sections should be included in the summarized file ?
-	2. Skill name and description - I think using summarization might not be the best word here, what to use ? 
-	3. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters.
-	4. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
+	1. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters. I think the description is very variant, so maybe just ask AI to 
+	2. 
+	3. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
+	4.  Output Format - What sections should be included in the summarized file ?
+	5. Skill name and description - I think using summarization might not be the best word here, what to use ? 
 
 
 2. Output of the summarization
