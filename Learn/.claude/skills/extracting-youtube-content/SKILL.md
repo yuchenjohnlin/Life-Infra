@@ -23,7 +23,7 @@ Query suffixes (`&t=`, `&list=`, `&index=`) are stripped. Bilibili and non-YouTu
 # Output
 
 - One markdown file per video at `Learn/10-Raw/youtube/<video_id>.md`.
-- Front-matter schema and body layout: see [`assets/_template.md`](assets/_template.md). ~24 fields covering identity, creator, time, visual, content structure (`chapters` + `chapters_usable`), language, subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, status, lifecycle. Body has `## Description` and `## Transcript` sections.
+- Front-matter schema and body layout: see [`assets/_template.md`](assets/_template.md). ~26 fields covering identity, creator, time, visual, content structure (`chapters` + `chapters_usable`), language, subtitles (`transcript_status`, `transcript_source`, `is_translated`, `transcript_error_type`, `transcript_error_stage`), engagement, status, lifecycle. Body has `## Description` and `## Transcript` sections.
 - Re-running is idempotent: existing files are skipped unless `--force`.
 
 # Prereq check
@@ -67,7 +67,7 @@ conda run -n life_infra python \
 
 Defaults: `--output-dir Learn/10-Raw/youtube`, `--fluent-languages zh,en` (first = translation target), sleep 0.4s between videos.
 
-The script prints a JSON summary line per video to stdout (`{video_id, transcript_status, transcript_source, original_language, chapters_usable, chapter_count, manual_tracks, auto_tracks, error?}`).
+The script prints a JSON summary line per video to stdout (`{video_id, transcript_status, transcript_source, transcript_error_type, transcript_error_stage, original_language, chapters_usable, chapter_count, manual_tracks, auto_tracks, error?}`).
 
 # Stop here
 

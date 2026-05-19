@@ -163,23 +163,25 @@ def fetch_metadata(YoutubeDL, vid: str) -> dict:
 # Transcript list + filtering
 # ---------------------------------------------------------------------------
 
-def list_tracks(api_cls, errors, vid: str) -> tuple[list[Track], str]:
+def list_tracks(api_cls, errors, vid: str) -> tuple[list[Track], str, str | None]:
     """List available tracks for a video.
 
-    Returns (tracks, status). status is one of:
+    Returns (tracks, status, error_type). status is one of:
       - "available" : at least one usable track exists
       - "disabled"  : TranscriptsDisabled / NoTranscriptFound / VideoUnavailable
       - "failed"    : transient (IpBlocked / network). Caller should backoff/retry.
+
+    error_type is the exception class name for disabled / failed, else None.
     """
     try:
         tl = api_cls().list(vid)
-    except (errors.TranscriptsDisabled, errors.NoTranscriptFound, errors.VideoUnavailable):
-        return [], "disabled"
-    except errors.IpBlocked:
-        return [], "failed"
+    except (errors.TranscriptsDisabled, errors.NoTranscriptFound, errors.VideoUnavailable) as e:
+        return [], "disabled", type(e).__name__
+    except errors.IpBlocked as e:
+        return [], "failed", type(e).__name__
     except Exception as e:  # noqa: BLE001 — unknown transcript-api error
         print(f"[warn] {vid}: list() raised {type(e).__name__}: {e}", file=sys.stderr)
-        return [], "failed"
+        return [], "failed", type(e).__name__
     raw = []
     for t in tl:
         raw.append(Track(
@@ -188,7 +190,11 @@ def list_tracks(api_cls, errors, vid: str) -> tuple[list[Track], str]:
             is_translatable=t.is_translatable,
             obj=t,
         ))
-    return filter_tracks(raw), "available" if raw else "disabled"
+    filtered = filter_tracks(raw)
+    if not filtered:
+        # tl iterated to empty (e.g. only live_chat) — treat as disabled with synthetic label
+        return [], "disabled", "NoUsableTracks"
+    return filtered, "available", None
 
 
 def filter_tracks(tracks: list[Track]) -> list[Track]:
@@ -428,7 +434,8 @@ def render_frontmatter(record: dict) -> str:
         ("content structure", ["chapters", "chapters_usable"]),
         ("language",          ["language", "original_language"]),
         ("subtitles",         ["manual_track_languages", "auto_track_languages",
-                               "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
+                               "transcript_status", "transcript_source", "transcript_target", "is_translated",
+                               "transcript_error_type", "transcript_error_stage"]),
         ("engagement",        ["view_count", "like_count"]),
         ("status",            ["availability", "live_status"]),
         ("lifecycle",         ["state"]),
@@ -497,14 +504,22 @@ def process_one(
         return {"video_id": vid, "error_type": type(e).__name__, "error": str(e)[:200]}
 
     # 2. Transcript inventory (with retry on transient failure)
-    tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
+    tracks, t_status, t_error_type = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
     if t_status == "failed":
         # exponential backoff: 0.5 → 2 → 8
         for delay in (0.5, 2.0, 8.0):
             time.sleep(delay)
-            tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
+            tracks, t_status, t_error_type = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
             if t_status != "failed":
                 break
+
+    # Stage tracking — which step did things break at (if anywhere)?
+    # disabled  → list
+    # failed    → list (so far; may be reassigned to "fetch" or "translate" below)
+    # available → None (overwritten when fetch succeeds)
+    # unavailable → translate (set below)
+    transcript_error_type: str | None = t_error_type
+    transcript_error_stage: str | None = "list" if t_status in {"disabled", "failed"} else None
 
     manual_codes = [t.language_code for t in tracks if not t.is_generated]
     auto_codes   = [t.language_code for t in tracks if t.is_generated]
@@ -529,6 +544,8 @@ def process_one(
         choice = choose_transcript(tracks, fluent_languages)
         if choice is None:
             final_status = "unavailable"
+            transcript_error_stage = "translate"
+            # leave transcript_error_type as None — best-effort (no specific exception bubbled up)
         else:
             try:
                 snippets = fetch_snippets(choice)
@@ -537,8 +554,12 @@ def process_one(
                 transcript_target = choice.transcript_target
                 is_translated = choice.is_translated
                 final_status = "available"
+                transcript_error_type = None
+                transcript_error_stage = None
             except Exception as e:  # noqa: BLE001
                 final_status = "failed"
+                transcript_error_type = type(e).__name__
+                transcript_error_stage = "fetch"
                 print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
 
     # 6. Build record (matches _template.md)
@@ -568,6 +589,8 @@ def process_one(
         "transcript_source":        transcript_source,
         "transcript_target":        transcript_target,
         "is_translated":            is_translated,
+        "transcript_error_type":    transcript_error_type,
+        "transcript_error_stage":   transcript_error_stage,
         "view_count":               int(info.get("view_count") or 0),
         "like_count":               int(info.get("like_count") or 0),
         "availability":             info.get("availability") or "",
@@ -579,15 +602,17 @@ def process_one(
     atomic_write(out_path, text)
 
     return {
-        "video_id":          vid,
-        "transcript_status": final_status,
-        "transcript_source": transcript_source,
-        "original_language": original_language,
-        "chapters_usable":   is_chapters_usable,
-        "chapter_count":     len([c for c in chapters_field if c["title"] and c["title"] != YTDLP_PLACEHOLDER_TITLE]),
-        "manual_tracks":     manual_codes,
-        "auto_tracks":       auto_codes,
-        "path":              str(out_path),
+        "video_id":                vid,
+        "transcript_status":       final_status,
+        "transcript_source":       transcript_source,
+        "transcript_error_type":   transcript_error_type,
+        "transcript_error_stage":  transcript_error_stage,
+        "original_language":       original_language,
+        "chapters_usable":         is_chapters_usable,
+        "chapter_count":           len([c for c in chapters_field if c["title"] and c["title"] != YTDLP_PLACEHOLDER_TITLE]),
+        "manual_tracks":           manual_codes,
+        "auto_tracks":             auto_codes,
+        "path":                    str(out_path),
     }
 
 

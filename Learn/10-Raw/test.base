@@ -15,6 +15,8 @@ views:
       - transcript_status
       - chapters
       - transcript_source
+      - transcript_error_type
+      - transcript_error_stage
     sort:
       - property: transcript_source
         direction: ASC

@@ -14,6 +14,8 @@ views:
       - chapters_usable
       - transcript_status
       - transcript_source
+      - transcript_error_type
+      - transcript_error_stage
       - manual_track_languages
       - auto_track_languages
     sort:

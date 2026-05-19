@@ -35,6 +35,8 @@ transcript_status: available        # available | disabled | unavailable | faile
 transcript_source: none             # manual_<lang> | auto_<lang> | whisper_local | none
 transcript_target: null             # only set when is_translated=true
 is_translated: false                # convenience boolean for grep / .base filter
+transcript_error_type: null         # exception class name (e.g. IpBlocked, TranscriptsDisabled); null when status=available
+transcript_error_stage: null        # list | fetch | translate; null when status=available
 
 # === engagement ===
 view_count: 0
