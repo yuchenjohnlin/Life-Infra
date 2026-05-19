@@ -9,21 +9,19 @@ aliases:
 # === creator ===
 channel: Berkeley RDI
 channel_url: "https://www.youtube.com/channel/UCB67PxhB5LAWEbI4etQS7aw"
-channel_follower_count: 37900
+channel_follower_count: 38000
 
 # === time ===
 duration: 4853
 upload_date: 20250303
-fetched_at: "2026-05-17T08:19:50+00:00"
+fetched_at: "2026-05-19T04:48:07+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/cMiu3A7YBks/maxresdefault.jpg"
 
 # === content structure ===
 chapters: []
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: en
@@ -40,7 +38,7 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 8467
+view_count: 8475
 like_count: 167
 
 # === status ===

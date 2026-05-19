@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: 马克的技术工作坊
 channel_url: "https://www.youtube.com/channel/UCbIeBdHsfTpHsICZy59ZzhA"
-channel_follower_count: 105000
+channel_follower_count: 106000
 
 # === time ===
 duration: 1062
 upload_date: 20251231
-fetched_at: "2026-05-17T08:20:31+00:00"
+fetched_at: "2026-05-19T04:48:45+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/yDc0_8emz7M/maxresdefault.jpg"
@@ -28,9 +28,7 @@ chapters:
   - {start: 681, title: Agent Skill 的高级用法（Script）}
   - {start: 829, title: 渐进式披露机制}
   - {start: 942, title: Agent Skill vs MCP}
-chapters_authoritative: false
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -47,8 +45,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 319359
-like_count: 8430
+view_count: 320767
+like_count: 8466
 
 # === status ===
 availability: public

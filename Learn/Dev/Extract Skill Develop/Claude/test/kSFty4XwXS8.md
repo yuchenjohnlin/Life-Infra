@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: AgentCrew Academy
 channel_url: "https://www.youtube.com/channel/UCAQFESUI6Mgt6V0hmw4LuSw"
-channel_follower_count: 7430
+channel_follower_count: 7510
 
 # === time ===
 duration: 1091
 upload_date: 20260417
-fetched_at: "2026-05-17T08:20:06+00:00"
+fetched_at: "2026-05-19T04:48:18+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/kSFty4XwXS8/maxresdefault.jpg"
@@ -28,9 +28,7 @@ chapters:
   - {start: 689, title: 強制執行的邏輯鉤子}
   - {start: 950, title: 四大功能實戰經驗分享}
   - {start: 1020, title: 收尾}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -46,8 +44,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 19680
-like_count: 522
+view_count: 19876
+like_count: 527
 
 # === status ===
 availability: public

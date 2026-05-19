@@ -21,9 +21,8 @@ thumbnail: https://i.ytimg.com/vi/VIDEO_ID/maxresdefault.jpg
 
 # === content structure ===
 chapters: []                        # list of {start, title} from yt-dlp; may be empty
-chapters_authoritative: false       # bool, true iff description timestamps pass the 5 rules
-has_real_chapters: false            # OPTIONAL: from watch-page engagementPanels.targetId
-has_key_moments: false              # OPTIONAL: from watch-page engagementPanels.targetId
+chapters_usable: false              # bool, true iff yt-dlp returned ≥3 non-placeholder chapters
+                                    # (summarizer should use `chapters` for segmentation iff true)
 
 # === language ===
 language: null                      # yt-dlp's "language" field (uploader-declared, often null)

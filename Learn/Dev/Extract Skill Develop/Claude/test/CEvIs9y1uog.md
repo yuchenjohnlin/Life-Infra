@@ -9,21 +9,19 @@ aliases:
 # === creator ===
 channel: AI Engineer
 channel_url: "https://www.youtube.com/channel/UCLKPca3kwwd-B59HNr-_lvA"
-channel_follower_count: 473000
+channel_follower_count: 477000
 
 # === time ===
 duration: 982
 upload_date: 20251208
-fetched_at: "2026-05-17T08:19:30+00:00"
+fetched_at: "2026-05-19T04:47:51+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/CEvIs9y1uog/maxresdefault.jpg"
 
 # === content structure ===
 chapters: []
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: false
+chapters_usable: false
 
 # === language ===
 language: en-US
@@ -39,8 +37,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 1333286
-like_count: 27622
+view_count: 1344580
+like_count: 27833
 
 # === status ===
 availability: public

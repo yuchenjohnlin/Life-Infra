@@ -4,17 +4,19 @@
 Output: one `<video_id>.md` per video at `Learn/10-Raw/youtube/`, conformant to
 `Learn/10-Raw/youtube/_template.md`. See SKILL.md and Discussion.md for full rationale.
 
-Design notes (LOCKED — see Discussion.md):
+Design notes (LOCKED — see Discussion.md and 2026-05-19-issue-chapters-usable.md):
 - yt-dlp used as a Python MODULE (not subprocess); in-memory dict; no intermediate JSON file.
 - youtube-transcript-api is the source of truth for subtitle tracks (yt-dlp's subtitles /
   automatic_captions fields are ignored — they have 4 documented bugs).
-- chapters_authoritative: deterministic 5-rule check on description, no AI.
+- chapters_usable: simple count of non-placeholder chapters yt-dlp returned (≥3 → true).
+  Replaces the older 4-rule "chapters_authoritative" check (which was too strict and
+  excluded Key-moments cases the summarizer should still use).
 - original_language: strict cascade — auto > single-manual > yt-dlp.language (corroborator) >
   fluent_languages tiebreaker > None.
 - transcript selection: native fluent (manual > auto, earlier fluent > later) → translate via
   transcript-api → unavailable. Whisper fallback NOT implemented in v1.
-- Watch-page fetch: default on; parses `engagement-panel-macro-markers-*` to distinguish
-  real Chapters vs Key moments.
+- Watch-page fetch removed: has_real_chapters / has_key_moments were informational only
+  and didn't drive any decision; chapters_usable now subsumes the relevant signal.
 - Per-video try/except; batch never aborts; resumable via filename existence check.
 - Atomic writes (tmp + os.replace).
 """
@@ -27,8 +29,6 @@ import os
 import re
 import sys
 import time
-import urllib.parse
-import urllib.request
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -51,10 +51,11 @@ YT_URL_RE = re.compile(
 )
 BILIBILI_URL_RE = re.compile(r"https?://(?:www\.)?bilibili\.com/", re.I)
 
-# 5-rule chapter check helpers
-CHAPTER_TS_RE = re.compile(r"^(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\b")
-MIN_CHAPTER_COUNT = 3
-MIN_CHAPTER_GAP_SECONDS = 10
+# chapters_usable threshold: yt-dlp chapter list (excluding placeholder titles) must have ≥3 entries
+MIN_USABLE_CHAPTER_COUNT = 3
+# Placeholder yt-dlp inserts when its description-regex path 3 fires and the first description
+# timestamp isn't at 0:00. Excluding it gives the count of "real" chapter entries.
+YTDLP_PLACEHOLDER_TITLE = "<Untitled Chapter 1>"
 
 # yt-dlp internal multi-track suffix pattern (e.g. "en-j3PyPqV-e1s", "zh-TW-RsSZZSfhlqk")
 INTERNAL_TRACK_SUFFIX_RE = re.compile(r"^([a-z]{2,3}(?:-[A-Za-z]{2,4})?)-[A-Za-z0-9_-]{10,}$")
@@ -93,8 +94,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                    help="Comma-separated priority list, first = translation target (default: zh,en).")
     p.add_argument("--force", action="store_true",
                    help="Overwrite existing raw files (default: skip).")
-    p.add_argument("--no-watch-page", action="store_true",
-                   help="Skip the optional watch-page fetch for chapter-source flagging.")
     p.add_argument("--sleep", type=float, default=DEFAULT_SLEEP,
                    help=f"Seconds to sleep between videos (default: {DEFAULT_SLEEP}).")
     return p.parse_args(argv)
@@ -207,77 +206,38 @@ def filter_tracks(tracks: list[Track]) -> list[Track]:
 
 
 # ---------------------------------------------------------------------------
-# Watch-page fetch (optional) — distinguishes real Chapters vs Key moments
+# chapters_usable — is yt-dlp's chapter list meaningful for segmentation?
 # ---------------------------------------------------------------------------
+#
+# History: this replaces the earlier `chapters_authoritative` 4-rule check on the
+# description (≥3 timestamps, first=0:00, strictly ascending, gaps≥10s). The strict
+# rules over-rejected: Key-moments cases like cVzf49yg0D8 (description starts at 0:14),
+# tfLTHCpPsSY (one out-of-order timestamp), and 4gciWspBVHw all have real chapters
+# the summarizer should use. The new rule simply asks: did yt-dlp produce a non-trivial
+# chapter list? If so, trust it for segmentation; the summarizer can sanity-check
+# individual titles itself. The watch-page fetch (has_real_chapters / has_key_moments)
+# was also removed in this change — those two booleans were informational only and
+# didn't drive any decision. See 2026-05-19-issue-chapters-usable.md for the diff.
 
-def fetch_watch_page_flags(vid: str) -> tuple[bool | None, bool | None]:
-    """Return (has_real_chapters, has_key_moments) by inspecting engagementPanels in the watch page HTML.
 
-    Returns (None, None) on any fetch failure — caller writes `null` to frontmatter.
+def chapters_usable(chapters: list[dict]) -> bool:
+    """True iff yt-dlp returned at least MIN_USABLE_CHAPTER_COUNT (default 3) chapters
+    with real titles (excluding the `<Untitled Chapter 1>` placeholder that yt-dlp
+    inserts when its description-regex path 3 fires and the first description timestamp
+    isn't at 0:00).
+
+    This catches all three yt-dlp chapter sources uniformly:
+      - path 1 (real Chapters via chapteredPlayerBarRenderer)
+      - path 2 (Key moments via macroMarkersListItemRenderer)
+      - path 3 (description regex fallback)
+    while still excluding lone-annotation noise like R6fZR_9kmIw / 2rcJdFuNbZQ
+    (each has exactly 1 real chapter entry plus the placeholder).
     """
-    url = f"https://www.youtube.com/watch?v={vid}"
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-            "Accept-Language": "en-US,en;q=0.9",
-        },
-    )
-    try:
-        html = urllib.request.urlopen(req, timeout=15).read().decode("utf-8", "replace")
-    except Exception as e:  # noqa: BLE001
-        print(f"[warn] {vid}: watch-page fetch failed: {type(e).__name__}: {e}", file=sys.stderr)
-        return None, None
-    panels = set(re.findall(r"engagement-panel-(macro-markers-[a-z-]+)", html))
-    return (
-        "macro-markers-description-chapters" in panels,
-        "macro-markers-auto-chapters" in panels,
-    )
-
-
-# ---------------------------------------------------------------------------
-# Chapter authoritativeness — the 5-rule check
-# ---------------------------------------------------------------------------
-
-def _timestamp_to_seconds(h: str | None, m: str, s: str) -> int:
-    return (int(h) if h else 0) * 3600 + int(m) * 60 + int(s)
-
-
-def parse_description_timestamps(description: str) -> list[int]:
-    """Return seconds for every line where a `MM:SS` or `HH:MM:SS` timestamp is the
-    first non-whitespace token on the line.
-
-    Leading whitespace before the timestamp is tolerated — YouTube's own chapter
-    parser accepts indented timestamp lists. See `chapter-detection-analysis.md`
-    (yDc0_8emz7M case) for the empirical evidence.
-    """
-    out: list[int] = []
-    for ln in (description or "").splitlines():
-        m = CHAPTER_TS_RE.match(ln.lstrip())
-        if m:
-            out.append(_timestamp_to_seconds(m.group(1), m.group(2), m.group(3)))
-    return out
-
-
-def chapters_authoritative(description: str) -> bool:
-    """4-rule check on the description (R5 was dropped — see chapter-detection-analysis.md):
-    (1) ≥3 timestamps, (2) first is 0:00, (3) strictly ascending, (4) gaps ≥10s.
-
-    The original "R5: each at line-start with no leading whitespace" was too strict
-    relative to YouTube's actual parser. The regex match against `lstrip()` in
-    `parse_description_timestamps` already enforces the relevant invariant
-    (timestamp is the first non-whitespace token on its line).
-    """
-    hits = parse_description_timestamps(description or "")
-    if len(hits) < MIN_CHAPTER_COUNT:
-        return False
-    if hits[0] != 0:
-        return False
-    if not all(a < b for a, b in zip(hits, hits[1:])):
-        return False
-    if not all(b - a >= MIN_CHAPTER_GAP_SECONDS for a, b in zip(hits, hits[1:])):
-        return False
-    return True
+    real = [
+        c for c in (chapters or [])
+        if c.get("title") and str(c["title"]).strip() not in {"", YTDLP_PLACEHOLDER_TITLE}
+    ]
+    return len(real) >= MIN_USABLE_CHAPTER_COUNT
 
 
 # ---------------------------------------------------------------------------
@@ -465,7 +425,7 @@ def render_frontmatter(record: dict) -> str:
         ("creator",           ["channel", "channel_url", "channel_follower_count"]),
         ("time",              ["duration", "upload_date", "fetched_at"]),
         ("visual",            ["thumbnail"]),
-        ("content structure", ["chapters", "chapters_authoritative", "has_real_chapters", "has_key_moments"]),
+        ("content structure", ["chapters", "chapters_usable"]),
         ("language",          ["language", "original_language"]),
         ("subtitles",         ["manual_track_languages", "auto_track_languages",
                                "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
@@ -549,21 +509,16 @@ def process_one(
     manual_codes = [t.language_code for t in tracks if not t.is_generated]
     auto_codes   = [t.language_code for t in tracks if t.is_generated]
 
-    # 3. Watch-page flags (optional)
-    if args.no_watch_page:
-        has_real, has_key = None, None
-    else:
-        has_real, has_key = fetch_watch_page_flags(vid)
-
-    # 4. Original-language detection
+    # 3. Original-language detection
     ytdlp_lang = info.get("language")
     original_language = detect_original_language(auto_codes, manual_codes, ytdlp_lang, fluent_languages)
 
-    # 5. chapters_authoritative — deterministic 5-rule check
+    # 4. chapters_usable — count of non-placeholder chapters yt-dlp returned
     desc = info.get("description") or ""
-    chapters_auth = chapters_authoritative(desc)
+    raw_chapters = info.get("chapters") or []
+    is_chapters_usable = chapters_usable(raw_chapters)
 
-    # 6. Pick + fetch transcript
+    # 5. Pick + fetch transcript
     transcript_source = "none"
     transcript_target = None
     is_translated = False
@@ -586,10 +541,10 @@ def process_one(
                 final_status = "failed"
                 print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
 
-    # 7. Build record (matches _template.md)
+    # 6. Build record (matches _template.md)
     chapters_field = [
         {"start": int(c.get("start_time") or 0), "title": (c.get("title") or "").strip()}
-        for c in (info.get("chapters") or [])
+        for c in raw_chapters
     ]
     record = {
         "id":                       vid,
@@ -604,9 +559,7 @@ def process_one(
         "fetched_at":               datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "thumbnail":                info.get("thumbnail") or "",
         "chapters":                 chapters_field,
-        "chapters_authoritative":   chapters_auth,
-        "has_real_chapters":        has_real,
-        "has_key_moments":          has_key,
+        "chapters_usable":          is_chapters_usable,
         "language":                 info.get("language"),
         "original_language":        original_language,
         "manual_track_languages":   manual_codes,
@@ -626,16 +579,15 @@ def process_one(
     atomic_write(out_path, text)
 
     return {
-        "video_id":               vid,
-        "transcript_status":      final_status,
-        "transcript_source":      transcript_source,
-        "original_language":      original_language,
-        "chapters_authoritative": chapters_auth,
-        "has_real_chapters":      has_real,
-        "has_key_moments":        has_key,
-        "manual_tracks":          manual_codes,
-        "auto_tracks":            auto_codes,
-        "path":                   str(out_path),
+        "video_id":          vid,
+        "transcript_status": final_status,
+        "transcript_source": transcript_source,
+        "original_language": original_language,
+        "chapters_usable":   is_chapters_usable,
+        "chapter_count":     len([c for c in chapters_field if c["title"] and c["title"] != YTDLP_PLACEHOLDER_TITLE]),
+        "manual_tracks":     manual_codes,
+        "auto_tracks":       auto_codes,
+        "path":              str(out_path),
     }
 
 

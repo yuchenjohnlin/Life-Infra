@@ -9,12 +9,12 @@ aliases:
 # === creator ===
 channel: "No Priors: AI, Machine Learning, Tech, & Startups"
 channel_url: "https://www.youtube.com/channel/UCSI7h9hydQ40K5MJHnCrQvw"
-channel_follower_count: 81100
+channel_follower_count: 81300
 
 # === time ===
 duration: 3991
 upload_date: 20260320
-fetched_at: "2026-05-17T08:19:19+00:00"
+fetched_at: "2026-05-19T04:47:40+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/kwSVtQ7dziU/maxresdefault.jpg"
@@ -34,9 +34,7 @@ chapters:
   - {start: 3231, title: Autonomous Robotics}
   - {start: 3659, title: MicroGPT and Agentic Education}
   - {start: 3940, title: Conclusion}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: en
@@ -52,8 +50,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 818922
-like_count: 15304
+view_count: 823193
+like_count: 15368
 
 # === status ===
 availability: public

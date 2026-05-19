@@ -14,7 +14,7 @@ channel_follower_count: 114000
 # === time ===
 duration: 2292
 upload_date: 20260428
-fetched_at: "2026-05-17T08:20:13+00:00"
+fetched_at: "2026-05-19T04:48:25+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/4gciWspBVHw/maxresdefault.jpg"
@@ -34,9 +34,7 @@ chapters:
   - {start: 1956, title: MCP}
   - {start: 2118, title: 项目部署}
   - {start: 2164, title: 电脑自动化}
-chapters_authoritative: false
-has_real_chapters: false
-has_key_moments: true
+chapters_usable: true
 
 # === language ===
 language: null
@@ -51,8 +49,8 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 133631
-like_count: 3528
+view_count: 142289
+like_count: 3709
 
 # === status ===
 availability: public

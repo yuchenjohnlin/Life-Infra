@@ -11,11 +11,11 @@ views:
       - file.name
       - channel
       - title
-      - chapters_authoritative
-      - has_key_moments
-      - has_real_chapters
+      - chapters_usable
       - transcript_status
       - transcript_source
+      - manual_track_languages
+      - auto_track_languages
     sort:
       - property: auto_track_languages
         direction: DESC
@@ -23,7 +23,7 @@ views:
         direction: ASC
     columnSize:
       note.channel: 198
-      note.chapters_authoritative: 61
-      note.has_key_moments: 69
+      note.chapters_authoritative: 102
+      note.has_key_moments: 95
       note.has_real_chapters: 100
       note.transcript_status: 101

@@ -14,7 +14,7 @@ channel_follower_count: 270
 # === time ===
 duration: 222
 upload_date: 20260421
-fetched_at: "2026-05-17T08:19:53+00:00"
+fetched_at: "2026-05-19T04:48:09+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/F9WrUwcbGPM/maxresdefault.jpg"
@@ -30,9 +30,7 @@ chapters:
   - {start: 133, title: "架构撞车:两家给的是同一份答卷"}
   - {start: 153, title: "商业分野:Apple vs Android"}
   - {start: 170, title: 金句收尾}
-chapters_authoritative: true
-has_real_chapters: true
-has_key_moments: false
+chapters_usable: true
 
 # === language ===
 language: null
@@ -47,7 +45,7 @@ transcript_target: null
 is_translated: false
 
 # === engagement ===
-view_count: 6043
+view_count: 6050
 like_count: 148
 
 # === status ===
