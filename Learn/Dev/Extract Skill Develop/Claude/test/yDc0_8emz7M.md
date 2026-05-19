@@ -14,7 +14,7 @@ channel_follower_count: 106000
 # === time ===
 duration: 1062
 upload_date: 20251231
-fetched_at: "2026-05-19T04:48:45+00:00"
+fetched_at: "2026-05-19T19:20:26+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/yDc0_8emz7M/maxresdefault.jpg"
@@ -43,10 +43,12 @@ transcript_status: failed
 transcript_source: none
 transcript_target: null
 is_translated: false
+transcript_error_type: IpBlocked
+transcript_error_stage: fetch
 
 # === engagement ===
-view_count: 320767
-like_count: 8466
+view_count: 321351
+like_count: 8473
 
 # === status ===
 availability: public

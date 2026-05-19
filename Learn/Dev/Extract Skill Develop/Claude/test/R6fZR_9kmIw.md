@@ -14,7 +14,7 @@ channel_follower_count: 424000
 # === time ===
 duration: 5541
 upload_date: 20260412
-fetched_at: "2026-05-19T04:49:01+00:00"
+fetched_at: "2026-05-19T19:20:18+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/R6fZR_9kmIw/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFQgYyhlMA8=&rs=AOn4CLAfbCs7OI-gYgYYm__yjmruRq5T3A"
@@ -37,10 +37,12 @@ transcript_status: failed
 transcript_source: none
 transcript_target: null
 is_translated: false
+transcript_error_type: IpBlocked
+transcript_error_stage: fetch
 
 # === engagement ===
-view_count: 114398
-like_count: 2424
+view_count: 115015
+like_count: 2427
 
 # === status ===
 availability: public
