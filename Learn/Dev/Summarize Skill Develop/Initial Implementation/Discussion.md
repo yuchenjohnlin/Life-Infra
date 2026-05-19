@@ -78,15 +78,20 @@ Ok, I have made up my mind, I don't think I should increase the complexity befor
 The following is the needed iterative discussion with AI to come up with the plan. 
 1. Look through anything that I have done regarding the summarization. I kind of want to remind myself of why I started separating the summarization, ok I think I remember because the discussion file was pretty long, but anyways this context has to be provided to AI. 
 2. What did we do regarding the Karpathy test ? Yeah only using Karpathy as test was one of the pain points I pointed out. oh but we have to deal with the no transcript part to get more useful test cases. 
-   Summarization 
-3. Define several things the skill has to do 
+   - Summarization uses up a lot more tokens, so I will only choose several videos to do a simpler test since I would also need to look through the whole result file. 
+     1. Short vs long 
+	 2. With Chapters vs No Chapters 
+	 3. Chinese vs. English
+	So I guess we would use 5 videos, I0DrcsDf3Os, 96jN2OCOfLs, D7_ipDqhtwk, CEvIs9y1uog, 2pM-7fBXc_M, put them into another input folder.
+	
+1. Define several things the skill has to do 
 	1. Output Format - What sections should be included in the summarized file ?
 	2. Skill name and description - I think using summarization might not be the best word here, what to use ? 
 	3. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters.
 	4. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
 
 
-4. Output of the summarization
+2. Output of the summarization
    Should be able to understand what is included in the video, but shouldn't change too much of the speaker's tone and means. 
    Should have a table of contents, a table of the segments and chapters 
    Two level hierarchy if the video covers enough content 

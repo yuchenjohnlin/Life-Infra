@@ -1,6 +1,6 @@
 views:
   - type: table
-    name: Table
+    name: Chapter Info
     filters:
       and:
         - file.inFolder("Learn/Dev/Extract Skill Develop/Claude/test")
@@ -22,5 +22,41 @@ views:
       - property: channel
         direction: ASC
     columnSize:
+      note.url: 59
       note.channel: 198
+      note.transcript_status: 82
+      note.manual_track_languages: 130
+      note.auto_track_languages: 56
+  - type: table
+    name: View
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
+    groupBy:
+      property: transcript_status
+      direction: ASC
+    order:
+      - url
+      - title
+      - like_count
+      - view_count
+      - duration
+      - channel
+      - transcript_status
+      - chapters_usable
+      - id
+    sort:
+      - property: like_count
+        direction: DESC
+      - property: duration
+        direction: ASC
+      - property: view_count
+        direction: DESC
+    columnSize:
+      note.url: 115
+      note.title: 219
+      note.like_count: 99
+      note.view_count: 107
+      note.duration: 87
+      note.channel: 142
       note.transcript_status: 82
