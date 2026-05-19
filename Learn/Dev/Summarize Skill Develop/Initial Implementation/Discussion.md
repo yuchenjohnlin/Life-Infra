@@ -7,7 +7,7 @@
 		1. put input clean in extract skill (raw file will be cleaned, easier to read, but might not be consistent every time)
 		2. put input clean as a separate skill (quite a waste of tokens, since the content cached might be useful, unless there is a way to use the cached content from the separate input clean skill) -> but then do we keep both files ? and which one to keep ? 
 
-> [!note]+ Reply — where should cleaning live?
+> [!note]- Reply — where should cleaning live?
 >
 > The frame "does input cleaning benefit summarization?" hides the real question. Cleaning ASR errors (`llama 270b` → `llama2 70b`) is **LLM reasoning**, not a deterministic transform — you can't regex it, you need context to know `270b` is wrong because the speaker is talking about Llama 2. That changes which options are actually viable:
 >
@@ -31,7 +31,7 @@
 > 3. So basically I didn't know how to deal with the variance and deviation of the chapter quality, and was thinking of letting AI decide by itself. 
 >    But I found out that we use chapters according to the amount of content covered, but the amount of content varies according to the speaker's speed and video length. We currently do have a video length metric, but we don't have the speakers speed. How do you think we can deal with the chapter quality variance, so that when the chapters are not that well, we would use it only as reference and create our own chapters. On the other hand, if the chapter is well defined then we can use it more straightforwardly in the summarization. 
 
-> [!note]+ Reply — handling chapter quality variance
+> [!note]- Reply — handling chapter quality variance
 >
 > **"Speaker speed" is the wrong axis.** What you actually want is **content density per chapter**, and it's directly computable without ever introducing a speed field: for each chapter slice, count transcript words between its `start` and the next chapter's `start`. Speed × duration = word count anyway, so just measure the end result. Skip the speed metric.
 >
@@ -78,6 +78,7 @@ Ok, I have made up my mind, I don't think I should increase the complexity befor
 The following is the needed iterative discussion with AI to come up with the plan. 
 1. Look through anything that I have done regarding the summarization. I kind of want to remind myself of why I started separating the summarization, ok I think I remember because the discussion file was pretty long, but anyways this context has to be provided to AI. 
 2. What did we do regarding the Karpathy test ? Yeah only using Karpathy as test was one of the pain points I pointed out. oh but we have to deal with the no transcript part to get more useful test cases. 
+   Summarization 
 3. Define several things the skill has to do 
 	1. Output Format - What sections should be included in the summarized file ?
 	2. Skill name and description - I think using summarization might not be the best word here, what to use ? 

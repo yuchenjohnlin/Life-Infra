@@ -1,0 +1,26 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/Extract Skill Develop/Claude/test")
+    groupBy:
+      property: transcript_status
+      direction: ASC
+    order:
+      - file.name
+      - channel
+      - title
+      - chapters_usable
+      - transcript_status
+      - transcript_source
+      - manual_track_languages
+      - auto_track_languages
+    sort:
+      - property: auto_track_languages
+        direction: DESC
+      - property: channel
+        direction: ASC
+    columnSize:
+      note.channel: 198
+      note.transcript_status: 82
