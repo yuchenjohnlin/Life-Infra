@@ -60,10 +60,15 @@ Approach the raw file the way you would a video you are about to learn from.
 By the end you should understand the whole video — its context, its content, and
 how well its given structure holds up.
 
-### 2. Structure
+### 2. Write the digest
 
-The digest follows the video's flow as a sequence of chapters. Decide that
-structure before writing.
+Structuring and writing are not separate stages — a writer's outline and draft
+co-evolve. Do them together as one step.
+
+**(a) Settle a working chapter structure.**
+
+The digest follows the video's flow as a sequence of chapters. Settle a first
+chapter structure, but treat it as a *working outline*, not a frozen one.
 
 First check `chapters_usable` in the raw frontmatter:
 
@@ -95,6 +100,18 @@ When creating chapters:
   many. Do not force a target.
 - Put boundaries at real breaks: a new topic, a demo starting or ending, a
   recap, an interviewer's next question, an explicit verbal transition.
+
+**(b) Write each chapter as argumentative, transcript-grounded prose.**
+
+_Under development — to be detailed next. As you write, let structure and prose
+develop together: if the prose reveals a boundary is wrong — an idea spilling
+across two chapters, or two chapters that are really one — revise the chapter
+boundaries as the prose reveals them._
+
+**(c) Fill the Chapters table.**
+
+Once the body is done, fill the Chapters table from the final chapter headings,
+so the table always matches the digest.
 
 ### Further steps
 
