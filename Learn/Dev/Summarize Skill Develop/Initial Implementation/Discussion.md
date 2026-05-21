@@ -90,6 +90,32 @@ The following is the needed iterative discussion with AI to come up with the pla
 	2. 
 	3. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
 	4.  Output Format - What sections should be included in the summarized file ?
+
+#### 4a. Designing the digest template — frontmatter, orientation, sections
+
+My concerns going into the template:
+
+- **Frontmatter vs. content.** I don't want too much metadata up top — it takes space and doesn't look good. I thought about putting `source_url` / `channel` in the content instead, but that breaks `.base` views (can't filter by channel). I also got the thumbnail to download and show on the card view — that works well and needs the metadata. View count and duration can be computed inside the Obsidian view. So the real question: can the property block be collapsed/hidden in Obsidian?
+- **Orientation.** With the two Berkeley files in Skill-v2 test I couldn't understand the TL;DR on its own. I need background first — who's speaking, why, what level (industry / course?), why it's being told (trending? academic topic?), what it relates to. Just a gist. So: an **orientation** giving background, then a **structured TL;DR** as the condensed summary.
+- **Write order.** The skill should have AI read the chapters and full transcript first, then write the TL;DR and orientation last — like a human watching a video. The description helps the orientation (it carries links and audience/framing info not in the content).
+- **Other sections.** Cleaned description (better than raw). Chapters table — how many layers? maybe a short per-chapter gist for long videos since the TL;DR over-condenses. A ToC for navigation. Chapter titles with argumentative prose; drop timestamps for now. References — unsure if they need their own section; inline links would be best but may need web search. Glossary / per-section takeaway / covers list — not needed.
+
+> [!note]- Reply — frontmatter, orientation, and template layout
+>
+> **Frontmatter — keep all metadata there.** "Looks bad" is a display problem, not a placement problem. Obsidian hides properties via Settings → Editor → **"Properties in document" → Hidden** (the block stays in the file, so `.base` filtering, card-view thumbnails, and computed columns keep working); there is also a per-note collapse chevron. Moving `source_url` / `channel` into content breaks exactly the `.base` filtering you need. The digest carries a **lean subset** of the raw frontmatter — only view-consumed fields — plus a `raw_file` backlink.
+>
+> **Orientation vs. TL;DR — keep them disjoint.** Orientation = *external* context (speaker, format, level, why it exists, field), from the description + background knowledge; avoid unverifiable claims like "trending" unless the description says so. TL;DR = the *internal* argument compressed — a one-sentence thesis + 3-6 claim bullets, kept short regardless of length. The over-condensation problem on long videos is solved by a **gist column in the chapters table** (scales with chapter count), not by a longer TL;DR.
+>
+> **Write order confirmed** — body → TL;DR → orientation. Belongs in the SKILL prompt as an explicit rule, not just the template.
+>
+> **Chapters table = the ToC.** Obsidian has no Notion-style auto-ToC; a table of `[[#heading]]` links is the native equivalent (the Outline core plugin also gives a sidebar one). One flat layer; the gist column is conditional on length. Long videos group chapters into a two-level `## Part` hierarchy in the body.
+>
+> **References** — keep description links inside the collapsed description callout; don't require web-search-to-link.
+
+### Decision — first digest template
+
+Created the first output template at `Initial Implementation/digest-template.md`. Display order: frontmatter (hidden in reading view) → `# Title` → cleaned **description** in a collapsible callout below the title → **Orientation** callout → **TL;DR** (thesis + claim bullets) → **Chapters** table (doubles as ToC, conditional gist column) → chapter body (`## N. Title`, argumentative prose; `## Part` grouping for long videos). Dropped: timestamps, glossary, per-section takeaways, covers list. Skill writing order: chapters → TL;DR → orientation.
+
 	5. Skill name and description - I think using summarization might not be the best word here, what to use ? 
 
 
