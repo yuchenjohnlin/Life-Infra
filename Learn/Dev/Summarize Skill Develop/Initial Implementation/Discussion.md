@@ -78,20 +78,17 @@ Work following up from [[Summarization Tests]] to create the separate summarizat
 Ok, I have made up my mind, I don't think I should increase the complexity before seeing what the simplest gives us, I understand that maybe Claude is strong enough so even if this skill works, it might not work on Codex or other models, but anyways, this should be an iterative process instead of me thinking that the variance is so big that it wouldn't give me good results. However, I should still refer to the tests and things I came up with about the summarization. There are also several things to be defined regarding the summarization skill. 
 The following is the needed iterative discussion with AI to come up with the plan. 
 1. Look through anything that I have done regarding the summarization. I kind of want to remind myself of why I started separating the summarization, ok I think I remember because the discussion file was pretty long, but anyways this context has to be provided to AI. 
-2. What did we do regarding the Karpathy test ? Yeah only using Karpathy as test was one of the pain points I pointed out. oh but we have to deal with the no transcript part to get more useful test cases. 
-   - Summarization uses up a lot more tokens, so I will only choose several videos to do a simpler test since I would also need to look through the whole result file. 
+2. What did we do regarding the Karpathy test ? Yeah only using Karpathy as test was one of the pain points I pointed out. oh but we have to deal with the no transcript part to get more useful test cases -> result was that it was not solved.
+   Summarization uses up a lot more tokens, so I will only choose several videos to do a simpler test since I would also need to look through the whole result file. 
      1. Short vs long 
 	 2. With Chapters vs No Chapters 
 	 3. Chinese vs. English
 	So I guess we would use 5 videos, I0DrcsDf3Os, 96jN2OCOfLs, D7_ipDqhtwk, CEvIs9y1uog, 2pM-7fBXc_M, put them into another input folder.
-	
-1. Define several things the skill has to do 
-	1. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters. I think the description is very variant, so maybe just ask AI to 
-	2. 
-	3. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
-	4.  Output Format - What sections should be included in the summarized file ?
+3. What do I really want for the summarization process ? 
+4. First come up with a template to put down the format of the processed output file. 
+	1. What metadata to put ? 
 
-#### 4 — Output format: designing the digest template
+#### Designing the digest template — section by section
 
 Going section by section through what the output digest should contain.
 
@@ -167,10 +164,15 @@ Display order: frontmatter (hidden via the Obsidian setting) → `# Title` → c
 Dropped for v1: timestamps, glossary, per-section takeaways, "Covers" list, dedicated references section.
 Skill writing order (to bake into SKILL.md): read everything → chapter body → TL;DR → orientation.
 
+5. Define several things the skill has to do 
+	1. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters. I think the description is very variant, so maybe just ask AI to 
+	2. 
+	3. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
+	4.  Output Format - What sections should be included in the summarized file ?
 	5. Skill name and description - I think using summarization might not be the best word here, what to use ? 
 
 
-2. Output of the summarization
+6. Output of the summarization
    Should be able to understand what is included in the video, but shouldn't change too much of the speaker's tone and means. 
    Should have a table of contents, a table of the segments and chapters 
    Two level hierarchy if the video covers enough content 
