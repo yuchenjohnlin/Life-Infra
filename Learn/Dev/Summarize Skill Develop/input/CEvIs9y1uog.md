@@ -18,6 +18,7 @@ fetched_at: "2026-05-19T04:47:51+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/CEvIs9y1uog/maxresdefault.jpg"
+thumbnail_local: "[[CEvIs9y1uog.jpg]]"
 
 # === content structure ===
 chapters: []
