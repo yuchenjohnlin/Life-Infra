@@ -26,14 +26,19 @@ Test defaults (this development phase):
 
 ## Output
 
-Each digest conforms to `digest-template.md`.
+Each digest conforms to `digest-template.md` — one digest file per input raw
+file.
 
 ## Workflow
 
-This skill has no scripts — it follows a flow, the way an experienced reader
-works through a video and then writes it up. Follow the spirit, not the letter:
-the goal is the quality of the digest, not completing steps. The template and
-the writing are what the reader ultimately judges.
+This skill is mostly a flow, not a script — it follows the way an experienced
+reader works through a video and then writes it up. Follow the spirit, not the
+letter: the goal is the quality of the digest, not completing steps. The
+template and the writing are what the reader ultimately judges. (Only the final
+step, generating the Chapters table, is mechanical.)
+
+The flow has four steps: **Understand** the video → **Write the digest** body →
+**Write the opening** → **Generate the Chapters table**.
 
 ### 1. Understand
 
@@ -132,11 +137,54 @@ As you write, let structure and prose develop together: if the prose reveals a
 boundary is wrong — an idea spilling across two chapters, or two chapters that
 are really one — revise the chapter boundaries.
 
-**(c) Fill the Chapters table.**
+### 3. Write the opening
 
-Once the body is done, fill the Chapters table from the final chapter headings,
-so the table always matches the digest.
+With the body finished, write the three sections that sit *above* it — the
+cleaned description, the orientation, and the TL;DR. They come last because only
+now do you have the clearest picture of the video's context and content. (In the
+file they appear above the chapters; the writing order is the reverse.)
 
-### Further steps
+**(a) Cleaned description.**
 
-_Under development — see `Discussion.md` (item 5)._
+Clean the raw `# Description` from the input file: drop promotional boilerplate,
+sponsor copy, "subscribe" calls, and repeated channel links. Keep links and
+framing that genuinely help a reader. It goes in a collapsible callout below the
+title — reference material, not primary reading. If the description is entirely
+promotional or empty, a very short version, or none, is fine.
+
+**(b) Orientation.**
+
+Write a few sentences of external context — what *situates* the video, not what
+it says. Cover, as far as the sources support it: who the speaker is, the format
+(conference talk, lecture, podcast, tutorial...), the level (introductory,
+industry, research), why the video exists, and the field it sits in.
+
+Context comes from several places, none authoritative: the description sometimes
+states who and what; the opening of the talk often gives its own background
+intro; and your own knowledge of the speaker, topic, and field fills in the
+rest. Weigh them together. Keep to stable, verifiable framing — do not call the
+video "trending" or "popular" unless a source says so. If context is genuinely
+thin, a lighter orientation is fine; don't manufacture it.
+
+The orientation is not a summary of the content — that is the TL;DR's job.
+
+**(c) TL;DR.**
+
+Write a short summary of the video — its main points and throughline — for a
+reader who wants to grasp the whole thing fast. Keep it tight and skimmable.
+
+It compresses the argument you wrote in the body, so keep it faithful to what
+the body actually says. Like the body, make it claim-driven — state the ideas
+directly, not "the video discusses...". Keep it short regardless of video
+length; it is a quick way into the argument, not a second digest.
+
+### 4. Generate the Chapters table
+
+The Chapters table is a mechanical derivation from the finished chapter
+headings, not a writing task. Once the body's `## N. Title` headings are final,
+the table has one row per chapter — the chapter number and a link to its
+section — in order.
+
+This step is slated to become a script, written after the first test runs
+confirm the heading format. Until then, produce the table directly from the
+final headings, matching each heading exactly so the `[[#...]]` links resolve.
