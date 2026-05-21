@@ -1,0 +1,9 @@
+{
+  "enabledCssSnippets": [
+    "thread-note",
+    "youtube-base-cards"
+  ],
+  "accentColor": "",
+  "theme": "obsidian",
+  "showRibbon": true
+}

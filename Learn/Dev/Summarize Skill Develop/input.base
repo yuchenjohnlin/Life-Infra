@@ -26,9 +26,10 @@ views:
     sort:
       - property: view_count
         direction: DESC
-    cardSize: 210
+    cardSize: 640
     image: note.thumbnail_local
-    imageAspectRatio: 0.6
+    imageAspectRatio: 12
+    imageFit: cover
   - type: table
     name: Chapter Info
     filters:
