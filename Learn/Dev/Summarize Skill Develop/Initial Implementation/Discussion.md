@@ -91,30 +91,81 @@ The following is the needed iterative discussion with AI to come up with the pla
 	3. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
 	4.  Output Format - What sections should be included in the summarized file ?
 
-#### 4a. Designing the digest template — frontmatter, orientation, sections
+#### 4 — Output format: designing the digest template
 
-My concerns going into the template:
+Going section by section through what the output digest should contain.
 
-- **Frontmatter vs. content.** I don't want too much metadata up top — it takes space and doesn't look good. I thought about putting `source_url` / `channel` in the content instead, but that breaks `.base` views (can't filter by channel). I also got the thumbnail to download and show on the card view — that works well and needs the metadata. View count and duration can be computed inside the Obsidian view. So the real question: can the property block be collapsed/hidden in Obsidian?
-- **Orientation.** With the two Berkeley files in Skill-v2 test I couldn't understand the TL;DR on its own. I need background first — who's speaking, why, what level (industry / course?), why it's being told (trending? academic topic?), what it relates to. Just a gist. So: an **orientation** giving background, then a **structured TL;DR** as the condensed summary.
-- **Write order.** The skill should have AI read the chapters and full transcript first, then write the TL;DR and orientation last — like a human watching a video. The description helps the orientation (it carries links and audience/framing info not in the content).
-- **Other sections.** Cleaned description (better than raw). Chapters table — how many layers? maybe a short per-chapter gist for long videos since the TL;DR over-condenses. A ToC for navigation. Chapter titles with argumentative prose; drop timestamps for now. References — unsure if they need their own section; inline links would be best but may need web search. Glossary / per-section takeaway / covers list — not needed.
+**1. What metadata to put — frontmatter or content?**
+As above, we can put the `source_url` and `channel`. I don't want too much because they take up space and don't look that good — so what about putting them in the content rather than the frontmatter? Wait, but this will matter when I want to use `.base` as a view, right? Like I wouldn't be able to filter by channel. Or is there a way to collapse the frontmatter? So I tried downloading the thumbnail and displaying it on the card view in Obsidian — it worked very well haha, so I guess we would need the metadata then. It is also verified that the computation for views and Duration can be converted in the Obsidian view itself. In this case, is there a way to collapse the property part in Obsidian?
 
-> [!note]- Reply — frontmatter, orientation, and template layout
+> [!note]- Reply — keep metadata in frontmatter; collapse it for display
 >
-> **Frontmatter — keep all metadata there.** "Looks bad" is a display problem, not a placement problem. Obsidian hides properties via Settings → Editor → **"Properties in document" → Hidden** (the block stays in the file, so `.base` filtering, card-view thumbnails, and computed columns keep working); there is also a per-note collapse chevron. Moving `source_url` / `channel` into content breaks exactly the `.base` filtering you need. The digest carries a **lean subset** of the raw frontmatter — only view-consumed fields — plus a `raw_file` backlink.
+> **Keep all metadata in the frontmatter — and yes, Obsidian can collapse/hide it.** The "takes up space / doesn't look good" problem is purely about *display*, and Obsidian solves it without moving any data:
+> - **Per-note collapse:** the chevron next to the "Properties" header folds that note's property block.
+> - **Hide globally:** Settings → Editor → **"Properties in document"** → set to **Hidden**. The block stays in the file but never renders in Reading/Live Preview. ("Source" shows it only in source mode.)
 >
-> **Orientation vs. TL;DR — keep them disjoint.** Orientation = *external* context (speaker, format, level, why it exists, field), from the description + background knowledge; avoid unverifiable claims like "trending" unless the description says so. TL;DR = the *internal* argument compressed — a one-sentence thesis + 3-6 claim bullets, kept short regardless of length. The over-condensation problem on long videos is solved by a **gist column in the chapters table** (scales with chapter count), not by a longer TL;DR.
+> Moving `source_url` / `channel` into the content body would break exactly what you found you need — `.base` can only filter and sort on frontmatter properties, not on text inside the note. The card-view thumbnail also reads from frontmatter. So frontmatter is mandatory; collapsing is how you keep it from cluttering the read.
 >
-> **Write order confirmed** — body → TL;DR → orientation. Belongs in the SKILL prompt as an explicit rule, not just the template.
+> For the digest file, carry only a **lean subset** of the raw file's frontmatter — the fields a `.base` view actually consumes: `id`, `url`, `title`, `channel`, `channel_url`, `thumbnail`, `duration`, `upload_date`, `view_count` — plus a `raw_file` backlink and `type` / `state`. Leave out the transcript-source fields (those belong to the raw file). Store `duration` in seconds and `view_count` as a plain integer; let the `.base` view do the formatting, which you already verified works.
+
+**2. Orientation and TL;DR**
+The orientation part is very good, because for the two [[berkeley]] files in the Skill-v2 test I cannot understand the TL;DR just by looking at it. I would at least need some background information — who is speaking, why, what level is this (industry or course?), and why is this being told (is it trending? or a topic in academia, and if so what is it related to). It doesn't need to be detailed, but it should give the reader a gist about what's going on. Consequently, we can have an **orientation** that serves as background, then a **TL;DR** acting as a structured summary — I want it structured because it would be easier to read.
+*Branch: how do we come up with the background orientation and the TL;DR?* In the skill I would actually have AI first go through the chapters and summarize the whole transcript, then at the end add the TL;DR and the background orientation — so AI reads through the whole content first and does the more condensed part last, just as if a human were going through a video. I think the descriptions would help a lot for the background orientation, because they sometimes have links and several introductions telling what kind of video this is and who the target is — stuff that is not related to the content of the video.
+
+> [!note]- Reply — orientation vs TL;DR, and how to generate them
 >
-> **Chapters table = the ToC.** Obsidian has no Notion-style auto-ToC; a table of `[[#heading]]` links is the native equivalent (the Outline core plugin also gives a sidebar one). One flat layer; the gist column is conditional on length. Long videos group chapters into a two-level `## Part` hierarchy in the body.
+> **Your write-order instinct is right, and it should be a hard rule in the skill:** read everything first (frontmatter + chapters + description + full transcript) → write the chapter body → then derive the **TL;DR** from that body → then write the **orientation** last. Condensed parts last, exactly like a human who finishes the video before summarizing it.
 >
-> **References** — keep description links inside the collapsed description callout; don't require web-search-to-link.
+> Keep orientation and TL;DR doing *different jobs* so they don't overlap:
+> - **Orientation = external context, not content.** Who the speaker is, the format (podcast / conference talk / lecture / course), the level (intro / industry / research), why the video exists, what field it sits in. Built from the **description + the model's background knowledge** — which is why the description is the right input: it carries framing/audience info that isn't in the transcript.
+>   - Caveat on "is it trending?": the model can't reliably know virality without a web search. Keep orientation to **stable, verifiable framing** (speaker background, format, field). If the description says it's part of a series, use that — don't have the AI guess trends.
+> - **TL;DR = the internal argument, compressed.** Structured = a **one-sentence thesis** (the spine) + **3-6 claim-driven bullets**. Claim-driven, not "the speaker discusses…", to match the argumentative-digest goal. Keep it short *regardless of video length* — see #4 for how long videos are handled instead.
+
+**3. Cleaned description**
+Clean description — yes, I think this is better than the original description.
+
+> [!note]- Reply — cleaned description
+>
+> Agreed. The cleaned description lives in a **collapsible callout right below the title** (your later call), not at the end. Cleaning = strip promotional boilerplate, sponsor copy, and repeated channel links; keep genuinely useful links. It's reference material, collapsed by default.
+
+**4. Chapters table**
+This is a table telling the users the chapters. More to be discussed about — like how many layers? And whether we want a small summary for each chapter if the video is too long and the TL;DR cannot be done in just a small amount of text. Because it would be condensed too much if the video is too long — and we already have chapters that naturally kind of relate to the length of the video.
+
+> [!note]- Reply — chapters table layers and per-chapter gist
+>
+> **Keep the table itself flat — one layer.** It lists the chapters and doubles as the ToC (see #5). "Layers" is really a *body* question: for long videos, group chapters into a two-level hierarchy in the body — `## Part I — …` headers with chapters demoted to `### N. Title`. The table can stay flat or show the Part as a grouping row.
+>
+> **Yes to a per-chapter gist — as a column in the table.** Add a `Gist` column, one line per chapter. This is the right place for the detail a short TL;DR can't hold, and it **scales with the video automatically**: a long video has more chapters → more rows → more total gist, without bloating the TL;DR. Make the column **conditional** — include it for long videos, drop it for short ones where the chapter titles + TL;DR already say enough. No fixed chapter count; the table follows whatever chapters the source has (or what the AI derives).
+
+**5. Table of contents**
+I don't know if it's easy to have this in Obsidian or not, because Notion has pretty easy ToCs. But this is just for easier navigation.
+
+> [!note]- Reply — ToC in Obsidian
+>
+> Obsidian has **no Notion-style auto-ToC** built in. But you don't need one: a table of `[[#heading]]` wiki-links *is* the native equivalent, and you get it for free from the **Chapters table** in #4 — it doubles as the ToC. On top of that, the **Outline** core plugin shows a live heading outline in the sidebar automatically. So no separate ToC element — the Chapters table covers navigation.
+
+**6. Chapter titles with argumentative prose**
+The main chapter titles with argumentative prose — OK, we can leave timestamps for now.
+
+> [!note]- Reply — chapter body
+>
+> Agreed — timestamps dropped for now. The body is `## N. Title` headers (or `### N. Title` under Parts for long videos) with argumentative, transcript-grounded prose: claim-driven, faithful to the speaker's claims / examples / terminology / order, in the speaker's register.
+
+**7. References**
+I am not sure if we should give references their own section. It would be the best if we can include the link in the context while reading, but I don't know if it's easy to do this or not — like you might have to do a web search.
+
+> [!note]- Reply — references
+>
+> **No dedicated references section for v1.** Two tiers of links: (a) links that appear in the **description** — free, no web search — keep those inside the collapsed description callout; (b) things only *mentioned aloud* in the talk (a paper title, a tool) — turning those into links needs a web search, so make that **optional / best-effort**, not a v1 requirement. Revisit a references section later only if the testset shows you actually want one.
+
+(Glossary, per-section takeaway, and "Covers" list — confirmed not needed.)
 
 ### Decision — first digest template
 
-Created the first output template at `Initial Implementation/digest-template.md`. Display order: frontmatter (hidden in reading view) → `# Title` → cleaned **description** in a collapsible callout below the title → **Orientation** callout → **TL;DR** (thesis + claim bullets) → **Chapters** table (doubles as ToC, conditional gist column) → chapter body (`## N. Title`, argumentative prose; `## Part` grouping for long videos). Dropped: timestamps, glossary, per-section takeaways, covers list. Skill writing order: chapters → TL;DR → orientation.
+Created the first output template at `Initial Implementation/digest-template.md`.
+Display order: frontmatter (hidden via the Obsidian setting) → `# Title` → cleaned **description** in a collapsible callout below the title → **Orientation** callout → **TL;DR** (one-line thesis + 3-6 claim bullets) → **Chapters** table (doubles as ToC; conditional `Gist` column) → chapter body (`## N. Title` argumentative prose; `## Part` grouping for long videos).
+Dropped for v1: timestamps, glossary, per-section takeaways, "Covers" list, dedicated references section.
+Skill writing order (to bake into SKILL.md): read everything → chapter body → TL;DR → orientation.
 
 	5. Skill name and description - I think using summarization might not be the best word here, what to use ? 
 
