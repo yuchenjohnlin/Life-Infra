@@ -60,6 +60,42 @@ Approach the raw file the way you would a video you are about to learn from.
 By the end you should understand the whole video — its context, its content, and
 how well its given structure holds up.
 
+### 2. Structure
+
+The digest follows the video's flow as a sequence of chapters. Decide that
+structure before writing.
+
+First check `chapters_usable` in the raw frontmatter:
+
+- **`false`** — the `chapters` field is not real chapters (it only matched a
+  chapter-like format in the description). Ignore it; create your own.
+- **`true`** — the chapters are real. Use your step-1 judgment: if good, use
+  them as-is — they are the author's own structure, trust them; if weak
+  (generic titles, or so fine-grained that single ideas are split across
+  several headers), recreate them, using the real chapters as reference for
+  where content shifts.
+
+When creating chapters:
+
+- Work from your whole-talk understanding (step 1), not by cutting the
+  transcript into equal pieces.
+- A chapter is a unit of thought, not a unit of time — one coherent idea, one
+  move in the talk. Its length follows the idea: a tight idea makes a short
+  chapter, a sustained one makes a long chapter, and both are fine.
+- Two failure modes to avoid, and neither is about minutes:
+  - **Fragmentation** — a single idea split across several headers. The reader
+    is interrupted mid-thought and no chapter has room to develop anything.
+  - **Lumping** — several distinct ideas crammed under one header. The reader
+    gets no signposts and no mental map.
+- The test for a good boundary: you can give the chapter an honest title that
+  covers the whole chapter and nothing more, without needing "and". A title
+  needing "and" is two chapters; a title that can only be generic ("Part 2")
+  is not a real boundary.
+- Let the chapter count follow the content — short video, few; long video,
+  many. Do not force a target.
+- Put boundaries at real breaks: a new topic, a demo starting or ending, a
+  recap, an interviewer's next question, an explicit verbal transition.
+
 ### Further steps
 
 _Under development — see `Discussion.md` (item 5)._
