@@ -103,10 +103,34 @@ When creating chapters:
 
 **(b) Write each chapter as argumentative, transcript-grounded prose.**
 
-_Under development — to be detailed next. As you write, let structure and prose
-develop together: if the prose reveals a boundary is wrong — an idea spilling
-across two chapters, or two chapters that are really one — revise the chapter
-boundaries as the prose reveals them._
+Within each chapter, write a *transcript-grounded argumentative digest* — close
+to the video, but recast so the ideas argue directly rather than narrate the
+speaker.
+
+- **Argument, not narration.** Narration reports the video as an event:
+  *"Karpathy explains that training is expensive, then shows a ChatGPT
+  example."* Argument states the ideas themselves: *"Training is expensive;
+  inference is cheap — and that asymmetry is why model development is
+  centralized while usage is widespread."* Drop the "the speaker says /
+  explains / shows" scaffolding; let the sentences carry the claims.
+- **Grounded and faithful.** Stay based on and supported by the transcript —
+  faithful to the speaker's claims, examples, terminology, and rough order. Do
+  not introduce claims the transcript does not support, and do not coin new
+  metaphors or sharpen the speaker's claims beyond what they actually said.
+- **Compress, but don't over-compress.** Include most of the substantive points
+  — the goal is to understand the video *faster*, not to re-watch it, but also
+  not to reduce it to an abstract skeleton. Cut repetition, filler, false
+  starts, and overly detailed step-by-step narration. This is a digest, not an
+  aggressive summary.
+- **Preserve the speaker's register.** Keep the way *this* speaker explains —
+  their analogies, their hedges, their "you can think of it as..." moves.
+  Whatever the register is (a conversational thinker, a precise lecturer),
+  preserve it rather than flattening everything into generic abstract essay
+  prose. That explanatory texture is part of what makes the ideas land.
+
+As you write, let structure and prose develop together: if the prose reveals a
+boundary is wrong — an idea spilling across two chapters, or two chapters that
+are really one — revise the chapter boundaries.
 
 **(c) Fill the Chapters table.**
 
