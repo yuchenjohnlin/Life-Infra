@@ -1,4 +1,34 @@
+formulas:
+  title_link: link(url, title)
+  views_label: if(view_count, if(view_count >= 1000000, (view_count / 1000000).toFixed(1) + "M views", if(view_count >= 1000, (view_count / 1000).toFixed(1) + "K views", view_count.toString() + " views")), "")
+  duration_hhmm: if(duration, if((duration / 3600).floor() < 10, "0", "") + (duration / 3600).floor().toString() + ":" + if(((duration % 3600) / 60).floor() < 10, "0", "") + ((duration % 3600) / 60).floor().toString(), "")
+properties:
+  formula.title_link:
+    displayName: Title
+  formula.views_label:
+    displayName: Views
+  formula.duration_hhmm:
+    displayName: Duration
 views:
+  - type: cards
+    name: YouTube
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
+    groupBy:
+      property: channel
+      direction: ASC
+    order:
+      - formula.title_link
+      - channel
+      - formula.duration_hhmm
+      - formula.views_label
+    sort:
+      - property: view_count
+        direction: DESC
+    cardSize: 210
+    image: note.thumbnail_local
+    imageAspectRatio: 0.6
   - type: table
     name: Chapter Info
     filters:
@@ -29,6 +59,39 @@ views:
       note.auto_track_languages: 56
   - type: table
     name: View
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
+    groupBy:
+      property: transcript_status
+      direction: ASC
+    order:
+      - url
+      - title
+      - like_count
+      - view_count
+      - duration
+      - channel
+      - transcript_status
+      - chapters_usable
+      - id
+    sort:
+      - property: like_count
+        direction: DESC
+      - property: duration
+        direction: ASC
+      - property: view_count
+        direction: DESC
+    columnSize:
+      note.url: 115
+      note.title: 219
+      note.like_count: 99
+      note.view_count: 107
+      note.duration: 87
+      note.channel: 142
+      note.transcript_status: 82
+  - type: cards
+    name: Test
     filters:
       and:
         - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
