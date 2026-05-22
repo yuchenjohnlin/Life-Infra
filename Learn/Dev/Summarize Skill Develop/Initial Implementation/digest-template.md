@@ -30,23 +30,41 @@ state: active
 
 ## TL;DR
 
-{Short summary of the video — the main points and throughline.}
+{Short, claim-driven summary of the video's throughline — leading with what is
+most striking, written to make the reader want to read on.}
 
 ## Chapters
 
-| # | Chapter |
-|---|---------|
-| 1 | [[#1. {Chapter title}]] |
-| 2 | [[#2. {Chapter title}]] |
+| # | Chapter | Time | Uploader's chapters |
+|---|---------|------|---------------------|
+| 1 | [[#1. {Chapter title} ({MM:SS})]] | {MM:SS} | {uploader chapter(s), or —} |
+| 2 | [[#2. {Chapter title} ({MM:SS})]] | {MM:SS} | {...} |
 
 ---
 
-## 1. {Chapter title}
+## Part I — {Part title}
+
+### 1. {Chapter title} ({MM:SS})
 
 {Argumentative, transcript-grounded prose.}
 
 ---
 
-## 2. {Chapter title}
+### 2. {Chapter title} ({MM:SS})
 
 {Argumentative, transcript-grounded prose.}
+
+---
+
+## Part II — {Part title}
+
+### 3. {Chapter title} ({MM:SS})
+
+{Argumentative, transcript-grounded prose.}
+
+---
+
+<!-- Parts are optional. For a short video, or one whose chapters don't cluster
+into larger arcs, drop the `## Part` headers and write chapters as
+`## N. {Chapter title} ({MM:SS})` directly. Timestamps are `(MM:SS)`, or
+`(H:MM:SS)` for videos over an hour. -->

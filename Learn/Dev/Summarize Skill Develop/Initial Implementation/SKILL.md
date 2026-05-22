@@ -31,14 +31,13 @@ file.
 
 ## Workflow
 
-This skill is mostly a flow, not a script — it follows the way an experienced
-reader works through a video and then writes it up. Follow the spirit, not the
-letter: the goal is the quality of the digest, not completing steps. The
-template and the writing are what the reader ultimately judges. (Only the final
-step, generating the Chapters table, is mechanical.)
+This skill is a flow, not a script — it follows the way an experienced reader
+works through a video and then writes it up. Follow the spirit, not the letter:
+the goal is the quality of the digest, not completing steps. The template and
+the writing are what the reader ultimately judges.
 
 The flow has four steps: **Understand** the video → **Write the digest** body →
-**Write the opening** → **Generate the Chapters table**.
+**Write the opening** → **Build the Chapters table**.
 
 ### 1. Understand
 
@@ -106,6 +105,20 @@ When creating chapters:
 - Put boundaries at real breaks: a new topic, a demo starting or ending, a
   recap, an interviewer's next question, an explicit verbal transition.
 
+**Group into Parts when it helps.** For a long video whose chapters cluster into
+larger arcs, group them into 2–5 **Parts** (`## Part I — …`), with chapters as
+`### N. Title` under them. Parts are optional: a short video, or one whose
+chapters don't cluster, stays flat with chapters as `## N. Title`. Use Parts only
+when they genuinely help the reader hold the video's shape — don't force them.
+
+**Record each chapter's start time and source mapping.** Every chapter heading
+carries its start timestamp — `(MM:SS)`, or `(H:MM:SS)` past an hour. For a
+chapter you created by merging source chapters, the start time is the start of
+the earliest source chapter (or transcript point) it covers — the reader needs
+it because your chapters may not line up with the uploader's. Also keep track of
+which uploader chapter(s) each digest chapter corresponds to; the Chapters table
+records this in step 4.
+
 **(b) Write each chapter as argumentative, transcript-grounded prose.**
 
 Within each chapter, write a *transcript-grounded argumentative digest* — close
@@ -170,21 +183,37 @@ The orientation is not a summary of the content — that is the TL;DR's job.
 
 **(c) TL;DR.**
 
-Write a short summary of the video — its main points and throughline — for a
-reader who wants to grasp the whole thing fast. Keep it tight and skimmable.
+The TL;DR has two jobs: convey the video's throughline, and make the reader
+*want* to read the digest. A reader already committed to reading everything
+doesn't need it — so write it for the reader who is still deciding.
 
-It compresses the argument you wrote in the body, so keep it faithful to what
-the body actually says. Like the body, make it claim-driven — state the ideas
-directly, not "the video discusses...". Keep it short regardless of video
-length; it is a quick way into the argument, not a second digest.
+- Lead with what is genuinely most striking, surprising, or distinctive in the
+  video — the insider detail, the counterintuitive claim, the strong opinion.
+  The pull comes from surfacing real intrigue, not from hype: if you reach for
+  words like "fascinating" or "must-watch", you are decorating instead of
+  surfacing.
+- It compresses the argument in the body — stay faithful to what the body
+  actually says. Make it claim-driven, like the body: state the ideas directly,
+  not "the video discusses...".
+- Keep it short regardless of video length; it is a way *into* the argument,
+  not a second digest.
 
-### 4. Generate the Chapters table
+### 4. Build the Chapters table
 
-The Chapters table is a mechanical derivation from the finished chapter
-headings, not a writing task. Once the body's `## N. Title` headings are final,
-the table has one row per chapter — the chapter number and a link to its
-section — in order.
+Once the body's chapter headings are final, build the Chapters table — one row
+per chapter, in order, with four columns:
 
-This step is slated to become a script, written after the first test runs
-confirm the heading format. Until then, produce the table directly from the
-final headings, matching each heading exactly so the `[[#...]]` links resolve.
+- **#** — the chapter number.
+- **Chapter** — a `[[#...]]` link to the chapter's heading. Match the heading
+  text *exactly*, including the number and the `(timestamp)`, so the link
+  resolves.
+- **Time** — the chapter's start timestamp.
+- **Uploader's chapters** — the uploader's original chapter title(s) this digest
+  chapter corresponds to. This shows how the uploader planned the video. Use `—`
+  when `chapters_usable` is false, or when a chapter has no uploader counterpart.
+
+We considered making this a script. It is staying model-written: the *Uploader's
+chapters* column is a judgment — it depends on the chapter-consolidation mapping
+you made in step 2, which a script cannot recover from the headings alone.
+Revisit a script only if model variance in the mechanical columns turns out to
+be a real, observed problem.
