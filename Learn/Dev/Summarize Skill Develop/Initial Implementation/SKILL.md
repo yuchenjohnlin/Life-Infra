@@ -211,12 +211,13 @@ per chapter, in order, with four columns:
   when `chapters_usable` is false, or when a chapter has no uploader counterpart.
 
 **Group a long table into Parts.** When a flat table is hard to scan and the
-chapters cluster into larger arcs, group the rows into 2–3 **Parts** — a bold
-label per Part (`**Part I — …**`) followed by that Part's rows, with one
-continuous chapter numbering across the whole table. This is a navigational
-wrapper in the table only; the body chapters stay flat. Parts are optional — a
-short video keeps a single flat table. Use them only when they genuinely help
-the reader see the video's shape.
+chapters cluster into larger arcs, keep it as **one table** but add **Part-label
+rows** — a row whose `Chapter` cell holds a bold `**Part I — …**` label (the
+`#`, Time, and Uploader's-chapters cells left empty), placed before each group's
+chapters. Numbering stays continuous across the whole table. This is a
+navigational wrapper in the table only; the body chapters stay flat. Parts are
+optional — a short video keeps a plain flat table. Use them only when they
+genuinely help the reader see the video's shape.
 
 We considered making this a script. It is staying model-written: the *Uploader's
 chapters* column is a judgment — it depends on the chapter-consolidation mapping
