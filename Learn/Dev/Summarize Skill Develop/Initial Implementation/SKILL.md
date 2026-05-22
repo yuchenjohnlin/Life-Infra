@@ -195,25 +195,17 @@ doesn't need it — so write it for the reader who is still deciding.
 - It compresses the argument in the body — stay faithful to what the body
   actually says. Make it claim-driven, like the body: state the ideas directly,
   not "the video discusses...".
-- Keep it short regardless of video length; it is a way *into* the argument,
-  not a second digest.
+- Keep it tight — it may scale modestly with a longer video, but it stays a way
+  *into* the argument, not a second digest. The limit isn't a word count; it's
+  that the TL;DR must not carry per-chapter detail — that belongs in the body.
 
-### 4. Build the Chapters table
+### 4. Generate the Chapters table
 
-Once the body's chapter headings are final, build the Chapters table — one row
-per chapter, in order, with four columns:
+The Chapters table is a mechanical derivation from the finished chapter
+headings, not a writing task. Once the body's `## N. Title` headings are final,
+the table has one row per chapter — the chapter number and a link to its
+section — in order.
 
-- **#** — the chapter number.
-- **Chapter** — a `[[#...]]` link to the chapter's heading. Match the heading
-  text *exactly*, including the number and the `(timestamp)`, so the link
-  resolves.
-- **Time** — the chapter's start timestamp.
-- **Uploader's chapters** — the uploader's original chapter title(s) this digest
-  chapter corresponds to. This shows how the uploader planned the video. Use `—`
-  when `chapters_usable` is false, or when a chapter has no uploader counterpart.
-
-We considered making this a script. It is staying model-written: the *Uploader's
-chapters* column is a judgment — it depends on the chapter-consolidation mapping
-you made in step 2, which a script cannot recover from the headings alone.
-Revisit a script only if model variance in the mechanical columns turns out to
-be a real, observed problem.
+This step is slated to become a script, written after the first test runs
+confirm the heading format. Until then, produce the table directly from the
+final headings, matching each heading exactly so the `[[#...]]` links resolve.
