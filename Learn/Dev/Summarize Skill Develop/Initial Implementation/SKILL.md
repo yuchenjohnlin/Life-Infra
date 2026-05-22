@@ -105,11 +105,8 @@ When creating chapters:
 - Put boundaries at real breaks: a new topic, a demo starting or ending, a
   recap, an interviewer's next question, an explicit verbal transition.
 
-**Group into Parts when it helps.** For a long video whose chapters cluster into
-larger arcs, group them into 2–5 **Parts** (`## Part I — …`), with chapters as
-`### N. Title` under them. Parts are optional: a short video, or one whose
-chapters don't cluster, stays flat with chapters as `## N. Title`. Use Parts only
-when they genuinely help the reader hold the video's shape — don't force them.
+Chapters in the body are always a **flat** sequence — `## N. Title`. Any
+higher-level grouping happens later, in the Chapters table only (step 4).
 
 **Record each chapter's start time and source mapping.** Every chapter heading
 carries its start timestamp — `(MM:SS)`, or `(H:MM:SS)` past an hour. For a
@@ -199,13 +196,30 @@ doesn't need it — so write it for the reader who is still deciding.
   *into* the argument, not a second digest. The limit isn't a word count; it's
   that the TL;DR must not carry per-chapter detail — that belongs in the body.
 
-### 4. Generate the Chapters table
+### 4. Build the Chapters table
 
-The Chapters table is a mechanical derivation from the finished chapter
-headings, not a writing task. Once the body's `## N. Title` headings are final,
-the table has one row per chapter — the chapter number and a link to its
-section — in order.
+Once the body's chapter headings are final, build the Chapters table — one row
+per chapter, in order, with four columns:
 
-This step is slated to become a script, written after the first test runs
-confirm the heading format. Until then, produce the table directly from the
-final headings, matching each heading exactly so the `[[#...]]` links resolve.
+- **#** — the chapter number.
+- **Chapter** — a `[[#...]]` link to the chapter's heading. Match the heading
+  text *exactly*, including the number and the `(timestamp)`, so the link
+  resolves.
+- **Time** — the chapter's start timestamp.
+- **Uploader's chapters** — the uploader's original chapter title(s) this digest
+  chapter corresponds to. This shows how the uploader planned the video. Use `—`
+  when `chapters_usable` is false, or when a chapter has no uploader counterpart.
+
+**Group a long table into Parts.** When a flat table is hard to scan and the
+chapters cluster into larger arcs, group the rows into 2–3 **Parts** — a bold
+label per Part (`**Part I — …**`) followed by that Part's rows, with one
+continuous chapter numbering across the whole table. This is a navigational
+wrapper in the table only; the body chapters stay flat. Parts are optional — a
+short video keeps a single flat table. Use them only when they genuinely help
+the reader see the video's shape.
+
+We considered making this a script. It is staying model-written: the *Uploader's
+chapters* column is a judgment — it depends on the chapter-consolidation mapping
+you made in step 2, which a script cannot recover from the headings alone.
+Revisit a script only if model variance in the mechanical columns turns out to
+be a real, observed problem.

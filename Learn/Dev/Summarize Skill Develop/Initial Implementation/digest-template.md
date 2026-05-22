@@ -35,36 +35,40 @@ most striking, written to make the reader want to read on.}
 
 ## Chapters
 
+<!-- For a long video, group the rows into 2-3 Parts with a bold label each, as
+below. For a short video, drop the Part labels and use a single flat table.
+The body chapters below stay flat regardless. -->
+
+**Part I — {Part title}**
+
 | # | Chapter | Time | Uploader's chapters |
 |---|---------|------|---------------------|
 | 1 | [[#1. {Chapter title} ({MM:SS})]] | {MM:SS} | {uploader chapter(s), or —} |
 | 2 | [[#2. {Chapter title} ({MM:SS})]] | {MM:SS} | {...} |
 
+**Part II — {Part title}**
+
+| # | Chapter | Time | Uploader's chapters |
+|---|---------|------|---------------------|
+| 3 | [[#3. {Chapter title} ({MM:SS})]] | {MM:SS} | {...} |
+
 ---
 
-## Part I — {Part title}
-
-### 1. {Chapter title} ({MM:SS})
+## 1. {Chapter title} ({MM:SS})
 
 {Argumentative, transcript-grounded prose.}
 
 ---
 
-### 2. {Chapter title} ({MM:SS})
+## 2. {Chapter title} ({MM:SS})
 
 {Argumentative, transcript-grounded prose.}
 
 ---
 
-## Part II — {Part title}
-
-### 3. {Chapter title} ({MM:SS})
+## 3. {Chapter title} ({MM:SS})
 
 {Argumentative, transcript-grounded prose.}
 
----
-
-<!-- Parts are optional. For a short video, or one whose chapters don't cluster
-into larger arcs, drop the `## Part` headers and write chapters as
-`## N. {Chapter title} ({MM:SS})` directly. Timestamps are `(MM:SS)`, or
-`(H:MM:SS)` for videos over an hour. -->
+<!-- Body chapters are a flat sequence of `## N. Title ({MM:SS})`. Timestamps
+are `(MM:SS)`, or `(H:MM:SS)` for videos over an hour. -->
