@@ -1,5 +1,5 @@
 Work following up from [[Summarization Tests]] to create the separate summarization skill. 
-## Summarization process 
+## Summarization process rough thoughts
 1. The raw file contains all of the content that we can possibly get, so it's kind of the ground truth, unless I start using speech detection. 
 2. We need to clean this ground truth and input, given the fact that transcripts would have llama 270b, which should be llama2 70b (find in Karpathy Case Study) However, where should this cleaning process live ? 
    My instinct is to put it in the extract skill. You told me not to do so because you think extract skill should be able to return the same content every time, so that it can count as a ground truth. This makes sense, but putting it in the summarization skill gives me the feeling of getting wrong content that I need to verify first, where I can't just do summarization straightforwardly. But ! I can't exclude the fact that doing the cleaning part would probably benefit the summarization process, if it does then the answer is clear. If it worsens the summarization process then I wouldn't because the summarization is  more important. Let's clarify the decision.
@@ -73,6 +73,18 @@ Work following up from [[Summarization Tests]] to create the separate summarizat
 > 3. Write one summarizer prompt with the 4-branch cascade above + mandatory provenance line.
 > 4. Skip the speaker-speed metric entirely.
 
+
+5. Define several things the skill has to do 
+	1. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters. I think the description is very variant, so maybe just ask AI to 
+	2. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
+	3.  Output Format - What sections should be included in the summarized file ?
+	4. Skill name and description - I think using summarization might not be the best word here, what to use ? 
+6. Output of the summarization
+   Should be able to understand what is included in the video, but shouldn't change too much of the speaker's tone and means. 
+   Should have a table of contents, a table of the segments and chapters 
+   Two level hierarchy if the video covers enough content 
+
+--- 
 ### Decision 
 
 Ok, I have made up my mind, I don't think I should increase the complexity before seeing what the simplest gives us, I understand that maybe Claude is strong enough so even if this skill works, it might not work on Codex or other models, but anyways, this should be an iterative process instead of me thinking that the variance is so big that it wouldn't give me good results. However, I should still refer to the tests and things I came up with about the summarization. There are also several things to be defined regarding the summarization skill. 
@@ -106,7 +118,7 @@ As above, we can put the `source_url` and `channel`. I don't want too much becau
 > For the digest file, carry only a **lean subset** of the raw file's frontmatter — the fields a `.base` view actually consumes: `id`, `url`, `title`, `channel`, `channel_url`, `thumbnail`, `duration`, `upload_date`, `view_count` — plus a `raw_file` backlink and `type` / `state`. Leave out the transcript-source fields (those belong to the raw file). Store `duration` in seconds and `view_count` as a plain integer; let the `.base` view do the formatting, which you already verified works.
 
 **2. Orientation and TL;DR**
-The orientation part is very good, because for the two [[berkeley]] files in the Skill-v2 test I cannot understand the TL;DR just by looking at it. I would at least need some background information — who is speaking, why, what level is this (industry or course?), and why is this being told (is it trending? or a topic in academia, and if so what is it related to). It doesn't need to be detailed, but it should give the reader a gist about what's going on. Consequently, we can have an **orientation** that serves as background, then a **TL;DR** acting as a structured summary — I want it structured because it would be easier to read.
+The orientation part is very good, because for the two berkeley files in the Skill-v2 test [[berkeley-rdi-zvI4UN2_i-w]] [[berkeley-rdi-cMiu3A7YBks]]I cannot understand the TL;DR just by looking at it. I would at least need some background information — who is speaking, why, what level is this (industry or course?), and why is this being told (is it trending? or a topic in academia, and if so what is it related to). It doesn't need to be detailed, but it should give the reader a gist about what's going on. Consequently, we can have an **orientation** that serves as background, then a **TL;DR** acting as a structured summary — I want it structured because it would be easier to read.
 *Branch: how do we come up with the background orientation and the TL;DR?* In the skill I would actually have AI first go through the chapters and summarize the whole transcript, then at the end add the TL;DR and the background orientation — so AI reads through the whole content first and does the more condensed part last, just as if a human were going through a video. I think the descriptions would help a lot for the background orientation, because they sometimes have links and several introductions telling what kind of video this is and who the target is — stuff that is not related to the content of the video.
 
 > [!note]- Reply — orientation vs TL;DR, and how to generate them
@@ -164,16 +176,16 @@ Display order: frontmatter (hidden via the Obsidian setting) → `# Title` → c
 Dropped for v1: timestamps, glossary, per-section takeaways, "Covers" list, dedicated references section.
 Skill writing order (to bake into SKILL.md): read everything → chapter body → TL;DR → orientation.
 
-5. Define several things the skill has to do 
-	1. What fields to be considered when summarizing ? Currently, chapters, but what about the description ? - To keep it simple, let's just not consider using detailed metrics to evaluate chapters. I think the description is very variant, so maybe just ask AI to 
-	2. 
-	3. Do we need to tell the AI that the chapters might not be that good ? Or maybe we should just first have a version where we just use the chapters as is ? 
-	4.  Output Format - What sections should be included in the summarized file ?
-	5. Skill name and description - I think using summarization might not be the best word here, what to use ? 
+--- 
+The first digest template had several instructions and guidelines in it, which matched what I said about hierarchical structure for the chapters and what content should be in TL;DR, but I think we can first start simple and iteratively develop. 
 
-
-6. Output of the summarization
-   Should be able to understand what is included in the video, but shouldn't change too much of the speaker's tone and means. 
-   Should have a table of contents, a table of the segments and chapters 
-   Two level hierarchy if the video covers enough content 
-
+Now the template is done, we start writing the skill. 
+1. What should be the skill name, this is quite important, because I have been using the word summarize, which obviously misleads. So come up with a better skill name in the format : verbing-noun, like that for the extract skill. 
+2. description for the skill : I think this shouldn't be that detailed as the discussion we made, but this is also critical so Claude knows what this does and when.
+3. Details :
+   Um, just to be more specific about the skill, the input would be the raw files (for the tests, we will run them in this Summarize Skill Development folder), the output would be in the output folder I just created. So yeah make the input and output like parameters. Then I guess we should also tell this skill it is a following skill for extract where the input raw file is formatted as extract's template. 
+4. There are no scripts for this skill, but still follows a flow just like how smart people or professional readers would read and write.
+	1. Understand : read metadata, title, description, chapters of the video to understand the context of this video. Then read and understand the transcript content. While reading through the raw file, we can also rate the if the chapters makes sense, understand what kind of video this is with the description.
+	2. Clean : There could be typos in the transcript that doesn't make sense, so cleaning up the content is also important.
+	3. Chapters : Some videos don't have chapters, or some videos don't have good chapters so we have to create them. For those that don't have good chapters, it can still be used for reference, when creating the chapters. This needs careful decision so let's discuss about this first. 
+	4. 

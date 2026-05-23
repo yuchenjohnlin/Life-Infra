@@ -40,13 +40,13 @@ chapters, as below — the label goes in the Chapter column, other cells empty,
 before each group. For a short video, drop the Part rows and use a plain flat
 table. Numbering stays continuous. The body chapters below stay flat regardless. -->
 
-| #   | Chapter                            | Time    | Uploader's chapters         |
-| --- | ---------------------------------- | ------- | --------------------------- |
-|     | **Part I — {Part title}**          |         |                             |
-| 1   | [[#1. {Chapter title} ({MM:SS})]]  | {MM:SS} | {uploader chapter(s), or —} |
-| 2   | [[#2. {Chapter title} ({MM:SS})]]  | {MM:SS} | {...}                       |
-|     | **Part II — {Part title}**         |         |                             |
-| 3   | [[#3. {Chapter title} ({MM:SS})]]  | {MM:SS} | {...}                       |
+| #           | Chapter                           | Time    | Uploader's chapters         |
+| ----------- | --------------------------------- | ------- | --------------------------- |
+| **Part I**  | {Part title}                      |         |                             |
+| 1           | [[#1. {Chapter title} ({MM:SS})]] | {MM:SS} | {uploader chapter(s), or —} |
+| 2           | [[#2. {Chapter title} ({MM:SS})]] | {MM:SS} | {...}                       |
+| **Part II** | {Part title}                      |         |                             |
+| 3           | [[#3. {Chapter title} ({MM:SS})]] | {MM:SS} | {...}                       |
 
 ---
 
