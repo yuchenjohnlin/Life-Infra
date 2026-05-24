@@ -1,9 +1,9 @@
 ---
 id: CEvIs9y1uog
 url: https://www.youtube.com/watch?v=CEvIs9y1uog
-title: "Don't Build Agents, Build Skills Instead – Barry Zhang & Mahesh Murag, Anthropic"
+title: Don't Build Agents, Build Skills Instead – Barry Zhang & Mahesh Murag, Anthropic
 aliases:
-  - "Don't Build Agents, Build Skills Instead – Barry Zhang & Mahesh Murag, Anthropic"
+  - Don't Build Agents, Build Skills Instead – Barry Zhang & Mahesh Murag, Anthropic
 channel: AI Engineer
 channel_url: https://www.youtube.com/channel/UCLKPca3kwwd-B59HNr-_lvA
 duration: 982
@@ -11,7 +11,7 @@ upload_date: 20251208
 processed_at: 2026-05-22T00:00:00
 thumbnail: https://i.ytimg.com/vi/CEvIs9y1uog/maxresdefault.jpg
 view_count: 1344580
-raw_file: "[[CEvIs9y1uog]]"
+raw_file: "[[Learn/Dev/Summarize Skill Develop/test review/test-2/CEvIs9y1uog]]"
 type: youtube-digest
 state: active
 ---

@@ -5,13 +5,13 @@ title: "翁家翌：OpenAI，GPT，强化学习，Infra，后训练，天授，t
 aliases:
   - "翁家翌：OpenAI，GPT，强化学习，Infra，后训练，天授，tuixue，开源，CMU，清华｜WhynotTV Podcast #4"
 channel: WhynotTV
-channel_url: "https://www.youtube.com/channel/UC5xLV_gJAP9psKcyrJ3ZIcw"
+channel_url: https://www.youtube.com/channel/UC5xLV_gJAP9psKcyrJ3ZIcw
 duration: 7365
 upload_date: 20260117
 processed_at: 2026-05-22T00:00:00
-thumbnail: "https://i.ytimg.com/vi_lc/I0DrcsDf3Os/maxresdefault_en-US.jpg"
+thumbnail: https://i.ytimg.com/vi_lc/I0DrcsDf3Os/maxresdefault_en-US.jpg
 view_count: 243225
-raw_file: "[[I0DrcsDf3Os]]"
+raw_file: "[[Learn/Dev/Summarize Skill Develop/test review/test-2/I0DrcsDf3Os]]"
 type: youtube-digest
 state: active
 ---

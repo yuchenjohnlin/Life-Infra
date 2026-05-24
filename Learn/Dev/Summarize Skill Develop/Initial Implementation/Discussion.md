@@ -287,4 +287,8 @@ Picked **`I0DrcsDf3Os`** — the longest input — as the first test. It's a 2-h
 
 What I found and what we changed lives in **`test review/test-1/revise.md`**.
 
+---
+## (test-2) look at test2 folder
 
+---
+One problem is the rating part.

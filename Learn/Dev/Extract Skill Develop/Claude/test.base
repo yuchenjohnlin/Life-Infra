@@ -16,14 +16,15 @@ views:
       - transcript_source
       - manual_track_languages
       - auto_track_languages
+      - language
+      - original_language
     sort:
-      - property: auto_track_languages
-        direction: DESC
       - property: channel
         direction: ASC
     columnSize:
-      note.url: 59
       note.channel: 198
+      note.title: 219
+      note.chapters_usable: 62
       note.transcript_status: 82
       note.manual_track_languages: 130
       note.auto_track_languages: 56
@@ -31,7 +32,7 @@ views:
     name: View
     filters:
       and:
-        - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
+        - file.inFolder("Learn/Dev/Extract Skill Develop/Claude/test")
     groupBy:
       property: transcript_status
       direction: ASC
@@ -46,11 +47,7 @@ views:
       - chapters_usable
       - id
     sort:
-      - property: like_count
-        direction: DESC
       - property: duration
-        direction: ASC
-      - property: view_count
         direction: DESC
     columnSize:
       note.url: 115
