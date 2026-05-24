@@ -42,8 +42,7 @@ The flow has four steps: **Understand** the video → **Write the digest** body 
 **Language.** Write the digest in the video's original language — per
 `original_language` in the raw frontmatter (`zh` → Traditional Chinese / zh-TW;
 `en` → English; etc.). Do not be misled by chapter titles or descriptions that
-may be translated. (The zh-TW choice for Chinese is the reader's preference;
-the LLM-performance gap with zh-Hans is small.)
+may be translated. (The zh-TW choice for Chinese is the reader's preference)
 
 ### 1. Understand
 
@@ -186,21 +185,30 @@ The orientation is not a summary of the content — that is the TL;DR's job.
 
 **(c) TL;DR.**
 
-The TL;DR has two jobs: convey the video's throughline, and make the reader
-*want* to read the digest. A reader already committed to reading everything
-doesn't need it — so write it for the reader who is still deciding.
+The TL;DR has three jobs at once: **hook** the reader who is still deciding,
+**substitute** for the digest for the reader who won't read the full thing
+today, and **refresh** the reader returning later. Done well it is both
+intriguing *and* thorough — those are not in tension as long as it stays at
+the *throughline* level.
 
-- Lead with what is genuinely most striking, surprising, or distinctive in the
-  video — the insider detail, the counterintuitive claim, the strong opinion.
-  The pull comes from surfacing real intrigue, not from hype: if you reach for
-  words like "fascinating" or "must-watch", you are decorating instead of
-  surfacing.
-- It compresses the argument in the body — stay faithful to what the body
-  actually says. Make it claim-driven, like the body: state the ideas directly,
+- **Format follows the content's structure, not its content-type label.**
+  Multiple parallel claims or topics → **bullets**. One sustained argument →
+  a **short paragraph** (often a thesis sentence followed by the supporting
+  moves). A long biographical or sequential video → a flowing paragraph or an
+  **ordered list** that mirrors the arc. The most common useful default is
+  *a one-line thesis followed by bulleted key points* — bullets are scannable
+  and can pack specifics without padding.
+- **Lead with what is genuinely striking** — the insider detail, the
+  counterintuitive claim, the strong opinion. The pull comes from surfacing
+  real intrigue, not from hype: if you reach for words like "fascinating" or
+  "must-watch", you are decorating instead of surfacing.
+- **Comprehensive but tight.** Cover the throughline and the main moves —
+  enough that a reader who never gets to the body still leaves with the real
+  shape of the video. Stay claim-driven, like the body: state ideas directly,
   not "the video discusses...".
-- Keep it tight — it may scale modestly with a longer video, but it stays a way
-  *into* the argument, not a second digest. The limit isn't a word count; it's
-  that the TL;DR must not carry per-chapter detail — that belongs in the body.
+- **The hard line.** No per-chapter detail — that belongs to the Chapters
+  table and the body. The TL;DR carries the spine, not the chapters. This
+  is what keeps "comprehensive" from drifting into "a second digest."
 
 ### 4. Build the Chapters table
 
