@@ -187,5 +187,104 @@ Now the template is done, we start writing the skill.
 4. There are no scripts for this skill, but still follows a flow just like how smart people or professional readers would read and write.
 	1. Understand : read metadata, title, description, chapters of the video to understand the context of this video. Then read and understand the transcript content. While reading through the raw file, we can also rate the if the chapters makes sense, understand what kind of video this is with the description.
 	2. Clean : There could be typos in the transcript that doesn't make sense, so cleaning up the content is also important.
-	3. Chapters : Some videos don't have chapters, or some videos don't have good chapters so we have to create them. For those that don't have good chapters, it can still be used for reference, when creating the chapters. This needs careful decision so let's discuss about this first. 
-	4. 
+	3. Chapters : Some videos don't have chapters, or some videos don't have good chapters so we have to create them. For those that don't have good chapters, it can still be used for reference, when creating the chapters. This needs careful decision so let's discuss about this first.
+
+> [!note]- Reply — skill name, description, parameters (1-3)
+>
+> **Name: `digesting-youtube-content`** — verbing-noun like the extract skill, and the verb matches the artifact you'd settled on ("digest"). Drops "summarize" entirely; the word always carried over-compression baggage.
+>
+> **Description (frontmatter trigger):**
+> Turn an existing raw YouTube transcript file into a chapter-mapped, transcript-grounded digest — a reader-friendly note that follows the video's flow in argumentative prose. Invoke when a raw transcript file already exists (e.g. under `Learn/10-Raw/youtube/`) and the user wants it digested, processed, or written up. Does not fetch transcripts or metadata; that is `extracting-youtube-content`'s job.
+>
+> Three things in one sentence: *what* it does, *when* to invoke, and the *boundary* with the extract skill (so it doesn't fire on raw URLs).
+>
+> **Parameters: `input` and `output`** — either a file or a folder; one digest per input raw file. Test defaults set to this dev folder's `input/` and `output/`. The skill also states it's downstream of `extracting-youtube-content` and its input conforms to the extract template (frontmatter + `# Description` + `# Transcript`).
+
+> [!note]- Reply — Understand (4.1)
+>
+> Step 1 is comprehension only — *no file output*. Read the metadata for context, then the full transcript end-to-end. Form a judgment on the chapters while reading (descriptive titles? boundaries at real topic shifts?) — that judgment feeds step 2.
+>
+> One sharpening on context: don't lean too hard on the description as "the source." Context comes from several places — description, the opening of the talk itself, your own knowledge of the speaker/topic/field — none authoritative. Weigh them. If context is genuinely thin, a lighter orientation is fine; don't manufacture it.
+
+> [!note]- Reply — Clean (4.2) is not really its own step
+>
+> An LLM agent has no separate "memory store" — when the skill says "clean in your understanding," that's just the correction held in the context window for the rest of the run. **Nothing is written to any file.** So "Clean" as a separate step produces no output at all — it isn't really a step.
+>
+> Better: fold it into Understand as an awareness. Two parallel caveats live there now — "the transcript may contain typos; note and silently correct when writing" and "the chapters may be weak; note and judge in step 2." Both inform later steps; neither produces an artifact. The raw file is the ground truth and stays untouched.
+
+> [!note]- Reply — Chapters (4.3): the gate, the granularity test
+>
+> **Trust YouTube — but with a gate.** Three cases, binary outcome:
+> - `chapters_usable: false` → ignore the field, create your own.
+> - `chapters_usable: true` and chapters are good → **use as-is** (the author's structure, trust it).
+> - `chapters_usable: true` but weak (generic titles, or so fine-grained that single ideas split across several headers) → **recreate**, using the real chapters as reference for where content shifts.
+>
+> **Granularity isn't about minutes.** A chapter is a unit of *thought*, not *time* — one coherent idea, one move in the talk. Two failure modes, neither about length:
+> - **Fragmentation** — a single idea split across several headers (reader interrupted mid-thought).
+> - **Lumping** — several distinct ideas under one header (no signposts, no map).
+>
+> The test for a good boundary: you can give the chapter an honest title that covers the whole chapter and nothing more, **without needing "and"**. A title needing "and" is two chapters; a title that can only be generic ("Part 2") isn't a real boundary.
+>
+> **Two-level hierarchy** (Parts grouping chapters) — *deferred* for v1. Add only if the testset shows a long flat list reads badly. (Spoiler: test 1 said it does — see `test review/test-1/revise.md`.)
+
+4. (cont.)
+	4. **Write the digest.** I initially split this into "Structure" and "Write" as two separate steps. But then if writing reveals a boundary is wrong — an idea spilling across two chapters, or two chapters that are really one — the structure should be revisable. Outline and draft co-evolve. So merge them.
+
+> [!note]- Reply — Write the digest (4.4): the merged step, and argumentative prose
+>
+> Merged correctly. The vocabulary that makes the relationship clear to Claude: *"working outline, not frozen"*, *"structure and prose develop together"*, *"revise chapter boundaries as the prose reveals them"*. The chapters table is filled last from the finished headings.
+>
+> **Sub-parts:** (a) settle a working chapter structure, (b) write the prose, (c) fill the chapters table.
+>
+> **The prose — a "transcript-grounded argumentative digest":**
+> - **Argument, not narration.** Narration reports the video as an event ("*Karpathy explains training is expensive, then shows a ChatGPT example.*"). Argument states the ideas ("*Training is expensive; inference is cheap — and that asymmetry is why model development is centralized while usage is widespread.*"). Drop the "the speaker says / explains / shows" scaffolding.
+> - **Grounded and faithful** — supported by the transcript; faithful to the speaker's claims, examples, terminology, rough order. No invented claims, no coined metaphors.
+> - **Compress, but don't over-compress** — include most substantive points (understand it *faster*, not skip it); cut filler, repetition, false starts. This is a digest, not an aggressive summary.
+> - **Preserve the speaker's register** — keep *their* analogies, hedges, "you can think of it as..." moves. Don't flatten into generic abstract essay prose.
+>
+> **Timestamps in chapter headings — out for v1.** A digest replaces watching; the raw file still has timestamps for verification.
+
+4. (cont.)
+	5. **Write the opening.** TL;DR, orientation, and the cleaned description sit *above* the body in the file — but should be written *last*, after the body, because only by then do you have the clearest picture of the throughline and content.
+
+> [!note]- Reply — Write the opening (4.5): placement, naming, content
+>
+> **Write-last is right.** TL;DR depends on the body. Orientation doesn't strictly depend on it, but writing it after costs nothing and keeps step 1 cleanly comprehension-only (no file output). Cleaned description is independent but groups well with the others for workflow clarity.
+>
+> **Don't split into "Condense + Frame"** — that's over-engineering. These three tasks aren't united by a verb but by *position* (they sit above the body), so name the step **positionally**: "Write the opening." Not "Condense," not "Frame."
+>
+> **Initial content sketch:**
+> - **Cleaned description** — strip promo, sponsor copy, repeated channel links; keep useful links. Collapsible callout below the title.
+> - **Orientation** — external context: speaker, format, level, why the video exists, the field. From description + model background knowledge; avoid unverifiable claims (no "trending" unless the description says so).
+> - **TL;DR** — internal: the argument compressed. Initially: one-line thesis + bulleted key points. Lead with what's most striking — pull comes from real intrigue, not hype.
+
+4. (cont.)
+	6. **Build the Chapters table.** Mechanical-ish — one row per chapter linking to its heading. I considered scripting it for determinism.
+
+> [!note]- Reply — Chapters table (4.6): model-written for now
+>
+> Table is generated last, from the finished chapter headings. **For v1, the model writes it.** Reasoning:
+> - Scripting now is optimizing a triviality before the core is validated.
+> - A script depends on a heading format we haven't observed yet — wait for real headings.
+> - "Script against real output, after tests" — the principle held in test 1, and the table actually *gained* a judgment-dependent column ("Uploader's chapters"), which a pure script can't own anyway.
+
+### Decision — first version of the digest skill
+
+Created `Initial Implementation/SKILL.md` with name `digesting-youtube-content`, the description above, parameters `input`/`output` (defaulting to this dev folder), and a four-step flow:
+
+1. **Understand** — read the raw file globally; form judgment on chapters; note transcript errors. No file output.
+2. **Write the digest** — (a) settle a working chapter structure, (b) write argumentative, transcript-grounded prose per chapter, (c) fill the chapters table. Structure and prose co-evolve.
+3. **Write the opening** — cleaned description, orientation, TL;DR. Written *last*, after the body.
+4. **Build the Chapters table** — model-written for v1 (script deferred).
+
+Body chapters are flat `## N. Title`. Two-level Part hierarchy deferred. Timestamps in chapter headings deferred. Cleaned description lives in a collapsible callout below the title.
+
+---
+
+## First test run (test-1)
+
+Picked **`I0DrcsDf3Os`** — the longest input — as the first test. It's a 2-hour Chinese podcast (WhynotTV #4, 翁家翌). The choice deliberately stressed the long-video / many-chapters / non-English path in one shot. Output went to `output/I0DrcsDf3Os.md`; a snapshot was saved to `test review/test-1/`. Then a second run was added for `CEvIs9y1uog` (Anthropic skills talk, ~16 min, no chapters).
+
+What I found and what we changed lives in **`test review/test-1/revise.md`**.
+
+
