@@ -39,6 +39,12 @@ the writing are what the reader ultimately judges.
 The flow has four steps: **Understand** the video → **Write the digest** body →
 **Write the opening** → **Build the Chapters table**.
 
+**Language.** Write the digest in the video's original language — per
+`original_language` in the raw frontmatter (`zh` → Traditional Chinese / zh-TW;
+`en` → English; etc.). Do not be misled by chapter titles or descriptions that
+may be translated. (The zh-TW choice for Chinese is the reader's preference;
+the LLM-performance gap with zh-Hans is small.)
+
 ### 1. Understand
 
 Approach the raw file the way you would a video you are about to learn from.
