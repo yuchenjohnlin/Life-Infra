@@ -36,9 +36,11 @@ most striking, written to make the reader want to read on.}
 ## Chapters
 
 <!-- One single table. For a long video, add bold Part-label rows to group the
-chapters, as below — the label goes in the Chapter column, other cells empty,
-before each group. For a short video, drop the Part rows and use a plain flat
-table. Numbering stays continuous. The body chapters below stay flat regardless. -->
+chapters, as below — the Part name goes in the `#` column (`**Part I**`) and
+the Part title in the `Chapter` column; Time and Uploader's-chapters cells stay
+empty. Place each Part row before its chapters. For a short video, drop the
+Part rows and use a plain flat table. Numbering stays continuous. The body
+chapters below stay flat regardless. -->
 
 | #           | Chapter                           | Time    | Uploader's chapters         |
 | ----------- | --------------------------------- | ------- | --------------------------- |
