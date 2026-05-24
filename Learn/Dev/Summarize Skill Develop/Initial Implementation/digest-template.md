@@ -15,7 +15,7 @@ upload_date: 20260101                 # YYYYMMDD
 processed_at: 2026-05-21T00:00:00      # ISO 8601
 thumbnail: https://i.ytimg.com/vi/VIDEO_ID/maxresdefault.jpg
 view_count: 0
-raw_file: "[[VIDEO_ID]]"               # link back to the raw transcript file
+transcript_file: "[[<input-folder>/VIDEO_ID|VIDEO_ID]]"  # path-qualified wiki-link to the raw transcript file (path-qualified because the digest shares the same basename — without the path, the link would resolve to the digest itself)
 type: youtube-digest
 state: active
 ---
