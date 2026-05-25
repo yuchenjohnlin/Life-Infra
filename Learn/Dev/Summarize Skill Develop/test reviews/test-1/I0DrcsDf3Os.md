@@ -12,7 +12,7 @@ processed_at: 2026-05-21T00:00:00
 thumbnail: https://i.ytimg.com/vi_lc/I0DrcsDf3Os/maxresdefault_en-US.jpg
 thumbnail_local: "[[I0DrcsDf3Os.jpg]]"
 view_count: 243225
-raw_file: "[[Learn/Dev/Summarize Skill Develop/test review/test-1/I0DrcsDf3Os]]"
+raw_file: "[[Learn/Dev/Summarize Skill Develop/test reviews/test-1/I0DrcsDf3Os]]"
 type: youtube-digest
 state: active
 ---

@@ -3,7 +3,7 @@
 After applying the test-1 revisions, I ran a second round on the same `I0DrcsDf3Os` and added `CEvIs9y1uog` (short Anthropic talk, no chapters). Snapshots sit next to this file. This pass mostly **validated** the test-1 revisions and surfaced a smaller, more specific set of new findings.
 
 > [!note]
-> Several findings that *started* in this test — language defaulting to English, the `raw_file` link bug, the TL;DR being too dense as a paragraph — are already written up in [[../test-1/revise|test-1/revise.md]] because all the revisions landed in one continuous editing pass. This file focuses on what's *not* there.
+> Several findings that *started* in this test — language defaulting to English, the `raw_file` link bug, the TL;DR being too dense as a paragraph — are already written up in [[Learn/Dev/Summarize Skill Develop/test reviews/test-1/revise|test-1/revise.md]] because all the revisions landed in one continuous editing pass. This file focuses on what's *not* there.
 
 ## What test-2 validated (the test-1 revisions worked)
 

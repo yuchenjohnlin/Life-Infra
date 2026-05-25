@@ -11,7 +11,7 @@ upload_date: 20251208
 processed_at: 2026-05-22T00:00:00
 thumbnail: https://i.ytimg.com/vi/CEvIs9y1uog/maxresdefault.jpg
 view_count: 1344580
-raw_file: "[[Learn/Dev/Summarize Skill Develop/test review/test-1/CEvIs9y1uog]]"
+raw_file: "[[Learn/Dev/Summarize Skill Develop/test reviews/test-1/CEvIs9y1uog]]"
 type: youtube-digest
 state: active
 ---
