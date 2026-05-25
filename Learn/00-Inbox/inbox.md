@@ -20,7 +20,13 @@
 - [x] https://www.youtube.com/watch?v=Z28Wfdf3SRc
 - [x] https://www.youtube.com/watch?v=2rcJdFuNbZQ&t=2s → [[hung-yi-lee-openclaw-ai-agent-anatomy]]
 - [x] https://www.youtube.com/watch?v=zvI4UN2_i-w&list=PLS01nW3RtgorL3AW8REU9nGkzhvtn6Egn&index=10 → [[berkeley-rdi-yu-su-reasoning-memory-planning]]
-- [ ] https://www.youtube.com/watch?v=Q3m-CKJmqMo&list=WL&index=5
+- [x] https://www.youtube.com/watch?v=Q3m-CKJmqMo&list=WL&index=5
+- [ ] https://www.youtube.com/watch?v=LnCXoIr0Mw8&list=WL&index=7
+- [ ] https://www.youtube.com/watch?v=cqW_VWYbIcU&list=WL&index=11&t=17s
+- [ ] https://www.youtube.com/watch?v=0XB7fNS_ONg&list=WL&index=15&t=6s
+- [ ] https://www.youtube.com/watch?v=bYM_VMs7EO0&list=WL&index=21&t=6s
+- [ ] https://www.youtube.com/watch?v=55pTFVoclvE&list=WL&index=26&t=15s
+- [ ] https://www.youtube.com/watch?v=bB2o81DnKHk&list=WL&index=27
 <!-- moved to ## 已處理 as -v2 run on 2026-04-27 -->
 
 
