@@ -21,12 +21,19 @@
 - [x] https://www.youtube.com/watch?v=2rcJdFuNbZQ&t=2s → [[hung-yi-lee-openclaw-ai-agent-anatomy]]
 - [x] https://www.youtube.com/watch?v=zvI4UN2_i-w&list=PLS01nW3RtgorL3AW8REU9nGkzhvtn6Egn&index=10 → [[berkeley-rdi-yu-su-reasoning-memory-planning]]
 - [x] https://www.youtube.com/watch?v=Q3m-CKJmqMo&list=WL&index=5
-- [ ] https://www.youtube.com/watch?v=LnCXoIr0Mw8&list=WL&index=7
-- [ ] https://www.youtube.com/watch?v=cqW_VWYbIcU&list=WL&index=11&t=17s
-- [ ] https://www.youtube.com/watch?v=0XB7fNS_ONg&list=WL&index=15&t=6s
-- [ ] https://www.youtube.com/watch?v=bYM_VMs7EO0&list=WL&index=21&t=6s
-- [ ] https://www.youtube.com/watch?v=55pTFVoclvE&list=WL&index=26&t=15s
-- [ ] https://www.youtube.com/watch?v=bB2o81DnKHk&list=WL&index=27
+- [x] https://www.youtube.com/watch?v=LnCXoIr0Mw8&list=WL&index=7
+- [x] https://www.youtube.com/watch?v=cqW_VWYbIcU&list=WL&index=11&t=17s
+- [x] https://www.youtube.com/watch?v=0XB7fNS_ONg&list=WL&index=15&t=6s
+- [x] https://www.youtube.com/watch?v=bYM_VMs7EO0&list=WL&index=21&t=6s
+- [x] https://www.youtube.com/watch?v=55pTFVoclvE&list=WL&index=26&t=15s
+- [x] https://www.youtube.com/watch?v=bB2o81DnKHk&list=WL&index=27
+- [ ] https://www.youtube.com/watch?v=rZACoZD8AG8&list=WL&index=8&t=11s
+- [ ] https://www.youtube.com/watch?v=YoqK_kQzMko&list=WL&index=9
+- [ ] https://www.youtube.com/watch?v=_je6aq87I9c&list=WL&index=29&t=26s
+- [ ] https://www.youtube.com/watch?v=SlGRN8jh2RI&list=WL&index=43&t=14s
+- [ ] https://www.youtube.com/watch?v=_R83pFpUWyM&list=WL&index=37&t=7s
+- [ ] https://www.youtube.com/watch?v=PKvgwp2Ff8M&list=WL&index=34&t=8s
+- [ ] https://www.youtube.com/watch?v=DN2mhf0b02s&list=WL&index=33&t=2s
 <!-- moved to ## 已處理 as -v2 run on 2026-04-27 -->
 
 
