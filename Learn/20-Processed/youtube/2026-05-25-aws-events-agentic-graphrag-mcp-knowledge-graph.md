@@ -43,22 +43,22 @@ The throughline: stop hardcoding retrieval logic. Layer graph capabilities as to
 
 ## Chapters
 
-| #            | Chapter                                                                                                       | Time    | Uploader's chapters |
-| ------------ | ------------------------------------------------------------------------------------------------------------- | ------- | ------------------- |
-| **Part I**   | Framing: from graph RAG to agentic graph RAG                                                                  |         |                     |
-| 1            | [[#1. From graph RAG to agentic graph RAG (00:40)]]                                                           | 00:40   | —                   |
-| 2            | [[#2. Why agents — experts iterate; hardcoded logic doesn't (05:08)]]                                         | 05:08   | —                   |
-| 3            | [[#3. Knowledge graphs vs auto-built lexical graphs (10:16)]]                                                 | 10:16   | —                   |
-| 4            | [[#4. Combining vector and graph search in Neptune (14:17)]]                                                  | 14:17   | —                   |
-| 5            | [[#5. Three ways to give a graph to an agent (18:55)]]                                                        | 18:55   | —                   |
-| **Part II**  | Demos against a knowledge graph (fraud)                                                                       |         |                     |
-| 6            | [[#6. Demo 1 — letting the agent author its own Neptune queries (24:27)]]                                     | 24:27   | —                   |
-| 7            | [[#7. Securing the agent: read-only IAM and the case for controlled tools (34:50)]]                           | 34:50   | —                   |
-| 8            | [[#8. Demo 2 — custom domain-specific tools as the production handoff (38:50)]]                               | 38:50   | —                   |
-| **Part III** | Demo against unstructured content (toolkit)                                                                   |         |                     |
-| 9            | [[#9. The graph-rag-toolkit, lexical graphs, multi-tenancy, inferred schema (47:43)]]                         | 47:43   | —                   |
-| 10           | [[#10. Demo 3 — auto-generated tools over aircraft and NTSB documents (53:31)]]                               | 53:31   | —                   |
-| 11           | [[#11. Closing — layer tools, don't replace them (57:34)]]                                                    | 57:34   | —                   |
+| #            | Chapter                                                                               | Time  | Uploader's chapters |
+| ------------ | ------------------------------------------------------------------------------------- | ----- | ------------------- |
+| **Part I**   | Framing: from graph RAG to agentic graph RAG                                          |       |                     |
+| 1            | [[#1. From graph RAG to agentic graph RAG (00:40)]]                                   | 00:40 | —                   |
+| 2            | [[#2. Why agents — experts iterate; hardcoded logic doesn't (05:08)]]                 | 05:08 | —                   |
+| 3            | [[#3. Knowledge graphs vs auto-built lexical graphs (10:16)]]                         | 10:16 | —                   |
+| 4            | [[#4. Combining vector and graph search in Neptune (14:17)]]                          | 14:17 | —                   |
+| 5            | [[#5. Three ways to give a graph to an agent (18:55)]]                                | 18:55 | —                   |
+| **Part II**  | Demos against a knowledge graph (fraud)                                               |       |                     |
+| 6            | [[#6. Demo 1 — letting the agent author its own Neptune queries (24:27)]]             | 24:27 | —                   |
+| 7            | [[#7. Securing the agent: read-only IAM and the case for controlled tools (34:50)]]   | 34:50 | —                   |
+| 8            | [[#8. Demo 2 — custom domain-specific tools as the production handoff (38:50)]]       | 38:50 | —                   |
+| **Part III** | Demo against unstructured content (toolkit)                                           |       |                     |
+| 9            | [[#9. The graph-rag-toolkit, lexical graphs, multi-tenancy, inferred schema (47:43)]] | 47:43 | —                   |
+| 10           | [[#10. Demo 3 — auto-generated tools over aircraft and NTSB documents (53:31)]]       | 53:31 | —                   |
+| 11           | [[#11. Closing — layer tools, don't replace them (57:34)]]                            | 57:34 | —                   |
 
 ---
 

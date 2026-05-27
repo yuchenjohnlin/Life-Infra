@@ -1,10 +1,16 @@
 ---
 # === identity ===
-id: VIDEO_ID                        # 11-char YouTube video id (filename matches this)
+id: VIDEO_ID                        # 11-char YouTube video id (also the filename: <id>.raw.md)
+type: youtube                       # source platform of this raw file (extensible: bilibili, podcast, ...)
 url: https://www.youtube.com/watch?v=VIDEO_ID
 title: "Video title here"
 aliases:                            # makes [[Video title here]] resolve to this file
   - Video title here
+
+# === pipeline ===
+status: extracted                   # extracted | extracted_no_transcript | extraction_failed
+                                    # set by extracting-youtube-content; downstream skills (digest, etc.)
+                                    # may update this field with their own stage values.
 
 # === creator ===
 channel: Channel Name
@@ -32,7 +38,8 @@ original_language: null             # derived via cascade (auto > single-manual 
 manual_track_languages: []          # transcript-api: is_generated=False track language codes
 auto_track_languages: []            # transcript-api: is_generated=True track language codes
 transcript_status: available        # available | disabled | unavailable | failed | stale
-transcript_source: none             # manual_<lang> | auto_<lang> | whisper_local | none
+                                    # finer-grained than `status` — specific to the transcript step.
+transcript_source: none             # which track we fetched FROM: manual_<lang> | auto_<lang> | whisper_local | none
 transcript_target: null             # only set when is_translated=true
 is_translated: false                # convenience boolean for grep / .base filter
 
@@ -40,12 +47,13 @@ is_translated: false                # convenience boolean for grep / .base filte
 view_count: 0
 like_count: 0
 
-# === status ===
+# === availability ===
 availability: public                # public | unlisted | subscriber_only | etc.
 live_status: not_live               # not_live | was_live | is_live
 
 # === lifecycle ===
-state: active                       # active | archived
+archived: false                     # bool — manual flag. True hides the file from default .base views
+                                    # without deleting it. Orthogonal to `status` above.
 ---
 
 # {title}

@@ -1,68 +1,67 @@
 ---
-# === identity ===
 id: bB2o81DnKHk
-url: "https://www.youtube.com/watch?v=bB2o81DnKHk"
+url: https://www.youtube.com/watch?v=bB2o81DnKHk
 title: "Harvard Professor: CS50, What Matters More Than Programming Now, Lecturing Well | David J Malan"
 aliases:
   - "Harvard Professor: CS50, What Matters More Than Programming Now, Lecturing Well | David J Malan"
-
-# === creator ===
 channel: Ryan Peterman
-channel_url: "https://www.youtube.com/channel/UCzB7YGrrxDC_POenf86H3_Q"
+channel_url: https://www.youtube.com/channel/UCzB7YGrrxDC_POenf86H3_Q
 channel_follower_count: 0
-
-# === time ===
 duration: 3826
 upload_date: 20260511
-fetched_at: "2026-05-25T13:07:10+00:00"
-
-# === visual ===
-thumbnail: "https://i.ytimg.com/vi/bB2o81DnKHk/maxresdefault.jpg"
-
-# === content structure ===
+fetched_at: 2026-05-25T13:07:10+00:00
+thumbnail: https://i.ytimg.com/vi/bB2o81DnKHk/maxresdefault.jpg
 chapters:
-  - {start: 0, title: Intro}
-  - {start: 69, title: Getting into computer science}
-  - {start: 207, title: Becoming the professor of CS50}
-  - {start: 679, title: How to lecture well}
-  - {start: 865, title: Depth vs engagement in education}
-  - {start: 1091, title: "Why don't we consolidate educational resources"}
-  - {start: 1400, title: Why start with C}
-  - {start: 1911, title: The ideal use of AI in education}
-  - {start: 2094, title: Cheating and AI}
-  - {start: 2301, title: "Should we really learn CS still?"}
-  - {start: 2724, title: College vs online education}
-  - {start: 2826, title: The most difficult concept to learn}
-  - {start: 3060, title: Growth vs fixed mindset}
-  - {start: 3155, title: The future of CS50}
-  - {start: 3356, title: Biggest career regret}
-  - {start: 3629, title: Top book recommendations}
-  - {start: 3756, title: Advice for his younger self}
-  - {start: 3815, title: Outro}
+  - start: 0
+    title: Intro
+  - start: 69
+    title: Getting into computer science
+  - start: 207
+    title: Becoming the professor of CS50
+  - start: 679
+    title: How to lecture well
+  - start: 865
+    title: Depth vs engagement in education
+  - start: 1091
+    title: Why don't we consolidate educational resources
+  - start: 1400
+    title: Why start with C
+  - start: 1911
+    title: The ideal use of AI in education
+  - start: 2094
+    title: Cheating and AI
+  - start: 2301
+    title: Should we really learn CS still?
+  - start: 2724
+    title: College vs online education
+  - start: 2826
+    title: The most difficult concept to learn
+  - start: 3060
+    title: Growth vs fixed mindset
+  - start: 3155
+    title: The future of CS50
+  - start: 3356
+    title: Biggest career regret
+  - start: 3629
+    title: Top book recommendations
+  - start: 3756
+    title: Advice for his younger self
+  - start: 3815
+    title: Outro
 chapters_usable: true
-
-# === language ===
 language: en
 original_language: en
-
-# === subtitles ===
 manual_track_languages: []
 auto_track_languages:
   - en
 transcript_status: available
 transcript_source: auto_en
-transcript_target: null
+transcript_target:
 is_translated: false
-
-# === engagement ===
 view_count: 218877
 like_count: 5817
-
-# === status ===
 availability: public
 live_status: not_live
-
-# === lifecycle ===
 state: active
 ---
 
