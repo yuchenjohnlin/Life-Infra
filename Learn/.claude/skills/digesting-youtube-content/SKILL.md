@@ -25,9 +25,17 @@ Test defaults (during current development): input `Learn/Dev/Summarize Skill Dev
 
 One digest markdown file per input raw file, conformant to [`assets/digest-template.md`](assets/digest-template.md).
 
-Frontmatter is a lean subset of the raw file's frontmatter — only fields a `.base` view consumes (id, url, title, channel, thumbnail, duration, view_count, etc.) — plus a `transcript_file` path-qualified wiki-link back to the raw, and `type: youtube-digest`.
+**Filename convention.** The digest file is `<VIDEO_ID>.digest.md`. The raw transcript stays at `<VIDEO_ID>.md`. The `.digest.md` suffix carries the content kind, so wiki-links to the raw (`[[<VIDEO_ID>]]`) resolve unambiguously without path qualification.
 
-Body sections, in file order:
+**Frontmatter** — lean subset of the raw file's frontmatter (id, url, title, channel, thumbnail, duration, view_count, etc.) plus a few digest-specific fields:
+
+- `transcript_file: "[[<VIDEO_ID>]]"` — wiki-link back to the raw.
+- `type: youtube` — source platform. Kind ("digest" vs. "raw") is carried by the filename suffix, not this field.
+- `status: complete | partial | error` — pipeline state of this digest; almost always `complete`. (Extract-stage errors — metadata missing, transcript failed — live on the *raw* file's `status` field, not the digest.)
+- `viewed_state: unviewed | digest_read | video_watched | both` — user engagement, for filtering "unwatched" or "still-to-read" piles in the holistic `.base` view.
+- `state: active | archived` — lifecycle, distinct from `status`.
+
+**Body sections**, in file order:
 
 1. `# Title`
 2. Collapsible **cleaned description** callout (`> [!quote]-`)
