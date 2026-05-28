@@ -11,7 +11,7 @@ upload_date: 20260510
 processed_at: 2026-05-25T00:00:00
 thumbnail: https://i.ytimg.com/vi/55pTFVoclvE/maxresdefault.jpg
 view_count: 1768711
-transcript_file: "[[Learn/10-Raw/youtube/55pTFVoclvE|55pTFVoclvE]]"
+transcript_file: "[[55pTFVoclvE|55pTFVoclvE]]"
 type: youtube-digest
 state: active
 ---

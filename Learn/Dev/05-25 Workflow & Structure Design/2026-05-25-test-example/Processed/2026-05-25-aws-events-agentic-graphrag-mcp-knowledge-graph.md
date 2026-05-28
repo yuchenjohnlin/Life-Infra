@@ -1,7 +1,7 @@
 ---
 id: LnCXoIr0Mw8
 url: https://www.youtube.com/watch?v=LnCXoIr0Mw8
-title: "Build an Agentic GraphRAG System in 1 Hour (MCP + Knowledge Graph) | Databases for AI"
+title: Build an Agentic GraphRAG System in 1 Hour (MCP + Knowledge Graph) | Databases for AI
 aliases:
   - Build an Agentic GraphRAG System in 1 Hour (MCP + Knowledge Graph) | Databases for AI
 channel: AWS Events
@@ -11,7 +11,7 @@ upload_date: 20260515
 processed_at: 2026-05-25T00:00:00
 thumbnail: https://i.ytimg.com/vi/LnCXoIr0Mw8/maxresdefault.jpg
 view_count: 4002
-transcript_file: "[[Learn/10-Raw/youtube/LnCXoIr0Mw8|LnCXoIr0Mw8]]"
+transcript_file: "[[LnCXoIr0Mw8|LnCXoIr0Mw8]]"
 type: youtube-digest
 state: active
 ---

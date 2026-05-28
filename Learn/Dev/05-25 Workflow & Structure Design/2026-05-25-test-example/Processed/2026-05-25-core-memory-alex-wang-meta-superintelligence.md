@@ -12,7 +12,7 @@ processed_at: 2026-05-25T00:00:00
 thumbnail: https://i.ytimg.com/vi/bYM_VMs7EO0/maxresdefault.jpg
 view_count: 34456
 like_count: 661
-transcript_file: "[[Learn/10-Raw/youtube/bYM_VMs7EO0|bYM_VMs7EO0]]"
+transcript_file: "[[bYM_VMs7EO0|bYM_VMs7EO0]]"
 type: youtube-digest
 state: active
 ---
