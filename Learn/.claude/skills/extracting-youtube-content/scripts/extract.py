@@ -391,9 +391,12 @@ def _yaml_scalar(v: Any) -> str:
         return str(v)
     s = str(v)
     # Force quoting when ambiguous or contains special chars.
+    # NOTE: "," and the flow indicators "[]{}" are included so the scalar is safe in BOTH
+    # block and flow context. (A comma in an unquoted flow-mapping value is read as an entry
+    # separator — that was the chapter-title-truncation bug.)
     if (
         s == ""
-        or any(c in s for c in [":", "#", "\n", '"', "'", "[", "]", "{", "}", "&", "*", "?", "|", ">", "%", "@", "`"])
+        or any(c in s for c in [":", "#", "\n", ",", '"', "'", "[", "]", "{", "}", "&", "*", "?", "|", ">", "%", "@", "`"])
         or s.lstrip()[:1] in {"-"}
         or s.strip() != s
         or s.lower() in {"true", "false", "yes", "no", "null", "~"}
@@ -405,14 +408,27 @@ def _yaml_scalar(v: Any) -> str:
 
 
 def _yaml_list(items: list[Any], indent: int = 0) -> str:
+    """Render a YAML block sequence.
+
+    Dict items are emitted as BLOCK mappings (not flow `{...}`), so commas inside scalar
+    values — e.g. a chapter title "Tianshou, the RL framework" — are never misread as
+    flow-mapping entry separators.
+    """
     if not items:
         return "[]"
     pad = " " * indent
     out_lines = []
     for it in items:
         if isinstance(it, dict):
-            kv = [f"{k}: {_yaml_scalar(v)}" for k, v in it.items()]
-            out_lines.append(f"{pad}- {{{', '.join(kv)}}}")
+            kv = list(it.items())
+            if not kv:
+                out_lines.append(f"{pad}- {{}}")
+                continue
+            (first_k, first_v), rest = kv[0], kv[1:]
+            out_lines.append(f"{pad}- {first_k}: {_yaml_scalar(first_v)}")
+            for k, v in rest:
+                # Align subsequent keys under the first (past the "- ").
+                out_lines.append(f"{pad}  {k}: {_yaml_scalar(v)}")
         else:
             out_lines.append(f"{pad}- {_yaml_scalar(it)}")
     return "\n" + "\n".join(out_lines)
