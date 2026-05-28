@@ -20,7 +20,6 @@ transcript_file: "[[VIDEO_ID.raw]]"    # wiki-link to the raw transcript (raw is
 type: youtube                          # source platform — content kind comes from the `.digest.md` filename suffix
 status: complete                       # complete | partial | error — pipeline state of THIS digest (almost always `complete`; pipeline errors live on the raw file's `status`)
 viewed_state: unviewed                 # unviewed | digest_read | video_watched | both — user engagement with this video
-state: active                          # active | archived — lifecycle, distinct from status
 ---
 
 # {Video title}

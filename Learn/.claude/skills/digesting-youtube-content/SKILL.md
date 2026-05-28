@@ -17,7 +17,7 @@ description: Turn an existing raw YouTube transcript file into a chapter-mapped,
 
 # Input
 
-A path to a single raw YouTube transcript file (`<VIDEO_ID>.raw.md`), or a folder of such files. Each file is the output of `extracting-youtube-content` and conforms to that skill's `assets/_template.md` — frontmatter, a `## Description` section, and a `## Transcript` section.
+A path to a single raw YouTube transcript file (`<VIDEO_ID>.raw.md`), or a folder of such files. Each file is the output of `extracting-youtube-content` and conforms to that skill's `assets/extract-template.md` — frontmatter, a `## Description` section, and a `## Transcript` section.
 
 Test defaults (during current development): input `Learn/Dev/Summarize Skill Develop/input/`, output `Learn/Dev/Summarize Skill Develop/output/`.
 
@@ -33,7 +33,6 @@ One digest markdown file per input raw file, conformant to [`assets/digest-templ
 - `type: youtube` — source platform. Kind ("digest" vs. "raw") is carried by the filename suffix, not this field.
 - `status: complete | partial | error` — pipeline state of this digest; almost always `complete`. (Extract-stage errors — metadata missing, transcript failed — live on the *raw* file's `status` field, not the digest.)
 - `viewed_state: unviewed | digest_read | video_watched | both` — user engagement, for filtering "unwatched" or "still-to-read" piles in the holistic `.base` view.
-- `state: active | archived` — lifecycle, distinct from `status`.
 
 **Body sections**, in file order:
 

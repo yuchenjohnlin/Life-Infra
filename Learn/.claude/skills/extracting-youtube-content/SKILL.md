@@ -1,6 +1,6 @@
 ---
 name: extracting-youtube-content
-description: Fetch a YouTube video's metadata and transcript and write a single raw markdown file at Learn/10-Raw/youtube/<video_id>.raw.md, conformant to the skill's assets/_template.md. Invoke whenever the user provides a youtube.com / youtu.be URL, asks to "fetch the transcript", "extract this video", or asks to extract YouTube items from Learn/00-Inbox/inbox.md. Accepts either a single URL or a file path containing URLs; greps URLs via regex internally. Stops after writing the raw file — digesting/summarization belong to `digesting-youtube-content`. Bilibili and other non-YouTube sources are out of scope.
+description: Fetch a YouTube video's metadata and transcript and write a single raw markdown file at Learn/10-Raw/youtube/<video_id>.raw.md, conformant to the skill's assets/extract-template.md. Invoke whenever the user provides a youtube.com / youtu.be URL, asks to "fetch the transcript", "extract this video", or asks to extract YouTube items from Learn/00-Inbox/inbox.md. Accepts either a single URL or a file path containing URLs; greps URLs via regex internally. Stops after writing the raw file — digesting/summarization belong to `digesting-youtube-content`. Bilibili and other non-YouTube sources are out of scope.
 ---
 
 # When to use
@@ -23,7 +23,7 @@ Query suffixes (`&t=`, `&list=`, `&index=`) are stripped. Bilibili and non-YouTu
 # Output
 
 - One markdown file per video at `Learn/10-Raw/youtube/<video_id>.raw.md`. The `.raw.md` suffix avoids collision with the downstream digest file (`<video_id>.digest.md` etc.).
-- Front-matter schema and body layout: see [`assets/_template.md`](assets/_template.md). Fields cover identity (`id`, `type: youtube`, `url`, `title`), **pipeline `status`** (`extracted` | `extracted_no_transcript` | `extraction_failed`), creator, time, visual, content structure (`chapters` + `chapters_usable`), language (`language`, `original_language`), subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, and availability (`availability`, `live_status`). Body has `## Description` and `## Transcript` sections.
+- Front-matter schema and body layout: see [`assets/extract-template.md`](assets/extract-template.md). Fields cover identity (`id`, `type: youtube`, `url`, `title`), **pipeline `status`** (`extracted` | `extracted_no_transcript` | `extraction_failed`), creator, time, visual, content structure (`chapters` + `chapters_usable`), language (`language`, `original_language`), subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, and availability (`availability`, `live_status`). Body has `## Description` and `## Transcript` sections.
 - Re-running is idempotent: existing files are skipped unless `--force`.
 - Failed extractions still write a stub file (`status: extraction_failed`) so the failure is visible in `.base` views instead of silently disappearing.
 

@@ -22,7 +22,7 @@ Following from the messier [[2026-05-25-Discussion]], this file contains a clear
 The mental model or design philosophy is kind of changed here. Previously, I had the structure of **" First get the transcript sources. Then according to the sources go to the next step."** 
 This emphasizes the source a lot, making it like the main character?, kind of like a pipeline. But after considering the UI that faces the user, an universal interface that tells the user what happens is needed, which is the .base file where images and title is shown to the user to click and go into the video. 
 The UI is emphasized, being the main character, so everything surrounds the UI rather than the source. The UI doesn't care if what happened, you just have to tell me the status so that it can let the user know. Previously, if we didn't have a source, then we wouldn't have a transcript file (I am actually not sure, but in my mind I had that in mind). 
-I also figured that the components can be listed as follows, 
+I also figured that the components can be listed as follows,
 1. metadata of transcript source 
 2. metadata of digest (for user) 
 3. common metadata for video 

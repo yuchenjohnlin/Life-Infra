@@ -2,7 +2,7 @@
 """extracting-youtube-content — fetch metadata + transcript and write a raw markdown file.
 
 Output: one `<video_id>.raw.md` per video at `Learn/10-Raw/youtube/`, conformant to
-the skill's `assets/_template.md`. See SKILL.md and Discussion.md for full rationale.
+the skill's `assets/extract-template.md`. See SKILL.md and Discussion.md for full rationale.
 
 Design notes (LOCKED — see Discussion.md and 2026-05-19-issue-chapters-usable.md):
 - yt-dlp used as a Python MODULE (not subprocess); in-memory dict; no intermediate JSON file.
@@ -554,7 +554,7 @@ def process_one(
                 final_status = "failed"
                 print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
 
-    # 6. Build record (matches _template.md)
+    # 6. Build record (matches extract-template.md)
     chapters_field = [
         {"start": int(c.get("start_time") or 0), "title": (c.get("title") or "").strip()}
         for c in raw_chapters
