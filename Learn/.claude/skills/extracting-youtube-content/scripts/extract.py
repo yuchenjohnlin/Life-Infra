@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """extracting-youtube-content — fetch metadata + transcript and write a raw markdown file.
 
-Output: one `<video_id>.md` per video at `Learn/10-Raw/youtube/`, conformant to
-`Learn/10-Raw/youtube/_template.md`. See SKILL.md and Discussion.md for full rationale.
+Output: one `<video_id>.raw.md` per video at `Learn/10-Raw/youtube/`, conformant to
+the skill's `assets/_template.md`. See SKILL.md and Discussion.md for full rationale.
 
 Design notes (LOCKED — see Discussion.md and 2026-05-19-issue-chapters-usable.md):
 - yt-dlp used as a Python MODULE (not subprocess); in-memory dict; no intermediate JSON file.
@@ -421,7 +421,7 @@ def _yaml_list(items: list[Any], indent: int = 0) -> str:
 def render_frontmatter(record: dict) -> str:
     """Render a flat YAML frontmatter block (with comments grouping fields)."""
     sections = [
-        ("identity",          ["id", "type", "url", "title", "aliases"]),
+        ("identity",          ["id", "type", "url", "title"]),
         ("pipeline",          ["status"]),
         ("creator",           ["channel", "channel_url", "channel_follower_count"]),
         ("time",              ["duration", "upload_date", "fetched_at"]),
@@ -432,7 +432,6 @@ def render_frontmatter(record: dict) -> str:
                                "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
         ("engagement",        ["view_count", "like_count"]),
         ("availability",      ["availability", "live_status"]),
-        ("lifecycle",         ["archived"]),
         ("diagnostics",       ["_extraction_error_type", "_extraction_error"]),
     ]
     lines = ["---"]
@@ -571,7 +570,6 @@ def process_one(
         "type":                     "youtube",
         "url":                      f"https://www.youtube.com/watch?v={vid}",
         "title":                    info.get("title") or "",
-        "aliases":                  [info.get("title")] if info.get("title") else [],
         "status":                   pipeline_status,
         "channel":                  info.get("channel") or info.get("uploader") or "",
         "channel_url":              info.get("channel_url") or info.get("uploader_url") or "",
@@ -594,7 +592,6 @@ def process_one(
         "like_count":               int(info.get("like_count") or 0),
         "availability":             info.get("availability") or "",
         "live_status":              info.get("live_status") or "",
-        "archived":                 False,
     }
 
     text = render_markdown(record, desc, transcript_body, final_status)
@@ -624,7 +621,6 @@ def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
         "type":                     "youtube",
         "url":                      f"https://www.youtube.com/watch?v={vid}",
         "title":                    f"<extraction failed: {vid}>",
-        "aliases":                  [],
         "status":                   "extraction_failed",
         "channel":                  "",
         "channel_url":              "",
@@ -647,7 +643,6 @@ def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
         "like_count":               0,
         "availability":             "",
         "live_status":              "",
-        "archived":                 False,
         # Diagnostic fields — captured here so the file is self-documenting on failure.
         "_extraction_error_type":   error_type,
         "_extraction_error":        error_msg,

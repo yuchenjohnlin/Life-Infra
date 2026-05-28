@@ -1,6 +1,6 @@
 ---
 # Digest output template for the digesting-youtube-content skill.
-# Output filename convention: <VIDEO_ID>.digest.md   (raw transcript stays at <VIDEO_ID>.md)
+# Output filename convention: <VIDEO_ID>.digest.md   (raw transcript stays at <VIDEO_ID>.raw.md)
 # Frontmatter = lean subset of the raw file's frontmatter (for .base views).
 # Hide it in reading view via Settings -> Editor -> "Properties in document".
 
@@ -16,7 +16,7 @@ upload_date: 20260101                 # YYYYMMDD
 processed_at: 2026-05-22T00:00:00      # ISO 8601
 thumbnail: https://i.ytimg.com/vi/VIDEO_ID/maxresdefault.jpg
 view_count: 0
-transcript_file: "[[VIDEO_ID]]"        # wiki-link to the raw transcript (basename is unambiguous now: raw is VIDEO_ID.md, digest is VIDEO_ID.digest.md)
+transcript_file: "[[VIDEO_ID.raw]]"    # wiki-link to the raw transcript (raw is VIDEO_ID.raw.md, digest is VIDEO_ID.digest.md)
 type: youtube                          # source platform — content kind comes from the `.digest.md` filename suffix
 status: complete                       # complete | partial | error — pipeline state of THIS digest (almost always `complete`; pipeline errors live on the raw file's `status`)
 viewed_state: unviewed                 # unviewed | digest_read | video_watched | both — user engagement with this video

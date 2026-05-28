@@ -4,8 +4,6 @@ id: VIDEO_ID                        # 11-char YouTube video id (also the filenam
 type: youtube                       # source platform of this raw file (extensible: bilibili, podcast, ...)
 url: https://www.youtube.com/watch?v=VIDEO_ID
 title: "Video title here"
-aliases:                            # makes [[Video title here]] resolve to this file
-  - Video title here
 
 # === pipeline ===
 status: extracted                   # extracted | extracted_no_transcript | extraction_failed
@@ -50,10 +48,6 @@ like_count: 0
 # === availability ===
 availability: public                # public | unlisted | subscriber_only | etc.
 live_status: not_live               # not_live | was_live | is_live
-
-# === lifecycle ===
-archived: false                     # bool — manual flag. True hides the file from default .base views
-                                    # without deleting it. Orthogonal to `status` above.
 ---
 
 # {title}

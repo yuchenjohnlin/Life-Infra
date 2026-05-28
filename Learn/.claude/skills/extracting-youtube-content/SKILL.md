@@ -23,7 +23,7 @@ Query suffixes (`&t=`, `&list=`, `&index=`) are stripped. Bilibili and non-YouTu
 # Output
 
 - One markdown file per video at `Learn/10-Raw/youtube/<video_id>.raw.md`. The `.raw.md` suffix avoids collision with the downstream digest file (`<video_id>.digest.md` etc.).
-- Front-matter schema and body layout: see [`assets/_template.md`](assets/_template.md). ~26 fields covering identity (`id`, `type: youtube`, `url`, `title`, `aliases`), **pipeline `status`** (`extracted` | `extracted_no_transcript` | `extraction_failed`), creator, time, visual, content structure (`chapters` + `chapters_usable`), language (`language`, `original_language`), subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, availability, lifecycle (`archived: bool`). Body has `## Description` and `## Transcript` sections.
+- Front-matter schema and body layout: see [`assets/_template.md`](assets/_template.md). Fields cover identity (`id`, `type: youtube`, `url`, `title`), **pipeline `status`** (`extracted` | `extracted_no_transcript` | `extraction_failed`), creator, time, visual, content structure (`chapters` + `chapters_usable`), language (`language`, `original_language`), subtitles (`transcript_status`, `transcript_source`, `is_translated`), engagement, and availability (`availability`, `live_status`). Body has `## Description` and `## Transcript` sections.
 - Re-running is idempotent: existing files are skipped unless `--force`.
 - Failed extractions still write a stub file (`status: extraction_failed`) so the failure is visible in `.base` views instead of silently disappearing.
 
