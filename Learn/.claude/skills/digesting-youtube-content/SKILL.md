@@ -17,7 +17,7 @@ description: Turn an existing raw YouTube transcript file into a chapter-mapped,
 
 # Input
 
-A path to a single raw YouTube transcript file, or a folder of such files. Each file is the output of `extracting-youtube-content` and conforms to `Learn/10-Raw/youtube/_template.md` — frontmatter, a `# Description` section, and a `# Transcript` section.
+A path to a single raw YouTube transcript file (`<VIDEO_ID>.raw.md`), or a folder of such files. Each file is the output of `extracting-youtube-content` and conforms to that skill's `assets/extract-template.md` — frontmatter, a `## Description` section, and a `## Transcript` section.
 
 Test defaults (during current development): input `Learn/Dev/Summarize Skill Develop/input/`, output `Learn/Dev/Summarize Skill Develop/output/`.
 
@@ -25,9 +25,16 @@ Test defaults (during current development): input `Learn/Dev/Summarize Skill Dev
 
 One digest markdown file per input raw file, conformant to [`assets/digest-template.md`](assets/digest-template.md).
 
-Frontmatter is a lean subset of the raw file's frontmatter — only fields a `.base` view consumes (id, url, title, channel, thumbnail, duration, view_count, etc.) — plus a `transcript_file` path-qualified wiki-link back to the raw, and `type: youtube-digest`.
+**Filename convention.** The digest file is `<VIDEO_ID>.digest.md`. The raw transcript is at `<VIDEO_ID>.raw.md`. Both suffixes carry the content kind, so wiki-links to the raw (`[[<VIDEO_ID>.raw]]`) resolve unambiguously without path qualification.
 
-Body sections, in file order:
+**Frontmatter** — lean subset of the raw file's frontmatter (id, url, title, channel, thumbnail, duration, view_count, etc.) plus a few digest-specific fields:
+
+- `transcript_file: "[[<VIDEO_ID>.raw]]"` — wiki-link back to the raw.
+- `type: youtube` — source platform. Kind ("digest" vs. "raw") is carried by the filename suffix, not this field.
+- `status: complete | partial | error` — pipeline state of this digest; almost always `complete`. (Extract-stage errors — metadata missing, transcript failed — live on the *raw* file's `status` field, not the digest.)
+- `viewed_state: unviewed | digest_read | video_watched | both` — user engagement, for filtering "unwatched" or "still-to-read" piles in the holistic `.base` view.
+
+**Body sections**, in file order:
 
 1. `# Title`
 2. Collapsible **cleaned description** callout (`> [!quote]-`)

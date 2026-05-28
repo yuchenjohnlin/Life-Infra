@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """extracting-youtube-content — fetch metadata + transcript and write a raw markdown file.
 
-Output: one `<video_id>.md` per video at `Learn/10-Raw/youtube/`, conformant to
-`Learn/10-Raw/youtube/_template.md`. See SKILL.md and Discussion.md for full rationale.
+Output: one `<video_id>.raw.md` per video at `Learn/10-Raw/youtube/`, conformant to
+the skill's `assets/extract-template.md`. See SKILL.md and Discussion.md for full rationale.
 
 Design notes (LOCKED — see Discussion.md and 2026-05-19-issue-chapters-usable.md):
 - yt-dlp used as a Python MODULE (not subprocess); in-memory dict; no intermediate JSON file.
@@ -421,7 +421,8 @@ def _yaml_list(items: list[Any], indent: int = 0) -> str:
 def render_frontmatter(record: dict) -> str:
     """Render a flat YAML frontmatter block (with comments grouping fields)."""
     sections = [
-        ("identity",          ["id", "url", "title", "aliases"]),
+        ("identity",          ["id", "type", "url", "title"]),
+        ("pipeline",          ["status"]),
         ("creator",           ["channel", "channel_url", "channel_follower_count"]),
         ("time",              ["duration", "upload_date", "fetched_at"]),
         ("visual",            ["thumbnail"]),
@@ -430,13 +431,16 @@ def render_frontmatter(record: dict) -> str:
         ("subtitles",         ["manual_track_languages", "auto_track_languages",
                                "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
         ("engagement",        ["view_count", "like_count"]),
-        ("status",            ["availability", "live_status"]),
-        ("lifecycle",         ["state"]),
+        ("availability",      ["availability", "live_status"]),
+        ("diagnostics",       ["_extraction_error_type", "_extraction_error"]),
     ]
     lines = ["---"]
     for label, fields in sections:
+        present = [f for f in fields if f in record]
+        if not present:
+            continue  # skip empty sections (e.g. diagnostics when no error)
         lines.append(f"# === {label} ===")
-        for f in fields:
+        for f in present:
             v = record.get(f)
             if isinstance(v, list):
                 lines.append(f"{f}:{_yaml_list(v, indent=2)}" if v else f"{f}: []")
@@ -486,15 +490,24 @@ def process_one(
     fluent_languages: list[str],
 ) -> dict:
     YoutubeDL, YouTubeTranscriptApi, yta_errors = deps
-    out_path = Path(args.output_dir) / f"{vid}.md"
+    out_path = Path(args.output_dir) / f"{vid}.raw.md"
     if out_path.exists() and not args.force:
         return {"video_id": vid, "skipped": True, "reason": "exists"}
 
-    # 1. Metadata
+    # 1. Metadata. If yt-dlp fails, write a minimal stub with status=extraction_failed
+    # so the failure is visible in .base instead of silently disappearing.
     try:
         info = fetch_metadata(YoutubeDL, vid)
     except Exception as e:  # noqa: BLE001
-        return {"video_id": vid, "error_type": type(e).__name__, "error": str(e)[:200]}
+        stub = _build_failure_stub(vid, type(e).__name__, str(e)[:200])
+        atomic_write(out_path, render_markdown(stub, "", "", "failed"))
+        return {
+            "video_id":  vid,
+            "status":    "extraction_failed",
+            "error_type": type(e).__name__,
+            "error":     str(e)[:200],
+            "path":      str(out_path),
+        }
 
     # 2. Transcript inventory (with retry on transient failure)
     tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
@@ -541,16 +554,23 @@ def process_one(
                 final_status = "failed"
                 print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
 
-    # 6. Build record (matches _template.md)
+    # 6. Build record (matches extract-template.md)
     chapters_field = [
         {"start": int(c.get("start_time") or 0), "title": (c.get("title") or "").strip()}
         for c in raw_chapters
     ]
+    # Pipeline-stage status: rolls up the transcript outcome into a coarser filter-friendly value.
+    if final_status == "available":
+        pipeline_status = "extracted"
+    else:  # disabled / unavailable / failed
+        pipeline_status = "extracted_no_transcript"
+
     record = {
         "id":                       vid,
+        "type":                     "youtube",
         "url":                      f"https://www.youtube.com/watch?v={vid}",
         "title":                    info.get("title") or "",
-        "aliases":                  [info.get("title")] if info.get("title") else [],
+        "status":                   pipeline_status,
         "channel":                  info.get("channel") or info.get("uploader") or "",
         "channel_url":              info.get("channel_url") or info.get("uploader_url") or "",
         "channel_follower_count":   info.get("channel_follower_count") or 0,
@@ -572,7 +592,6 @@ def process_one(
         "like_count":               int(info.get("like_count") or 0),
         "availability":             info.get("availability") or "",
         "live_status":              info.get("live_status") or "",
-        "state":                    "active",
     }
 
     text = render_markdown(record, desc, transcript_body, final_status)
@@ -580,6 +599,7 @@ def process_one(
 
     return {
         "video_id":          vid,
+        "status":            pipeline_status,
         "transcript_status": final_status,
         "transcript_source": transcript_source,
         "original_language": original_language,
@@ -588,6 +608,44 @@ def process_one(
         "manual_tracks":     manual_codes,
         "auto_tracks":       auto_codes,
         "path":              str(out_path),
+    }
+
+
+def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
+    """Build a minimal record for videos where metadata fetch itself failed.
+
+    Most fields are unknown — we still want a file written so the failure shows up in `.base`.
+    """
+    return {
+        "id":                       vid,
+        "type":                     "youtube",
+        "url":                      f"https://www.youtube.com/watch?v={vid}",
+        "title":                    f"<extraction failed: {vid}>",
+        "status":                   "extraction_failed",
+        "channel":                  "",
+        "channel_url":              "",
+        "channel_follower_count":   0,
+        "duration":                 0,
+        "upload_date":              "",
+        "fetched_at":               datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "thumbnail":                "",
+        "chapters":                 [],
+        "chapters_usable":          False,
+        "language":                 None,
+        "original_language":        None,
+        "manual_track_languages":   [],
+        "auto_track_languages":     [],
+        "transcript_status":        "failed",
+        "transcript_source":        "none",
+        "transcript_target":        None,
+        "is_translated":            False,
+        "view_count":               0,
+        "like_count":               0,
+        "availability":             "",
+        "live_status":              "",
+        # Diagnostic fields — captured here so the file is self-documenting on failure.
+        "_extraction_error_type":   error_type,
+        "_extraction_error":        error_msg,
     }
 
 

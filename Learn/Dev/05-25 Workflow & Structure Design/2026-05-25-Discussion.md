@@ -176,3 +176,4 @@ One concrete suggestion: when you build it, keep the **state vocabulary small an
 具體來說，我在想我這個東西如果是用api寫的話應該會是什麼樣子的，其實相對來說非常簡單，可能唯一的比較難的地方就是"怎麼使用api"這件事情，雖然不知道如果要讓api去讀一個文本的話要怎麼做，但是說真的有agent sdk真的會讓這個tool的定義以及開發簡單很多。那在網上層走一點之後就是Claude 用agent去開發出來的這個Claude Code. 
 現在我都是讓Claude Code去讀我的文本，這個部分的input interface是透過Claude Code，這樣說的話Claude Code其實是一個非常強力的工具，有點像是因為有辦法access local file所以變得非常得厲害，不然原本只用api好像就是去利用prompt去使用LLM。如果從"我用api設計一個我這樣的系統"，就會發現其實差別是在可以access file，讀file，然後對這些file做修改。啊但是其實不太確定他是怎麼讓LLM 很好的access 修改這些file的，這部分就感覺挺厲害的，不過這個的話好像cursor就有了，不知道Claude 是什麼時候開發出這個東西的。基本上原本是透過所謂chatbot的interface這個設計所延伸出來的產品。所以說因為需求的官續，不管是從哪一個角度所設計出來的Ｍ，應該都是有點殊途工歸。
 
+去看Claude 的對話紀錄裡面的System Design 0 and Learn system architecture and design 
