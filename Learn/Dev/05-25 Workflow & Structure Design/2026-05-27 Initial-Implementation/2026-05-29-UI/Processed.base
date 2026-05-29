@@ -1,0 +1,37 @@
+formulas:
+  Untitled: if(view_count, if(view_count >= 1000000, (view_count / 1000000).toFixed(1) + "M views", if(view_count >= 1000, (view_count / 1000).toFixed(1) + "K views", view_count.toString() + " views")), "")
+  Duration_hours: |
+    if(duration, if((duration / 3600).floor() < 10, "0", "") + (duration / 3600).floor().toString() + ":" + if(((duration % 3600) / 60).floor() < 10, "0", "") + ((duration % 3600) / 60).floor().toString(), "")
+properties:
+  formula.Untitled:
+    displayName: Views
+  formula.Duration_hours:
+    displayName: Duration
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Processed")
+    order:
+      - title
+      - channel
+      - viewed_state
+      - url
+      - status
+      - transcript_file
+      - formula.Duration_hours
+      - formula.Untitled
+    sort:
+      - property: viewed_state
+        direction: ASC
+      - property: view_count
+        direction: ASC
+      - property: formula.Duration_hours
+        direction: DESC
+      - property: formula.Untitled
+        direction: DESC
+    columnSize:
+      note.viewed_state: 97
+      note.url: 272
+      note.view_count: 102

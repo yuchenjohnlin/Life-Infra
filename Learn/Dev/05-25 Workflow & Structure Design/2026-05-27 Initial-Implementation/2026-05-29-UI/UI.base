@@ -1,0 +1,6 @@
+views:
+  - type: table
+    name: Processed
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Processed")

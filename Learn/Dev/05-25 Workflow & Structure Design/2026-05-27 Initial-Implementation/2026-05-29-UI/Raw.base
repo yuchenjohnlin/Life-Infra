@@ -1,0 +1,31 @@
+views:
+  - type: table
+    name: Raw Debug
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw")
+    groupBy:
+      property: transcript_status
+      direction: ASC
+    order:
+      - title
+      - channel
+      - original_language
+      - language
+      - manual_track_languages
+      - auto_track_languages
+      - transcript_source
+      - transcript_status
+      - chapters_usable
+      - is_translated
+      - transcript_target
+    sort:
+      - property: original_language
+        direction: ASC
+    columnSize:
+      note.title: 211
+      note.channel: 158
+      note.original_language: 83
+      note.manual_track_languages: 144
+      note.auto_track_languages: 147
+      note.transcript_target: 129

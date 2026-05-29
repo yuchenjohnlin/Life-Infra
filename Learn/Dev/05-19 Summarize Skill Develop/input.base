@@ -14,7 +14,7 @@ views:
     name: YouTube
     filters:
       and:
-        - file.inFolder("Learn/Dev/Summarize Skill Develop/input")
+        - file.inFolder("Learn/Dev/05-19 Summarize Skill Develop/input")
     groupBy:
       property: channel
       direction: ASC
