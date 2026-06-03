@@ -1,0 +1,1 @@
+1. 要確定Claude 具有能力可以在回答我的discussion的時候用callout format
