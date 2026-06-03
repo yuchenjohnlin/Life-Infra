@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: AF3XJT9YKpM
@@ -25,14 +25,20 @@ fetched_at: "2026-05-25T13:06:15+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/AF3XJT9YKpM/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/AF3XJT9YKpM.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Introduction}
-  - {start: 232, title: Understanding Cognitive Tools}
-  - {start: 780, title: Leveraging Visual Abstraction to Communicate Concepts}
-  - {start: 2237, title: Harnessing Multimodel Abstraction to Support Statistical Reasoning}
-  - {start: 3439, title: "Q&A"}
+  - start: 0
+    title: Introduction
+  - start: 232
+    title: Understanding Cognitive Tools
+  - start: 780
+    title: Leveraging Visual Abstraction to Communicate Concepts
+  - start: 2237
+    title: Harnessing Multimodel Abstraction to Support Statistical Reasoning
+  - start: 3439
+    title: "Q&A"
 chapters_usable: true
 
 # === language ===

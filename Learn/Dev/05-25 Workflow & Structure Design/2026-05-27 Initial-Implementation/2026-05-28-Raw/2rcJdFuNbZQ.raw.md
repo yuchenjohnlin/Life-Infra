@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: 2rcJdFuNbZQ
@@ -25,11 +25,14 @@ fetched_at: "2026-05-25T13:06:35+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/2rcJdFuNbZQ/sddefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/2rcJdFuNbZQ.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: "<Untitled Chapter 1>"}
-  - {start: 375, title: "此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息"}
+  - start: 0
+    title: "<Untitled Chapter 1>"
+  - start: 375
+    title: "此處現場用手機跟 \"小金\" (在現場的另外一台筆電上) 傳訊息"
 chapters_usable: false
 
 # === language ===

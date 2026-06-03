@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: _R83pFpUWyM
@@ -25,19 +25,30 @@ fetched_at: "2026-05-25T14:37:37+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/_R83pFpUWyM/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/_R83pFpUWyM.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: "The Evolution: From Autocomplete to Agents"}
-  - {start: 135, title: "What is Context Engineering? (Rules, MCP, and Skills)"}
-  - {start: 330, title: Modularizing Context with Anthropic Skills}
-  - {start: 525, title: "The Cost Reality: $380/day per Developer?"}
-  - {start: 680, title: Subagents and Research Workflows}
-  - {start: 845, title: "The \"Lethal Trifecta\" of AI Security Risks"}
-  - {start: 1070, title: "Harness Engineering: Building Deterministic Safety Nets"}
-  - {start: 1270, title: "Maintaining Quality: Structural Tests as Feedback Loops"}
-  - {start: 1480, title: "The \"Goldilocks Speed\": How much velocity do we actually need?"}
-  - {start: 1695, title: "Final Thoughts: Scaling AI Autonomy Safely"}
+  - start: 0
+    title: "The Evolution: From Autocomplete to Agents"
+  - start: 135
+    title: "What is Context Engineering? (Rules, MCP, and Skills)"
+  - start: 330
+    title: Modularizing Context with Anthropic Skills
+  - start: 525
+    title: "The Cost Reality: $380/day per Developer?"
+  - start: 680
+    title: Subagents and Research Workflows
+  - start: 845
+    title: "The \"Lethal Trifecta\" of AI Security Risks"
+  - start: 1070
+    title: "Harness Engineering: Building Deterministic Safety Nets"
+  - start: 1270
+    title: "Maintaining Quality: Structural Tests as Feedback Loops"
+  - start: 1480
+    title: "The \"Goldilocks Speed\": How much velocity do we actually need?"
+  - start: 1695
+    title: "Final Thoughts: Scaling AI Autonomy Safely"
 chapters_usable: true
 
 # === language ===

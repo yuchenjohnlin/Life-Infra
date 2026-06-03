@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: njWyDHKYeVA
@@ -25,15 +25,22 @@ fetched_at: "2026-05-25T13:07:30+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/njWyDHKYeVA/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/njWyDHKYeVA.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Intro}
-  - {start: 368, title: Getting started with Agentverse lab}
-  - {start: 477, title: Laying the foundations of the citadel}
-  - {start: 967, title: "Forging the power core: Self hosted LLMs"}
-  - {start: 1682, title: "Forging the citadel's central core: Deploy vLLM"}
-  - {start: 2639, title: Summary}
+  - start: 0
+    title: Intro
+  - start: 368
+    title: Getting started with Agentverse lab
+  - start: 477
+    title: Laying the foundations of the citadel
+  - start: 967
+    title: "Forging the power core: Self hosted LLMs"
+  - start: 1682
+    title: "Forging the citadel's central core: Deploy vLLM"
+  - start: 2639
+    title: Summary
 chapters_usable: true
 
 # === language ===

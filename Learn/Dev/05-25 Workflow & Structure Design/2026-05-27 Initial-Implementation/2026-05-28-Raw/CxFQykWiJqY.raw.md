@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: CxFQykWiJqY
@@ -25,15 +25,22 @@ fetched_at: "2026-05-25T13:07:18+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/CxFQykWiJqY/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/CxFQykWiJqY.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Intro}
-  - {start: 83, title: Rule 1.Throw Yourself Into the Ether}
-  - {start: 234, title: Rule 2.Prove Yourself Wrong}
-  - {start: 487, title: "Rule 3.Real Networks Aren't Built at Cocktail Parties"}
-  - {start: 563, title: "Rule 4.Great Products Aren't Built in One Click"}
-  - {start: 797, title: Rule 5.Hiring is Like Dating}
+  - start: 0
+    title: Intro
+  - start: 83
+    title: Rule 1.Throw Yourself Into the Ether
+  - start: 234
+    title: Rule 2.Prove Yourself Wrong
+  - start: 487
+    title: "Rule 3.Real Networks Aren't Built at Cocktail Parties"
+  - start: 563
+    title: "Rule 4.Great Products Aren't Built in One Click"
+  - start: 797
+    title: Rule 5.Hiring is Like Dating
 chapters_usable: true
 
 # === language ===

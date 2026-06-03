@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: 55pTFVoclvE
@@ -25,28 +25,48 @@ fetched_at: "2026-05-25T13:07:05+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/55pTFVoclvE/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/55pTFVoclvE.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Intro}
-  - {start: 58, title: Interview process}
-  - {start: 256, title: Starting at Atlassian}
-  - {start: 275, title: Building an Open Service Broker}
-  - {start: 463, title: Diagram of OSB architecture}
-  - {start: 596, title: Picking a proxy technology - Envoy}
-  - {start: 696, title: Envoy XDS Control Plane}
-  - {start: 873, title: AWS Infrastructure}
-  - {start: 1065, title: Creating the machine image (AMI)}
-  - {start: 1222, title: 24 month recap}
-  - {start: 1269, title: What did I do after building}
-  - {start: 1365, title: Extending the load balancing platform}
-  - {start: 1477, title: Envoy extensions}
-  - {start: 1554, title: Edge Compute and centralized logic}
-  - {start: 1632, title: Handling concerns for dev teams}
-  - {start: 1895, title: Diplomacy and conflict resolution}
-  - {start: 1934, title: Maintaining software over long-term}
-  - {start: 2142, title: Personality Conflicts}
-  - {start: 2231, title: Mentoring}
+  - start: 0
+    title: Intro
+  - start: 58
+    title: Interview process
+  - start: 256
+    title: Starting at Atlassian
+  - start: 275
+    title: Building an Open Service Broker
+  - start: 463
+    title: Diagram of OSB architecture
+  - start: 596
+    title: Picking a proxy technology - Envoy
+  - start: 696
+    title: Envoy XDS Control Plane
+  - start: 873
+    title: AWS Infrastructure
+  - start: 1065
+    title: Creating the machine image (AMI)
+  - start: 1222
+    title: 24 month recap
+  - start: 1269
+    title: What did I do after building
+  - start: 1365
+    title: Extending the load balancing platform
+  - start: 1477
+    title: Envoy extensions
+  - start: 1554
+    title: Edge Compute and centralized logic
+  - start: 1632
+    title: Handling concerns for dev teams
+  - start: 1895
+    title: Diplomacy and conflict resolution
+  - start: 1934
+    title: Maintaining software over long-term
+  - start: 2142
+    title: Personality Conflicts
+  - start: 2231
+    title: Mentoring
 chapters_usable: true
 
 # === language ===

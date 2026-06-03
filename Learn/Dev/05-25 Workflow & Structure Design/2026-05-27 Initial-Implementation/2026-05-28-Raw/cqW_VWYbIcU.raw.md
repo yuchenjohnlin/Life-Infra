@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: cqW_VWYbIcU
@@ -25,26 +25,44 @@ fetched_at: "2026-05-25T13:06:50+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/cqW_VWYbIcU/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/cqW_VWYbIcU.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: 专访Andrew Dai：一位谷歌AI核心科学家的14年}
-  - {start: 335, title: 从伦敦到硅谷：Google Now与个性化分发}
-  - {start: 411, title: 两次收购、两种哲学：Hinton带来深度学习，DeepMind选择独立}
-  - {start: 574, title: 半监督序列学习：谷歌错过的“GPT时刻”}
-  - {start: 954, title: 谷歌健康：跨界医疗AI失败的教训}
-  - {start: 1001, title: MaskGAN：引入填空任务探索，大幅提升文本生成质量}
-  - {start: 1043, title: 让大模型学会纠错：首批将强化学习（RL）用于预训练的团队}
-  - {start: 1085, title: MoE架构：2021年研发，被谷歌“雪藏”至Gemini 1.5}
-  - {start: 1331, title: PaLM 2：极致顺滑的预训练，却遭GPT-4抢走风头}
-  - {start: 1407, title: FLAN：让ChatGPT式对话成为可能}
-  - {start: 1555, title: 拉响红色警报：DeepMind与Google Brain的被迫整合与碰撞}
-  - {start: 1742, title: Gemini 1.0：追赶进度的仓促上线，导致舍弃MoE创新}
-  - {start: 1902, title: Gemini 2.0：大模型最大的差异点是数据的选择}
-  - {start: 2112, title: Gemini 3.0：大厂求稳限制激进创新，选择离职追寻研究自由}
-  - {start: 2271, title: Neolab爆发：创立Elorian AI，探索视觉推理路线}
-  - {start: 3147, title: “最重要的资源是时间”：谷歌14年的研究品味与引路人}
-  - {start: 3486, title: 彩蛋：office tour：AI科学家需要绿植和白天蒸桑拿？}
+  - start: 0
+    title: 专访Andrew Dai：一位谷歌AI核心科学家的14年
+  - start: 335
+    title: 从伦敦到硅谷：Google Now与个性化分发
+  - start: 411
+    title: 两次收购、两种哲学：Hinton带来深度学习，DeepMind选择独立
+  - start: 574
+    title: 半监督序列学习：谷歌错过的“GPT时刻”
+  - start: 954
+    title: 谷歌健康：跨界医疗AI失败的教训
+  - start: 1001
+    title: MaskGAN：引入填空任务探索，大幅提升文本生成质量
+  - start: 1043
+    title: 让大模型学会纠错：首批将强化学习（RL）用于预训练的团队
+  - start: 1085
+    title: MoE架构：2021年研发，被谷歌“雪藏”至Gemini 1.5
+  - start: 1331
+    title: PaLM 2：极致顺滑的预训练，却遭GPT-4抢走风头
+  - start: 1407
+    title: FLAN：让ChatGPT式对话成为可能
+  - start: 1555
+    title: 拉响红色警报：DeepMind与Google Brain的被迫整合与碰撞
+  - start: 1742
+    title: Gemini 1.0：追赶进度的仓促上线，导致舍弃MoE创新
+  - start: 1902
+    title: Gemini 2.0：大模型最大的差异点是数据的选择
+  - start: 2112
+    title: Gemini 3.0：大厂求稳限制激进创新，选择离职追寻研究自由
+  - start: 2271
+    title: Neolab爆发：创立Elorian AI，探索视觉推理路线
+  - start: 3147
+    title: “最重要的资源是时间”：谷歌14年的研究品味与引路人
+  - start: 3486
+    title: 彩蛋：office tour：AI科学家需要绿植和白天蒸桑拿？
 chapters_usable: true
 
 # === language ===

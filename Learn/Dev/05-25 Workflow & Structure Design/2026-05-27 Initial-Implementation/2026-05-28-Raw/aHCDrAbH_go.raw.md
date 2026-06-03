@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: aHCDrAbH_go
@@ -25,21 +25,34 @@ fetched_at: "2026-05-25T13:06:21+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/aHCDrAbH_go/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/aHCDrAbH_go.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: "Introduction & Key Concepts"}
-  - {start: 60, title: Understanding Workflows vs Agents}
-  - {start: 120, title: "Why Use Frameworks? Benefits of LangGraph"}
-  - {start: 240, title: "Building Block: Augmented LLM"}
-  - {start: 300, title: "Pattern 1: Basic Prompt Chaining"}
-  - {start: 540, title: "Pattern 2: Parallelization"}
-  - {start: 660, title: "Pattern 3: Routing with LLMs"}
-  - {start: 840, title: "Pattern 4: Orchestrator-Worker Pattern"}
-  - {start: 1200, title: "Pattern 5: Evaluator-Optimizer Workflow"}
-  - {start: 1440, title: "Building Agents: Beyond Workflows"}
-  - {start: 1620, title: Implementing a Basic Agent Loop}
-  - {start: 1800, title: "Conclusion & LangGraph Benefits"}
+  - start: 0
+    title: "Introduction & Key Concepts"
+  - start: 60
+    title: Understanding Workflows vs Agents
+  - start: 120
+    title: "Why Use Frameworks? Benefits of LangGraph"
+  - start: 240
+    title: "Building Block: Augmented LLM"
+  - start: 300
+    title: "Pattern 1: Basic Prompt Chaining"
+  - start: 540
+    title: "Pattern 2: Parallelization"
+  - start: 660
+    title: "Pattern 3: Routing with LLMs"
+  - start: 840
+    title: "Pattern 4: Orchestrator-Worker Pattern"
+  - start: 1200
+    title: "Pattern 5: Evaluator-Optimizer Workflow"
+  - start: 1440
+    title: "Building Agents: Beyond Workflows"
+  - start: 1620
+    title: Implementing a Basic Agent Loop
+  - start: 1800
+    title: "Conclusion & LangGraph Benefits"
 chapters_usable: true
 
 # === language ===

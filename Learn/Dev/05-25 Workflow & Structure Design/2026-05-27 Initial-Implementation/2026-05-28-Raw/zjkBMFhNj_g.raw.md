@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: zjkBMFhNj_g
@@ -25,30 +25,59 @@ fetched_at: "2026-05-25T13:07:36+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/zjkBMFhNj_g/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/zjkBMFhNj_g.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: "Intro: Large Language Model (LLM) talk"}
-  - {start: 20, title: LLM Inference}
-  - {start: 257, title: LLM Training}
-  - {start: 538, title: LLM dreams}
-  - {start: 682, title: "How do they work?"}
-  - {start: 854, title: Finetuning into an Assistant}
-  - {start: 1072, title: Summary so far}
-  - {start: 1265, title: "Appendix: Comparisons, Labeling docs, RLHF, Synthetic data, Leaderboard"}
-  - {start: 1543, title: LLM Scaling Laws}
-  - {start: 1663, title: Tool Use (Browser, Calculator, Interpreter, DALL-E)}
-  - {start: 2012, title: Multimodality (Vision, Audio)}
-  - {start: 2100, title: Thinking, System 1/2}
-  - {start: 2282, title: Self-improvement, LLM AlphaGo}
-  - {start: 2445, title: LLM Customization, GPTs store}
-  - {start: 2535, title: LLM OS}
-  - {start: 2743, title: LLM Security Intro}
-  - {start: 2774, title: Jailbreaks}
-  - {start: 3090, title: Prompt Injection}
-  - {start: 3383, title: Data poisoning}
-  - {start: 3517, title: LLM Security conclusions}
-  - {start: 3563, title: Outro}
+  - start: 0
+    title: "Intro: Large Language Model (LLM) talk"
+  - start: 20
+    title: LLM Inference
+  - start: 257
+    title: LLM Training
+  - start: 538
+    title: LLM dreams
+  - start: 682
+    title: "How do they work?"
+  - start: 854
+    title: Finetuning into an Assistant
+  - start: 1072
+    title: Summary so far
+  - start: 1265
+    title: "Appendix: Comparisons, Labeling docs, RLHF, Synthetic data, Leaderboard"
+  - start: 1543
+    title: LLM Scaling Laws
+  - start: 1663
+    title: Tool Use (Browser
+    Calculator: null
+    Interpreter: null
+    DALL-E): null
+  - start: 2012
+    title: Multimodality (Vision
+    Audio): null
+  - start: 2100
+    title: Thinking
+    System 1/2: null
+  - start: 2282
+    title: Self-improvement
+    LLM AlphaGo: null
+  - start: 2445
+    title: LLM Customization
+    GPTs store: null
+  - start: 2535
+    title: LLM OS
+  - start: 2743
+    title: LLM Security Intro
+  - start: 2774
+    title: Jailbreaks
+  - start: 3090
+    title: Prompt Injection
+  - start: 3383
+    title: Data poisoning
+  - start: 3517
+    title: LLM Security conclusions
+  - start: 3563
+    title: Outro
 chapters_usable: true
 
 # === language ===

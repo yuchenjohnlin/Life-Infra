@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: SlGRN8jh2RI
@@ -25,19 +25,30 @@ fetched_at: "2026-05-25T14:37:29+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/SlGRN8jh2RI/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/SlGRN8jh2RI.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Introduction}
-  - {start: 55, title: Claude Code Crowd Check}
-  - {start: 159, title: Origin Story of Claude Code}
-  - {start: 215, title: From Typeahead to Agents}
-  - {start: 307, title: Is Coding Solved}
-  - {start: 410, title: Boris Personal Workflow}
-  - {start: 531, title: Future Teams and Generalists}
-  - {start: 626, title: SaaS Apocalypse Predictions}
-  - {start: 777, title: "Audience Q&A Deep Dive"}
-  - {start: 1415, title: Closing and Whats Next}
+  - start: 0
+    title: Introduction
+  - start: 55
+    title: Claude Code Crowd Check
+  - start: 159
+    title: Origin Story of Claude Code
+  - start: 215
+    title: From Typeahead to Agents
+  - start: 307
+    title: Is Coding Solved
+  - start: 410
+    title: Boris Personal Workflow
+  - start: 531
+    title: Future Teams and Generalists
+  - start: 626
+    title: SaaS Apocalypse Predictions
+  - start: 777
+    title: "Audience Q&A Deep Dive"
+  - start: 1415
+    title: Closing and Whats Next
 chapters_usable: true
 
 # === language ===

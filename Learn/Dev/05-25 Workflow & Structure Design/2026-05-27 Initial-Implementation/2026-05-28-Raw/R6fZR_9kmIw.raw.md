@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: R6fZR_9kmIw
@@ -25,11 +25,14 @@ fetched_at: "2026-05-25T13:07:39+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/R6fZR_9kmIw/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFQgYyhlMA8=&rs=AOn4CLAfbCs7OI-gYgYYm__yjmruRq5T3A"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/R6fZR_9kmIw.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: "<Untitled Chapter 1>"}
-  - {start: 5150, title: 就我所知，在小金做這個實驗時，Antropic 官方的 Haiku 3.5 API 已經退役，小金的  Haiku 3.5 是在 Open Router 的服務上用的}
+  - start: 0
+    title: "<Untitled Chapter 1>"
+  - start: 5150
+    title: 就我所知，在小金做這個實驗時，Antropic 官方的 Haiku 3.5 API 已經退役，小金的  Haiku 3.5 是在 Open Router 的服務上用的
 chapters_usable: false
 
 # === language ===

@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: bYM_VMs7EO0
@@ -25,19 +25,34 @@ fetched_at: "2026-05-25T13:07:01+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/bYM_VMs7EO0/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/bYM_VMs7EO0.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Intro}
-  - {start: 122, title: Inside Meta Superintelligence Labs}
-  - {start: 383, title: The Tahoe Conversation That Changed Everything}
-  - {start: 770, title: "How Do You Rebuild a Frontier Lab in 9 Months?"}
-  - {start: 1475, title: "The Soup, Sam Altman, and Being \"Too Young\""}
-  - {start: 1968, title: "MuseSpark: Appetizer, Not Entrée"}
-  - {start: 2927, title: "Why Does Everyone Hate AI Right Now?"}
-  - {start: 3230, title: Open Source, Safety, and the Manus Question}
-  - {start: 3899, title: Robots, Mangos, and Health Superintelligence}
-  - {start: 4268, title: "Sci-Fi, BCI, and Do AI Models Deserve Moral Weight?"}
+  - start: 0
+    title: Intro
+  - start: 122
+    title: Inside Meta Superintelligence Labs
+  - start: 383
+    title: The Tahoe Conversation That Changed Everything
+  - start: 770
+    title: "How Do You Rebuild a Frontier Lab in 9 Months?"
+  - start: 1475
+    title: "The Soup, Sam Altman, and Being \"Too Young\""
+  - start: 1968
+    title: "MuseSpark: Appetizer, Not Entrée"
+  - start: 2927
+    title: "Why Does Everyone Hate AI Right Now?"
+  - start: 3230
+    title: Open Source
+    Safety: null
+    and the Manus Question: null
+  - start: 3899
+    title: Robots
+    Mangos: null
+    and Health Superintelligence: null
+  - start: 4268
+    title: "Sci-Fi, BCI, and Do AI Models Deserve Moral Weight?"
 chapters_usable: true
 
 # === language ===

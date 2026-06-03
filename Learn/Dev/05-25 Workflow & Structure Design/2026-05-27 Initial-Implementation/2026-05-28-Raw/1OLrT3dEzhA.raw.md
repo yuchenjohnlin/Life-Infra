@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: 1OLrT3dEzhA
@@ -25,15 +25,22 @@ fetched_at: "2026-05-25T13:07:13+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/1OLrT3dEzhA/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/1OLrT3dEzhA.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Introduction}
-  - {start: 168, title: Module 1 - Reflection Pattern}
-  - {start: 1240, title: Module 2 - Tool Pattern}
-  - {start: 2662, title: Module 3 - Planning Pattern}
-  - {start: 4396, title: Module 4 - MultiAgent Pattern}
-  - {start: 6060, title: Conclusion}
+  - start: 0
+    title: Introduction
+  - start: 168
+    title: Module 1 - Reflection Pattern
+  - start: 1240
+    title: Module 2 - Tool Pattern
+  - start: 2662
+    title: Module 3 - Planning Pattern
+  - start: 4396
+    title: Module 4 - MultiAgent Pattern
+  - start: 6060
+    title: Conclusion
 chapters_usable: true
 
 # === language ===

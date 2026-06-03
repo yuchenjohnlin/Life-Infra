@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: EV7WhVT270Q
@@ -25,35 +25,68 @@ fetched_at: "2026-05-25T13:06:24+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/EV7WhVT270Q/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/EV7WhVT270Q.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Introduction}
-  - {start: 117, title: "China vs US: Who wins the AI race?"}
-  - {start: 638, title: "ChatGPT vs Claude vs Gemini vs Grok: Who is winning?"}
-  - {start: 1298, title: Best AI for coding}
-  - {start: 1709, title: Open Source vs Closed Source LLMs}
-  - {start: 2408, title: "Transformers: Evolution of LLMs since 2019"}
-  - {start: 2885, title: "AI Scaling Laws: Are they dead or still holding?"}
-  - {start: 3852, title: "How AI is trained: Pre-training, Mid-training, and Post-training"}
-  - {start: 5838, title: "Post-training explained: Exciting new research directions in LLMs"}
-  - {start: 7091, title: "Advice for beginners on how to get into AI development & research"}
-  - {start: 8463, title: Work culture in AI (72+ hour weeks)}
-  - {start: 8689, title: Silicon Valley bubble}
-  - {start: 8926, title: Text diffusion models and other new research directions}
-  - {start: 9268, title: Tool use}
-  - {start: 9524, title: Continual learning}
-  - {start: 9846, title: Long context}
-  - {start: 10221, title: Robotics}
-  - {start: 10771, title: Timeline to AGI}
-  - {start: 11207, title: "Will AI replace programmers?"}
-  - {start: 12318, title: "Is the dream of AGI dying?"}
-  - {start: 12727, title: "How AI will make money?"}
-  - {start: 12989, title: Big acquisitions in 2026}
-  - {start: 13261, title: Future of OpenAI, Anthropic, Google DeepMind, xAI, Meta}
-  - {start: 14015, title: Manhattan Project for AI}
-  - {start: 14410, title: Future of NVIDIA, GPUs, and AI compute clusters}
-  - {start: 14895, title: Future of human civilization}
+  - start: 0
+    title: Introduction
+  - start: 117
+    title: "China vs US: Who wins the AI race?"
+  - start: 638
+    title: "ChatGPT vs Claude vs Gemini vs Grok: Who is winning?"
+  - start: 1298
+    title: Best AI for coding
+  - start: 1709
+    title: Open Source vs Closed Source LLMs
+  - start: 2408
+    title: "Transformers: Evolution of LLMs since 2019"
+  - start: 2885
+    title: "AI Scaling Laws: Are they dead or still holding?"
+  - start: 3852
+    title: "How AI is trained: Pre-training, Mid-training, and Post-training"
+  - start: 5838
+    title: "Post-training explained: Exciting new research directions in LLMs"
+  - start: 7091
+    title: "Advice for beginners on how to get into AI development & research"
+  - start: 8463
+    title: Work culture in AI (72+ hour weeks)
+  - start: 8689
+    title: Silicon Valley bubble
+  - start: 8926
+    title: Text diffusion models and other new research directions
+  - start: 9268
+    title: Tool use
+  - start: 9524
+    title: Continual learning
+  - start: 9846
+    title: Long context
+  - start: 10221
+    title: Robotics
+  - start: 10771
+    title: Timeline to AGI
+  - start: 11207
+    title: "Will AI replace programmers?"
+  - start: 12318
+    title: "Is the dream of AGI dying?"
+  - start: 12727
+    title: "How AI will make money?"
+  - start: 12989
+    title: Big acquisitions in 2026
+  - start: 13261
+    title: Future of OpenAI
+    Anthropic: null
+    Google DeepMind: null
+    xAI: null
+    Meta: null
+  - start: 14015
+    title: Manhattan Project for AI
+  - start: 14410
+    title: Future of NVIDIA
+    GPUs: null
+    and AI compute clusters: null
+  - start: 14895
+    title: Future of human civilization
 chapters_usable: true
 
 # === language ===

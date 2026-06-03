@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: bB2o81DnKHk
@@ -25,6 +25,7 @@ fetched_at: "2026-05-25T13:07:10+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/bB2o81DnKHk/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/bB2o81DnKHk.jpg"
 
 # === content structure ===
 chapters:
@@ -39,7 +40,7 @@ chapters:
   - start: 865
     title: Depth vs engagement in education
   - start: 1091
-    title: Why don't we consolidate educational resources
+    title: "Why don't we consolidate educational resources"
   - start: 1400
     title: Why start with C
   - start: 1911
@@ -47,7 +48,7 @@ chapters:
   - start: 2094
     title: Cheating and AI
   - start: 2301
-    title: Should we really learn CS still?
+    title: "Should we really learn CS still?"
   - start: 2724
     title: College vs online education
   - start: 2826

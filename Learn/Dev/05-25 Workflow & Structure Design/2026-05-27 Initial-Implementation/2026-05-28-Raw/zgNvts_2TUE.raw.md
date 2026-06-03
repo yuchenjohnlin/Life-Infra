@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: zgNvts_2TUE
@@ -25,25 +25,42 @@ fetched_at: "2026-05-25T13:07:22+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/zgNvts_2TUE/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/zgNvts_2TUE.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Project Growth and Statistics}
-  - {start: 143, title: Management Challenges and the OpenClaw Foundation}
-  - {start: 227, title: Addressing Security Advisories and Vulnerabilities}
-  - {start: 633, title: Misinformation and Media Fearmongering}
-  - {start: 890, title: The Burden of Open Source Maintenance}
-  - {start: 972, title: OpenAI Involvement and Future Independence}
-  - {start: 1137, title: "Audience Q&A Begins"}
-  - {start: 1193, title: "OpenClaw's Relationship with OpenAI"}
-  - {start: 1348, title: The Importance of Open and Local Models}
-  - {start: 1497, title: Coding Workflow and Agent Interactions}
-  - {start: 1708, title: "Defining 'Taste' in AI Development"}
-  - {start: 1831, title: Developing Personality for AI Agents}
-  - {start: 2002, title: "Future Vision: Ubiquitous Agents and Smart Homes"}
-  - {start: 2158, title: Addressing Prompt Injection Risks}
-  - {start: 2313, title: "Future Vision: Implementing 'Dreaming' and Modularity"}
-  - {start: 2424, title: Life as a Maintainer and Future Skills}
+  - start: 0
+    title: Project Growth and Statistics
+  - start: 143
+    title: Management Challenges and the OpenClaw Foundation
+  - start: 227
+    title: Addressing Security Advisories and Vulnerabilities
+  - start: 633
+    title: Misinformation and Media Fearmongering
+  - start: 890
+    title: The Burden of Open Source Maintenance
+  - start: 972
+    title: OpenAI Involvement and Future Independence
+  - start: 1137
+    title: "Audience Q&A Begins"
+  - start: 1193
+    title: "OpenClaw's Relationship with OpenAI"
+  - start: 1348
+    title: The Importance of Open and Local Models
+  - start: 1497
+    title: Coding Workflow and Agent Interactions
+  - start: 1708
+    title: "Defining 'Taste' in AI Development"
+  - start: 1831
+    title: Developing Personality for AI Agents
+  - start: 2002
+    title: "Future Vision: Ubiquitous Agents and Smart Homes"
+  - start: 2158
+    title: Addressing Prompt Injection Risks
+  - start: 2313
+    title: "Future Vision: Implementing 'Dreaming' and Modularity"
+  - start: 2424
+    title: Life as a Maintainer and Future Skills
 chapters_usable: true
 
 # === language ===

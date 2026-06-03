@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: I0DrcsDf3Os
@@ -25,46 +25,86 @@ fetched_at: "2026-05-25T13:06:12+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi_lc/I0DrcsDf3Os/maxresdefault_en-US.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/I0DrcsDf3Os.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: "<Untitled Chapter 1>"}
-  - {start: 153, title: "What kind of child was Jiayi Weng?"}
-  - {start: 356, title: Developing an awareness of investing in the future while growing up}
-  - {start: 490, title: High school computer competitions and college admissions}
-  - {start: 962, title: Open-sourcing coursework at Tsinghua and breaking information asymmetry}
-  - {start: 1163, title: Encountering reinforcement learning as an undergraduate}
-  - {start: 1680, title: Doing NLP summer research in Yoshua Bengio’s group}
-  - {start: 1838, title: Reflections on NLP and RL before the ChatGPT era}
-  - {start: 1967, title: Setbacks during the graduate application season}
-  - {start: 2128, title: Breaking free from fixed systems of evaluation}
-  - {start: 2468, title: The past and present of Tianshou, the reinforcement learning framework}
-  - {start: 2887, title: tuixue online, the visa status lookup system}
-  - {start: 2994, title: "What is the deeper logic behind pursuing impact?"}
-  - {start: 3381, title: Studying at CMU and joining OpenAI}
-  - {start: 3586, title: The interview story with John Schulman}
-  - {start: 3714, title: Why he did not consider doing a PhD}
-  - {start: 3796, title: "Which matters more: research ability or engineering ability?"}
-  - {start: 3991, title: The importance of infra}
-  - {start: 4168, title: "Would he still encourage students today to do an AI PhD?"}
-  - {start: 4393, title: "What are reinforcement learning and post-training?"}
-  - {start: 4462, title: "Was ChatGPT the main focus when he joined OpenAI?"}
-  - {start: 4561, title: "Could they imagine ChatGPT’s massive success before launch?"}
-  - {start: 4758, title: First impressions of OpenAI after joining in 2022}
-  - {start: 4852, title: OpenAI’s talent density and organizational structure}
-  - {start: 5049, title: The past and present of GPT reinforcement learning and post-training}
-  - {start: 5110, title: Key challenges and breakthroughs in doing RLHF in 2022}
-  - {start: 5221, title: Challenges of industrial-scale RL infra for large models}
-  - {start: 5528, title: Challenges and bottlenecks for large language models in the next 5-10 years}
-  - {start: 5790, title: "Can today’s pre-training and post-training reach AGI?"}
-  - {start: 5914, title: "Is OpenAI still open?"}
-  - {start: 6210, title: The biggest challenge in OpenAI’s mission to achieve AGI}
-  - {start: 6242, title: An internal perspective on Sam Altman’s firing}
-  - {start: 6397, title: How to view talent departures from OpenAI}
-  - {start: 6463, title: An internal perspective on OpenAI facing the AI race}
-  - {start: 6768, title: The future and fatalism}
-  - {start: 7115, title: "Has he considered starting a company?"}
-  - {start: 7201, title: "What does he hope his self ten years from now will be like?"}
+  - start: 0
+    title: "<Untitled Chapter 1>"
+  - start: 153
+    title: "What kind of child was Jiayi Weng?"
+  - start: 356
+    title: Developing an awareness of investing in the future while growing up
+  - start: 490
+    title: High school computer competitions and college admissions
+  - start: 962
+    title: Open-sourcing coursework at Tsinghua and breaking information asymmetry
+  - start: 1163
+    title: Encountering reinforcement learning as an undergraduate
+  - start: 1680
+    title: Doing NLP summer research in Yoshua Bengio’s group
+  - start: 1838
+    title: Reflections on NLP and RL before the ChatGPT era
+  - start: 1967
+    title: Setbacks during the graduate application season
+  - start: 2128
+    title: Breaking free from fixed systems of evaluation
+  - start: 2468
+    title: The past and present of Tianshou
+    the reinforcement learning framework: null
+  - start: 2887
+    title: tuixue online
+    the visa status lookup system: null
+  - start: 2994
+    title: "What is the deeper logic behind pursuing impact?"
+  - start: 3381
+    title: Studying at CMU and joining OpenAI
+  - start: 3586
+    title: The interview story with John Schulman
+  - start: 3714
+    title: Why he did not consider doing a PhD
+  - start: 3796
+    title: "Which matters more: research ability or engineering ability?"
+  - start: 3991
+    title: The importance of infra
+  - start: 4168
+    title: "Would he still encourage students today to do an AI PhD?"
+  - start: 4393
+    title: "What are reinforcement learning and post-training?"
+  - start: 4462
+    title: "Was ChatGPT the main focus when he joined OpenAI?"
+  - start: 4561
+    title: "Could they imagine ChatGPT’s massive success before launch?"
+  - start: 4758
+    title: First impressions of OpenAI after joining in 2022
+  - start: 4852
+    title: OpenAI’s talent density and organizational structure
+  - start: 5049
+    title: The past and present of GPT reinforcement learning and post-training
+  - start: 5110
+    title: Key challenges and breakthroughs in doing RLHF in 2022
+  - start: 5221
+    title: Challenges of industrial-scale RL infra for large models
+  - start: 5528
+    title: Challenges and bottlenecks for large language models in the next 5-10 years
+  - start: 5790
+    title: "Can today’s pre-training and post-training reach AGI?"
+  - start: 5914
+    title: "Is OpenAI still open?"
+  - start: 6210
+    title: The biggest challenge in OpenAI’s mission to achieve AGI
+  - start: 6242
+    title: An internal perspective on Sam Altman’s firing
+  - start: 6397
+    title: How to view talent departures from OpenAI
+  - start: 6463
+    title: An internal perspective on OpenAI facing the AI race
+  - start: 6768
+    title: The future and fatalism
+  - start: 7115
+    title: "Has he considered starting a company?"
+  - start: 7201
+    title: "What does he hope his self ten years from now will be like?"
 chapters_usable: true
 
 # === language ===

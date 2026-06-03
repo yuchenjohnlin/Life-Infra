@@ -281,6 +281,6 @@ Right. And the fact that you asked instead of just patching it is the more impor
 	3. static data (包含chapters and description)
 	   其實現在已經有chapters和description專門的一些metadata了，不過還沒有為了這些field加上error field
    這樣的話raw file的status要是一個field還是multiple field呢？.....這我真的不是很確定，就是要也可以不要也可以，要了怕會變複雜，取名不好就會不知道是怎樣
+1. 上面的update這個digest status到底是要用哪一個 skill
 
 先停在這裡一下，然後把UI的介面給弄好，加上thumbnail...
-3. 上面的update這個digest status到底是要用哪一個 skill

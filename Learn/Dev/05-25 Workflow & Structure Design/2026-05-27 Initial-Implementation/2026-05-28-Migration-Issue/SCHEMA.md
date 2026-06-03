@@ -44,36 +44,36 @@ Every field should serve at least one. If it serves none, it belongs in the body
 
 ## v1 — RAW (`<id>.raw.md`)
 
-| Field | Type | Job | Notes |
-|---|---|---|---|
-| `schema_version` | int | provenance | migration stamp |
-| `id` | str | key, navigate | 11-char YouTube id; = filename stem |
-| `type` | enum | filter, discriminator | `youtube` (extensible: bilibili, podcast…) |
-| `url` | str | navigate, display | |
-| `title` | str | display | snapshot |
-| `aliases` | list[str] | link-resolution | makes `[[title]]` resolve (see note ¹) |
-| `status` | enum | filter | `extracted` \| `extracted_no_transcript` \| `extraction_failed` |
-| `channel` | str | display, filter, group | |
-| `channel_url` | str | navigate | |
-| `channel_follower_count` | int | — | rarely queried; candidate to cut |
-| `duration` | int (s) | display, filter, sort | |
-| `upload_date` | int (YYYYMMDD) | sort, filter | |
-| `fetched_at` | str (ISO) | provenance | when raw was created; snapshot anchor |
-| `thumbnail` | str (url) | display | required for card view |
-| `chapters` | list[{start,title}] | skill input | **never round-tripped by migrate.py** (see note ²) |
-| `chapters_usable` | bool | filter, skill input | true iff ≥3 real chapters |
-| `language` | str\|null | — | uploader-declared; often null |
-| `original_language` | str\|null | filter, skill input | derived cascade; digest writes in this |
-| `manual_track_languages` | list | diagnostic | |
-| `auto_track_languages` | list | diagnostic | |
-| `transcript_status` | enum | filter, operational | `available`\|`disabled`\|`unavailable`\|`failed`\|`stale` |
-| `transcript_source` | str | diagnostic | `manual_<lang>`\|`auto_<lang>`\|`whisper_local`\|`none` |
-| `transcript_target` | str\|null | diagnostic | set only when translated |
-| `is_translated` | bool | filter | |
-| `view_count` | int | sort, filter | **snapshot** |
-| `like_count` | int | sort, filter | **snapshot** |
-| `availability` | enum | edge filter | `public`\|`unlisted`\|`subscriber_only`… |
-| `live_status` | enum | edge filter | `not_live`\|`was_live`\|`is_live` |
+| Field                    | Type                | Job                    | Notes                                                           |
+| ------------------------ | ------------------- | ---------------------- | --------------------------------------------------------------- |
+| `schema_version`         | int                 | provenance             | migration stamp                                                 |
+| `id`                     | str                 | key, navigate          | 11-char YouTube id; = filename stem                             |
+| `type`                   | enum                | filter, discriminator  | `youtube` (extensible: bilibili, podcast…)                      |
+| `url`                    | str                 | navigate, display      |                                                                 |
+| `title`                  | str                 | display                | snapshot                                                        |
+| `aliases`                | list[str]           | link-resolution        | makes `[[title]]` resolve (see note ¹)                          |
+| `status`                 | enum                | filter                 | `extracted` \| `extracted_no_transcript` \| `extraction_failed` |
+| `channel`                | str                 | display, filter, group |                                                                 |
+| `channel_url`            | str                 | navigate               |                                                                 |
+| `channel_follower_count` | int                 | —                      | rarely queried; candidate to cut                                |
+| `duration`               | int (s)             | display, filter, sort  |                                                                 |
+| `upload_date`            | int (YYYYMMDD)      | sort, filter           |                                                                 |
+| `fetched_at`             | str (ISO)           | provenance             | when raw was created; snapshot anchor                           |
+| `thumbnail`              | str (url)           | display                | required for card view                                          |
+| `chapters`               | list[{start,title}] | skill input            | **never round-tripped by migrate.py** (see note ²)              |
+| `chapters_usable`        | bool                | filter, skill input    | true iff ≥3 real chapters                                       |
+| `language`               | str\|null           | —                      | uploader-declared; often null                                   |
+| `original_language`      | str\|null           | filter, skill input    | derived cascade; digest writes in this                          |
+| `manual_track_languages` | list                | diagnostic             |                                                                 |
+| `auto_track_languages`   | list                | diagnostic             |                                                                 |
+| `transcript_status`      | enum                | filter, operational    | `available`\|`disabled`\|`unavailable`\|`failed`\|`stale`       |
+| `transcript_source`      | str                 | diagnostic             | `manual_<lang>`\|`auto_<lang>`\|`whisper_local`\|`none`         |
+| `transcript_target`      | str\|null           | diagnostic             | set only when translated                                        |
+| `is_translated`          | bool                | filter                 |                                                                 |
+| `view_count`             | int                 | sort, filter           | **snapshot**                                                    |
+| `like_count`             | int                 | sort, filter           | **snapshot**                                                    |
+| `availability`           | enum                | edge filter            | `public`\|`unlisted`\|`subscriber_only`…                        |
+| `live_status`            | enum                | edge filter            | `not_live`\|`was_live`\|`is_live`                               |
 
 ## v1 — DIGEST (`<id>.digest.md`)
 

@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: rZACoZD8AG8
@@ -25,6 +25,7 @@ fetched_at: "2026-05-25T14:37:08+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/rZACoZD8AG8/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/rZACoZD8AG8.jpg"
 
 # === content structure ===
 chapters: []

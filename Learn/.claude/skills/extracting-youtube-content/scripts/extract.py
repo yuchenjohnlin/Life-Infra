@@ -2,22 +2,33 @@
 """extracting-youtube-content — fetch metadata + transcript and write a raw markdown file.
 
 Output: one `<video_id>.raw.md` per video at `Learn/10-Raw/youtube/`, conformant to
-the skill's `assets/extract-template.md`. See SKILL.md and Discussion.md for full rationale.
+the skill's `assets/extract-template.md` (currently schema_version: 2).
 
-Design notes (LOCKED — see Discussion.md and 2026-05-19-issue-chapters-usable.md):
-- yt-dlp used as a Python MODULE (not subprocess); in-memory dict; no intermediate JSON file.
-- youtube-transcript-api is the source of truth for subtitle tracks (yt-dlp's subtitles /
-  automatic_captions fields are ignored — they have 4 documented bugs).
-- chapters_usable: simple count of non-placeholder chapters yt-dlp returned (≥3 → true).
-  Replaces the older 4-rule "chapters_authoritative" check (which was too strict and
-  excluded Key-moments cases the summarizer should still use).
-- original_language: strict cascade — auto > single-manual > yt-dlp.language (corroborator) >
-  fluent_languages tiebreaker > None.
-- transcript selection: native fluent (manual > auto, earlier fluent > later) → translate via
-  transcript-api → unavailable. Whisper fallback NOT implemented in v1.
-- Watch-page fetch removed: has_real_chapters / has_key_moments were informational only
-  and didn't drive any decision; chapters_usable now subsumes the relevant signal.
-- Per-video try/except; batch never aborts; resumable via filename existence check.
+Stage flags (added in schema-v2 / 2026-06-03 implementation):
+  (no flag)         → full pipeline: metadata + transcript (skips if file exists)
+  --metadata-only   → run only the metadata stage (yt-dlp + transcript-api list();
+                      no fetch(); empty/preserved transcript body)
+  --transcript-only → run only the transcript stage (uses the existing file's track
+                      inventory; calls transcript-api fetch(); updates transcript_* fields
+                      and the body). Requires an existing file.
+  --refresh         → re-run the specified stage(s) and MERGE into the existing file.
+                      Without --refresh, an existing file is skipped.
+  --force           → overwrite the file entirely (no merge). Implies both stages.
+  --no-thumbnail    → skip the thumbnail-image download in the metadata stage.
+
+Design notes (LOCKED — see Discussion.md, 2026-05-19-issue-chapters-usable.md, and
+2026-06-01-Extract Separation & Thumbnail/):
+- yt-dlp used as a Python MODULE (not subprocess); in-memory dict.
+- youtube-transcript-api is the source of truth for subtitle tracks (yt-dlp's
+  subtitles / automatic_captions fields are ignored — they have 4 documented bugs).
+- chapters_usable: ≥3 non-placeholder chapters yt-dlp returned.
+- original_language: strict cascade — auto > single-manual > yt-dlp.language (corroborator)
+  > fluent_languages tiebreaker > None.
+- transcript selection: native fluent (manual > auto, earlier fluent > later) → translate
+  via transcript-api → unavailable. Whisper fallback NOT implemented.
+- Thumbnail download: urllib.urlopen + write_bytes — 20× faster than yt-dlp's
+  writethumbnail (which re-fetches all metadata). Benchmarked 2026-06-03.
+- Per-video try/except; batch never aborts; resumable.
 - Atomic writes (tmp + os.replace).
 """
 
@@ -29,7 +40,10 @@ import os
 import re
 import sys
 import time
-from dataclasses import dataclass, field
+import urllib.error
+import urllib.parse
+import urllib.request
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -38,7 +52,10 @@ from typing import Any
 # Constants
 # ---------------------------------------------------------------------------
 
+SCHEMA_VERSION = 2
+
 DEFAULT_OUTPUT_DIR = "Learn/10-Raw/youtube"
+DEFAULT_THUMBNAIL_DIR = "Learn/15-Thumbnail"
 DEFAULT_FLUENT_LANGUAGES = ("zh", "en")
 DEFAULT_SLEEP = 0.4
 
@@ -51,22 +68,19 @@ YT_URL_RE = re.compile(
 )
 BILIBILI_URL_RE = re.compile(r"https?://(?:www\.)?bilibili\.com/", re.I)
 
-# chapters_usable threshold: yt-dlp chapter list (excluding placeholder titles) must have ≥3 entries
 MIN_USABLE_CHAPTER_COUNT = 3
-# Placeholder yt-dlp inserts when its description-regex path 3 fires and the first description
-# timestamp isn't at 0:00. Excluding it gives the count of "real" chapter entries.
 YTDLP_PLACEHOLDER_TITLE = "<Untitled Chapter 1>"
 
-# yt-dlp internal multi-track suffix pattern (e.g. "en-j3PyPqV-e1s", "zh-TW-RsSZZSfhlqk")
 INTERNAL_TRACK_SUFFIX_RE = re.compile(r"^([a-z]{2,3}(?:-[A-Za-z]{2,4})?)-[A-Za-z0-9_-]{10,}$")
+
+THUMBNAIL_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 
 
 # ---------------------------------------------------------------------------
-# Dependency check (lazy — only when --help isn't sufficient)
+# Dependency check (lazy)
 # ---------------------------------------------------------------------------
 
 def require_deps() -> tuple[Any, Any, Any]:
-    """Import yt_dlp + youtube_transcript_api; return (YoutubeDL, YouTubeTranscriptApi, errors_module)."""
     try:
         from yt_dlp import YoutubeDL
     except ImportError:
@@ -90,13 +104,39 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("source", help="A YouTube URL, video ID, or path to a file containing URLs.")
     p.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR,
                    help=f"Output directory (default: {DEFAULT_OUTPUT_DIR}).")
+    p.add_argument("--thumbnail-dir", default=DEFAULT_THUMBNAIL_DIR,
+                   help=f"Where to download thumbnail images (default: {DEFAULT_THUMBNAIL_DIR}).")
     p.add_argument("--fluent-languages", default=",".join(DEFAULT_FLUENT_LANGUAGES),
                    help="Comma-separated priority list, first = translation target (default: zh,en).")
-    p.add_argument("--force", action="store_true",
-                   help="Overwrite existing raw files (default: skip).")
+    # Stage flags
+    stage = p.add_mutually_exclusive_group()
+    stage.add_argument("--metadata-only", action="store_true",
+                       help="Run only the metadata stage (skip transcript fetch).")
+    stage.add_argument("--transcript-only", action="store_true",
+                       help="Run only the transcript stage (requires existing file).")
+    # Mode flags
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument("--refresh", action="store_true",
+                      help="Re-run the specified stage(s) and merge into the existing file.")
+    mode.add_argument("--force", action="store_true",
+                      help="Overwrite the file entirely (no merge). Implies both stages.")
+    # Misc
+    p.add_argument("--no-thumbnail", action="store_true",
+                   help="Skip downloading the thumbnail image in the metadata stage.")
     p.add_argument("--sleep", type=float, default=DEFAULT_SLEEP,
                    help=f"Seconds to sleep between videos (default: {DEFAULT_SLEEP}).")
     return p.parse_args(argv)
+
+
+def resolve_stages(args: argparse.Namespace) -> tuple[bool, bool]:
+    """Decide (do_metadata, do_transcript) from the flag combination."""
+    if args.force:
+        return True, True
+    if args.metadata_only:
+        return True, False
+    if args.transcript_only:
+        return False, True
+    return True, True
 
 
 # ---------------------------------------------------------------------------
@@ -104,7 +144,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 # ---------------------------------------------------------------------------
 
 def extract_video_ids(source: str) -> list[str]:
-    """Return a deduplicated list of YouTube video IDs from `source`."""
     text = _load_source_text(source)
     if BILIBILI_URL_RE.search(text):
         print("[warn] Bilibili URL(s) detected in input — skipping.", file=sys.stderr)
@@ -112,14 +151,12 @@ def extract_video_ids(source: str) -> list[str]:
     for vid in YT_URL_RE.findall(text):
         if vid not in seen:
             seen.add(vid); ordered.append(vid)
-    # Bare-ID input
     if not ordered and VIDEO_ID_RE.match(text.strip()):
         ordered.append(text.strip())
     return ordered
 
 
 def _load_source_text(source: str) -> str:
-    """If `source` is an existing file path, read it; otherwise return as-is."""
     p = Path(source)
     if p.is_file():
         return p.read_text(encoding="utf-8", errors="replace")
@@ -132,20 +169,106 @@ def _load_source_text(source: str) -> str:
 
 @dataclass
 class Track:
-    """A transcript-api `Transcript` plus the fields we actually use."""
     language_code: str
     is_generated: bool
     is_translatable: bool
-    obj: Any  # the raw transcript-api Transcript object (carries .translate(), .fetch())
+    obj: Any
 
 
 @dataclass
 class TranscriptChoice:
     track: Track
-    fetch_obj: Any                      # what we call .fetch() on (Transcript or translated)
-    transcript_source: str              # "manual_<lang>" / "auto_<lang>"
-    transcript_target: str | None       # set only when translated
+    fetch_obj: Any
+    transcript_source: str
+    transcript_target: str | None
     is_translated: bool
+
+
+# ---------------------------------------------------------------------------
+# Existing-file parser — for --refresh and --transcript-only modes
+# ---------------------------------------------------------------------------
+
+def load_existing_file(path: Path) -> dict | None:
+    """Parse an existing raw file. Returns:
+      {
+        "frontmatter": dict,     # parsed YAML
+        "title": str | None,     # # {title} heading
+        "description": str,      # body of `## Description` section
+        "transcript": str,       # body of `## Transcript` section
+      }
+    or None if the file doesn't exist / can't be parsed.
+    """
+    if not path.exists():
+        return None
+    try:
+        import yaml
+    except ImportError:
+        sys.exit("error: PyYAML required for --refresh/--transcript-only modes.")
+
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if not text.startswith("---"):
+        return None
+    # Split off the front-matter block.
+    rest = text[len("---"):]
+    end = rest.find("\n---")
+    if end < 0:
+        return None
+    fm_text = rest[:end]
+    body_text = rest[end + len("\n---"):].lstrip("\n")
+    try:
+        frontmatter = yaml.safe_load(fm_text) or {}
+    except yaml.YAMLError as e:
+        print(f"[warn] {path.name}: failed to parse front-matter ({e})", file=sys.stderr)
+        return None
+
+    # Body parsing — find # {title}, ## Description, ## Transcript boundaries.
+    title = None
+    description = ""
+    transcript = ""
+    sections = _split_markdown_sections(body_text)
+    title = sections.get("__title__")
+    description = sections.get("Description", "").strip()
+    transcript = sections.get("Transcript", "").strip()
+
+    return {
+        "frontmatter": frontmatter,
+        "title": title,
+        "description": description,
+        "transcript": transcript,
+    }
+
+
+def _split_markdown_sections(body: str) -> dict[str, str]:
+    """Split markdown body into {section_name: text}. The H1 (`# ...`) is the title;
+    H2 (`## ...`) headings become section keys.
+    """
+    lines = body.splitlines(keepends=True)
+    sections: dict[str, str] = {}
+    title: str | None = None
+    current_key: str | None = None
+    current_buf: list[str] = []
+
+    def flush():
+        nonlocal current_key, current_buf
+        if current_key is not None:
+            sections[current_key] = "".join(current_buf)
+        current_key, current_buf = None, []
+
+    for ln in lines:
+        if ln.startswith("# ") and title is None:
+            title = ln[2:].rstrip("\n").strip()
+            continue
+        m = re.match(r"^##\s+(.+?)\s*$", ln.rstrip("\n"))
+        if m:
+            flush()
+            current_key = m.group(1).strip()
+            continue
+        if current_key is not None:
+            current_buf.append(ln)
+    flush()
+    if title is not None:
+        sections["__title__"] = title
+    return sections
 
 
 # ---------------------------------------------------------------------------
@@ -153,7 +276,6 @@ class TranscriptChoice:
 # ---------------------------------------------------------------------------
 
 def fetch_metadata(YoutubeDL, vid: str) -> dict:
-    """Return yt-dlp's full info dict for a video. Raises on hard failure."""
     opts = {"skip_download": True, "quiet": True, "no_warnings": True, "extract_flat": False}
     with YoutubeDL(opts) as ydl:
         return ydl.extract_info(f"https://www.youtube.com/watch?v={vid}", download=False)
@@ -164,20 +286,14 @@ def fetch_metadata(YoutubeDL, vid: str) -> dict:
 # ---------------------------------------------------------------------------
 
 def list_tracks(api_cls, errors, vid: str) -> tuple[list[Track], str]:
-    """List available tracks for a video.
-
-    Returns (tracks, status). status is one of:
-      - "available" : at least one usable track exists
-      - "disabled"  : TranscriptsDisabled / NoTranscriptFound / VideoUnavailable
-      - "failed"    : transient (IpBlocked / network). Caller should backoff/retry.
-    """
+    """Returns (tracks, status). status ∈ {available, disabled, failed}."""
     try:
         tl = api_cls().list(vid)
     except (errors.TranscriptsDisabled, errors.NoTranscriptFound, errors.VideoUnavailable):
         return [], "disabled"
     except errors.IpBlocked:
         return [], "failed"
-    except Exception as e:  # noqa: BLE001 — unknown transcript-api error
+    except Exception as e:
         print(f"[warn] {vid}: list() raised {type(e).__name__}: {e}", file=sys.stderr)
         return [], "failed"
     raw = []
@@ -192,7 +308,7 @@ def list_tracks(api_cls, errors, vid: str) -> tuple[list[Track], str]:
 
 
 def filter_tracks(tracks: list[Track]) -> list[Track]:
-    """Drop live_chat tracks (defensive); collapse internal track IDs to plain codes."""
+    """Drop live_chat tracks; collapse internal track IDs to plain codes."""
     out = []
     for t in tracks:
         code = t.language_code
@@ -206,33 +322,10 @@ def filter_tracks(tracks: list[Track]) -> list[Track]:
 
 
 # ---------------------------------------------------------------------------
-# chapters_usable — is yt-dlp's chapter list meaningful for segmentation?
+# chapters_usable
 # ---------------------------------------------------------------------------
-#
-# History: this replaces the earlier `chapters_authoritative` 4-rule check on the
-# description (≥3 timestamps, first=0:00, strictly ascending, gaps≥10s). The strict
-# rules over-rejected: Key-moments cases like cVzf49yg0D8 (description starts at 0:14),
-# tfLTHCpPsSY (one out-of-order timestamp), and 4gciWspBVHw all have real chapters
-# the summarizer should use. The new rule simply asks: did yt-dlp produce a non-trivial
-# chapter list? If so, trust it for segmentation; the summarizer can sanity-check
-# individual titles itself. The watch-page fetch (has_real_chapters / has_key_moments)
-# was also removed in this change — those two booleans were informational only and
-# didn't drive any decision. See 2026-05-19-issue-chapters-usable.md for the diff.
-
 
 def chapters_usable(chapters: list[dict]) -> bool:
-    """True iff yt-dlp returned at least MIN_USABLE_CHAPTER_COUNT (default 3) chapters
-    with real titles (excluding the `<Untitled Chapter 1>` placeholder that yt-dlp
-    inserts when its description-regex path 3 fires and the first description timestamp
-    isn't at 0:00).
-
-    This catches all three yt-dlp chapter sources uniformly:
-      - path 1 (real Chapters via chapteredPlayerBarRenderer)
-      - path 2 (Key moments via macroMarkersListItemRenderer)
-      - path 3 (description regex fallback)
-    while still excluding lone-annotation noise like R6fZR_9kmIw / 2rcJdFuNbZQ
-    (each has exactly 1 real chapter entry plus the placeholder).
-    """
     real = [
         c for c in (chapters or [])
         if c.get("title") and str(c["title"]).strip() not in {"", YTDLP_PLACEHOLDER_TITLE}
@@ -241,45 +334,32 @@ def chapters_usable(chapters: list[dict]) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Original-language detection — strict cascade
+# Original-language cascade
 # ---------------------------------------------------------------------------
 
 def normalize_lang(code: str | None) -> str | None:
-    """Normalize "en-US" → "en", "zh-Hans"/"zh-TW"/"zh-Hant" → "zh", lowercase root."""
     if not code:
         return None
     code = code.strip()
     if not code:
         return None
-    # Pull the root before any "-" / "_" suffix.
     root = re.split(r"[-_]", code, maxsplit=1)[0].lower()
     return root or None
 
 
-def detect_original_language(
-    auto_track_codes: list[str],
-    manual_track_codes: list[str],
-    ytdlp_lang: str | None,
-    fluent_languages: list[str],
-) -> str | None:
-    """Strict cascade — see Discussion.md §1.2.iii."""
-    # Step 1: auto track wins (physical audio signal)
+def detect_original_language(auto_track_codes, manual_track_codes, ytdlp_lang, fluent_languages):
     if auto_track_codes:
         return normalize_lang(auto_track_codes[0])
-    # Step 2: single manual is unambiguous
     if len(manual_track_codes) == 1:
         return normalize_lang(manual_track_codes[0])
-    # Step 3: yt-dlp.language as corroborator (must appear in manual tracks)
     manuals_norm = {normalize_lang(m) for m in manual_track_codes}
     nyt = normalize_lang(ytdlp_lang)
     if nyt and nyt in manuals_norm:
         return nyt
-    # Step 4: fluent_languages priority tiebreaker
     for f in fluent_languages:
         nf = normalize_lang(f)
         if nf and nf in manuals_norm:
             return nf
-    # Step 5: give up
     return None
 
 
@@ -287,9 +367,7 @@ def detect_original_language(
 # Transcript selection cascade
 # ---------------------------------------------------------------------------
 
-def choose_transcript(tracks: list[Track], fluent_languages: list[str]) -> TranscriptChoice | None:
-    """Native-fluent (manual > auto, earlier fluent > later) → translate → None."""
-    # Step 1: native fluent — outer loop is language priority, inner is manual-first
+def choose_transcript(tracks, fluent_languages):
     for f in fluent_languages:
         nf = normalize_lang(f)
         for prefer_manual in (True, False):
@@ -297,7 +375,6 @@ def choose_transcript(tracks: list[Track], fluent_languages: list[str]) -> Trans
                 if t.is_generated == (not prefer_manual) and normalize_lang(t.language_code) == nf:
                     src = f"{'manual' if prefer_manual else 'auto'}_{t.language_code}"
                     return TranscriptChoice(t, t.obj, src, None, False)
-    # Step 2: translate via transcript-api (hard-whitelisted to 16 targets)
     for f in fluent_languages:
         for t in tracks:
             if not t.is_translatable:
@@ -307,9 +384,7 @@ def choose_transcript(tracks: list[Track], fluent_languages: list[str]) -> Trans
                 src = f"{'auto' if t.is_generated else 'manual'}_{t.language_code}"
                 return TranscriptChoice(t, translated, src, f, True)
             except Exception:
-                # TranslationLanguageNotAvailable, IpBlocked, etc.
                 continue
-    # Step 3: unavailable (Whisper fallback NOT implemented in v1)
     return None
 
 
@@ -317,42 +392,31 @@ def choose_transcript(tracks: list[Track], fluent_languages: list[str]) -> Trans
 # Body rendering
 # ---------------------------------------------------------------------------
 
-def fetch_snippets(choice: TranscriptChoice) -> list[Any]:
-    """Call .fetch() and return the FetchedTranscript object (iterable of FetchedTranscriptSnippet)."""
+def fetch_snippets(choice):
     fetched = choice.fetch_obj.fetch()
-    # Newer transcript-api versions return a FetchedTranscript wrapper; older return list-of-dicts.
     if hasattr(fetched, "snippets"):
         return list(fetched.snippets)
     return list(fetched)
 
 
-def _snippet_text(snip: Any) -> str:
+def _snippet_text(snip):
     return snip.text if hasattr(snip, "text") else snip.get("text", "")
 
 
 def _format_timestamp(seconds: float) -> str:
-    """Format seconds as `HH:MM:SS` (e.g. 195.7s → `00:03:15`)."""
     secs = int(seconds)
     h, rem = divmod(secs, 3600)
     m, s = divmod(rem, 60)
     return f"{h:02d}:{m:02d}:{s:02d}"
 
 
-def build_paragraphs(snippets: list[Any]) -> str:
-    """Join snippets into prose paragraphs, prefixed with `[HH:MM:SS]` per paragraph.
-
-    Paragraph boundary heuristic: new paragraph after a long pause (~3s) OR when
-    accumulated text reaches ~400 chars. Each paragraph carries the start timestamp
-    of its first snippet so the summarizer can produce time-anchored sections even
-    for videos with no chapters.
-    """
+def build_paragraphs(snippets) -> str:
     if not snippets:
         return ""
-    paragraphs: list[str] = []
-    current: list[str] = []
+    paragraphs, current = [], []
     current_len = 0
     last_end = 0.0
-    para_start: float | None = None  # start time of the first snippet in `current`
+    para_start: float | None = None
     for snip in snippets:
         text = _snippet_text(snip).strip()
         if not text:
@@ -363,9 +427,7 @@ def build_paragraphs(snippets: list[Any]) -> str:
         if current and (pause >= 3.0 or current_len >= 400):
             stamp = _format_timestamp(para_start if para_start is not None else 0.0)
             paragraphs.append(f"[{stamp}] " + " ".join(current))
-            current = []
-            current_len = 0
-            para_start = None
+            current, current_len, para_start = [], 0, None
         if para_start is None:
             para_start = start
         current.append(text)
@@ -378,11 +440,60 @@ def build_paragraphs(snippets: list[Any]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# YAML rendering — minimal, safe; mimics what python-frontmatter would produce
+# Thumbnail download
+# ---------------------------------------------------------------------------
+
+def download_thumbnail(url: str, vid: str, thumbnail_dir: Path) -> str | None:
+    """Download a thumbnail to `<thumbnail_dir>/<vid>.jpg`. Returns the file path string
+    or None if all candidates failed.
+
+    Falls back through a candidate chain:
+      1. The URL yt-dlp gave us (often localized — sometimes 404s).
+      2. The canonical `maxresdefault.jpg`.
+      3. The always-available `hqdefault.jpg`.
+    Uses urllib.urlopen + write_bytes — benchmarked 270ms vs yt-dlp's 5.5s (20× faster).
+    """
+    thumbnail_dir.mkdir(parents=True, exist_ok=True)
+    out_path = thumbnail_dir / f"{vid}.jpg"
+
+    candidates: list[str] = []
+    seen: set[str] = set()
+    for u in (
+        url,
+        f"https://i.ytimg.com/vi/{vid}/maxresdefault.jpg",
+        f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
+    ):
+        if u and u not in seen:
+            seen.add(u); candidates.append(u)
+
+    last_err: Exception | None = None
+    for u in candidates:
+        try:
+            req = urllib.request.Request(u, headers={"User-Agent": THUMBNAIL_USER_AGENT})
+            with urllib.request.urlopen(req, timeout=15) as r:
+                data = r.read()
+            if data:
+                out_path.write_bytes(data)
+                return str(out_path)
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if e.code == 404:
+                continue  # try next candidate
+            break
+        except Exception as e:  # timeouts, SSL errors, etc.
+            last_err = e
+            continue
+
+    err_label = f"{type(last_err).__name__}: {last_err}" if last_err else "no candidates"
+    print(f"[warn] {vid}: thumbnail download failed ({len(candidates)} URLs tried): {err_label}", file=sys.stderr)
+    return None
+
+
+# ---------------------------------------------------------------------------
+# YAML rendering
 # ---------------------------------------------------------------------------
 
 def _yaml_scalar(v: Any) -> str:
-    """Render a Python scalar as a YAML value."""
     if v is None:
         return "null"
     if isinstance(v, bool):
@@ -390,10 +501,6 @@ def _yaml_scalar(v: Any) -> str:
     if isinstance(v, (int, float)):
         return str(v)
     s = str(v)
-    # Force quoting when ambiguous or contains special chars.
-    # NOTE: "," and the flow indicators "[]{}" are included so the scalar is safe in BOTH
-    # block and flow context. (A comma in an unquoted flow-mapping value is read as an entry
-    # separator — that was the chapter-title-truncation bug.)
     if (
         s == ""
         or any(c in s for c in [":", "#", "\n", ",", '"', "'", "[", "]", "{", "}", "&", "*", "?", "|", ">", "%", "@", "`"])
@@ -401,19 +508,12 @@ def _yaml_scalar(v: Any) -> str:
         or s.strip() != s
         or s.lower() in {"true", "false", "yes", "no", "null", "~"}
     ):
-        # Use double-quoted scalar; escape backslashes and quotes.
         esc = s.replace("\\", "\\\\").replace('"', '\\"')
         return f'"{esc}"'
     return s
 
 
-def _yaml_list(items: list[Any], indent: int = 0) -> str:
-    """Render a YAML block sequence.
-
-    Dict items are emitted as BLOCK mappings (not flow `{...}`), so commas inside scalar
-    values — e.g. a chapter title "Tianshou, the RL framework" — are never misread as
-    flow-mapping entry separators.
-    """
+def _yaml_list(items, indent: int = 0) -> str:
     if not items:
         return "[]"
     pad = " " * indent
@@ -427,34 +527,37 @@ def _yaml_list(items: list[Any], indent: int = 0) -> str:
             (first_k, first_v), rest = kv[0], kv[1:]
             out_lines.append(f"{pad}- {first_k}: {_yaml_scalar(first_v)}")
             for k, v in rest:
-                # Align subsequent keys under the first (past the "- ").
                 out_lines.append(f"{pad}  {k}: {_yaml_scalar(v)}")
         else:
             out_lines.append(f"{pad}- {_yaml_scalar(it)}")
     return "\n" + "\n".join(out_lines)
 
 
+# Section layout for the front-matter render. Each entry is (section_label, [field_names]).
+# This is the canonical schema-v2 grouping. Sections with no present fields are skipped.
+FRONTMATTER_SECTIONS: list[tuple[str, list[str]]] = [
+    ("meta",              ["schema_version"]),
+    ("identity",          ["id", "type", "url", "title", "aliases"]),
+    ("pipeline",          ["status"]),
+    ("creator",           ["channel", "channel_url", "channel_follower_count"]),
+    ("time",              ["duration", "upload_date", "fetched_at"]),
+    ("visual",            ["thumbnail", "thumbnail_image"]),
+    ("content structure", ["chapters", "chapters_usable"]),
+    ("language",          ["language", "original_language"]),
+    ("subtitles",         ["manual_track_languages", "auto_track_languages",
+                           "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
+    ("engagement",        ["view_count", "like_count"]),
+    ("availability",      ["availability", "live_status"]),
+    ("diagnostics",       ["_extraction_error_type", "_extraction_error"]),
+]
+
+
 def render_frontmatter(record: dict) -> str:
-    """Render a flat YAML frontmatter block (with comments grouping fields)."""
-    sections = [
-        ("identity",          ["id", "type", "url", "title"]),
-        ("pipeline",          ["status"]),
-        ("creator",           ["channel", "channel_url", "channel_follower_count"]),
-        ("time",              ["duration", "upload_date", "fetched_at"]),
-        ("visual",            ["thumbnail"]),
-        ("content structure", ["chapters", "chapters_usable"]),
-        ("language",          ["language", "original_language"]),
-        ("subtitles",         ["manual_track_languages", "auto_track_languages",
-                               "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
-        ("engagement",        ["view_count", "like_count"]),
-        ("availability",      ["availability", "live_status"]),
-        ("diagnostics",       ["_extraction_error_type", "_extraction_error"]),
-    ]
     lines = ["---"]
-    for label, fields in sections:
+    for label, fields in FRONTMATTER_SECTIONS:
         present = [f for f in fields if f in record]
         if not present:
-            continue  # skip empty sections (e.g. diagnostics when no error)
+            continue
         lines.append(f"# === {label} ===")
         for f in present:
             v = record.get(f)
@@ -462,7 +565,7 @@ def render_frontmatter(record: dict) -> str:
                 lines.append(f"{f}:{_yaml_list(v, indent=2)}" if v else f"{f}: []")
             else:
                 lines.append(f"{f}: {_yaml_scalar(v)}")
-        lines.append("")  # blank line between sections
+        lines.append("")
     if lines[-1] == "":
         lines.pop()
     lines.append("---")
@@ -479,6 +582,9 @@ def render_markdown(record: dict, description: str, transcript_body: str, transc
         parts.append("_(no transcript: YouTube has no manual or auto-generated captions for this video)_")
     elif transcript_status == "unavailable":
         parts.append("_(no transcript: no track in fluent_languages and translation unavailable)_")
+    elif not transcript_status:
+        # metadata-only run; transcript hasn't been fetched yet
+        parts.append("_(transcript not yet fetched; run `extract.py --transcript-only`)_")
     else:
         parts.append("_(transcript fetch failed; see logs)_")
     return "\n".join(parts).rstrip() + "\n"
@@ -496,39 +602,27 @@ def atomic_write(path: Path, text: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Per-video pipeline
+# Stage functions
 # ---------------------------------------------------------------------------
 
-def process_one(
+def run_metadata_stage(
     vid: str,
-    args: argparse.Namespace,
     deps: tuple[Any, Any, Any],
     fluent_languages: list[str],
-) -> dict:
+    thumbnail_dir: Path,
+    download_thumb: bool,
+) -> tuple[dict, str]:
+    """Run the metadata stage. Returns (record_update_dict, description_text).
+    Raises on hard yt-dlp failure (caller writes a failure stub).
+    """
     YoutubeDL, YouTubeTranscriptApi, yta_errors = deps
-    out_path = Path(args.output_dir) / f"{vid}.raw.md"
-    if out_path.exists() and not args.force:
-        return {"video_id": vid, "skipped": True, "reason": "exists"}
 
-    # 1. Metadata. If yt-dlp fails, write a minimal stub with status=extraction_failed
-    # so the failure is visible in .base instead of silently disappearing.
-    try:
-        info = fetch_metadata(YoutubeDL, vid)
-    except Exception as e:  # noqa: BLE001
-        stub = _build_failure_stub(vid, type(e).__name__, str(e)[:200])
-        atomic_write(out_path, render_markdown(stub, "", "", "failed"))
-        return {
-            "video_id":  vid,
-            "status":    "extraction_failed",
-            "error_type": type(e).__name__,
-            "error":     str(e)[:200],
-            "path":      str(out_path),
-        }
+    # 1. yt-dlp
+    info = fetch_metadata(YoutubeDL, vid)
 
-    # 2. Transcript inventory (with retry on transient failure)
+    # 2. transcript-api list() — with retry on transient failure
     tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
     if t_status == "failed":
-        # exponential backoff: 0.5 → 2 → 8
         for delay in (0.5, 2.0, 8.0):
             time.sleep(delay)
             tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
@@ -538,130 +632,250 @@ def process_one(
     manual_codes = [t.language_code for t in tracks if not t.is_generated]
     auto_codes   = [t.language_code for t in tracks if t.is_generated]
 
-    # 3. Original-language detection
-    ytdlp_lang = info.get("language")
-    original_language = detect_original_language(auto_codes, manual_codes, ytdlp_lang, fluent_languages)
+    # 3. original_language (cascade)
+    original_language = detect_original_language(auto_codes, manual_codes, info.get("language"), fluent_languages)
 
-    # 4. chapters_usable — count of non-placeholder chapters yt-dlp returned
-    desc = info.get("description") or ""
+    # 4. chapters
     raw_chapters = info.get("chapters") or []
-    is_chapters_usable = chapters_usable(raw_chapters)
-
-    # 5. Pick + fetch transcript
-    transcript_source = "none"
-    transcript_target = None
-    is_translated = False
-    transcript_body = ""
-    final_status = t_status
-
-    if t_status == "available" and tracks:
-        choice = choose_transcript(tracks, fluent_languages)
-        if choice is None:
-            final_status = "unavailable"
-        else:
-            try:
-                snippets = fetch_snippets(choice)
-                transcript_body = build_paragraphs(snippets)
-                transcript_source = choice.transcript_source
-                transcript_target = choice.transcript_target
-                is_translated = choice.is_translated
-                final_status = "available"
-            except Exception as e:  # noqa: BLE001
-                final_status = "failed"
-                print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
-
-    # 6. Build record (matches extract-template.md)
     chapters_field = [
         {"start": int(c.get("start_time") or 0), "title": (c.get("title") or "").strip()}
         for c in raw_chapters
     ]
-    # Pipeline-stage status: rolls up the transcript outcome into a coarser filter-friendly value.
-    if final_status == "available":
-        pipeline_status = "extracted"
-    else:  # disabled / unavailable / failed
-        pipeline_status = "extracted_no_transcript"
+    is_chapters_usable = chapters_usable(raw_chapters)
 
-    record = {
-        "id":                       vid,
-        "type":                     "youtube",
-        "url":                      f"https://www.youtube.com/watch?v={vid}",
-        "title":                    info.get("title") or "",
-        "status":                   pipeline_status,
-        "channel":                  info.get("channel") or info.get("uploader") or "",
-        "channel_url":              info.get("channel_url") or info.get("uploader_url") or "",
-        "channel_follower_count":   info.get("channel_follower_count") or 0,
-        "duration":                 int(info.get("duration") or 0),
-        "upload_date":              info.get("upload_date") or "",
-        "fetched_at":               datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-        "thumbnail":                info.get("thumbnail") or "",
-        "chapters":                 chapters_field,
-        "chapters_usable":          is_chapters_usable,
-        "language":                 info.get("language"),
-        "original_language":        original_language,
-        "manual_track_languages":   manual_codes,
-        "auto_track_languages":     auto_codes,
-        "transcript_status":        final_status,
-        "transcript_source":        transcript_source,
-        "transcript_target":        transcript_target,
-        "is_translated":            is_translated,
-        "view_count":               int(info.get("view_count") or 0),
-        "like_count":               int(info.get("like_count") or 0),
-        "availability":             info.get("availability") or "",
-        "live_status":              info.get("live_status") or "",
+    # 5. thumbnail
+    thumbnail_url = info.get("thumbnail") or ""
+    thumbnail_image: str | None = None
+    if download_thumb and thumbnail_url:
+        thumbnail_image = download_thumbnail(thumbnail_url, vid, thumbnail_dir)
+
+    title = info.get("title") or ""
+
+    update = {
+        "schema_version":            SCHEMA_VERSION,
+        "id":                        vid,
+        "type":                      "youtube",
+        "url":                       f"https://www.youtube.com/watch?v={vid}",
+        "title":                     title,
+        "aliases":                   [title] if title else [],
+        "channel":                   info.get("channel") or info.get("uploader") or "",
+        "channel_url":               info.get("channel_url") or info.get("uploader_url") or "",
+        "channel_follower_count":    info.get("channel_follower_count") or 0,
+        "duration":                  int(info.get("duration") or 0),
+        "upload_date":               info.get("upload_date") or "",
+        "fetched_at":                datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "thumbnail":                 thumbnail_url,
+        "thumbnail_image":           thumbnail_image,
+        "chapters":                  chapters_field,
+        "chapters_usable":           is_chapters_usable,
+        "language":                  info.get("language"),
+        "original_language":         original_language,
+        "manual_track_languages":    manual_codes,
+        "auto_track_languages":      auto_codes,
+        # Pre-set transcript status from list() outcome — transcript stage may refine it.
+        # If list() reported "disabled", this is a terminal state and transcript stage will skip.
+        "transcript_status":         t_status,
+        "view_count":                int(info.get("view_count") or 0),
+        "like_count":                int(info.get("like_count") or 0),
+        "availability":              info.get("availability") or "",
+        "live_status":               info.get("live_status") or "",
     }
+    return update, info.get("description") or ""
 
-    text = render_markdown(record, desc, transcript_body, final_status)
-    atomic_write(out_path, text)
 
-    return {
-        "video_id":          vid,
-        "status":            pipeline_status,
-        "transcript_status": final_status,
-        "transcript_source": transcript_source,
-        "original_language": original_language,
-        "chapters_usable":   is_chapters_usable,
-        "chapter_count":     len([c for c in chapters_field if c["title"] and c["title"] != YTDLP_PLACEHOLDER_TITLE]),
-        "manual_tracks":     manual_codes,
-        "auto_tracks":       auto_codes,
-        "path":              str(out_path),
-    }
+def run_transcript_stage(
+    vid: str,
+    record: dict,
+    deps: tuple[Any, Any, Any],
+    fluent_languages: list[str],
+) -> tuple[dict, str]:
+    """Run the transcript stage on top of an existing record (which must carry track lists).
+    Returns (record_update_dict, transcript_body_text).
+    """
+    YoutubeDL, YouTubeTranscriptApi, yta_errors = deps
 
+    # If the metadata stage said "disabled", honor that — don't even hit the API.
+    if record.get("transcript_status") == "disabled":
+        return {
+            "transcript_status":  "disabled",
+            "transcript_source":  "none",
+            "transcript_target":  None,
+            "is_translated":      False,
+        }, ""
+
+    # Re-list tracks (fresh, in case state changed between metadata and transcript runs).
+    tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
+    if t_status == "failed":
+        for delay in (0.5, 2.0, 8.0):
+            time.sleep(delay)
+            tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
+            if t_status != "failed":
+                break
+
+    if t_status == "disabled":
+        return {
+            "transcript_status":  "disabled",
+            "transcript_source":  "none",
+            "transcript_target":  None,
+            "is_translated":      False,
+        }, ""
+    if t_status == "failed" or not tracks:
+        return {
+            "transcript_status":  "failed",
+            "transcript_source":  "none",
+            "transcript_target":  None,
+            "is_translated":      False,
+        }, ""
+
+    choice = choose_transcript(tracks, fluent_languages)
+    if choice is None:
+        return {
+            "transcript_status":  "unavailable",
+            "transcript_source":  "none",
+            "transcript_target":  None,
+            "is_translated":      False,
+        }, ""
+
+    try:
+        snippets = fetch_snippets(choice)
+        body = build_paragraphs(snippets)
+        return {
+            "transcript_status":  "available",
+            "transcript_source":  choice.transcript_source,
+            "transcript_target":  choice.transcript_target,
+            "is_translated":      choice.is_translated,
+        }, body
+    except Exception as e:
+        print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
+        return {
+            "transcript_status":  "failed",
+            "transcript_source":  "none",
+            "transcript_target":  None,
+            "is_translated":      False,
+        }, ""
+
+
+# ---------------------------------------------------------------------------
+# Failure stub builder
+# ---------------------------------------------------------------------------
 
 def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
-    """Build a minimal record for videos where metadata fetch itself failed.
-
-    Most fields are unknown — we still want a file written so the failure shows up in `.base`.
-    """
     return {
+        "schema_version":           SCHEMA_VERSION,
         "id":                       vid,
         "type":                     "youtube",
         "url":                      f"https://www.youtube.com/watch?v={vid}",
         "title":                    f"<extraction failed: {vid}>",
+        "aliases":                  [],
         "status":                   "extraction_failed",
-        "channel":                  "",
-        "channel_url":              "",
-        "channel_follower_count":   0,
-        "duration":                 0,
-        "upload_date":              "",
+        "channel":                  "", "channel_url": "", "channel_follower_count": 0,
+        "duration":                 0, "upload_date": "",
         "fetched_at":               datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-        "thumbnail":                "",
-        "chapters":                 [],
-        "chapters_usable":          False,
-        "language":                 None,
-        "original_language":        None,
-        "manual_track_languages":   [],
-        "auto_track_languages":     [],
-        "transcript_status":        "failed",
-        "transcript_source":        "none",
-        "transcript_target":        None,
-        "is_translated":            False,
-        "view_count":               0,
-        "like_count":               0,
-        "availability":             "",
-        "live_status":              "",
-        # Diagnostic fields — captured here so the file is self-documenting on failure.
+        "thumbnail":                "", "thumbnail_image": None,
+        "chapters":                 [], "chapters_usable": False,
+        "language":                 None, "original_language": None,
+        "manual_track_languages":   [], "auto_track_languages": [],
+        "transcript_status":        "failed", "transcript_source": "none",
+        "transcript_target":        None, "is_translated": False,
+        "view_count":               0, "like_count": 0,
+        "availability":             "", "live_status": "",
         "_extraction_error_type":   error_type,
         "_extraction_error":        error_msg,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Per-video pipeline (v2 — stage-aware)
+# ---------------------------------------------------------------------------
+
+def derive_pipeline_status(transcript_status: str | None) -> str:
+    """Top-level `status` from the transcript outcome."""
+    if transcript_status == "available":
+        return "extracted"
+    if transcript_status in ("disabled", "unavailable", "failed"):
+        return "extracted_no_transcript"
+    return "extracted"  # default (metadata-only run before transcript runs)
+
+
+def process_one(
+    vid: str,
+    args: argparse.Namespace,
+    deps: tuple[Any, Any, Any],
+    fluent_languages: list[str],
+) -> dict:
+    out_path = Path(args.output_dir) / f"{vid}.raw.md"
+    do_metadata, do_transcript = resolve_stages(args)
+    file_exists = out_path.exists()
+
+    # Loading existing file (for merge mode).
+    existing = load_existing_file(out_path) if file_exists else None
+
+    # Decide: skip / merge / overwrite.
+    if file_exists and not (args.force or args.refresh):
+        return {"video_id": vid, "skipped": True, "reason": "exists (use --refresh or --force)"}
+    if args.transcript_only and not file_exists:
+        return {"video_id": vid, "skipped": True, "reason": "--transcript-only requires existing file"}
+
+    record: dict = dict(existing["frontmatter"]) if existing and not args.force else {}
+    description_body = (existing["description"] if existing and not args.force else "")
+    transcript_body = (existing["transcript"] if existing and not args.force else "")
+
+    # --- metadata stage ---
+    if do_metadata:
+        try:
+            meta_update, fresh_description = run_metadata_stage(
+                vid, deps, fluent_languages,
+                thumbnail_dir=Path(args.thumbnail_dir),
+                download_thumb=not args.no_thumbnail,
+            )
+        except Exception as e:
+            stub = _build_failure_stub(vid, type(e).__name__, str(e)[:200])
+            atomic_write(out_path, render_markdown(stub, "", "", "failed"))
+            return {
+                "video_id":   vid,
+                "status":     "extraction_failed",
+                "stage":      "metadata",
+                "error_type": type(e).__name__,
+                "error":      str(e)[:200],
+                "path":       str(out_path),
+            }
+        record.update(meta_update)
+        description_body = fresh_description
+
+    # --- transcript stage ---
+    if do_transcript:
+        # Prefer track lists from this run's metadata if available; else use existing record's.
+        if not (record.get("manual_track_languages") is not None or record.get("auto_track_languages") is not None):
+            # No tracks recorded — caller hasn't run metadata stage and there's no existing data.
+            return {
+                "video_id": vid,
+                "status":   "skipped",
+                "reason":   "--transcript-only on a file with no track inventory; run --metadata-only first",
+            }
+        transcript_update, fresh_transcript_body = run_transcript_stage(vid, record, deps, fluent_languages)
+        record.update(transcript_update)
+        if fresh_transcript_body or transcript_update.get("transcript_status") != "available":
+            transcript_body = fresh_transcript_body  # may be empty for disabled/failed
+
+    # --- derived fields & write ---
+    record["status"] = derive_pipeline_status(record.get("transcript_status"))
+    record["schema_version"] = SCHEMA_VERSION  # ensure always set
+
+    text = render_markdown(record, description_body, transcript_body, record.get("transcript_status") or "")
+    atomic_write(out_path, text)
+
+    return {
+        "video_id":          vid,
+        "status":            record["status"],
+        "transcript_status": record.get("transcript_status"),
+        "transcript_source": record.get("transcript_source"),
+        "original_language": record.get("original_language"),
+        "chapters_usable":   record.get("chapters_usable"),
+        "chapter_count":     len([c for c in record.get("chapters", []) if c.get("title") and c["title"] != YTDLP_PLACEHOLDER_TITLE]),
+        "thumbnail_image":   record.get("thumbnail_image"),
+        "did_metadata":      do_metadata,
+        "did_transcript":    do_transcript,
+        "path":              str(out_path),
     }
 
 
@@ -676,32 +890,37 @@ def main(argv: list[str] | None = None) -> int:
         fluent_languages = list(DEFAULT_FLUENT_LANGUAGES)
 
     deps = require_deps()
-    YoutubeDL, YouTubeTranscriptApi, yta_errors = deps  # noqa: F841 (kept for clarity)
-
     video_ids = extract_video_ids(args.source)
     if not video_ids:
         print(f"[error] No YouTube URLs or video IDs found in: {args.source!r}", file=sys.stderr)
         return 2
 
-    print(f"[info] Found {len(video_ids)} video(s). Output → {args.output_dir}", file=sys.stderr)
+    do_meta, do_transcript = resolve_stages(args)
+    stage_label = "metadata+transcript" if (do_meta and do_transcript) else ("metadata-only" if do_meta else "transcript-only")
+    mode_label = "force" if args.force else ("refresh" if args.refresh else "create-or-skip")
+    print(
+        f"[info] {len(video_ids)} video(s) | stage={stage_label} | mode={mode_label} | "
+        f"output={args.output_dir} | thumbs={'off' if args.no_thumbnail else args.thumbnail_dir}",
+        file=sys.stderr,
+    )
+
     results = []
     backoff_pause = 0.0
     for i, vid in enumerate(video_ids, 1):
         if backoff_pause:
             time.sleep(backoff_pause)
             backoff_pause = 0.0
-        print(f"[{i:>3}/{len(video_ids)}] {vid}", file=sys.stderr)
+        print(f"[{i:>3}/{len(video_ids)}] {vid}", file=sys.stderr, flush=True)
         try:
             res = process_one(vid, args, deps, fluent_languages)
-        except Exception as e:  # noqa: BLE001 — never abort the batch
+        except Exception as e:
             res = {"video_id": vid, "error_type": type(e).__name__, "error": str(e)[:200]}
             if "IpBlocked" in type(e).__name__:
                 backoff_pause = 30.0
         results.append(res)
-        print(json.dumps(res, ensure_ascii=False))
+        print(json.dumps(res, ensure_ascii=False), flush=True)
         time.sleep(args.sleep)
 
-    # Exit code: 0 if at least one file produced; 2 if all failed.
     successes = [r for r in results if "error" not in r and not r.get("skipped")]
     return 0 if successes or any(r.get("skipped") for r in results) else 2
 

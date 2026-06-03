@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: DN2mhf0b02s
@@ -25,15 +25,22 @@ fetched_at: "2026-05-25T14:37:55+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/DN2mhf0b02s/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/DN2mhf0b02s.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Hook}
-  - {start: 15, title: "Who I am + Crafter's Lab"}
-  - {start: 75, title: You Keep Chasing the Best Model — And Your Agent Still Breaks}
-  - {start: 285, title: Your Agent Chokes Because You Gave It Too Much}
-  - {start: 495, title: "Stop Agonizing Over Models — Fix What's Around Them"}
-  - {start: 720, title: "Outro + Crafter's Lab Deep Dive"}
+  - start: 0
+    title: Hook
+  - start: 15
+    title: "Who I am + Crafter's Lab"
+  - start: 75
+    title: You Keep Chasing the Best Model — And Your Agent Still Breaks
+  - start: 285
+    title: Your Agent Chokes Because You Gave It Too Much
+  - start: 495
+    title: "Stop Agonizing Over Models — Fix What's Around Them"
+  - start: 720
+    title: "Outro + Crafter's Lab Deep Dive"
 chapters_usable: true
 
 # === language ===

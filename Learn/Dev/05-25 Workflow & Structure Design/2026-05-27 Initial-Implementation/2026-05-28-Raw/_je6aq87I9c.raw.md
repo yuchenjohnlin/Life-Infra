@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: _je6aq87I9c
@@ -25,19 +25,31 @@ fetched_at: "2026-05-25T14:37:20+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi_lc/_je6aq87I9c/maxresdefault_en.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/_je6aq87I9c.jpg"
 
 # === content structure ===
 chapters:
-  - {start: 0, title: Directory structure and SKILL.md}
-  - {start: 97, title: Name/description constraints and frontmatter}
-  - {start: 234, title: Reference vs Task content}
-  - {start: 330, title: "Creation process: real knowledge + refinement"}
-  - {start: 432, title: Context saving and splitting skills}
-  - {start: 610, title: "Calibrating control: freedom vs rules"}
-  - {start: 729, title: "Content Patterns: Gotchas, Templates, Loops"}
-  - {start: 892, title: "scripts/ Design: non-interactive, structured"}
-  - {start: 1088, title: Description optimization and skills-ref validate}
-  - {start: 1279, title: First skill explain-code, summary}
+  - start: 0
+    title: Directory structure and SKILL.md
+  - start: 97
+    title: Name/description constraints and frontmatter
+  - start: 234
+    title: Reference vs Task content
+  - start: 330
+    title: "Creation process: real knowledge + refinement"
+  - start: 432
+    title: Context saving and splitting skills
+  - start: 610
+    title: "Calibrating control: freedom vs rules"
+  - start: 729
+    title: "Content Patterns: Gotchas, Templates, Loops"
+  - start: 892
+    title: "scripts/ Design: non-interactive, structured"
+  - start: 1088
+    title: Description optimization and skills-ref validate
+  - start: 1279
+    title: First skill explain-code
+    summary: null
 chapters_usable: true
 
 # === language ===

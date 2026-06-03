@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 1
+schema_version: 2
 
 # === identity ===
 id: UqMtkgQe-kI
@@ -25,6 +25,7 @@ fetched_at: "2026-05-25T13:06:09+00:00"
 
 # === visual ===
 thumbnail: "https://i.ytimg.com/vi/UqMtkgQe-kI/maxresdefault.jpg"
+thumbnail_image: "Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail/UqMtkgQe-kI.jpg"
 
 # === content structure ===
 chapters: []

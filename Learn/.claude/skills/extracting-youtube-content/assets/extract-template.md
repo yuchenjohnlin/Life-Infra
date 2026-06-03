@@ -1,9 +1,16 @@
 ---
+# === meta ===
+schema_version: 2                   # bumped from 1 → 2 on 2026-06-03 (added thumbnail_image).
+                                    # See Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-01-Extract Separation & Thumbnail/schema-v2.md
+                                    # for the changelog and migration procedure.
+
 # === identity ===
 id: VIDEO_ID                        # 11-char YouTube video id (also the filename: <id>.raw.md)
 type: youtube                       # source platform of this raw file (extensible: bilibili, podcast, ...)
 url: https://www.youtube.com/watch?v=VIDEO_ID
 title: "Video title here"
+aliases:                            # makes [[Video title here]] wikilinks resolve to this file
+  - Video title here
 
 # === pipeline ===
 status: extracted                   # extracted | extracted_no_transcript | extraction_failed
@@ -18,10 +25,14 @@ channel_follower_count: 0
 # === time ===
 duration: 0                         # seconds
 upload_date: 20260101               # YYYYMMDD (yt-dlp's native format)
-fetched_at: 2026-05-08T00:00:00     # ISO 8601, when this raw file was created
+fetched_at: 2026-05-08T00:00:00     # ISO 8601, when this raw file was created or last refreshed
 
 # === visual ===
 thumbnail: https://i.ytimg.com/vi/VIDEO_ID/maxresdefault.jpg
+                                    # the YouTube CDN URL (yt-dlp's `thumbnail` field — the best available variant)
+thumbnail_image: null               # vault-relative path to the LOCAL downloaded thumbnail file,
+                                    # e.g. "Learn/15-Thumbnail/VIDEO_ID.jpg". `null` if not downloaded.
+                                    # Populated by extract.py when `--no-thumbnail` is NOT set.
 
 # === content structure ===
 chapters: []                        # list of {start, title} from yt-dlp; may be empty
