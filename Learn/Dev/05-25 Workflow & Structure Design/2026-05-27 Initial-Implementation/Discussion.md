@@ -34,6 +34,7 @@ I also figured that the components can be listed as follows,
 5. digest content and digest format. 
 		
 ---
+# Migration 
 
 1. About the filename and schema drift, you can see that after I made some changes in the filename and metadata of the template of the digest skill, parts in the extract skill wasn't updated
 
@@ -56,3 +57,6 @@ So I have already fixed the filename, metadatas in the skills as well as the con
 4. I can write a skill that manages the current schemas ? Where the schemas of each file will be more clear and understandable between each other ?
     
 5. I understand this might be over engineer, so I want to ask your advice
+
+--- 
+[[2026-06-01-Discussion]]
