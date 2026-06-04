@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: CxFQykWiJqY
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: EO
@@ -63,6 +64,11 @@ like_count: 5774
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # "50 AI Agents Running My Company" Is a Lie. Here's How I Build It | Gumloop, Max Brodeur-Urbas

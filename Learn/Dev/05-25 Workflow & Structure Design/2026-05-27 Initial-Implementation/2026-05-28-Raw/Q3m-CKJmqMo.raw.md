@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: Q3m-CKJmqMo
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: NVIDIA Developer
@@ -51,6 +52,11 @@ like_count: 176
 # === availability ===
 availability: public
 live_status: was_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # DGX Spark Live:  Ask the Experts - Gemma 4 on DGX Spark

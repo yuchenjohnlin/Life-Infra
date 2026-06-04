@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: EV7WhVT270Q
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: Lex Fridman
@@ -111,6 +112,11 @@ like_count: 13717
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # State of AI in 2026: LLMs, Coding, Scaling Laws, China, Agents, GPUs, AGI | Lex Fridman Podcast #490

@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: PKvgwp2Ff8M
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extraction_failed
+metadata_status: ok
 
 # === creator ===
 channel: "研究生2.0 · 學海擺渡人 "
@@ -51,6 +52,11 @@ like_count: 84
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # 研究者做文獻筆記，真正該外包給 AI 的不是理解，而是整理

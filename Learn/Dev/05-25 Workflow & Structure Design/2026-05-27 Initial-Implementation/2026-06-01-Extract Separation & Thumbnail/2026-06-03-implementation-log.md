@@ -133,5 +133,126 @@ In rough order of priority:
 
 1. **Wire `.base` to consume `thumbnail_image`** — update `Learn/10-Raw/youtube.base` to use the local image field for cards view.
 2. **Migrate the production raw folder** when the user has confirmed the dev set looks right: `python migrate_schema.py "Learn/10-Raw/youtube/*.raw.md"` with `--thumbnail-dir Learn/15-Thumbnail` (the default).
-3. **Add the deferred error fields** when transient transcript failures actually become a recurring pain point.
+3. **Add the deferred error fields** when transient transcript failures actually become a recurring pain point.   ✅ done — see "v2.1 addendum" below.
 4. **`digesting-youtube-content`** needs to know how to read `thumbnail_image` if it embeds the thumbnail anywhere in the digest.
+
+---
+
+# v2.1 addendum — per-stage error fields (schema_version 3)
+
+**Date**: 2026-06-04
+**Schema bump**: 2 → 3 (colloquially "v2.1" — additive, fully backward-compatible at the field level)
+
+## Why this exists
+
+The user spotted two real inconsistencies after v2 shipped:
+
+1. The `status` field (`extracted | extracted_no_transcript | extraction_failed`) was being stored even though I'd previously argued for derived-at-read-time only. The schema doc treated it as a primary field.
+2. The per-stage error blocks (`metadata_error`, `transcript_error`) I'd committed to during an earlier discussion of yt-dlp / transcript-api failure modes were deferred during the v2 implementation and never added. A thumbnail download failure within minutes of shipping v2 surfaced the gap concretely: a `thumbnail_image: null` with no record of why is a black box.
+
+Both fixed in v3.
+
+## What changed
+
+### Schema additions (4 new fields, 1 reclassification)
+
+```yaml
+# === pipeline ===
+status: extracted              # KEPT — now documented as a CACHED derivation of
+                               # (metadata_status, transcript_status). Written by the
+                               # producer; the per-stage fields are authoritative.
+metadata_status: ok            # NEW — authoritative metadata-stage outcome: ok | error.
+
+# === errors ===                NEW section
+metadata_error: null           # NEW — structured error when metadata_status == "error"
+transcript_error: null         # NEW — structured error when transcript_status in (failed,)
+thumbnail_error: null          # NEW — structured error when thumbnail_image is null
+```
+
+Each error record (when populated):
+
+```yaml
+metadata_error:
+  error_type: DownloadError                # Python exception class name
+  category: video_gone                     # coarse bucket (see below)
+  message: "ERROR: [youtube] X: Video unavailable"
+  occurred_at: 2026-06-04T07:27:56+00:00
+  retryable: false
+  attempt_count: 1
+```
+
+Categories: `captions_off | video_gone | access_wall | translation_unavailable | rate_limit | not_found | network | schema_drift | unknown`.
+
+### Dropped fields
+
+- `_extraction_error_type` and `_extraction_error` (legacy v2 diagnostics) — converted to a `metadata_error` block during migration, then removed.
+
+## Code changes
+
+### `extract.py`
+- `SCHEMA_VERSION = 3`.
+- New `classify_error(exc) -> (category, retryable)` — central error classifier covering yt-dlp's `ExtractorError`/`DownloadError`, transcript-api's named exceptions, and `HTTPError` codes.
+- New `build_error_record(exc, attempt_count=1)` — emits the 6-field error block.
+- `download_thumbnail()` signature changed: now returns `(local_path_or_None, error_record_or_None)`. Caller (metadata stage) stores both `thumbnail_image` and `thumbnail_error`.
+- `run_metadata_stage()` now sets `metadata_status: ok` + `metadata_error: None` on success, captures `thumbnail_error` independently.
+- `run_transcript_stage()` retries `list()` with backoff, captures the *last* exception, and populates `transcript_error` with a structured record on terminal failure. Clears `transcript_error: None` on success. `disabled` and `unavailable` are NOT errors (permanent design states, not supply-chain failures).
+- `_build_failure_stub(vid, exc)` — signature changed from `(vid, error_type_str, msg_str)`; now takes the exception object and builds a real `metadata_error` block. Sets `metadata_status: error`.
+- `FRONTMATTER_SECTIONS`: `pipeline` gained `metadata_status`; new `errors` section; legacy `diagnostics` section dropped.
+- `_yaml_mapping()` helper added so dict-valued fields render as block mappings instead of getting stringified by `_yaml_scalar()`.
+- `derive_pipeline_status(metadata_status, transcript_status)` — `extraction_failed` takes precedence over transcript outcomes.
+
+### `migrate_schema.py`
+- `CURRENT_SCHEMA_VERSION = 3`.
+- `migrate_to_v2()` and `migrate_to_v3()` separated; `migrate_to_current()` orchestrates whichever steps a file needs.
+- `migrate_to_v3()`: adds the four new fields; converts legacy `_extraction_error*` into a `metadata_error` block (preserving the original error_type and message; marking `occurred_at` as `<unknown — migrated from legacy diagnostics>` since we don't have the original timestamp).
+- Migration thumbnail download also returns `(path, error)` — if the download fails during migration, the error block lands in `thumbnail_error`.
+- Idempotence check tightened to require all four new fields to be present.
+- Mirrors extract.py's `_yaml_mapping()` and dict-aware rendering.
+
+### `assets/extract-template.md`
+- Bumped to `schema_version: 3`.
+- New `errors` section with full inline documentation of the error block shape.
+- `status` field reclassified in its comment as a cached derivation.
+
+## Migration result on the 33 dev files
+
+```
+[info] migrating 33 file(s) to schema_version=3
+[info] thumbnail-dir: …/2026-06-03-Thumbnail
+[ 33/33] zvI4UN2_i-w.raw.md
+[info] summary: {'updated': 33, 'current': 0, 'skipped': 0, 'would-update': 0}
+```
+
+All 33 files updated in one pass. Second run: `{'updated': 0, 'current': 33, ...}` — idempotent.
+
+Field-count check on three spot-sampled files: each now carries **33 frontmatter fields** (v2 had 30). All four new fields present; legacy `_extraction_error*` fields absent. Body sections (`## Description`, `## Transcript`) unchanged.
+
+## Smoke tests
+
+| Scenario | Command | Outcome |
+|---|---|---|
+| Successful new fetch | `extract.py YFjfBk8HI5o ...` | `metadata_status: ok`, `metadata_error: null`, `transcript_error: null`, `thumbnail_error: null` |
+| Hard failure (invalid video id) | `extract.py AAAAAAAAAAA ...` | Failure stub written. `status: extraction_failed`, `metadata_status: error`. `metadata_error` block populated with `error_type: DownloadError`, `category: video_gone`, `retryable: false`. |
+| Migration idempotence | second migrate run | All files `current=33`, no writes |
+
+The `category: video_gone, retryable: false` classification on the invalid-ID test is the right call — re-running won't help; the operator should remove the URL from the input list.
+
+## What's still NOT done (deferred again, deliberately)
+
+- A "retry only retryable" mode on the migration script — the current `migrate_schema.py --refresh` (TODO) would re-attempt only the `*_error` blocks where `retryable: true`. Useful when you have a few transient failures in a large batch. Build it the first time you have >5 retryable errors sitting in your raw folder.
+- The `digesting-youtube-content` skill still doesn't know about `thumbnail_image` or any of the new error fields. A digest read after a transcript failure currently won't surface the `transcript_error` reason in the digest file — but the digest skill wasn't supposed to in our design (errors stay in raw). Confirm or adjust when wiring up the UI.
+
+## Files updated/created in v2.1
+
+```
+Learn/.claude/skills/extracting-youtube-content/
+  assets/extract-template.md            (updated → v3)
+  scripts/extract.py                    (~80 lines added; 4 functions touched)
+  scripts/migrate_schema.py             (~100 lines added; v3 migration step)
+
+Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/
+  2026-06-01-Extract Separation & Thumbnail/
+    2026-06-03-implementation-log.md    (this addendum appended)
+    schema-v3.md                        (new — canonical v3 reference)
+  2026-05-28-Raw/*.raw.md               (33 files migrated v2 → v3 in place)
+```

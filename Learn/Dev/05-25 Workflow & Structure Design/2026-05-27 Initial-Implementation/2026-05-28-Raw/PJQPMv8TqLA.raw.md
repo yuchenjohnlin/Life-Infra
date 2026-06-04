@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: PJQPMv8TqLA
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: Google Cloud
@@ -52,6 +53,11 @@ like_count: 301
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Next '26: The Future of AI Infrastructure

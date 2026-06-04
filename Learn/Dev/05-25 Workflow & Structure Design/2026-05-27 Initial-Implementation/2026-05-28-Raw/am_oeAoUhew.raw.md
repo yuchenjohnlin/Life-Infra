@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: am_oeAoUhew
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: AI Engineer
@@ -51,6 +52,11 @@ like_count: 2526
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Harness Engineering: How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI

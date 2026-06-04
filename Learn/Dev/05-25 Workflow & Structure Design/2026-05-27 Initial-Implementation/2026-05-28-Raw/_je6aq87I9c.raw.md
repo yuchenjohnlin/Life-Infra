@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: _je6aq87I9c
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extraction_failed
+metadata_status: ok
 
 # === creator ===
 channel: New beginning (neosarchizo)
@@ -157,6 +158,11 @@ like_count: 895
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # [Claude Code 입문 E25] Claude Code 커스텀 스킬 작성: SKILL.md 구조부터 description 최적화까지

@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: UqMtkgQe-kI
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted_no_transcript
+metadata_status: ok
 
 # === creator ===
 channel: Zhang Xiaojun Podcast
@@ -50,6 +51,11 @@ like_count: 2572
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Manus' Final Interview Before the Acquisition: Oh, the Surreal Odyssey of 2025…

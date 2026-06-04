@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: njWyDHKYeVA
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extraction_failed
+metadata_status: ok
 
 # === creator ===
 channel: Google Cloud Tech
@@ -64,6 +65,11 @@ like_count: 394
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Self host Gemma 4: Deploy LLMs on Cloud Run GPUs

@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: k8cnVCMYmNc
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extraction_failed
+metadata_status: ok
 
 # === creator ===
 channel: AI Engineer
@@ -51,6 +52,11 @@ like_count: 633
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # OpenAI + @Temporalio : Building Durable, Production Ready Agents - Cornelia Davis, Temporal

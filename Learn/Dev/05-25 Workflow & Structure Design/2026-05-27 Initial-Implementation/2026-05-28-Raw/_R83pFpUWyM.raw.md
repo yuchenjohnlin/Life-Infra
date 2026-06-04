@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: _R83pFpUWyM
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extraction_failed
+metadata_status: ok
 
 # === creator ===
 channel: InfoQ
@@ -71,6 +72,11 @@ like_count: 471
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # The Engineering of AI Agents: Context, Harnessing, and Autonomy

@@ -2,9 +2,16 @@
 """extracting-youtube-content — fetch metadata + transcript and write a raw markdown file.
 
 Output: one `<video_id>.raw.md` per video at `Learn/10-Raw/youtube/`, conformant to
-the skill's `assets/extract-template.md` (currently schema_version: 2).
+the skill's `assets/extract-template.md` (currently schema_version: 3, colloquially "v2.1").
 
-Stage flags (added in schema-v2 / 2026-06-03 implementation):
+Schema v3 (2026-06-03) added per-stage error blocks:
+  metadata_status: ok | error
+  metadata_error  / transcript_error / thumbnail_error: null on success, structured
+    record on failure with {error_type, category, message, occurred_at, retryable,
+    attempt_count}. The top-level `status` is kept as a CACHED derivation of the
+    per-stage statuses (for .base filter convenience), not as an authoritative field.
+
+Stage flags:
   (no flag)         → full pipeline: metadata + transcript (skips if file exists)
   --metadata-only   → run only the metadata stage (yt-dlp + transcript-api list();
                       no fetch(); empty/preserved transcript body)
@@ -52,7 +59,11 @@ from typing import Any
 # Constants
 # ---------------------------------------------------------------------------
 
-SCHEMA_VERSION = 2
+# schema_version 3 (released 2026-06-03, colloquially "v2.1") adds per-stage
+# error blocks: metadata_status, metadata_error, transcript_error, thumbnail_error.
+# `status` is preserved but reclassified as a cached derivation of the per-stage
+# statuses, written by the producer for query convenience (e.g. .base filters).
+SCHEMA_VERSION = 3
 
 DEFAULT_OUTPUT_DIR = "Learn/10-Raw/youtube"
 DEFAULT_THUMBNAIL_DIR = "Learn/15-Thumbnail"
@@ -74,6 +85,88 @@ YTDLP_PLACEHOLDER_TITLE = "<Untitled Chapter 1>"
 INTERNAL_TRACK_SUFFIX_RE = re.compile(r"^([a-z]{2,3}(?:-[A-Za-z]{2,4})?)-[A-Za-z0-9_-]{10,}$")
 
 THUMBNAIL_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+
+
+# ---------------------------------------------------------------------------
+# Error classifier (added in v2.1)
+# ---------------------------------------------------------------------------
+
+# Permanent failure classes by name — never retryable. The category is what we'll
+# report as `<error>.category` in the YAML, so it should be coarse but useful.
+_PERMANENT_CLASSES = {
+    "TranscriptsDisabled":             "captions_off",
+    "NoTranscriptFound":               "captions_off",
+    "VideoUnavailable":                "video_gone",
+    "VideoUnplayable":                 "video_gone",
+    "NotTranslatable":                 "translation_unavailable",
+    "TranslationLanguageNotAvailable": "translation_unavailable",
+    "AgeRestricted":                   "access_wall",
+}
+# Transient — retry with backoff usually helps.
+_TRANSIENT_CLASSES = {
+    "IpBlocked":           "rate_limit",
+    "RequestBlocked":      "rate_limit",
+    "YouTubeRequestFailed":"network",
+    "TimeoutError":        "network",
+    "URLError":            "network",
+}
+
+
+def classify_error(exc: BaseException) -> tuple[str, bool]:
+    """Return (category, retryable) for any exception we might catch.
+
+    Categories: captions_off | video_gone | access_wall | translation_unavailable
+                | rate_limit | not_found | network | schema_drift | unknown
+    """
+    name = type(exc).__name__
+    msg = str(exc).lower()
+
+    if name in _PERMANENT_CLASSES:
+        return _PERMANENT_CLASSES[name], False
+    if name in _TRANSIENT_CLASSES:
+        return _TRANSIENT_CLASSES[name], True
+
+    # HTTPError: inspect the code.
+    if name == "HTTPError":
+        code = getattr(exc, "code", None)
+        if code == 404:
+            return "not_found", False
+        if code == 403:
+            return "access_wall", False
+        if code == 429:
+            return "rate_limit", True
+        if isinstance(code, int) and 500 <= code < 600:
+            return "network", True
+        return "unknown", False
+
+    # Message-based heuristics for yt-dlp's ExtractorError wrappers.
+    if "video unavailable" in msg or "private video" in msg or "has been removed" in msg:
+        return "video_gone", False
+    if "sign in to confirm your age" in msg or "members-only" in msg:
+        return "access_wall", False
+    if "not available in your country" in msg:
+        return "access_wall", False
+    if "unable to extract" in msg or "nsig" in msg or "cipher" in msg:
+        return "schema_drift", True
+    if "timeout" in msg or "ssl" in msg or "connection" in msg:
+        return "network", True
+    if "rate" in msg or "block" in msg:
+        return "rate_limit", True
+
+    return "unknown", False
+
+
+def build_error_record(exc: BaseException, attempt_count: int = 1) -> dict:
+    """Build the YAML error block we write to the front-matter."""
+    category, retryable = classify_error(exc)
+    return {
+        "error_type":    type(exc).__name__,
+        "category":      category,
+        "message":       str(exc)[:200],
+        "occurred_at":   datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "retryable":     retryable,
+        "attempt_count": attempt_count,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -443,15 +536,17 @@ def build_paragraphs(snippets) -> str:
 # Thumbnail download
 # ---------------------------------------------------------------------------
 
-def download_thumbnail(url: str, vid: str, thumbnail_dir: Path) -> str | None:
-    """Download a thumbnail to `<thumbnail_dir>/<vid>.jpg`. Returns the file path string
-    or None if all candidates failed.
+def download_thumbnail(url: str, vid: str, thumbnail_dir: Path) -> tuple[str | None, dict | None]:
+    """Download a thumbnail to `<thumbnail_dir>/<vid>.jpg`.
+
+    Returns (local_path, error_record):
+      - on success → (path_string, None)
+      - on failure → (None, error_record_dict)
 
     Falls back through a candidate chain:
       1. The URL yt-dlp gave us (often localized — sometimes 404s).
       2. The canonical `maxresdefault.jpg`.
       3. The always-available `hqdefault.jpg`.
-    Uses urllib.urlopen + write_bytes — benchmarked 270ms vs yt-dlp's 5.5s (20× faster).
     """
     thumbnail_dir.mkdir(parents=True, exist_ok=True)
     out_path = thumbnail_dir / f"{vid}.jpg"
@@ -474,7 +569,7 @@ def download_thumbnail(url: str, vid: str, thumbnail_dir: Path) -> str | None:
                 data = r.read()
             if data:
                 out_path.write_bytes(data)
-                return str(out_path)
+                return str(out_path), None
         except urllib.error.HTTPError as e:
             last_err = e
             if e.code == 404:
@@ -486,7 +581,18 @@ def download_thumbnail(url: str, vid: str, thumbnail_dir: Path) -> str | None:
 
     err_label = f"{type(last_err).__name__}: {last_err}" if last_err else "no candidates"
     print(f"[warn] {vid}: thumbnail download failed ({len(candidates)} URLs tried): {err_label}", file=sys.stderr)
-    return None
+    if last_err is None:
+        return None, {
+            "error_type": "NoCandidates",
+            "category":   "unknown",
+            "message":    "no thumbnail URLs to try",
+            "occurred_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "retryable":  False,
+            "attempt_count": 1,
+        }
+    rec = build_error_record(last_err)
+    rec["message"] = f"{rec['message']} ({len(candidates)} URLs tried)"
+    return None, rec
 
 
 # ---------------------------------------------------------------------------
@@ -533,12 +639,23 @@ def _yaml_list(items, indent: int = 0) -> str:
     return "\n" + "\n".join(out_lines)
 
 
+def _yaml_mapping(d: dict, indent: int = 2) -> str:
+    """Render a dict as a YAML block mapping. Used for the error blocks."""
+    if not d:
+        return "{}"
+    pad = " " * indent
+    return "\n" + "\n".join(f"{pad}{k}: {_yaml_scalar(v)}" for k, v in d.items())
+
+
 # Section layout for the front-matter render. Each entry is (section_label, [field_names]).
-# This is the canonical schema-v2 grouping. Sections with no present fields are skipped.
+# Sections with no present fields are skipped.
+# v3 (2026-06-03): `pipeline` gained `metadata_status`; new `errors` section added;
+# legacy `diagnostics` section dropped (the `_extraction_error*` fields were renamed
+# and structured into `metadata_error`).
 FRONTMATTER_SECTIONS: list[tuple[str, list[str]]] = [
     ("meta",              ["schema_version"]),
     ("identity",          ["id", "type", "url", "title", "aliases"]),
-    ("pipeline",          ["status"]),
+    ("pipeline",          ["status", "metadata_status"]),
     ("creator",           ["channel", "channel_url", "channel_follower_count"]),
     ("time",              ["duration", "upload_date", "fetched_at"]),
     ("visual",            ["thumbnail", "thumbnail_image"]),
@@ -548,7 +665,7 @@ FRONTMATTER_SECTIONS: list[tuple[str, list[str]]] = [
                            "transcript_status", "transcript_source", "transcript_target", "is_translated"]),
     ("engagement",        ["view_count", "like_count"]),
     ("availability",      ["availability", "live_status"]),
-    ("diagnostics",       ["_extraction_error_type", "_extraction_error"]),
+    ("errors",            ["metadata_error", "transcript_error", "thumbnail_error"]),
 ]
 
 
@@ -563,6 +680,8 @@ def render_frontmatter(record: dict) -> str:
             v = record.get(f)
             if isinstance(v, list):
                 lines.append(f"{f}:{_yaml_list(v, indent=2)}" if v else f"{f}: []")
+            elif isinstance(v, dict):
+                lines.append(f"{f}:{_yaml_mapping(v, indent=2)}" if v else f"{f}: {{}}")
             else:
                 lines.append(f"{f}: {_yaml_scalar(v)}")
         lines.append("")
@@ -643,11 +762,12 @@ def run_metadata_stage(
     ]
     is_chapters_usable = chapters_usable(raw_chapters)
 
-    # 5. thumbnail
+    # 5. thumbnail — may fail independently of metadata
     thumbnail_url = info.get("thumbnail") or ""
     thumbnail_image: str | None = None
+    thumbnail_error: dict | None = None
     if download_thumb and thumbnail_url:
-        thumbnail_image = download_thumbnail(thumbnail_url, vid, thumbnail_dir)
+        thumbnail_image, thumbnail_error = download_thumbnail(thumbnail_url, vid, thumbnail_dir)
 
     title = info.get("title") or ""
 
@@ -658,6 +778,9 @@ def run_metadata_stage(
         "url":                       f"https://www.youtube.com/watch?v={vid}",
         "title":                     title,
         "aliases":                   [title] if title else [],
+        # metadata stage reached here without raising → metadata_status: ok
+        "metadata_status":           "ok",
+        "metadata_error":            None,
         "channel":                   info.get("channel") or info.get("uploader") or "",
         "channel_url":               info.get("channel_url") or info.get("uploader_url") or "",
         "channel_follower_count":    info.get("channel_follower_count") or 0,
@@ -666,6 +789,7 @@ def run_metadata_stage(
         "fetched_at":                datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "thumbnail":                 thumbnail_url,
         "thumbnail_image":           thumbnail_image,
+        "thumbnail_error":           thumbnail_error,
         "chapters":                  chapters_field,
         "chapters_usable":           is_chapters_usable,
         "language":                  info.get("language"),
@@ -695,22 +819,33 @@ def run_transcript_stage(
     YoutubeDL, YouTubeTranscriptApi, yta_errors = deps
 
     # If the metadata stage said "disabled", honor that — don't even hit the API.
+    # `disabled` is a permanent state (creator turned captions off); it's not an error.
     if record.get("transcript_status") == "disabled":
         return {
             "transcript_status":  "disabled",
             "transcript_source":  "none",
             "transcript_target":  None,
             "is_translated":      False,
+            "transcript_error":   None,
         }, ""
 
     # Re-list tracks (fresh, in case state changed between metadata and transcript runs).
-    tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
-    if t_status == "failed":
-        for delay in (0.5, 2.0, 8.0):
+    # We re-do this here rather than reusing the metadata-stage tracks because the
+    # transcript-api Transcript objects don't survive across processes/runs.
+    last_list_exc: BaseException | None = None
+    tracks: list = []
+    t_status = "failed"
+    for attempt, delay in enumerate([0.0, 0.5, 2.0, 8.0], start=1):
+        if delay:
             time.sleep(delay)
+        try:
             tracks, t_status = list_tracks(YouTubeTranscriptApi, yta_errors, vid)
-            if t_status != "failed":
-                break
+        except BaseException as e:  # noqa: BLE001
+            last_list_exc = e
+            t_status = "failed"
+        if t_status != "failed":
+            last_list_exc = None
+            break
 
     if t_status == "disabled":
         return {
@@ -718,22 +853,35 @@ def run_transcript_stage(
             "transcript_source":  "none",
             "transcript_target":  None,
             "is_translated":      False,
+            "transcript_error":   None,  # `disabled` is not an error
         }, ""
     if t_status == "failed" or not tracks:
+        err = build_error_record(last_list_exc) if last_list_exc else {
+            "error_type": "Unknown",
+            "category":   "unknown",
+            "message":    "list() returned no tracks and no exception",
+            "occurred_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "retryable":  True,
+            "attempt_count": 1,
+        }
         return {
             "transcript_status":  "failed",
             "transcript_source":  "none",
             "transcript_target":  None,
             "is_translated":      False,
+            "transcript_error":   err,
         }, ""
 
     choice = choose_transcript(tracks, fluent_languages)
     if choice is None:
+        # No track in fluent_languages, no viable translation → design-level "not for us",
+        # not an error in the supply chain.
         return {
             "transcript_status":  "unavailable",
             "transcript_source":  "none",
             "transcript_target":  None,
             "is_translated":      False,
+            "transcript_error":   None,
         }, ""
 
     try:
@@ -744,6 +892,7 @@ def run_transcript_stage(
             "transcript_source":  choice.transcript_source,
             "transcript_target":  choice.transcript_target,
             "is_translated":      choice.is_translated,
+            "transcript_error":   None,  # success clears any prior error
         }, body
     except Exception as e:
         print(f"[warn] {vid}: fetch() raised {type(e).__name__}: {e}", file=sys.stderr)
@@ -752,6 +901,7 @@ def run_transcript_stage(
             "transcript_source":  "none",
             "transcript_target":  None,
             "is_translated":      False,
+            "transcript_error":   build_error_record(e),
         }, ""
 
 
@@ -759,7 +909,10 @@ def run_transcript_stage(
 # Failure stub builder
 # ---------------------------------------------------------------------------
 
-def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
+def _build_failure_stub(vid: str, exc: BaseException) -> dict:
+    """Minimal record when the metadata stage itself raised. Most fields default to empty,
+    but `metadata_error` captures the structured error so the file is self-documenting.
+    """
     return {
         "schema_version":           SCHEMA_VERSION,
         "id":                       vid,
@@ -768,6 +921,7 @@ def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
         "title":                    f"<extraction failed: {vid}>",
         "aliases":                  [],
         "status":                   "extraction_failed",
+        "metadata_status":          "error",
         "channel":                  "", "channel_url": "", "channel_follower_count": 0,
         "duration":                 0, "upload_date": "",
         "fetched_at":               datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
@@ -779,8 +933,9 @@ def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
         "transcript_target":        None, "is_translated": False,
         "view_count":               0, "like_count": 0,
         "availability":             "", "live_status": "",
-        "_extraction_error_type":   error_type,
-        "_extraction_error":        error_msg,
+        "metadata_error":           build_error_record(exc),
+        "transcript_error":         None,
+        "thumbnail_error":          None,
     }
 
 
@@ -788,8 +943,12 @@ def _build_failure_stub(vid: str, error_type: str, error_msg: str) -> dict:
 # Per-video pipeline (v2 — stage-aware)
 # ---------------------------------------------------------------------------
 
-def derive_pipeline_status(transcript_status: str | None) -> str:
-    """Top-level `status` from the transcript outcome."""
+def derive_pipeline_status(metadata_status: str | None, transcript_status: str | None) -> str:
+    """Top-level `status` — a cached derivation of the per-stage statuses.
+    Stored for `.base` query convenience; the per-stage fields are authoritative.
+    """
+    if metadata_status == "error":
+        return "extraction_failed"
     if transcript_status == "available":
         return "extracted"
     if transcript_status in ("disabled", "unavailable", "failed"):
@@ -829,7 +988,7 @@ def process_one(
                 download_thumb=not args.no_thumbnail,
             )
         except Exception as e:
-            stub = _build_failure_stub(vid, type(e).__name__, str(e)[:200])
+            stub = _build_failure_stub(vid, e)
             atomic_write(out_path, render_markdown(stub, "", "", "failed"))
             return {
                 "video_id":   vid,
@@ -858,7 +1017,7 @@ def process_one(
             transcript_body = fresh_transcript_body  # may be empty for disabled/failed
 
     # --- derived fields & write ---
-    record["status"] = derive_pipeline_status(record.get("transcript_status"))
+    record["status"] = derive_pipeline_status(record.get("metadata_status"), record.get("transcript_status"))
     record["schema_version"] = SCHEMA_VERSION  # ensure always set
 
     text = render_markdown(record, description_body, transcript_body, record.get("transcript_status") or "")

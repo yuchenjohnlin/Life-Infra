@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: AF3XJT9YKpM
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: MIT Siegel Family Quest for Intelligence
@@ -61,6 +62,11 @@ like_count: 31642
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Prof. Judy Fan: Cognitive Tools for Making the Invisible Visible

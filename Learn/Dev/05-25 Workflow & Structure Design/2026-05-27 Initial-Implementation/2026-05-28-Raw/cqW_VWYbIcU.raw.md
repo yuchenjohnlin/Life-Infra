@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: cqW_VWYbIcU
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted_no_transcript
+metadata_status: ok
 
 # === creator ===
 channel: 硅谷101
@@ -84,6 +85,11 @@ like_count: 2278
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # 谷歌AI的14年、Gemini翻身之战，与视觉理解模型：专访DeepMind前核心科学家Andrew Dai｜Neolabs特辑

@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: zvI4UN2_i-w
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: Berkeley RDI
@@ -52,6 +53,11 @@ like_count: 247
 # === availability ===
 availability: public
 live_status: was_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Adv. LLM Agents MOOC | UC Berkeley Sp25 | Reasoning, Memory & Planning of Language Agents by Yu Su

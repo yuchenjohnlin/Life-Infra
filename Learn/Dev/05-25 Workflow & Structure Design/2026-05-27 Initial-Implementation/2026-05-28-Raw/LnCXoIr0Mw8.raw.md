@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: LnCXoIr0Mw8
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: AWS Events
@@ -51,6 +52,11 @@ like_count: 114
 # === availability ===
 availability: public
 live_status: was_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # Build an Agentic GraphRAG System in 1 Hour (MCP + Knowledge Graph) | Databases for AI

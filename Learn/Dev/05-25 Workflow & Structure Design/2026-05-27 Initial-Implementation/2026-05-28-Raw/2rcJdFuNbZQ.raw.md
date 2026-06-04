@@ -1,6 +1,6 @@
 ---
 # === meta ===
-schema_version: 2
+schema_version: 3
 
 # === identity ===
 id: 2rcJdFuNbZQ
@@ -12,6 +12,7 @@ aliases:
 
 # === pipeline ===
 status: extracted
+metadata_status: ok
 
 # === creator ===
 channel: Hung-yi Lee
@@ -55,6 +56,11 @@ like_count: 21852
 # === availability ===
 availability: public
 live_status: not_live
+
+# === errors ===
+metadata_error: null
+transcript_error: null
+thumbnail_error: null
 ---
 
 # 解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理
