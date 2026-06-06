@@ -256,3 +256,94 @@ Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/
     schema-v3.md                        (new — canonical v3 reference)
   2026-05-28-Raw/*.raw.md               (33 files migrated v2 → v3 in place)
 ```
+
+---
+
+# Thumbnail-404 root cause: yt-dlp picks the wrong URL among tied preferences
+
+**Date investigated**: 2026-06-04
+**Status**: Worked around in our code. Not fixed upstream. Upstream issue not yet filed.
+
+## What was happening
+
+Three videos failed thumbnail download in the original migration: `1OLrT3dEzhA`, `I0DrcsDf3Os`, `_je6aq87I9c`. Two failure classes were conflated:
+
+| Video | Failure | Class |
+|---|---|---|
+| `1OLrT3dEzhA` | SSL handshake timeout | Transient — succeeded on retry without code change |
+| `I0DrcsDf3Os` | HTTP 404 on `vi_lc/.../maxresdefault_en-US.jpg` | **Persistent** — same 404 reproduces today |
+| `_je6aq87I9c` | HTTP 404 on `vi_lc/.../maxresdefault_en.jpg` | **Persistent** — same 404 reproduces today |
+
+The two 404 cases are a yt-dlp selection bug, not a transient.
+
+## Root cause (verified by re-fetching today)
+
+Both failed videos have `vi/<id>/maxresdefault.jpg` AND `vi_lc/<id>/maxresdefault_<lang>.jpg` in YouTube's `thumbnails` array at the same `preference: -1`. yt-dlp filters out WebP, then picks among the tied JPGs — and chooses the **localized** `vi_lc` URL.
+
+```
+[0] pref=  0  vi_webp/I0DrcsDf3Os/maxresdefault.webp          ← skipped (WebP)
+[1] pref= -1  vi/I0DrcsDf3Os/maxresdefault.jpg                 ← CANONICAL, serves 200 OK ~95 KB
+[2] pref= -1  vi_lc/I0DrcsDf3Os/maxresdefault_en-US.jpg       ← LOCALIZED, 404s today
+```
+
+yt-dlp picks `[2]`. The localized URL appears in YouTube's metadata as a "could exist" placeholder but YouTube never actually serves it — `vi_lc` URLs are sometimes real (for videos where the channel has localized thumbnails) and sometimes phantom (for videos where they don't). yt-dlp doesn't distinguish and doesn't HEAD-check.
+
+Working videos like `0HIlhRl38QA` have **no `vi_lc` entry at all** in their `thumbnails` array, so yt-dlp naturally lands on `vi/.../maxresdefault.jpg` and everything works. The difference is whether YouTube advertises a localized thumbnail.
+
+## Why this is a yt-dlp issue, not ours
+
+- yt-dlp's `thumbnail` field is the headline URL most integrations trust. If it points at a URL that doesn't fetch, callers are surprised.
+- The tie-break among same-`preference` JPGs is yt-dlp's own selection code (not YouTube's). YouTube returns both URLs in the array; yt-dlp decides which one to surface in `thumbnail`.
+- The fix is local to yt-dlp: when multiple JPGs tie at the same `preference`, prefer non-localized (`/vi/`) over localized (`/vi_lc/`).
+
+We are downstream of this. We can't make yt-dlp pick the right URL. We can only work around it.
+
+## Our workaround
+
+In `scripts/extract.py` (and mirrored in `migrate_schema.py`), `download_thumbnail()` uses a 3-URL fallback chain:
+
+```python
+candidates = [
+    url,                                                  # 1. yt-dlp's choice (may be bad)
+    f"https://i.ytimg.com/vi/{vid}/maxresdefault.jpg",   # 2. canonical maxres
+    f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",       # 3. always-available HQ fallback
+]
+```
+
+On HTTP 404, fall through. On any other error (timeout, SSL, 5xx), record and stop. Always at most 3 HTTP calls per video. For the two broken videos, candidate 2 (the canonical URL) is what actually serves the image.
+
+If a future video has neither candidate 2 nor 3, the `thumbnail_error` block captures the structured reason and `thumbnail_image` stays `null`.
+
+## Should we file an upstream issue?
+
+It's reportable. Likely outcomes:
+
+- **Accepted (best case)** — two-line fix in yt-dlp's selection logic prefers non-localized variants on ties. Helps every downstream consumer.
+- **Won't-fix as "upstream YouTube quirk"** — possible; counter-argument is that the tie-break is yt-dlp's code, not YouTube's.
+- **Deferred** — accepted but low priority since the workaround is well-known.
+
+Reproducer (verified working as of 2026-06-04):
+
+```python
+from yt_dlp import YoutubeDL
+import urllib.request, urllib.error
+
+for vid in ("I0DrcsDf3Os", "_je6aq87I9c"):
+    with YoutubeDL({"skip_download": True, "quiet": True}) as ydl:
+        info = ydl.extract_info(f"https://www.youtube.com/watch?v={vid}", download=False)
+    url = info["thumbnail"]
+    print(f"{vid}: {url}")
+    try:
+        with urllib.request.urlopen(url, timeout=15) as r:
+            print(f"  → {r.status}  {len(r.read()):,} bytes")
+    except urllib.error.HTTPError as e:
+        print(f"  → {e.code} {e.reason}")
+```
+
+Search first: https://github.com/yt-dlp/yt-dlp/issues?q=thumbnail+404 (or `vi_lc`, or `maxresdefault localized`). If it's already filed, thumbs up + add these two video IDs as additional reproducers. If not, draft is in this session's transcript (in the "Should I file an issue?" exchange).
+
+## What this means for the script going forward
+
+- **For now (with the 3-URL fallback)**: no expected thumbnail errors on normal videos. Transient SSL/network failures still possible but the migration script auto-retries `thumbnail_image: null` on every run, so they self-heal.
+- **If `thumbnail_error` ever appears in a raw file**: the structured block tells you category + retryable. If `retryable: true`, run `migrate_schema.py` again (or extract with `--metadata-only --refresh`). If `retryable: false`, the video genuinely has no usable thumbnail at any of our 3 candidate URLs — accept `thumbnail_image: null` for that one.
+- **Trigger to revisit this workaround**: more than ~5 raw files with `thumbnail_error.retryable: false` accumulated, OR yt-dlp ships a fix and we can simplify the candidate chain back to one URL. Until then, leave it.

@@ -1,6 +1,6 @@
 views:
   - type: table
-    name: Raw Debug
+    name: Raw Transcript Metadata
     filters:
       and:
         - file.inFolder("Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw")
@@ -29,3 +29,20 @@ views:
       note.manual_track_languages: 144
       note.auto_track_languages: 147
       note.transcript_target: 129
+  - type: table
+    name: Debug View
+    filters:
+      and:
+        - file.inFolder("Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw")
+    groupBy:
+      property: transcript_status
+      direction: ASC
+    order:
+      - status
+      - metadata_status
+      - transcript_status
+      - transcript_error
+      - metadata_error
+      - thumbnail_error
+    columnSize:
+      note.metadata_status: 90

@@ -1,1 +1,3 @@
 1. 要確定Claude 具有能力可以在回答我的discussion的時候用callout format
+2. 現在我這個 Workflow & Structure Design 裡面的Discussion部分有兩個主題，因為我在做第一個主題的時候遇到問題，然後就延伸到第二個主題。但是我過了一段時間之後又遇到migration問題，我就忘記我之前到底是寫在哪裡了，所以其實discussion file好像不是那麼方便的。當然啦，如果我們從頭想，我所有的筆記都在discussion裡面那其實我也只要看discussion file就好了。但是這樣我就又會不確定到底會在哪一個file裡面的discussion。這個可能可以想辦法解決？
+   現在的問題大概就是我太喜歡一直增加file了，但是也是因為我的discussion或是我的開發流程沒有一個統整的記錄的地方讓我覺得非常的混亂。

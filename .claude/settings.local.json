@@ -96,7 +96,21 @@
       "Bash(git stash *)",
       "Bash(git reset *)",
       "Bash(git push *)",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(rm -rf /tmp/thumb-bench)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python -c \"import yaml; print\\('PyYAML ok:', yaml.__version__\\)\")",
+      "Bash(~/anaconda3/envs/life_infra/bin/python Learn/.claude/skills/extracting-youtube-content/scripts/migrate_schema.py 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw/0XB7fNS_ONg.raw.md' 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw/1OLrT3dEzhA.raw.md' 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw/2rcJdFuNbZQ.raw.md' --thumbnail-dir 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail' --dry-run)",
+      "Bash(cp \"Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw/0XB7fNS_ONg.raw.md\" /tmp/0XB7fNS_ONg.bak.md)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python Learn/.claude/skills/extracting-youtube-content/scripts/migrate_schema.py 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw/0XB7fNS_ONg.raw.md' --thumbnail-dir 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-06-03-Thumbnail')",
+      "Bash(grep ^thumbnail: 'Learn/Dev/05-25 Workflow & Structure Design/2026-05-27 Initial-Implementation/2026-05-28-Raw/__TRACKED_VAR__.raw.md')",
+      "Bash(curl -sI \"https://i.ytimg.com/vi/I0DrcsDf3Os/hqdefault.jpg\")",
+      "Bash(curl -sI \"https://i.ytimg.com/vi/_je6aq87I9c/hqdefault.jpg\")",
+      "Bash(curl -sI \"https://i.ytimg.com/vi/I0DrcsDf3Os/maxresdefault.jpg\")",
+      "Bash(rm -rf /tmp/yt-flags)",
+      "Bash(mkdir -p /tmp/yt-flags)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python Learn/.claude/skills/extracting-youtube-content/scripts/extract.py https://www.youtube.com/watch?v=rmvDxxNubIg --output-dir /tmp/yt-flags --thumbnail-dir /tmp/yt-flags/thumbs)",
+      "Bash(~/anaconda3/envs/life_infra/bin/python -c ' *)",
+      "Bash(rm -rf /tmp/yt-flags /tmp/0XB7fNS_ONg.bak.md /tmp/migrate*.log /tmp/migrate*.jsonl)"
     ]
   }
 }
